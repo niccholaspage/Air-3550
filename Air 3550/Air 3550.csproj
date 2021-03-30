@@ -129,6 +129,7 @@
     <Compile Include="Models\ScheduledFlight.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Repository\AirContext.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
