@@ -119,6 +119,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Airport.cs" />
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\CustomerData.cs" />
+    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\FlightScheduleEvent.cs" />
+    <Compile Include="Models\Plane.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\ScheduledFlight.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
