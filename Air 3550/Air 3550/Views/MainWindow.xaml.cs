@@ -23,8 +23,16 @@ namespace Air_3550.Views
         {
             using (var db = new AirContext())
             {
-                var plane = db.Planes.First();
-                myButton.Content = "Quinn is dumb: " + plane.Model;
+                var plane = db.Planes.FirstOrDefault();
+
+                if (plane == null)
+                {
+                    myButton.Content = "No plane!";
+                }
+                else
+                {
+                    myButton.Content = "We got a plane: " + plane.Model;
+                }
             }
         }
     }
