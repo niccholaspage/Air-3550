@@ -1,6 +1,6 @@
 ﻿namespace Air_3550.Models
 {
-    class User
+    public class User
     {
         public int UserId { get; set; }
         public string LoginId { get; set; }

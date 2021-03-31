@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Air_3550.Repository
 {
-    class AirContext : DbContext
+    public class AirContext : DbContext
     {
         public DbSet<Airport> Airports { get; set; }
         public DbSet<Booking> Bookings { get; set; }
@@ -15,6 +15,6 @@ namespace Air_3550.Repository
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite(@"Data Source=blogging.db");
+        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite(@"Data Source=air.db");
     }
 }

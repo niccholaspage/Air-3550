@@ -2,10 +2,9 @@
 
 namespace Air_3550.Models
 {
-    class CustomerData
+    public class CustomerData
     {
         public int CustomerDataId { get; set; }
-        public int UserId { get; set; }
         public User User { get; set; }
 
         public string Name { get; set; }
@@ -20,7 +19,6 @@ namespace Air_3550.Models
         public int RewardPointsBalance { get; set; }
         public int RewardPointsUsed { get; set; }
 
-        public List<int> BookingIds { get; set; }
         public List<Booking> Bookings { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Air_3550.Models
 {
-    enum Role
+    public enum Role
     {
         CUSTOMER,
         ACCOUNTANT,
