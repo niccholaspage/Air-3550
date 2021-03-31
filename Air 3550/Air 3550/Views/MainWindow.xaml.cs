@@ -1,8 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Air_3550.Repository;
-using Windows.UI.Popups;
-using System;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,7 +21,7 @@ namespace Air_3550.Views
         {
             using (var db = new AirContext())
             {
-                var plane = db.Planes.FirstOrDefault();
+                var plane = await db.Planes.FirstOrDefaultAsync();
 
                 if (plane == null)
                 {
