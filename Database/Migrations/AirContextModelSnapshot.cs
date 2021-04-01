@@ -40,6 +40,26 @@ namespace Database.Migrations
                     b.HasKey("AirportId");
 
                     b.ToTable("Airports");
+
+                    b.HasData(
+                        new
+                        {
+                            AirportId = 1,
+                            City = "Cleveland",
+                            Code = "CLE",
+                            Latitude = 0m,
+                            Longitude = 0m,
+                            State = "Ohio"
+                        },
+                        new
+                        {
+                            AirportId = 2,
+                            City = "Nashville",
+                            Code = "BNA",
+                            Latitude = 0m,
+                            Longitude = 0m,
+                            State = "Tennessee"
+                        });
                 });
 
             modelBuilder.Entity("Air_3550.Models.Booking", b =>

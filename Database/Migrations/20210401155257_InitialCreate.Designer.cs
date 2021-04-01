@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(AirContext))]
-    [Migration("20210401002755_InitialCreate")]
+    [Migration("20210401155257_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,26 @@ namespace Database.Migrations
                     b.HasKey("AirportId");
 
                     b.ToTable("Airports");
+
+                    b.HasData(
+                        new
+                        {
+                            AirportId = 1,
+                            City = "Cleveland",
+                            Code = "CLE",
+                            Latitude = 0m,
+                            Longitude = 0m,
+                            State = "Ohio"
+                        },
+                        new
+                        {
+                            AirportId = 2,
+                            City = "Nashville",
+                            Code = "BNA",
+                            Latitude = 0m,
+                            Longitude = 0m,
+                            State = "Tennessee"
+                        });
                 });
 
             modelBuilder.Entity("Air_3550.Models.Booking", b =>

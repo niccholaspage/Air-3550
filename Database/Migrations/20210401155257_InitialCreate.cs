@@ -197,6 +197,16 @@ namespace Database.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Airports",
+                columns: new[] { "AirportId", "City", "Code", "Latitude", "Longitude", "State" },
+                values: new object[] { 1, "Cleveland", "CLE", 0m, 0m, "Ohio" });
+
+            migrationBuilder.InsertData(
+                table: "Airports",
+                columns: new[] { "AirportId", "City", "Code", "Latitude", "Longitude", "State" },
+                values: new object[] { 2, "Nashville", "BNA", 0m, 0m, "Tennessee" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_CustomerDataId",
                 table: "Bookings",

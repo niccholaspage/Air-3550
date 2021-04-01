@@ -1,4 +1,7 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Air_3550.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +13,24 @@ namespace Air_3550
 {
     public sealed class AirportSuggestBox : Control
     {
+        private List<string> AirportNames = new List<string>();
+
         public AirportSuggestBox()
         {
             this.DefaultStyleKey = typeof(AirportSuggestBox);
+
+            this.Loaded += PopulateAirportNames;
         }
 
-        // List of cats
-        private List<string> Cats = new List<string>()
+        private async void PopulateAirportNames(object sender, RoutedEventArgs e)
         {
-            "Abyssinian",
-            "Aegean",
-            "American Bobtail"
-        };
+            using (var db = new AirContext())
+            {
+                var airports = await db.Airports.ToListAsync();
+
+                AirportNames.AddRange(airports.Select(airport => airport.Code));
+            }
+        }
 
         protected override void OnApplyTemplate()
         {
@@ -35,20 +44,20 @@ namespace Air_3550
         {
             var suitableItems = new List<string>();
             var splitText = sender.Text.ToLower().Split(" ");
-            foreach (var cat in Cats)
+            foreach (var airportName in AirportNames)
             {
                 var found = splitText.All((key) =>
                 {
-                    return cat.ToLower().Contains(key);
+                    return airportName.ToLower().Contains(key);
                 });
                 if (found)
                 {
-                    suitableItems.Add(cat);
+                    suitableItems.Add(airportName);
                 }
             }
             if (suitableItems.Count == 0)
             {
-                suitableItems.Add("No results found");
+                suitableItems.Add("No results found"); // Stop this from being selectable somehow
             }
             sender.ItemsSource = suitableItems;
         }
