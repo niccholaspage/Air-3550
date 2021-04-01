@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(AirContext))]
-    [Migration("20210331190512_InitialCreate")]
+    [Migration("20210401002755_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -286,13 +286,15 @@ namespace Database.Migrations
 
             modelBuilder.Entity("Air_3550.Models.Ticket", b =>
                 {
-                    b.HasOne("Air_3550.Models.Booking", null)
+                    b.HasOne("Air_3550.Models.Booking", "Booking")
                         .WithMany("Tickets")
                         .HasForeignKey("BookingId");
 
                     b.HasOne("Air_3550.Models.ScheduledFlight", "ScheduledFlight")
                         .WithMany()
                         .HasForeignKey("ScheduledFlightId");
+
+                    b.Navigation("Booking");
 
                     b.Navigation("ScheduledFlight");
                 });

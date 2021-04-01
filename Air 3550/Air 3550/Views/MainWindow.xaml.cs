@@ -1,6 +1,8 @@
 ﻿using Microsoft.UI.Xaml;
 using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
+using Air_3550.Models;
+using System.Collections.Generic;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -21,16 +23,13 @@ namespace Air_3550.Views
         {
             using (var db = new AirContext())
             {
-                var plane = await db.Planes.FirstOrDefaultAsync();
+                var booking = new Booking { Tickets = new List<Ticket>() };
 
-                if (plane == null)
-                {
-                    myButton.Content = "No plane!";
-                }
-                else
-                {
-                    myButton.Content = "We got a plane: " + plane.Model;
-                }
+                booking.Tickets.Add(new Ticket { IsCanceled = true });
+
+                db.Add(booking);
+
+                db.SaveChanges();
             }
         }
     }

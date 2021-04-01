@@ -284,13 +284,15 @@ namespace Database.Migrations
 
             modelBuilder.Entity("Air_3550.Models.Ticket", b =>
                 {
-                    b.HasOne("Air_3550.Models.Booking", null)
+                    b.HasOne("Air_3550.Models.Booking", "Booking")
                         .WithMany("Tickets")
                         .HasForeignKey("BookingId");
 
                     b.HasOne("Air_3550.Models.ScheduledFlight", "ScheduledFlight")
                         .WithMany()
                         .HasForeignKey("ScheduledFlightId");
+
+                    b.Navigation("Booking");
 
                     b.Navigation("ScheduledFlight");
                 });
