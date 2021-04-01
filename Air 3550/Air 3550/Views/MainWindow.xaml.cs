@@ -3,7 +3,6 @@ using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Air_3550.Models;
 using System.Collections.Generic;
-using System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -20,7 +19,7 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        private async void myButton_Click(object sender, RoutedEventArgs e)
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new AirContext())
             {
