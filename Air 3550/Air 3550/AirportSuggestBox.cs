@@ -15,6 +15,14 @@ namespace Air_3550
     {
         private List<string> AirportNames = new List<string>();
 
+        public string Label
+        {
+            get => (string)GetValue(LabelProperty);
+            set => SetValue(LabelProperty, value);
+        }
+
+        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(nameof(Label), typeof(String), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
+
         public AirportSuggestBox()
         {
             this.DefaultStyleKey = typeof(AirportSuggestBox);

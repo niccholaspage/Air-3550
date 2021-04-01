@@ -8,8 +8,8 @@
     mc:Ignorable="d">
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <local:AirportSuggestBox />
-        <local:AirportSuggestBox />
+        <local:AirportSuggestBox Label="Departure City" />
+        <local:AirportSuggestBox Label="Arrival City" />
         <CalendarDatePicker PlaceholderText="Pick a date" Header="Departure" />
         <CalendarDatePicker PlaceholderText="Pick a date" Header="Arrival" />
         <Button x:Name="SearchButton" Click="SearchButton_Click">Search</Button>
