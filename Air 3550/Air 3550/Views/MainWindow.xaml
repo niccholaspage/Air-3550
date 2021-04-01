@@ -8,10 +8,10 @@
     mc:Ignorable="d">
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <local:AirportSuggestBox Label="Departure City" />
-        <local:AirportSuggestBox Label="Arrival City" />
-        <CalendarDatePicker PlaceholderText="Pick a date" Header="Departure" />
-        <CalendarDatePicker PlaceholderText="Pick a date" Header="Arrival" />
-        <Button x:Name="SearchButton" Click="SearchButton_Click">Search</Button>
+        <local:AirportSuggestBox Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
+        <local:AirportSuggestBox Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
+        <CalendarDatePicker PlaceholderText="Pick a date" Margin="3" Header="Departure" VerticalAlignment="Bottom" />
+        <CalendarDatePicker PlaceholderText="Pick a date" Margin="3" Header="Arrival" VerticalAlignment="Bottom" />
+        <Button x:Name="SearchButton" Click="SearchButton_Click" Margin="3" VerticalAlignment="Bottom">Search</Button>
     </StackPanel>
 </Window>
