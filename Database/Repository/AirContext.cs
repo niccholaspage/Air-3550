@@ -1,5 +1,7 @@
 ﻿using Air_3550.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
 
 namespace Air_3550.Repository
 {
@@ -15,6 +17,13 @@ namespace Air_3550.Repository
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite(@"Data Source=air.db");
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            var appDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var airDataDirectory = Path.Combine(appDataDirectory, "Air 3550 Team 4");
+            Directory.CreateDirectory(airDataDirectory);
+            var dbPath = Path.Combine(airDataDirectory, "air.db");
+            options.UseSqlite(@"Data Source=" + dbPath);
+        }
     }
 }

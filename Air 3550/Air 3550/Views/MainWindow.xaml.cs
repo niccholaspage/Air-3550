@@ -3,6 +3,7 @@ using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Air_3550.Models;
 using System.Collections.Generic;
+using System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,12 +25,9 @@ namespace Air_3550.Views
             using (var db = new AirContext())
             {
                 var booking = new Booking { Tickets = new List<Ticket>() };
-
                 booking.Tickets.Add(new Ticket { IsCanceled = true });
-
-                db.Add(booking);
-
-                db.SaveChanges();
+                await db.AddAsync(booking);
+                await db.SaveChangesAsync();
             }
         }
     }
