@@ -28,7 +28,7 @@ namespace Air_3550
             {
                 var airports = await db.Airports.ToListAsync();
 
-                AirportNames.AddRange(airports.Select(airport => airport.Code));
+                AirportNames.AddRange(airports.Select(airport => airport.City + ", " + airport.State + " (" + airport.Code + ")"));
             }
         }
 
