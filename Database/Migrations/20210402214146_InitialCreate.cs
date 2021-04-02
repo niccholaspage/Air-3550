@@ -13,11 +13,11 @@ namespace Database.Migrations
                 {
                     AirportId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Code = table.Column<string>(type: "TEXT", nullable: true),
+                    Code = table.Column<string>(type: "TEXT", nullable: false),
                     Latitude = table.Column<decimal>(type: "Decimal(8,6)", nullable: false),
                     Longitude = table.Column<decimal>(type: "Decimal(9,6)", nullable: false),
-                    City = table.Column<string>(type: "TEXT", nullable: true),
-                    State = table.Column<string>(type: "TEXT", nullable: true)
+                    City = table.Column<string>(type: "TEXT", nullable: false),
+                    State = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +30,7 @@ namespace Database.Migrations
                 {
                     PlaneId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Model = table.Column<string>(type: "TEXT", nullable: true),
+                    Model = table.Column<string>(type: "TEXT", nullable: false),
                     MaxSeats = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -44,8 +44,8 @@ namespace Database.Migrations
                 {
                     UserId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LoginId = table.Column<string>(type: "TEXT", nullable: true),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    LoginId = table.Column<string>(type: "TEXT", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
                     Role = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -108,14 +108,14 @@ namespace Database.Migrations
                     CustomerDataId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Age = table.Column<int>(type: "INTEGER", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    Address = table.Column<string>(type: "TEXT", nullable: true),
-                    ZipCode = table.Column<string>(type: "TEXT", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: true),
-                    State = table.Column<string>(type: "TEXT", nullable: true),
-                    CreditCardNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Address = table.Column<string>(type: "TEXT", nullable: false),
+                    ZipCode = table.Column<string>(type: "TEXT", nullable: false),
+                    City = table.Column<string>(type: "TEXT", nullable: false),
+                    State = table.Column<string>(type: "TEXT", nullable: false),
+                    CreditCardNumber = table.Column<string>(type: "TEXT", nullable: false),
                     AccountBalance = table.Column<int>(type: "INTEGER", nullable: false),
                     RewardPointsBalance = table.Column<int>(type: "INTEGER", nullable: false),
                     RewardPointsUsed = table.Column<int>(type: "INTEGER", nullable: false)
@@ -178,7 +178,7 @@ namespace Database.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ScheduledFlightId = table.Column<int>(type: "INTEGER", nullable: true),
                     IsCanceled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    BookingId = table.Column<int>(type: "INTEGER", nullable: true)
+                    BookingId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -188,7 +188,7 @@ namespace Database.Migrations
                         column: x => x.BookingId,
                         principalTable: "Bookings",
                         principalColumn: "BookingId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tickets_ScheduledFlights_ScheduledFlightId",
                         column: x => x.ScheduledFlightId,
