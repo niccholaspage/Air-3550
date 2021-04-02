@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <RelativePanel>
-        <Image Source="Assets/logo.svg" Height="280" RelativePanel.Above="stack"></Image>
+        <Image Source="ms-appx:///Assets/logo.svg" Height="280"></Image>
         <StackPanel x:Name="stack" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
             <local:AirportSuggestBox Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
             <local:AirportSuggestBox Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
