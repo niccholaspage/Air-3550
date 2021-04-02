@@ -9,7 +9,7 @@
 
     <RelativePanel>
         <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.AlignVerticalCenterWithPanel="true">
-            <Image x:Name="logo" Source="ms-appx:///Assets/logo.svg" HorizontalAlignment="Center"></Image>
+            <Image x:Name="logo" Source="ms-appx:///Assets/logo.svg" Width="500" Height="154"></Image>
             <StackPanel x:Name="stack" Orientation="Horizontal" HorizontalAlignment="Center">
                 <local:AirportSuggestBox Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
                 <local:AirportSuggestBox Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
