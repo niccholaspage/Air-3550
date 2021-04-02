@@ -17,6 +17,8 @@ namespace Air_3550.Views
         public MainWindow()
         {
             this.InitializeComponent();
+
+            Title = "Air 3550";
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
