@@ -1,6 +1,6 @@
 ﻿namespace Air_3550
 {
-    class Methods
+    class UserMethods
     {
         public void RegisterUser()
         {
