@@ -19,6 +19,6 @@
                 <Button x:Name="SearchButton" Click="SearchButton_Click" Margin="3" VerticalAlignment="Bottom">Search</Button>
             </StackPanel>
         </StackPanel>
-        <Button RelativePanel.AlignTopWithPanel="true" RelativePanel.AlignRightWithPanel="true" Margin="5">Login</Button>
+        <Button Click="LoginButton_Click"  RelativePanel.AlignTopWithPanel="true" RelativePanel.AlignRightWithPanel="true" Margin="5">Login</Button>
     </RelativePanel>
 </Page>

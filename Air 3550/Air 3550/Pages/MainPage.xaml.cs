@@ -20,5 +20,10 @@ namespace Air_3550.Pages
         {
 
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginPage));
+        }
     }
 }
