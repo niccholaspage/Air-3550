@@ -8,7 +8,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBox Header="Username:" PlaceholderText="Name" />
+        <PasswordBox Header="Password:" PlaceholderText="Password" />
+        <Button HorizontalAlignment="Right" Margin="0 5 0 0">Login</Button>
+    </StackPanel>
 </Page>
