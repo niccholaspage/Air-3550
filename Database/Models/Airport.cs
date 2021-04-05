@@ -16,6 +16,8 @@ namespace Air_3550.Models
         [Column(TypeName = "Decimal(9,6)")]
         public decimal Longitude { get; set; }
 
+        public int Elevation { get; set; }
+
         [Required]
         public string City { get; set; }
 
