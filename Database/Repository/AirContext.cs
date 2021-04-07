@@ -33,6 +33,12 @@ namespace Air_3550.Repository
                 new Airport { AirportId = 9, Code = "DEN", City = "Denver", State = "Colorado", Latitude = 39.861667m, Longitude = -104.673056m, Elevation = 5434 },
                 new Airport { AirportId = 10, Code = "SEA", City = "Seattle", State = "Washington", Latitude = 47.448889m, Longitude = -122.309444m, Elevation = 433 }
                 );
+
+            modelBuilder.Entity<Plane>().HasData(
+                new Plane { PlaneId = 1, Model = "Boeing 737 MAX", MaxSeats = 230 },
+                new Plane { PlaneId = 2, Model = "Boeing 747", MaxSeats = 416 },
+                new Plane { PlaneId = 4, Model = "Boeing 777", MaxSeats = 550 }
+                );
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
