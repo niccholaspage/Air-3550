@@ -35,9 +35,9 @@ namespace Air_3550.Repository
                 );
 
             modelBuilder.Entity<Plane>().HasData(
-                new Plane { PlaneId = 1, Model = "Boeing 737 MAX", MaxSeats = 230 },
-                new Plane { PlaneId = 2, Model = "Boeing 747", MaxSeats = 416 },
-                new Plane { PlaneId = 4, Model = "Boeing 777", MaxSeats = 550 }
+                new Plane { PlaneId = 1, Model = "Boeing 737 MAX", MaxSeats = 230, MaxDistance = 6570 },
+                new Plane { PlaneId = 2, Model = "Boeing 747", MaxSeats = 416, MaxDistance = 14815 },
+                new Plane { PlaneId = 4, Model = "Boeing 777", MaxSeats = 550, MaxDistance = 17395 }
                 );
         }
 

@@ -11,5 +11,8 @@ namespace Air_3550.Models
 
         [Required]
         public int MaxSeats { get; set; }
+
+        [Required]
+        public int MaxDistance { get; set; }
     }
 }
