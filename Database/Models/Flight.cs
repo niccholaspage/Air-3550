@@ -33,7 +33,8 @@ namespace Air_3550.Models
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             double distance = R * c * 1000; // convert to meters
 
-            double height = OriginAirport.Elevation - DestinationAirport.Elevation;
+            // Divide resulting height by 3.281 to convert feet to meters
+            double height = (OriginAirport.Elevation - DestinationAirport.Elevation) / 3.281;
 
             distance = Math.Pow(distance, 2) + Math.Pow(height, 2);
 
