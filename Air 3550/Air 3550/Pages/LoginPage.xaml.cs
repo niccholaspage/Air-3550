@@ -6,6 +6,8 @@ using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Threading.Tasks;
+using Windows.System;
 
 namespace Air_3550.Pages
 {
@@ -19,7 +21,7 @@ namespace Air_3550.Pages
             this.InitializeComponent();
         }
 
-        public async void LoginButton_Clicked(object sender, RoutedEventArgs e)
+        private async Task PerformLogin()
         {
             void ShowFeedback(string text)
             {
@@ -55,6 +57,19 @@ namespace Air_3550.Pages
                         ShowFeedback("The username or password is incorrect.");
                     }
                 }
+            }
+        }
+
+        public async void LoginButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            await PerformLogin();
+        }
+
+        private async void StackPanel_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                await PerformLogin();
             }
         }
     }
