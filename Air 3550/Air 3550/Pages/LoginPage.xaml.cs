@@ -21,13 +21,18 @@ namespace Air_3550.Pages
 
         public async void LoginButton_Clicked(object sender, RoutedEventArgs e)
         {
+            void ShowFeedback(string text)
+            {
+                Feedback.Text = text;
+                Feedback.Visibility = Visibility.Visible;
+            }
+
             string username = UsernameBox.Text;
             string password = PasswordBox.Password;
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                Feedback.Text = "Please enter a username or password.";
-                Feedback.Visibility = Visibility.Visible;
+                ShowFeedback("Please enter a username or password.");
             }
 
             using (var db = new AirContext())
@@ -36,20 +41,18 @@ namespace Air_3550.Pages
 
                 if (user == null)
                 {
-                    Feedback.Visibility = Visibility.Visible;
-                    Feedback.Text = "The username or password is incorrect.";
+                    ShowFeedback("The username or password is incorrect.");
                 }
                 else
                 {
                     if (PasswordHandling.CheckPassword(password, user.PasswordHash))
                     {
-                        Feedback.Visibility = Visibility.Visible;
-                        Feedback.Text = "Good work! :)";
+                        // TODO: Actually sign you in.
+                        Frame.Navigate(typeof(MainPage));
                     }
                     else
                     {
-                        Feedback.Visibility = Visibility.Visible;
-                        Feedback.Text = "The username or password is incorrect.";
+                        ShowFeedback("The username or password is incorrect.");
                     }
                 }
             }
