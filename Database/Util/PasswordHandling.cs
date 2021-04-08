@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Database.Util
 {
-    class PasswordHandling
+    public class PasswordHandling
     {
         public static string HashPassword(string password)
         {

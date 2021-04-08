@@ -10,8 +10,9 @@
 
     <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>
-        <TextBox Header="Username:" PlaceholderText="Name" />
-        <PasswordBox Header="Password:" PlaceholderText="Password" />
-        <Button HorizontalAlignment="Right" Margin="0 5 0 0">Login</Button>
+        <TextBox x:Name="UsernameBox" Header="Username:" PlaceholderText="Name" />
+        <PasswordBox x:Name="PasswordBox" Header="Password:" PlaceholderText="Password" />
+        <Button x:Name="LoginButton" Click="LoginButton_Clicked" HorizontalAlignment="Right" Margin="0 5 0 0">Login</Button>
+        <TextBlock x:Name="Feedback" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="Red"></TextBlock>
     </StackPanel>
 </Page>
