@@ -10,9 +10,8 @@ namespace Database.Util
         {
             // TODO: Ask Larry if this seems reasonable because this is ACTUALLY so stupid and insecure.
             byte[] data = Encoding.UTF8.GetBytes(password);
-            byte[] result;
             SHA512 shaM = new SHA512Managed();
-            result = shaM.ComputeHash(data);
+            byte[] result = shaM.ComputeHash(data);
             return Convert.ToBase64String(result);
         }
 
