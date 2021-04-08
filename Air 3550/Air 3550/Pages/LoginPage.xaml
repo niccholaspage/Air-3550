@@ -9,6 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>
         <TextBox Header="Username:" PlaceholderText="Name" />
         <PasswordBox Header="Password:" PlaceholderText="Password" />
         <Button HorizontalAlignment="Right" Margin="0 5 0 0">Login</Button>
