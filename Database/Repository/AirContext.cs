@@ -1,4 +1,5 @@
 ﻿using Air_3550.Models;
+using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
@@ -38,6 +39,13 @@ namespace Air_3550.Repository
                 new Plane { PlaneId = 1, Model = "Boeing 737 MAX", MaxSeats = 230, MaxDistance = 6570 },
                 new Plane { PlaneId = 2, Model = "Boeing 747", MaxSeats = 416, MaxDistance = 14815 },
                 new Plane { PlaneId = 4, Model = "Boeing 777", MaxSeats = 550, MaxDistance = 17395 }
+                );
+
+            modelBuilder.Entity<User>().HasData(
+                new User { UserId = 1, Role = Role.ACCOUNTANT, LoginId = "accountant", PasswordHash = PasswordHandling.hashPassword("accountant") },
+                new User { UserId = 2, Role = Role.LOAD_ENGINEER, LoginId = "load_engineer", PasswordHash = PasswordHandling.hashPassword("load_engineer") },
+                new User { UserId = 3, Role = Role.FLIGHT_MANAGER, LoginId = "flight_manager", PasswordHash = PasswordHandling.hashPassword("flight_manager") },
+                new User { UserId = 4, Role = Role.MARKETING_MANAGER, LoginId = "marketing_manager", PasswordHash = PasswordHandling.hashPassword("marketing_manager") }
                 );
         }
 
