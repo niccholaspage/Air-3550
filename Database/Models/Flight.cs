@@ -25,11 +25,11 @@ namespace Air_3550.Models
 
             const int R = 6371; // Radius of the earth
 
-            double latDistance = toRadians(DestinationAirport.Latitude - OriginAirport.Latitude);
-            double lonDistance = toRadians(DestinationAirport.Longitude - OriginAirport.Longitude);
-            double a = Math.Sin(latDistance / 2) * Math.Sin(latDistance / 2)
+            double latitudeDistance = toRadians(DestinationAirport.Latitude - OriginAirport.Latitude);
+            double longitudeDistance = toRadians(DestinationAirport.Longitude - OriginAirport.Longitude);
+            double a = Math.Sin(latitudeDistance / 2) * Math.Sin(latitudeDistance / 2)
                     + Math.Cos(toRadians(OriginAirport.Latitude)) * Math.Cos(toRadians(DestinationAirport.Latitude))
-                    * Math.Sin(lonDistance / 2) * Math.Sin(lonDistance / 2);
+                    * Math.Sin(longitudeDistance / 2) * Math.Sin(longitudeDistance / 2);
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             double distance = R * c * 1000; // convert to meters
 
