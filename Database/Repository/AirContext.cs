@@ -30,7 +30,7 @@ namespace Air_3550.Repository
                 new Airport { AirportId = 5, Code = "JFK", City = "New York City", State = "New York", Latitude = 40.639722m, Longitude = -73.778889m, Elevation = 13 },
                 new Airport { AirportId = 6, Code = "LAX", City = "Los Angeles", State = "California", Latitude = 33.9425m, Longitude = -118.408056m, Elevation = 128 },
                 new Airport { AirportId = 7, Code = "ORD", City = "Chicago", State = "Illinois", Latitude = 41.978611m, Longitude = -87.904722m, Elevation = 668 },
-                new Airport { AirportId = 8, Code = "DFW", City = "Dallas", State = "Ohio", Latitude = 32.896944m, Longitude = -97.038056m, Elevation = 607 },
+                new Airport { AirportId = 8, Code = "DFW", City = "Dallas", State = "Texas", Latitude = 32.896944m, Longitude = -97.038056m, Elevation = 607 },
                 new Airport { AirportId = 9, Code = "DEN", City = "Denver", State = "Colorado", Latitude = 39.861667m, Longitude = -104.673056m, Elevation = 5434 },
                 new Airport { AirportId = 10, Code = "SEA", City = "Seattle", State = "Washington", Latitude = 47.448889m, Longitude = -122.309444m, Elevation = 433 }
                 );
@@ -38,7 +38,7 @@ namespace Air_3550.Repository
             modelBuilder.Entity<Plane>().HasData(
                 new Plane { PlaneId = 1, Model = "Boeing 737 MAX", MaxSeats = 230, MaxDistance = 6570 },
                 new Plane { PlaneId = 2, Model = "Boeing 747", MaxSeats = 416, MaxDistance = 14815 },
-                new Plane { PlaneId = 4, Model = "Boeing 777", MaxSeats = 550, MaxDistance = 17395 }
+                new Plane { PlaneId = 3, Model = "Boeing 777", MaxSeats = 550, MaxDistance = 17395 }
                 );
 
             modelBuilder.Entity<User>().HasData(
