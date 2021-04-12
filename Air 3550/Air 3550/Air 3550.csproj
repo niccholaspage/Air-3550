@@ -9,8 +9,8 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Pages\LoginPage.xaml" />
-    <None Remove="Pages\MainPage.xaml" />
+    <None Remove="Views\LoginPage.xaml" />
+    <None Remove="Views\MainPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
