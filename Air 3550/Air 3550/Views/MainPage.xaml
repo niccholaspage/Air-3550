@@ -2,7 +2,7 @@
     x:Class="Air_3550.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Air_3550.Controls"
+    xmlns:controls="using:Air_3550.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -12,10 +12,10 @@
         <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.AlignVerticalCenterWithPanel="true">
             <Image x:Name="logo" Source="ms-appx:///Assets/logo.svg" Width="500" Height="154"></Image>
             <StackPanel x:Name="stack" Orientation="Horizontal" HorizontalAlignment="Center">
-                <local:AirportSuggestBox Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
-                <local:AirportSuggestBox Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
-                <CalendarDatePicker PlaceholderText="Pick a date" Width="125" Margin="3" Header="Departure Date" VerticalAlignment="Bottom" />
-                <CalendarDatePicker PlaceholderText="Pick a date" Width="125" Margin="3" Header="Return Date" VerticalAlignment="Bottom" />
+                <controls:AirportSuggestBox Text="{x:Bind ViewModel.DepartureCity}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
+                <controls:AirportSuggestBox Text="{x:Bind ViewModel.ArrivalCity}" Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
+                <CalendarDatePicker Date="{x:Bind ViewModel.DepartureDate}" PlaceholderText="Pick a date" Width="125" Margin="3" Header="Departure Date" VerticalAlignment="Bottom" />
+                <CalendarDatePicker Date="{x:Bind ViewModel.ArrivalDate}" PlaceholderText="Pick a date" Width="125" Margin="3" Header="Return Date" VerticalAlignment="Bottom" />
                 <Button x:Name="SearchButton" Click="SearchButton_Click" Margin="3" VerticalAlignment="Bottom">Search</Button>
             </StackPanel>
         </StackPanel>

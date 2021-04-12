@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Air_3550.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -15,6 +16,8 @@ namespace Air_3550.Views
         {
             this.InitializeComponent();
         }
+
+        MainViewModel ViewModel => new MainViewModel();
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
