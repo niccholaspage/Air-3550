@@ -9,7 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 using System.Threading.Tasks;
 using Windows.System;
 
-namespace Air_3550.Pages
+namespace Air_3550.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
