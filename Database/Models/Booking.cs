@@ -91,12 +91,18 @@ namespace Air_3550.Models
             return GetCost(true) + GetCost(false);
         }
 
-
-        public TimeSpan GetTotalDuration()
+        // this calculates the duration of one-way flight (either departure or return)
+        public TimeSpan GetDuration(bool departingTickets)
         {
             DateTime date1 = DateTime.Now;
             DateTime date2 = DateTime.Now;
             TimeSpan totalDuration = new TimeSpan();
+            TimeSpan finalFlightTime = new TimeSpan();
+            var tickets = departingTickets ? GetDepartureTickets() : GetReturnTickets();
+            if (tickets.Count == 0)
+            {
+                return totalDuration;
+            }
             foreach (var ticket in Tickets)
             {
                 date2 = ticket.ScheduledFlight.DepartureTimestamp;
@@ -107,10 +113,18 @@ namespace Air_3550.Models
                 if (ticket.ScheduledFlight.DepartureTimestamp > date2)
                 {
                     date2 = ticket.ScheduledFlight.DepartureTimestamp;
+                    finalFlightTime = ticket.ScheduledFlight.Flight.GetFlightDuration();
                 }
             }
             totalDuration = date2.Subtract(date1);
+            totalDuration += finalFlightTime;
             return totalDuration;
+        }
+
+        // this calculates the duration of round-trip flight
+        public TimeSpan GetTotalDuration()
+        {
+            return GetDuration(true) + GetDuration(false);
         }
     }
 }

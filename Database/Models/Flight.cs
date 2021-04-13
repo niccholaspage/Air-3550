@@ -41,7 +41,8 @@ namespace Air_3550.Models
             return Math.Sqrt(distance);
         }
 
-        public TimeSpan GetDuration()
+        // this calculates the duration of each flight
+        public TimeSpan GetFlightDuration()
         {
             double permDuration = 30 + (60/500) * GetDistance();
             int hours = (int)permDuration / 60;
