@@ -70,18 +70,24 @@ namespace Air_3550.Models
             double totalCost = 50;
             double distance = 0;
             DateTime date1 = DateTime.Now; // TODO: This needs to be updated, why are we using current time?
+            DateTime date2 = DateTime.Now;
             foreach (var ticket in tickets)
             {
                 distance += ticket.ScheduledFlight.Flight.GetDistance();
                 totalCost += 8;
-                if (ticket.ScheduledFlight.DepartureTimestamp < date1) // still need to implement the discount based
-                {                                                       // on arrival time
+                date2 = ticket.ScheduledFlight.GetArrivalTimestamp();
+                if (ticket.ScheduledFlight.DepartureTimestamp < date1) 
+                {                                                       
                     date1 = ticket.ScheduledFlight.DepartureTimestamp;
+                }
+                if(ticket.ScheduledFlight.GetArrivalTimestamp() > date2)
+                {
+                    date2 = ticket.ScheduledFlight.GetArrivalTimestamp();
                 }
             }
             totalCost += (0.12 * distance);
-            if (date1.Hour < 8) totalCost -= totalCost * 0.10;
-            else if (date1.Hour < 5) totalCost -= totalCost * 0.20;
+            if (date1.Hour < 5 || date2.Hour < 5) totalCost -= totalCost * 0.20;
+            else if (date1.Hour < 8 || date2.Hour > 19) totalCost -= totalCost * 0.10;
             return totalCost;
         }
 
