@@ -41,7 +41,7 @@ namespace Air_3550.ViewModels
         public string PhoneNumber
         {
             get => _phoneNumber;
-            set => SetProperty(ref _phoneNumber, value);
+            set => SetProperty(ref _phoneNumber, value, true);
         }
 
         private string _address;
@@ -49,7 +49,7 @@ namespace Air_3550.ViewModels
         public string Address
         {
             get => _address;
-            set => SetProperty(ref _address, value);
+            set => SetProperty(ref _address, value, true);
         }
 
         private string _city;
@@ -57,7 +57,7 @@ namespace Air_3550.ViewModels
         public string City
         {
             get => _city;
-            set => SetProperty(ref _city, value);
+            set => SetProperty(ref _city, value, true);
         }
 
         private string _state;
@@ -65,7 +65,7 @@ namespace Air_3550.ViewModels
         public string State
         {
             get => _state;
-            set => SetProperty(ref _state, value);
+            set => SetProperty(ref _state, value, true);
         }
 
         private string _zipCode;
@@ -73,7 +73,7 @@ namespace Air_3550.ViewModels
         public string ZipCode
         {
             get => _zipCode;
-            set => SetProperty(ref _zipCode, value);
+            set => SetProperty(ref _zipCode, value, true);
         }
 
         private string _creditCardNumber;
@@ -81,7 +81,7 @@ namespace Air_3550.ViewModels
         public string CreditCardNumber
         {
             get => _creditCardNumber;
-            set => SetProperty(ref _creditCardNumber, value);
+            set => SetProperty(ref _creditCardNumber, value, true);
         }
     }
 }
