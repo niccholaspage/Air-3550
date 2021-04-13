@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 
 namespace Air_3550.ViewModels
 {
-    class MainViewModel : BindableBase
+    class MainViewModel : ObservableObject
     {
         private string _departureCity;
 
         public string DepartureCity
         {
             get => _departureCity;
-            set => Set(ref _departureCity, value);
+            set => SetProperty(ref _departureCity, value);
         }
 
         private string _arrivalCity;
@@ -17,7 +18,7 @@ namespace Air_3550.ViewModels
         public string ArrivalCity
         {
             get => _arrivalCity;
-            set => Set(ref _arrivalCity, value);
+            set => SetProperty(ref _arrivalCity, value);
         }
 
         private DateTimeOffset? _departureDate;
@@ -25,7 +26,7 @@ namespace Air_3550.ViewModels
         public DateTimeOffset? DepartureDate
         {
             get => _departureDate;
-            set => Set(ref _departureDate, value);
+            set => SetProperty(ref _departureDate, value);
         }
 
         private DateTimeOffset? _arrivalDate;
@@ -33,7 +34,7 @@ namespace Air_3550.ViewModels
         public DateTimeOffset? ArrivalDate
         {
             get => _arrivalDate;
-            set => Set(ref _arrivalDate, value);
+            set => SetProperty(ref _arrivalDate, value);
         }
     }
 }
