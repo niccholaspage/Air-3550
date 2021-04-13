@@ -8,15 +8,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
-        <PasswordBox x:Name="PasswordBox"></PasswordBox>
-        <TextBox x:Name="NameBox"></TextBox>
-        <NumberBox x:Name="AgeBox"></NumberBox>
-        <TextBox x:Name="PhoneNumberBox"></TextBox>
-        <TextBox x:Name="AddressBox"></TextBox>
-        <TextBox x:Name="ZipCodeBox"></TextBox>
-        <TextBox x:Name="CityBox"></TextBox>
-        <TextBox x:Name="StateBox"></TextBox>
-        <TextBox x:Name="CreditCardNumberBox"></TextBox>
+    <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Register</TextBlock>
+        <TextBox Header="Full Name" x:Name="FullNameBox"></TextBox>
+        <PasswordBox Header="Password" x:Name="PasswordBox"></PasswordBox>
+        <PasswordBox Header="Confirm Password" x:Name="PasswordConfirmBox"></PasswordBox>
+        <NumberBox Header="Age" x:Name="AgeBox"></NumberBox>
+        <TextBox Header="Phone Number" x:Name="PhoneNumberBox"></TextBox>
+        <TextBox Header="Address" x:Name="AddressBox"></TextBox>
+        <TextBox Header="City" x:Name="CityBox"></TextBox>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Width="148" Margin="0 0 4 0" Header="State" x:Name="StateBox"></TextBox>
+            <TextBox Width="148" Header="Postal Code" x:Name="ZipCodeBox"></TextBox>
+        </StackPanel>
+        <TextBox Header="Credit Card Number" x:Name="CreditCardNumberBox"></TextBox>
+        <Button Margin="0 5 0 0" HorizontalAlignment="Right">Register</Button>
     </StackPanel>
 </Page>
