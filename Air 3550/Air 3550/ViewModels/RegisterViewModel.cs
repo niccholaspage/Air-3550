@@ -9,7 +9,7 @@ namespace Air_3550.ViewModels
         public string FullName
         {
             get => _fullName;
-            set => SetProperty(ref _fullName, value);
+            set => SetProperty(ref _fullName, value, true);
         }
 
         private string _password;
@@ -17,7 +17,7 @@ namespace Air_3550.ViewModels
         public string Password
         {
             get => _password;
-            set => SetProperty(ref _password, value);
+            set => SetProperty(ref _password, value, true);
         }
 
         private string _confirmPassword;
@@ -25,7 +25,7 @@ namespace Air_3550.ViewModels
         public string ConfirmPassword
         {
             get => _confirmPassword;
-            set => SetProperty(ref _confirmPassword, value);
+            set => SetProperty(ref _confirmPassword, value, true);
         }
 
         private double _age = double.NaN;
@@ -33,7 +33,7 @@ namespace Air_3550.ViewModels
         public double Age
         {
             get => _age;
-            set => SetProperty(ref _age, value);
+            set => SetProperty(ref _age, value, true);
         }
 
         private string _phoneNumber;
