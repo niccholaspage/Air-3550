@@ -40,5 +40,14 @@ namespace Air_3550.Models
 
             return Math.Sqrt(distance);
         }
+
+        public TimeSpan GetDuration()
+        {
+            double permDuration = 30 + (60/500) * GetDistance();
+            int hours = (int)permDuration / 60;
+            int min = (int)permDuration % 60;
+            TimeSpan duration = new TimeSpan(hours, min, 0);
+            return duration;
+        }
     }
 }

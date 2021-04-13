@@ -27,5 +27,26 @@ namespace Air_3550.Models
             else if (date1.Hour < 5) totalCost -= totalCost * 0.20;
             return totalCost;
         }
+
+        public TimeSpan GetTotalDuration()
+        {
+            DateTime date1 = DateTime.Now;
+            DateTime date2 = DateTime.Now;
+            TimeSpan totalDuration = new TimeSpan();
+            foreach (var ticket in Tickets)
+            {
+                date2= ticket.ScheduledFlight.DepartureTimestamp;
+                if (ticket.ScheduledFlight.DepartureTimestamp < date1) 
+                {                                                       
+                    date1 = ticket.ScheduledFlight.DepartureTimestamp;
+                }
+                if (ticket.ScheduledFlight.DepartureTimestamp > date2)
+                {
+                    date2 = ticket.ScheduledFlight.DepartureTimestamp;
+                }
+            }
+            totalDuration = date2.Subtract(date1);
+            return totalDuration;
+        }
     }
 }
