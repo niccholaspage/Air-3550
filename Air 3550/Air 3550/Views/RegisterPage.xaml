@@ -23,5 +23,6 @@
         </StackPanel>
         <TextBox Text="{x:Bind ViewModel.CreditCardNumber, Mode=TwoWay}" Header="Credit Card Number" x:Name="CreditCardNumberBox"></TextBox>
         <Button Margin="0 5 0 0" HorizontalAlignment="Right">Register</Button>
+        <TextBlock Text="{x:Bind ViewModel.HasErrors, Mode=OneWay}"></TextBlock>
     </StackPanel>
 </Page>
