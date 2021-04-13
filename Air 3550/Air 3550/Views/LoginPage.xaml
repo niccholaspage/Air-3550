@@ -12,7 +12,10 @@
         <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>
         <TextBox x:Name="UsernameBox" Header="Username:" PlaceholderText="Name" />
         <PasswordBox x:Name="PasswordBox" Header="Password:" PlaceholderText="Password" />
-        <Button x:Name="LoginButton" Click="LoginButton_Clicked" HorizontalAlignment="Right" Margin="0 5 0 0">Login</Button>
+        <RelativePanel Margin="0 5 0 0">
+            <Button x:Name="RegisterButton" Click="RegisterButton_Click" RelativePanel.AlignLeftWithPanel="true">Register</Button>
+            <Button x:Name="LoginButton" Click="LoginButton_Clicked" RelativePanel.AlignRightWithPanel="true">Login</Button>
+        </RelativePanel>
         <TextBlock x:Name="Feedback" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="Red"></TextBlock>
     </StackPanel>
 </Page>

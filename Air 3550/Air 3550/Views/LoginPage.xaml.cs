@@ -72,5 +72,10 @@ namespace Air_3550.Views
                 await PerformLogin();
             }
         }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(RegisterPage));
+        }
     }
 }
