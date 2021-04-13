@@ -16,6 +16,11 @@ namespace Air_3550.Models
         [Required]
         public Airport DestinationAirport { get; set; }
 
+        /**
+         * Calculate distance between the origin airport and destination
+         * airport. Returns the distance in miles.
+         * 
+         */
         public double GetDistance()
         {
             static double toRadians(decimal angdeg)
@@ -38,7 +43,7 @@ namespace Air_3550.Models
 
             distance = Math.Pow(distance, 2) + Math.Pow(height, 2);
 
-            return Math.Sqrt(distance);
+            return Math.Sqrt(distance) / 1000 / 0.62137119; // We convert our distance we are about to return from meters to kilometers to miles.
         }
     }
 }
