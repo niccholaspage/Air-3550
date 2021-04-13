@@ -15,6 +15,12 @@ namespace Air_3550.Controls
     {
         private List<string> AirportNames = new List<string>();
 
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
+
         public string Label
         {
             get => (string)GetValue(LabelProperty);
@@ -22,6 +28,7 @@ namespace Air_3550.Controls
         }
 
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(nameof(Label), typeof(String), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(String), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
 
         public AirportSuggestBox()
         {

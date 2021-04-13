@@ -11,17 +11,25 @@
   <ItemGroup>
     <None Remove="Views\LoginPage.xaml" />
     <None Remove="Views\MainPage.xaml" />
+    <None Remove="Views\RegisterPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ProjectReunion" Version="0.5.0" />
     <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.5.0" />
     <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.5.0" />
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.0.1" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\RegisterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

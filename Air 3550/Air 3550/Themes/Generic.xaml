@@ -9,7 +9,7 @@
                 <ControlTemplate TargetType="local:AirportSuggestBox">
                     <StackPanel>
                         <TextBlock Text="{TemplateBinding Label}"></TextBlock>
-                        <AutoSuggestBox Name="SuggestBox" Width="300" AutomationProperties.Name="Basic AutoSuggestBox"/>
+                        <AutoSuggestBox Text="{TemplateBinding Text}" Name="SuggestBox" Width="300" AutomationProperties.Name="Basic AutoSuggestBox"/>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
