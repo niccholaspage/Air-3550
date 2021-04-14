@@ -10,12 +10,12 @@
 
     <StackPanel KeyDown="StackPanel_KeyDown" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>
-        <TextBox x:Name="UsernameBox" Header="Username:" PlaceholderText="Name" />
-        <PasswordBox x:Name="PasswordBox" Header="Password:" PlaceholderText="Password" />
+        <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" x:Name="UsernameBox" Header="Username:" PlaceholderText="Name" />
+        <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" x:Name="PasswordBox" Header="Password:" PlaceholderText="Password" />
         <RelativePanel Margin="0 5 0 0">
             <Button x:Name="RegisterButton" Click="RegisterButton_Click" RelativePanel.AlignLeftWithPanel="true">Register</Button>
             <Button x:Name="LoginButton" Click="LoginButton_Clicked" RelativePanel.AlignRightWithPanel="true">Login</Button>
         </RelativePanel>
-        <TextBlock x:Name="Feedback" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="Red"></TextBlock>
+        <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay}" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
     </StackPanel>
 </Page>
