@@ -119,7 +119,7 @@ namespace Air_3550.Models
                 if (ticket.ScheduledFlight.DepartureTimestamp > date2)
                 {
                     date2 = ticket.ScheduledFlight.DepartureTimestamp;
-                    finalFlightTime = ticket.ScheduledFlight.Flight.GetFlightDuration();
+                    finalFlightTime = ticket.ScheduledFlight.Flight.GetDuration();
                 }
             }
             totalDuration = date2.Subtract(date1);

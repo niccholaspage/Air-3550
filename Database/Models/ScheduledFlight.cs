@@ -17,7 +17,7 @@ namespace Air_3550.Models
         public DateTime GetArrivalTimestamp()
         {
             DateTime arrivalTime = DepartureTimestamp;
-            TimeSpan permDuration = Flight.GetFlightDuration();
+            TimeSpan permDuration = Flight.GetDuration();
             arrivalTime = arrivalTime.Add(permDuration);
             return arrivalTime;
         }
