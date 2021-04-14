@@ -7,6 +7,7 @@ using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.System;
 
@@ -23,6 +24,13 @@ namespace Air_3550.Views
         }
 
         LoginViewModel ViewModel = new LoginViewModel();
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            string loginId = e.Parameter as string;
+        }
 
         public async void LoginButton_Clicked(object sender, RoutedEventArgs e)
         {
@@ -41,7 +49,7 @@ namespace Air_3550.Views
         {
             if (await ViewModel.PerformLogin())
             {
-                Frame.Navigate(typeof(MainPage));
+                Frame.GoBack();
             }
         }
 
@@ -52,7 +60,8 @@ namespace Air_3550.Views
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+            // TODO: Switch to a proper header bar for navigating backward and such
+            Frame.GoBack();
         }
     }
 }

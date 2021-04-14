@@ -21,17 +21,18 @@ namespace Air_3550.Views
 
         private async void RegisterButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            var result = await ViewModel.CreateAccount();
+            var loginId = await ViewModel.CreateAccount();
 
-            if (result)
+            if (loginId != null)
             {
-                Frame.Navigate(typeof(MainPage));
+                Frame.Navigate(typeof(LoginPage), loginId);
             }
         }
 
         private void Back_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(LoginPage));
+            // TODO: Switch to a proper header bar for navigating backward and such
+            Frame.GoBack();
         }
     }
 }

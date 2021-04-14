@@ -109,13 +109,13 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _creditCardNumber, value);
         }
 
-        public async Task<bool> CreateAccount()
+        public async Task<string> CreateAccount()
         {
             ValidateAllProperties();
 
             if (HasErrors)
             {
-                return false;
+                return null;
             }
 
             using (var db = new AirContext())
@@ -157,10 +157,9 @@ namespace Air_3550.ViewModels
                 });
 
                 db.SaveChanges();
+
+                return user.LoginId;
             }
-
-
-            return true;
         }
     }
 }
