@@ -15,8 +15,7 @@ namespace Air_3550.ViewModels
     {
         private string _fullName;
 
-        [Required]
-        [MinLength(1)]
+        [Required(ErrorMessage = "Please enter your full name.")]
         public string FullName
         {
             get => _fullName;
@@ -25,8 +24,7 @@ namespace Air_3550.ViewModels
 
         private string _password;
 
-        [Required]
-        [MinLength(1)]
+        [Required(ErrorMessage = "Please enter your password.")]
         public string Password
         {
             get => _password;
@@ -36,7 +34,7 @@ namespace Air_3550.ViewModels
         private string _confirmPassword;
 
         [Required]
-        [Compare(nameof(Password))]
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword
         {
             get => _confirmPassword;
@@ -45,7 +43,7 @@ namespace Air_3550.ViewModels
 
         private int? _age = null;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your age.")]
         [Range(0.0, 200.0)]
         public int? Age
         {
@@ -55,7 +53,7 @@ namespace Air_3550.ViewModels
 
         private string _phoneNumber;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your phone number.")]
         [Phone]
         public string PhoneNumber
         {
@@ -65,7 +63,7 @@ namespace Air_3550.ViewModels
 
         private string _address;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your address.")]
         public string Address
         {
             get => _address;
@@ -74,7 +72,7 @@ namespace Air_3550.ViewModels
 
         private string _city;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your city.")]
         public string City
         {
             get => _city;
@@ -83,7 +81,7 @@ namespace Air_3550.ViewModels
 
         private string _state;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your state.")]
         public string State
         {
             get => _state;
@@ -92,7 +90,7 @@ namespace Air_3550.ViewModels
 
         private string _zipCode;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your postal code.")]
         public string ZipCode
         {
             get => _zipCode;
@@ -101,9 +99,9 @@ namespace Air_3550.ViewModels
 
         private string _creditCardNumber;
 
-        [Required]
-        [MinLength(15)]
-        [MaxLength(16)]
+        [Required(ErrorMessage = "Please enter your credit card number.")]
+        [MinLength(15, ErrorMessage = "Please enter a valid credit card number.")]
+        [MaxLength(16, ErrorMessage = "Please enter a valid credit card number.")]
         // TODO: Figure out how to exclude dashes when doing validation
         public string CreditCardNumber
         {
