@@ -6,4 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <RelativePanel>
+        <Frame x:Name="ContentFrame" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignRightWithPanel="true" RelativePanel.AlignTopWithPanel="true" RelativePanel.AlignBottomWithPanel="true"></Frame>
+        <RelativePanel x:Name="HeaderPanel" Height="60" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignRightWithPanel="true">
+            <Button Click="BackButton_Click" RelativePanel.AlignLeftWithPanel="true" Margin="5">Back</Button>
+            <Button Click="LoginButton_Click" RelativePanel.AlignRightWithPanel="true" Margin="5">Login</Button>
+        </RelativePanel>
+    </RelativePanel>
 </Window>

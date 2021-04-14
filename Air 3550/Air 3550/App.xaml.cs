@@ -1,8 +1,6 @@
-﻿using Air_3550.Views;
-using Air_3550.Repository;
+﻿using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,21 +34,6 @@ namespace Air_3550
             }
 
             m_window = new MainWindow();
-
-            Frame frame = m_window.Content as Frame;
-
-            if (frame == null)
-            {
-                frame = new Frame();
-
-                // Previous execution state??
-                m_window.Content = frame;
-            }
-
-            if (frame.Content == null)
-            {
-                frame.Navigate(typeof(MainPage));
-            }
 
             m_window.Activate();
         }
