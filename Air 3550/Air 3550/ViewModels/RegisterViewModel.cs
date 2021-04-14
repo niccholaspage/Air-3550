@@ -43,11 +43,11 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _confirmPassword, value);
         }
 
-        private double _age = double.NaN;
+        private int? _age = null;
 
         [Required]
         [Range(0.0, 200.0)]
-        public double Age
+        public int? Age
         {
             get => _age;
             set => SetProperty(ref _age, value);
