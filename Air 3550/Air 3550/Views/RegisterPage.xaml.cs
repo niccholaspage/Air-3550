@@ -17,5 +17,10 @@ namespace Air_3550.Views
         }
 
         RegisterViewModel ViewModel = new RegisterViewModel();
+
+        private void RegisterButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            ViewModel.CreateAccount();
+        }
     }
 }

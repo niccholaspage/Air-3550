@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Xaml.Controls;
 using System.ComponentModel.DataAnnotations;
 
 namespace Air_3550.ViewModels
@@ -12,7 +13,7 @@ namespace Air_3550.ViewModels
         public string FullName
         {
             get => _fullName;
-            set => SetProperty(ref _fullName, value, true);
+            set => SetProperty(ref _fullName, value);
         }
 
         private string _password;
@@ -22,7 +23,7 @@ namespace Air_3550.ViewModels
         public string Password
         {
             get => _password;
-            set => SetProperty(ref _password, value, true);
+            set => SetProperty(ref _password, value);
         }
 
         private string _confirmPassword;
@@ -32,7 +33,7 @@ namespace Air_3550.ViewModels
         public string ConfirmPassword
         {
             get => _confirmPassword;
-            set => SetProperty(ref _confirmPassword, value, true);
+            set => SetProperty(ref _confirmPassword, value);
         }
 
         private double _age = double.NaN;
@@ -41,7 +42,7 @@ namespace Air_3550.ViewModels
         public double Age
         {
             get => _age;
-            set => SetProperty(ref _age, value, true);
+            set => SetProperty(ref _age, value);
         }
 
         private string _phoneNumber;
@@ -51,7 +52,7 @@ namespace Air_3550.ViewModels
         public string PhoneNumber
         {
             get => _phoneNumber;
-            set => SetProperty(ref _phoneNumber, value, true);
+            set => SetProperty(ref _phoneNumber, value);
         }
 
         private string _address;
@@ -60,7 +61,7 @@ namespace Air_3550.ViewModels
         public string Address
         {
             get => _address;
-            set => SetProperty(ref _address, value, true);
+            set => SetProperty(ref _address, value);
         }
 
         private string _city;
@@ -69,7 +70,7 @@ namespace Air_3550.ViewModels
         public string City
         {
             get => _city;
-            set => SetProperty(ref _city, value, true);
+            set => SetProperty(ref _city, value);
         }
 
         private string _state;
@@ -78,7 +79,7 @@ namespace Air_3550.ViewModels
         public string State
         {
             get => _state;
-            set => SetProperty(ref _state, value, true);
+            set => SetProperty(ref _state, value);
         }
 
         private string _zipCode;
@@ -87,7 +88,7 @@ namespace Air_3550.ViewModels
         public string ZipCode
         {
             get => _zipCode;
-            set => SetProperty(ref _zipCode, value, true);
+            set => SetProperty(ref _zipCode, value);
         }
 
         private string _creditCardNumber;
@@ -99,7 +100,19 @@ namespace Air_3550.ViewModels
         public string CreditCardNumber
         {
             get => _creditCardNumber;
-            set => SetProperty(ref _creditCardNumber, value, true);
+            set => SetProperty(ref _creditCardNumber, value);
+        }
+
+        public void CreateAccount()
+        {
+            ValidateAllProperties();
+
+            if (HasErrors)
+            {
+                return;
+            }
+
+            // TODO: How do we have this navigate back? Maybe with a result return.
         }
     }
 }
