@@ -1,6 +1,13 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using Air_3550.Models;
+using Air_3550.Repository;
+using Database.Util;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {
@@ -39,6 +46,7 @@ namespace Air_3550.ViewModels
         private double _age = double.NaN;
 
         [Required]
+        [Range(0.0, 200.0)]
         public double Age
         {
             get => _age;
@@ -103,16 +111,58 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _creditCardNumber, value);
         }
 
-        public void CreateAccount()
+        public async Task<bool> CreateAccount()
         {
             ValidateAllProperties();
 
             if (HasErrors)
             {
-                return;
+                return false;
             }
 
-            // TODO: How do we have this navigate back? Maybe with a result return.
+            using (var db = new AirContext())
+            {
+                Random random = new();
+
+                string generatedId;
+
+                while (true)
+                {
+                    // Generates an ID between 100000 (because user IDs cannot start with zero) and 1,000,000 exclusive
+                    generatedId = random.Next(100_000, 1_000_000).ToString();
+                    if (await db.Users.SingleOrDefaultAsync(user => user.LoginId == generatedId) == null)
+                    {
+                        break;
+                    }
+                }
+
+                var user = new User
+                {
+                    LoginId = generatedId,
+                    PasswordHash = PasswordHandling.HashPassword(Password),
+                    Role = Role.CUSTOMER
+                };
+
+                await db.AddAsync(user);
+
+                await db.CustomerDatas.AddAsync(new CustomerData
+                {
+                    User = user,
+                    Name = FullName,
+                    Age = (int)Age,
+                    PhoneNumber = PhoneNumber,
+                    Address = Address,
+                    ZipCode = ZipCode,
+                    City = City,
+                    State = State,
+                    CreditCardNumber = CreditCardNumber
+                });
+
+                db.SaveChanges();
+            }
+
+
+            return true;
         }
     }
 }
