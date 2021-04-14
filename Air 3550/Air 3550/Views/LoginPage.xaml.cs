@@ -30,6 +30,13 @@ namespace Air_3550.Views
             base.OnNavigatedTo(e);
 
             string loginId = e.Parameter as string;
+
+            if (loginId != null)
+            {
+                ViewModel.Username = loginId;
+                AccountCreatedBar.Message = $"Your account has been successfully created. Your ID is {loginId}.";
+                AccountCreatedBar.IsOpen = true;
+            }
         }
 
         public async void LoginButton_Clicked(object sender, RoutedEventArgs e)
