@@ -67,15 +67,15 @@ namespace Air_3550.Models
             {
                 return 0.0;
             }
-            double totalCost = 50;
-            double distance = 0;
+            int basePrice = 50;
+            double totalCost = 0;
+            totalCost += basePrice;
             DateTime date1 = DateTime.Now; // TODO: This needs to be updated, why are we using current time?
-            DateTime date2 = DateTime.Now;
+            DateTime date2;
+            date2 = tickets[0].ScheduledFlight.GetArrivalTimestamp();
             foreach (var ticket in tickets)
             {
-                distance += ticket.ScheduledFlight.Flight.GetDistance();
-                totalCost += 8;
-                date2 = ticket.ScheduledFlight.GetArrivalTimestamp();
+                totalCost += ticket.GetCost();
                 if (ticket.ScheduledFlight.DepartureTimestamp < date1) 
                 {                                                       
                     date1 = ticket.ScheduledFlight.DepartureTimestamp;
@@ -85,9 +85,9 @@ namespace Air_3550.Models
                     date2 = ticket.ScheduledFlight.GetArrivalTimestamp();
                 }
             }
-            totalCost += (0.12 * distance);
-            if (date1.Hour < 5 || date2.Hour < 5) totalCost -= totalCost * 0.20;
-            else if (date1.Hour < 8 || date2.Hour > 19) totalCost -= totalCost * 0.10;
+            totalCost += (8 * (tickets.Count -1));
+            if (date1.Hour < 5 || date2.Hour < 5) totalCost -= basePrice * 0.20;
+            else if (date1.Hour < 8 || date2.Hour > 19) totalCost -= basePrice * 0.10;
             return totalCost;
         }
 
@@ -101,7 +101,7 @@ namespace Air_3550.Models
         public TimeSpan GetDuration(bool departingTickets)
         {
             DateTime date1 = DateTime.Now;
-            DateTime date2 = DateTime.Now;
+            DateTime date2;
             TimeSpan totalDuration = new TimeSpan();
             TimeSpan finalFlightTime = new TimeSpan();
             var tickets = departingTickets ? GetDepartureTickets() : GetReturnTickets();
@@ -109,9 +109,9 @@ namespace Air_3550.Models
             {
                 return totalDuration;
             }
+            date2 = tickets[0].ScheduledFlight.GetArrivalTimestamp();
             foreach (var ticket in Tickets)
             {
-                date2 = ticket.ScheduledFlight.DepartureTimestamp;
                 if (ticket.ScheduledFlight.DepartureTimestamp < date1)
                 {
                     date1 = ticket.ScheduledFlight.DepartureTimestamp;

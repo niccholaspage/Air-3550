@@ -15,5 +15,22 @@ namespace Air_3550.Models
 
         [Required]
         public Booking Booking { get; set; }
+
+
+        public double GetCost()
+        {
+            double flightCost = 0;
+            double duration = ScheduledFlight.Flight.GetDistance();
+            flightCost += (duration * 0.12);
+            if(ScheduledFlight.DepartureTimestamp.Hour < 5 || ScheduledFlight.GetArrivalTimestamp().Hour < 5)
+            {
+                flightCost -= (flightCost * 0.20);
+            }
+            else if(ScheduledFlight.DepartureTimestamp.Hour < 8 || ScheduledFlight.GetArrivalTimestamp().Hour > 19)
+            {
+                flightCost -= (flightCost * 0.10);
+            }
+            return flightCost;
+        }
     }
 }
