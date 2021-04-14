@@ -7,15 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <StackPanel KeyDown="StackPanel_KeyDown" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>
-        <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" x:Name="UsernameBox" Header="Username:" PlaceholderText="Name" />
-        <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" x:Name="PasswordBox" Header="Password:" PlaceholderText="Password" />
-        <RelativePanel Margin="0 5 0 0">
-            <Button x:Name="RegisterButton" Click="RegisterButton_Click" RelativePanel.AlignLeftWithPanel="true">Register</Button>
-            <Button x:Name="LoginButton" Click="LoginButton_Clicked" RelativePanel.AlignRightWithPanel="true">Login</Button>
-        </RelativePanel>
-        <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay}" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
-    </StackPanel>
+    <RelativePanel>
+        <StackPanel KeyDown="StackPanel_KeyDown" Width="300" RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.AlignVerticalCenterWithPanel="true">
+            <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>
+            <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" x:Name="UsernameBox" Header="Username:" PlaceholderText="Name" />
+            <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" x:Name="PasswordBox" Header="Password:" PlaceholderText="Password" />
+            <RelativePanel Margin="0 5 0 0">
+                <Button x:Name="RegisterButton" Click="RegisterButton_Click" RelativePanel.AlignLeftWithPanel="true">Register</Button>
+                <Button x:Name="LoginButton" Click="LoginButton_Clicked" RelativePanel.AlignRightWithPanel="true">Login</Button>
+            </RelativePanel>
+            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay}" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
+        </StackPanel>
+        <Button Click="Back_Click" RelativePanel.AlignTopWithPanel="true" RelativePanel.AlignLeftWithPanel="true" Margin="5">Return</Button>
+    </RelativePanel>
 </Page>

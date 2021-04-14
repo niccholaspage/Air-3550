@@ -28,5 +28,10 @@ namespace Air_3550.Views
                 Frame.Navigate(typeof(MainPage));
             }
         }
+
+        private void Back_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginPage));
+        }
     }
 }

@@ -13,21 +13,24 @@
         <converters:IntConverter x:Key="IntConverter"></converters:IntConverter>
     </Page.Resources>
 
-
-    <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Register</TextBlock>
-        <TextBox Text="{x:Bind ViewModel.FullName, Mode=TwoWay}" Header="Full Name" x:Name="FullNameBox"></TextBox>
-        <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" Header="Password" x:Name="PasswordBox"></PasswordBox>
-        <PasswordBox Password="{x:Bind ViewModel.ConfirmPassword, Mode=TwoWay}" Header="Confirm Password" x:Name="PasswordConfirmBox"></PasswordBox>
-        <TextBox Text="{x:Bind ViewModel.Age, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Age" x:Name="AgeBox"></TextBox>
-        <TextBox Text="{x:Bind ViewModel.PhoneNumber, Mode=TwoWay}" Header="Phone Number" x:Name="PhoneNumberBox"></TextBox>
-        <TextBox Text="{x:Bind ViewModel.Address, Mode=TwoWay}" Header="Address" x:Name="AddressBox"></TextBox>
-        <TextBox Text="{x:Bind ViewModel.City, Mode=TwoWay}" Header="City" x:Name="CityBox"></TextBox>
-        <StackPanel Orientation="Horizontal">
-            <TextBox Text="{x:Bind ViewModel.State, Mode=TwoWay}" Width="148" Margin="0 0 4 0" Header="State" x:Name="StateBox"></TextBox>
-            <TextBox Text="{x:Bind ViewModel.ZipCode, Mode=TwoWay}" Width="148" Header="Postal Code" x:Name="ZipCodeBox"></TextBox>
+    <RelativePanel>
+        <StackPanel Width="300" RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.AlignVerticalCenterWithPanel="true">
+            <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Register</TextBlock>
+            <TextBox Text="{x:Bind ViewModel.FullName, Mode=TwoWay}" Header="Full Name" x:Name="FullNameBox"></TextBox>
+            <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" Header="Password" x:Name="PasswordBox"></PasswordBox>
+            <PasswordBox Password="{x:Bind ViewModel.ConfirmPassword, Mode=TwoWay}" Header="Confirm Password" x:Name="PasswordConfirmBox"></PasswordBox>
+            <TextBox Text="{x:Bind ViewModel.Age, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Age" x:Name="AgeBox"></TextBox>
+            <TextBox Text="{x:Bind ViewModel.PhoneNumber, Mode=TwoWay}" Header="Phone Number" x:Name="PhoneNumberBox"></TextBox>
+            <TextBox Text="{x:Bind ViewModel.Address, Mode=TwoWay}" Header="Address" x:Name="AddressBox"></TextBox>
+            <TextBox Text="{x:Bind ViewModel.City, Mode=TwoWay}" Header="City" x:Name="CityBox"></TextBox>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{x:Bind ViewModel.State, Mode=TwoWay}" Width="148" Margin="0 0 4 0" Header="State" x:Name="StateBox"></TextBox>
+                <TextBox Text="{x:Bind ViewModel.ZipCode, Mode=TwoWay}" Width="148" Header="Postal Code" x:Name="ZipCodeBox"></TextBox>
+            </StackPanel>
+            <TextBox Text="{x:Bind ViewModel.CreditCardNumber, Mode=TwoWay}" Header="Credit Card Number" x:Name="CreditCardNumberBox"></TextBox>
+            <Button Margin="0 5 0 0" Click="RegisterButton_Click" HorizontalAlignment="Right">Register</Button>
         </StackPanel>
-        <TextBox Text="{x:Bind ViewModel.CreditCardNumber, Mode=TwoWay}" Header="Credit Card Number" x:Name="CreditCardNumberBox"></TextBox>
-        <Button Margin="0 5 0 0" Click="RegisterButton_Click" HorizontalAlignment="Right">Register</Button>
-    </StackPanel>
+        <Button Click="Back_Click" RelativePanel.AlignTopWithPanel="true" RelativePanel.AlignLeftWithPanel="true" Margin="5">Return</Button>
+    </RelativePanel>
+
 </Page>

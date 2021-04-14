@@ -1,6 +1,6 @@
 ﻿// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
-//test jh
+
 using Air_3550.Repository;
 using Air_3550.ViewModels;
 using Database.Util;
@@ -48,6 +48,11 @@ namespace Air_3550.Views
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(RegisterPage));
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }
