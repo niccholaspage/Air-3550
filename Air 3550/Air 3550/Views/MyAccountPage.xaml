@@ -8,7 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
-        <TextBlock>This will be the my account page.</TextBlock>
-    </StackPanel>
+    <RelativePanel>
+        <CommandBar x:Name="TabBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignTopWithPanel="true">
+            <AppBarToggleButton IsChecked="true" Icon="ContactInfo" Label="Account Info"/>
+            <AppBarToggleButton Icon="Globe" Label="Bookings"/>
+        </CommandBar>
+
+        <ContentControl RelativePanel.AlignLeftWithPanel="true" RelativePanel.Below="TabBar"></ContentControl>
+    </RelativePanel>
 </Page>
