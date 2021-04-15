@@ -21,7 +21,7 @@ namespace Air_3550.Views
 
         private async void AddFlightButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            var asdfas = await ViewModel.CreateFlight();
+            var createdFlight = await ViewModel.CreateFlight();
         }
 
     }

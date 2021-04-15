@@ -21,25 +21,28 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _depart, value);
         }
 
-        private int _originId;
+        private int? _originId;
 
-        public int OriginId
+        [Required(ErrorMessage = "Please enter Id.")]
+        public int? OriginId
         {
             get => _originId;
             set => SetProperty(ref _originId, value);
         }
 
-        private int _destinationId;
+        private int? _destinationId;
 
-        public int DestinationId
+        [Required(ErrorMessage = "Please enter Id.")]
+        public int? DestinationId
         {
             get => _destinationId;
             set => SetProperty(ref _destinationId, value);
         }
 
-        private int _number;
+        private int? _number;
 
-        public int Number
+        [Required(ErrorMessage = "Please enter Number.")]
+        public int? Number
         {
             get => _number;
             set => SetProperty(ref _number, value);
@@ -79,8 +82,8 @@ namespace Air_3550.ViewModels
                         break;
                     }
                 }
-
-                var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => airport1.AirportId == OriginId);
+                
+                var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => airport1.AirportId == (int)OriginId);
                 if (airport1 == null)
                 {
                     Feedback = "No Origin Air Port";
@@ -88,7 +91,7 @@ namespace Air_3550.ViewModels
                     return false;
                 }
 
-                var airport2 = await db.Airports.SingleOrDefaultAsync(airport2 => airport2.AirportId == DestinationId);
+                var airport2 = await db.Airports.SingleOrDefaultAsync(airport2 => airport2.AirportId == (int)DestinationId);
                 if (airport2 == null)
                 {
                     Feedback = "No destination Air Port";
@@ -101,7 +104,7 @@ namespace Air_3550.ViewModels
                 var flight = new Flight
                 {
                     FlightId = generatedId,
-                    Number = Number,
+                    Number = (int)Number,
                     OriginAirport = airport1,
                     DestinationAirport = airport2
                 };
