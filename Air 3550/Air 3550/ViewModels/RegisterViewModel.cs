@@ -156,7 +156,7 @@ namespace Air_3550.ViewModels
                     CreditCardNumber = CreditCardNumber
                 });
 
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 return user.LoginId;
             }
