@@ -69,20 +69,6 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                Random random = new();
-
-                int generatedId;
-
-                while (true)
-                {
-                    // Generates an ID between 100000 (because user IDs cannot start with zero) and 1,000,000 exclusive
-                    generatedId = random.Next(100_000, 1_000_000);
-                    if (await db.Flights.SingleOrDefaultAsync(Flight => Flight.FlightId == generatedId) == null)
-                    {
-                        break;
-                    }
-                }
-                
                 var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => airport1.AirportId == (int)OriginId);
                 if (airport1 == null)
                 {
@@ -103,7 +89,6 @@ namespace Air_3550.ViewModels
 
                 var flight = new Flight
                 {
-                    FlightId = generatedId,
                     Number = (int)Number,
                     OriginAirport = airport1,
                     DestinationAirport = airport2
@@ -111,7 +96,7 @@ namespace Air_3550.ViewModels
 
                 await db.AddAsync(flight);
 
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 Feedback = "Sucess";
                 return true;
             }
