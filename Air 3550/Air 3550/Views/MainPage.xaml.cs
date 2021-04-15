@@ -28,5 +28,10 @@ namespace Air_3550.Views
         {
             Frame.Navigate(typeof(LoginPage));
         }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditSchedulePage));
+        }
     }
 }
