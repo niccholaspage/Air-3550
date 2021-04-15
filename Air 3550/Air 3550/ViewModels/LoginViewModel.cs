@@ -2,9 +2,9 @@
 using Air_3550.Services;
 using Database.Util;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Air_3550.ViewModels
 {

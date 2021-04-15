@@ -1,0 +1,20 @@
+﻿<UserControl
+    x:Class="Air_3550.Controls.HeaderControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Air_3550.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="using:Air_3550.Converters"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverterInverted" OnTrue="Collapsed" OnFalse="Visible"></converters:BoolToVisibilityConverter>
+    </UserControl.Resources>
+
+    <RelativePanel x:Name="HeaderPanel" Height="60">
+        <Button Click="BackButton_Click" RelativePanel.AlignLeftWithPanel="true" Margin="5">Back</Button>
+        <Button Visibility="{x:Bind userSession.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterInverted}}" Click="LoginButton_Click" RelativePanel.AlignRightWithPanel="true" Margin="5">Login</Button>
+        <Button Visibility="{x:Bind userSession.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" Click="MyAccountButton_Click" RelativePanel.AlignRightWithPanel="true" Margin="5">My Account</Button>
+    </RelativePanel>
+</UserControl>

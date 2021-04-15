@@ -1,11 +1,30 @@
 ﻿using Air_3550.Models;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Air_3550.Services
 {
-    class UserSessionService
+    class UserSessionService : ObservableObject
     {
-        public int? UserId { get; private set; }
-        public Role? Role { get; private set; }
+        private int? _userId;
+
+        public int? UserId
+        {
+            get => _userId;
+            private set
+            {
+                SetProperty(ref _userId, value);
+
+                OnPropertyChanged(nameof(IsLoggedIn));
+            }
+        }
+
+        private Role? _role;
+
+        public Role? Role
+        {
+            get => _role;
+            private set => SetProperty(ref _role, value);
+        }
 
         public void Login(User user)
         {
@@ -14,9 +33,9 @@ namespace Air_3550.Services
             Role = user.Role;
         }
 
-        public bool IsLoggedIn()
+        public bool IsLoggedIn
         {
-            return UserId != null;
+            get => UserId != null;
         }
 
         public void Logout()
