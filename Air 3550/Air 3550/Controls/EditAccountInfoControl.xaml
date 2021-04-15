@@ -1,0 +1,30 @@
+﻿<UserControl
+    x:Class="Air_3550.Controls.EditAccountInfoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Air_3550.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="using:Air_3550.Converters"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:IntConverter x:Key="IntConverter"></converters:IntConverter>
+    </UserControl.Resources>
+
+    <StackPanel Width="300">
+        <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Register</TextBlock>
+        <TextBox Text="{x:Bind Validator.FullName, Mode=TwoWay}" Header="Full Name" x:Name="FullNameBox"></TextBox>
+        <PasswordBox Password="{x:Bind Validator.Password, Mode=TwoWay}" Header="Password" x:Name="PasswordBox"></PasswordBox>
+        <PasswordBox Password="{x:Bind Validator.ConfirmPassword, Mode=TwoWay}" Header="Confirm Password" x:Name="PasswordConfirmBox"></PasswordBox>
+        <TextBox Text="{x:Bind Validator.Age, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Age" x:Name="AgeBox"></TextBox>
+        <TextBox Text="{x:Bind Validator.PhoneNumber, Mode=TwoWay}" Header="Phone Number" x:Name="PhoneNumberBox"></TextBox>
+        <TextBox Text="{x:Bind Validator.Address, Mode=TwoWay}" Header="Address" x:Name="AddressBox"></TextBox>
+        <TextBox Text="{x:Bind Validator.City, Mode=TwoWay}" Header="City" x:Name="CityBox"></TextBox>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="{x:Bind Validator.State, Mode=TwoWay}" Width="148" Margin="0 0 4 0" Header="State" x:Name="StateBox"></TextBox>
+            <TextBox Text="{x:Bind Validator.ZipCode, Mode=TwoWay}" Width="148" Header="Postal Code" x:Name="ZipCodeBox"></TextBox>
+        </StackPanel>
+        <TextBox Text="{x:Bind Validator.CreditCardNumber, Mode=TwoWay}" Header="Credit Card Number" x:Name="CreditCardNumberBox"></TextBox>
+        <Button Margin="0 5 0 0" Click="ActionButton_Click" HorizontalAlignment="Right">Register</Button>
+    </StackPanel>
+</UserControl>
