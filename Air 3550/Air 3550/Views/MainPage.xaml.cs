@@ -17,19 +17,14 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        MainViewModel ViewModel => new MainViewModel();
+        MainViewModel ViewModel => new();
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        private void SearchButton_Click(object _, RoutedEventArgs _1)
         {
 
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(LoginPage));
-        }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
+        private void EditButton_Click(object _, RoutedEventArgs _1)
         {
             Frame.Navigate(typeof(EditSchedulePage));
         }

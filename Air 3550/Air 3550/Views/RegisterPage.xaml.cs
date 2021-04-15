@@ -1,4 +1,5 @@
 ﻿using Air_3550.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 
@@ -17,9 +18,9 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        RegisterViewModel ViewModel = new RegisterViewModel();
+        readonly RegisterViewModel ViewModel = new();
 
-        private async void RegisterButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        private async void RegisterButton_Click(object _, RoutedEventArgs _1)
         {
             var loginId = await ViewModel.CreateAccount();
 
@@ -27,12 +28,6 @@ namespace Air_3550.Views
             {
                 Frame.Navigate(typeof(LoginPage), loginId);
             }
-        }
-
-        private void Back_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-        {
-            // TODO: Switch to a proper header bar for navigating backward and such
-            Frame.GoBack();
         }
     }
 }

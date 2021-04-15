@@ -76,16 +76,16 @@ namespace Air_3550.Models
             foreach (var ticket in tickets)
             {
                 totalCost += ticket.GetCost();
-                if (ticket.ScheduledFlight.DepartureTimestamp < date1) 
-                {                                                       
+                if (ticket.ScheduledFlight.DepartureTimestamp < date1)
+                {
                     date1 = ticket.ScheduledFlight.DepartureTimestamp;
                 }
-                if(ticket.ScheduledFlight.GetArrivalTimestamp() > date2)
+                if (ticket.ScheduledFlight.GetArrivalTimestamp() > date2)
                 {
                     date2 = ticket.ScheduledFlight.GetArrivalTimestamp();
                 }
             }
-            totalCost += (8 * (tickets.Count -1));
+            totalCost += (8 * (tickets.Count - 1));
             if (date1.Hour < 5 || date2.Hour < 5) totalCost -= basePrice * 0.20;
             else if (date1.Hour < 8 || date2.Hour > 19) totalCost -= basePrice * 0.10;
             return totalCost;
@@ -102,8 +102,8 @@ namespace Air_3550.Models
         {
             DateTime date1 = DateTime.Now;
             DateTime date2;
-            TimeSpan totalDuration = new TimeSpan();
-            TimeSpan finalFlightTime = new TimeSpan();
+            TimeSpan totalDuration = new();
+            TimeSpan finalFlightTime = new();
             var tickets = departingTickets ? GetDepartureTickets() : GetReturnTickets();
             if (tickets.Count == 0)
             {

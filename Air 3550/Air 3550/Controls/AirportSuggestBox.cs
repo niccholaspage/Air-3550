@@ -13,7 +13,7 @@ namespace Air_3550.Controls
 {
     public sealed class AirportSuggestBox : Control
     {
-        private List<string> AirportNames = new List<string>();
+        private readonly List<string> AirportNames = new();
 
         public string Text
         {

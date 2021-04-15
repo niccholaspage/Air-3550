@@ -1,12 +1,9 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
-using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
