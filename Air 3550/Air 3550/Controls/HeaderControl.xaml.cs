@@ -29,9 +29,18 @@ namespace Air_3550.Controls
             ContentFrame.Navigate(typeof(LoginPage));
         }
 
-        private void MyAccountButton_Click(object _, RoutedEventArgs _1)
+        private void AccountInfoButton_Click(object _, RoutedEventArgs _1)
         {
             ContentFrame.Navigate(typeof(MyAccountPage));
+        }
+
+        private void LogoutButton_Click(object _, RoutedEventArgs _1)
+        {
+            userSession.Logout();
+
+            ContentFrame.Navigate(typeof(MainPage));
+
+            ContentFrame.BackStack.Clear();
         }
 
         private void BackButton_Click(object _, RoutedEventArgs _2)
