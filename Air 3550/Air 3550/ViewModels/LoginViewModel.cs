@@ -1,13 +1,22 @@
 ﻿using Air_3550.Repository;
+using Air_3550.Services;
 using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Air_3550.ViewModels
 {
     class LoginViewModel : ObservableObject
     {
+        private readonly UserSessionService userSession;
+
+        public LoginViewModel()
+        {
+            userSession = App.Current.Services.GetService<UserSessionService>();
+        }
+
         private string _username;
 
         public string Username
@@ -55,6 +64,8 @@ namespace Air_3550.ViewModels
                 {
                     if (PasswordHandling.CheckPassword(Password, user.PasswordHash))
                     {
+                        userSession.Login(user);
+
                         Feedback = null;
 
                         return true;

@@ -1,6 +1,9 @@
 ﻿using Air_3550.Repository;
+using Air_3550.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
+using System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -18,8 +21,23 @@ namespace Air_3550
         /// </summary>
         public App()
         {
+            Services = ConfigureServices();
+
             this.InitializeComponent();
         }
+
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            services.AddSingleton<UserSessionService>();
+
+            return services.BuildServiceProvider();
+        }
+
+        public new static App Current => (App)Application.Current;
+
+        public IServiceProvider Services { get; }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
