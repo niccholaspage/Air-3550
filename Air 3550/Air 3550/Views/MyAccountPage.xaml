@@ -8,10 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <RelativePanel>
+    <RelativePanel Margin="5 45 0 0">
         <CommandBar x:Name="TabBar" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignTopWithPanel="true">
-            <AppBarToggleButton IsChecked="true" Icon="ContactInfo" Label="Account Info"/>
-            <AppBarToggleButton Icon="Globe" Label="Bookings"/>
+            <AppBarToggleButton IsChecked="{x:Bind ViewModel.ViewingBookings, Mode=OneWay}" Click="BookingsButton_Click" Icon="Globe" Label="Bookings"/>
+            <AppBarToggleButton IsChecked="{x:Bind ViewModel.ViewingAccountInfo, Mode=OneWay}" Click="AccountInfoButton_Click" Icon="ContactInfo" Label="Account Info"/>
         </CommandBar>
 
         <ContentControl RelativePanel.AlignLeftWithPanel="true" RelativePanel.Below="TabBar"></ContentControl>
