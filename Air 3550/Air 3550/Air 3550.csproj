@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Controls\EditAccountInfoControl.xaml" />
     <None Remove="Controls\HeaderControl.xaml" />
+    <None Remove="Views\EditAccountInfoSubPage.xaml" />
     <None Remove="Views\EditSchedulePage.xaml" />
     <None Remove="Views\LoginPage.xaml" />
     <None Remove="Views\MainPage.xaml" />
@@ -28,6 +29,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\EditAccountInfoSubPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

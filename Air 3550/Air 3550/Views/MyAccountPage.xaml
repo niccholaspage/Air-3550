@@ -14,6 +14,6 @@
             <AppBarToggleButton IsChecked="{x:Bind ViewModel.ViewingAccountInfo, Mode=OneWay}" Click="AccountInfoButton_Click" Icon="ContactInfo" Label="Account Info"/>
         </CommandBar>
 
-        <ContentControl RelativePanel.AlignLeftWithPanel="true" RelativePanel.Below="TabBar"></ContentControl>
+        <ContentControl Content="{x:Bind ViewModel.DisplayedPage, Mode=OneWay}" RelativePanel.AlignLeftWithPanel="true" RelativePanel.Below="TabBar"></ContentControl>
     </RelativePanel>
 </Page>
