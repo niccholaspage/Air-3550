@@ -108,9 +108,9 @@ namespace Air_3550.Controls
             set => SetProperty(ref _creditCardNumber, value);
         }
 
-        public void RunValidateAllProperties()
+        public new void ValidateAllProperties()
         {
-            ValidateAllProperties();
+            base.ValidateAllProperties();
         }
     }
 

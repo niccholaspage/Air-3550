@@ -14,7 +14,7 @@ namespace Air_3550.ViewModels
 
         public async Task<string> CreateAccount()
         {
-            Validator.RunValidateAllProperties();
+            Validator.ValidateAllProperties();
 
             if (Validator.HasErrors)
             {
