@@ -13,7 +13,11 @@ namespace Air_3550.Controls
     {
         private readonly UserSessionService userSession;
 
-        public Frame ContentFrame { get; set; }
+        public Frame ContentFrame
+        {
+            get => (Frame)GetValue(ContentFrameProperty);
+            set => SetValue(ContentFrameProperty, value);
+        }
 
         public static readonly DependencyProperty ContentFrameProperty = DependencyProperty.Register(nameof(ContentFrame), typeof(Frame), typeof(AirportSuggestBox), new PropertyMetadata(default(Frame)));
 
