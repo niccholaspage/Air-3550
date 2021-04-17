@@ -11,7 +11,6 @@ namespace Air_3550.Controls
 {
     public class EditAccountInfoValidator : ObservableValidator
     {
-
         private string _fullName;
 
         [Required(ErrorMessage = "Please enter your full name.")]
@@ -116,6 +115,22 @@ namespace Air_3550.Controls
 
     public sealed partial class EditAccountInfoControl : UserControl
     {
+        public string Header
+        {
+            get => (string)GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
+        }
+
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header), typeof(string), typeof(EditAccountInfoControl), new PropertyMetadata(default(string)));
+
+        public string ActionButtonText
+        {
+            get => (string)GetValue(ActionButtonTextProperty);
+            set => SetValue(ActionButtonTextProperty, value);
+        }
+
+        public static readonly DependencyProperty ActionButtonTextProperty = DependencyProperty.Register(nameof(ActionButtonText), typeof(string), typeof(EditAccountInfoControl), new PropertyMetadata(default(string)));
+
         public EditAccountInfoValidator Validator
         {
             get => (EditAccountInfoValidator)GetValue(ValidatorProperty);

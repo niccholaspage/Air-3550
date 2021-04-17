@@ -12,7 +12,7 @@
     </UserControl.Resources>
 
     <StackPanel Width="300">
-        <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Register</TextBlock>
+        <TextBlock Text="{x:Bind Header}" FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0"></TextBlock>
         <TextBox Text="{x:Bind Validator.FullName, Mode=TwoWay}" Header="Full Name" x:Name="FullNameBox"></TextBox>
         <PasswordBox Password="{x:Bind Validator.Password, Mode=TwoWay}" Header="Password" x:Name="PasswordBox"></PasswordBox>
         <PasswordBox Password="{x:Bind Validator.ConfirmPassword, Mode=TwoWay}" Header="Confirm Password" x:Name="PasswordConfirmBox"></PasswordBox>
@@ -25,6 +25,6 @@
             <TextBox Text="{x:Bind Validator.ZipCode, Mode=TwoWay}" Width="148" Header="Postal Code" x:Name="ZipCodeBox"></TextBox>
         </StackPanel>
         <TextBox Text="{x:Bind Validator.CreditCardNumber, Mode=TwoWay}" Header="Credit Card Number" x:Name="CreditCardNumberBox"></TextBox>
-        <Button Margin="0 5 0 0" Click="ActionButton_Click" HorizontalAlignment="Right">Register</Button>
+        <Button Content="{x:Bind ActionButtonText}" Margin="0 5 0 0" Click="ActionButton_Click" HorizontalAlignment="Right"></Button>
     </StackPanel>
 </UserControl>

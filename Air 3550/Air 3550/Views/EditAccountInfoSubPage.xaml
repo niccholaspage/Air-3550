@@ -8,5 +8,5 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <controls:EditAccountInfoControl x:Name="EditAccountInfoControl"></controls:EditAccountInfoControl>
+    <controls:EditAccountInfoControl x:Name="EditAccountInfoControl" Header="Edit Account Info" ActionButtonText="Save Changes"></controls:EditAccountInfoControl>
 </Page>
