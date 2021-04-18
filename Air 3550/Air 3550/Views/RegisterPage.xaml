@@ -8,5 +8,5 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <controls:EditAccountInfoControl Header="Register" ActionButtonText="Register" Validator="{x:Bind ViewModel.Validator}" Click="RegisterButton_Click" x:Name="EditAccountInfoControl" HorizontalAlignment="Center" VerticalAlignment="Center"></controls:EditAccountInfoControl>
+    <controls:EditAccountInfoControl Width="300" Header="Register" ActionButtonText="Register" Validator="{x:Bind ViewModel.Validator}" Click="RegisterButton_Click" x:Name="EditAccountInfoControl" HorizontalAlignment="Center" VerticalAlignment="Center"></controls:EditAccountInfoControl>
 </Page>

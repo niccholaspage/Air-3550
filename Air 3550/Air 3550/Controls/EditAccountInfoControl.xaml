@@ -11,7 +11,7 @@
         <converters:IntConverter x:Key="IntConverter"></converters:IntConverter>
     </UserControl.Resources>
 
-    <StackPanel Width="300">
+    <StackPanel>
         <TextBlock Text="{x:Bind Header}" FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0"></TextBlock>
         <TextBox Text="{x:Bind Validator.FullName, Mode=TwoWay}" Header="Full Name" x:Name="FullNameBox"></TextBox>
         <PasswordBox Password="{x:Bind Validator.Password, Mode=TwoWay}" Header="Password" x:Name="PasswordBox"></PasswordBox>
