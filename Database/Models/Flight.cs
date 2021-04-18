@@ -22,6 +22,8 @@ namespace Air_3550.Models
         [Required]
         public Plane Plane { get; set; }
 
+        public bool IsCanceled { get; set; }
+
         /**
          * Calculate distance between the origin airport and destination
          * airport. Returns the distance in miles.
