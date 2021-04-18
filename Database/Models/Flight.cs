@@ -17,7 +17,7 @@ namespace Air_3550.Models
         public Airport DestinationAirport { get; set; }
 
         [Required]
-        public TimeSpan FlightDepartureTime { get; set; }
+        public TimeSpan DepartureTime { get; set; }
 
         [Required]
         public Plane Plane { get; set; }
