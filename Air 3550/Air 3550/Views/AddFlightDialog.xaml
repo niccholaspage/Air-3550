@@ -1,0 +1,30 @@
+﻿<ContentDialog
+    x:Class="Air_3550.Views.AddFlightDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Air_3550.Views"
+    xmlns:converters="using:Air_3550.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Title="Add Flight"
+    CloseButtonText="Cancel"
+    DefaultButton="Close"
+    >
+
+    <ContentDialog.Resources>
+        <converters:IntConverter x:Key="IntConverter"></converters:IntConverter>
+    </ContentDialog.Resources>
+
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <!-- Content body -->
+        <TimePicker Time="{x:Bind ViewModel.Depart, Mode=TwoWay}" Header="Departure time" MinuteIncrement="15"/>
+        <TextBox Text="{x:Bind ViewModel.OriginId, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Origin ID" x:Name="OriginIdBox"></TextBox>
+        <TextBox Text="{x:Bind ViewModel.DestinationId, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Destination ID" x:Name="DestinationIdBox"></TextBox>
+        <TextBox Text="{x:Bind ViewModel.Number, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Flight Number" x:Name="FlightNumber"></TextBox>
+        <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
+        <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Flight</Button>
+    </StackPanel>
+
+</ContentDialog>

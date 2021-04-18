@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {
-    class EditScheduleViewModel : ObservableValidator
+    class AddFlightViewModel : ObservableValidator
     {
         private TimeSpan _depart;
 
