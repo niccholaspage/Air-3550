@@ -16,6 +16,12 @@ namespace Air_3550.Models
         [Required]
         public Airport DestinationAirport { get; set; }
 
+        [Required]
+        public TimeSpan FlightDepartureTime { get; set; }
+
+        [Required]
+        public Plane Plane { get; set; }
+
         /**
          * Calculate distance between the origin airport and destination
          * airport. Returns the distance in miles.

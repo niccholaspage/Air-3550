@@ -12,7 +12,6 @@ namespace Air_3550.Repository
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<CustomerData> CustomerDatas { get; set; }
         public DbSet<Flight> Flights { get; set; }
-        public DbSet<FlightScheduleEvent> FlightScheduleEvents { get; set; }
         public DbSet<Plane> Planes { get; set; }
         public DbSet<ScheduledFlight> ScheduledFlights { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
