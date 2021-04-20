@@ -4,6 +4,7 @@
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.System;
@@ -34,12 +35,12 @@ namespace Air_3550.Views
             }
         }
 
-        public async void LoginButton_Clicked(object sender, RoutedEventArgs e)
+        public async void LoginButton_Clicked(object _, RoutedEventArgs __)
         {
             await PerformLogin();
         }
 
-        private async void StackPanel_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private async void StackPanel_KeyDown(object e, KeyRoutedEventArgs _)
         {
             if (e.Key == VirtualKey.Enter)
             {
@@ -55,7 +56,7 @@ namespace Air_3550.Views
             }
         }
 
-        private void RegisterButton_Click(object _, RoutedEventArgs _1)
+        private void RegisterButton_Click(object _, RoutedEventArgs __)
         {
             Frame.Navigate(typeof(RegisterPage));
         }

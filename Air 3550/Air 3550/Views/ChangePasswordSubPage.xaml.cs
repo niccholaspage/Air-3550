@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Air_3550.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -26,6 +27,13 @@ namespace Air_3550.Views
         public ChangePasswordSubPage()
         {
             this.InitializeComponent();
+        }
+
+        ChangePasswordViewModel ViewModel = new();
+
+        private async void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.ChangePassword();
         }
     }
 }
