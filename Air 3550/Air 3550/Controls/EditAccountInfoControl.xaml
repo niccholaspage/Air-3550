@@ -9,13 +9,14 @@
 
     <UserControl.Resources>
         <converters:IntConverter x:Key="IntConverter"></converters:IntConverter>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
     </UserControl.Resources>
 
     <StackPanel>
         <TextBlock Text="{x:Bind Header}" FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0"></TextBlock>
         <TextBox Text="{x:Bind Validator.FullName, Mode=TwoWay}" Header="Full Name" x:Name="FullNameBox"></TextBox>
-        <PasswordBox Password="{x:Bind Validator.Password, Mode=TwoWay}" Header="Password" x:Name="PasswordBox"></PasswordBox>
-        <PasswordBox Password="{x:Bind Validator.ConfirmPassword, Mode=TwoWay}" Header="Confirm Password" x:Name="PasswordConfirmBox"></PasswordBox>
+        <PasswordBox Visibility="{x:Bind Validator.IsRegistering, Converter={StaticResource BoolToVisibilityConverter}}" Password="{x:Bind Validator.Password, Mode=TwoWay}" Header="Password" x:Name="PasswordBox"></PasswordBox>
+        <PasswordBox Visibility="{x:Bind Validator.IsRegistering, Converter={StaticResource BoolToVisibilityConverter}}" Password="{x:Bind Validator.ConfirmPassword, Mode=TwoWay}" Header="Confirm Password" x:Name="PasswordConfirmBox"></PasswordBox>
         <TextBox Text="{x:Bind Validator.Age, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Age" x:Name="AgeBox"></TextBox>
         <TextBox Text="{x:Bind Validator.PhoneNumber, Mode=TwoWay}" Header="Phone Number" x:Name="PhoneNumberBox"></TextBox>
         <TextBox Text="{x:Bind Validator.Address, Mode=TwoWay}" Header="Address" x:Name="AddressBox"></TextBox>

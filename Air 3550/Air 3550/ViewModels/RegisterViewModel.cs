@@ -10,7 +10,7 @@ namespace Air_3550.ViewModels
 {
     class RegisterViewModel
     {
-        public EditAccountInfoValidator Validator = new();
+        public EditAccountInfoValidator Validator = new(true);
 
         public async Task<string> CreateAccount()
         {

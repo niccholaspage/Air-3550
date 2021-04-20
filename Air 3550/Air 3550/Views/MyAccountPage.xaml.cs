@@ -1,4 +1,5 @@
 ﻿using Air_3550.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -18,14 +19,19 @@ namespace Air_3550.Views
 
         MyAccountViewModel ViewModel = new();
 
-        private void BookingsButton_Click(object _, Microsoft.UI.Xaml.RoutedEventArgs _1)
+        private void BookingsButton_Click(object _, RoutedEventArgs __)
         {
-            ViewModel.ViewingBookings = true;
+            ViewModel.SetCurrentTab(MyAccountViewModel.Tab.BOOKINGS);
         }
 
-        private void AccountInfoButton_Click(object _, Microsoft.UI.Xaml.RoutedEventArgs _1)
+        private void ProfileButton_Click(object _, RoutedEventArgs __)
         {
-            ViewModel.ViewingBookings = false;
+            ViewModel.SetCurrentTab(MyAccountViewModel.Tab.PROFILE);
+        }
+
+        private void ChangePasswordButton_Click(object _, RoutedEventArgs __)
+        {
+            ViewModel.SetCurrentTab(MyAccountViewModel.Tab.CHANGE_PASSWORD);
         }
     }
 }

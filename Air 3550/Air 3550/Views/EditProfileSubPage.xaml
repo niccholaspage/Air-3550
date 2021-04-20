@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Air_3550.Views.EditAccountInfoSubPage"
+    x:Class="Air_3550.Views.EditProfileSubPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Air_3550.Views"
@@ -8,5 +8,5 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <controls:EditAccountInfoControl Width="400" x:Name="EditAccountInfoControl" Header="Edit Account Info" ActionButtonText="Save Changes"></controls:EditAccountInfoControl>
+    <controls:EditAccountInfoControl Validator="{x:Bind ViewModel.Validator}" Width="400" x:Name="EditAccountInfoControl" Header="Profile" ActionButtonText="Save Changes" Click="SaveChangesButton_Click"></controls:EditAccountInfoControl>
 </Page>

@@ -1,8 +1,14 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using Air_3550.Repository;
+using Air_3550.Services;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -11,6 +17,35 @@ namespace Air_3550.Controls
 {
     public class EditAccountInfoValidator : ObservableValidator
     {
+        public bool IsRegistering;
+
+        public EditAccountInfoValidator(bool isRegistering)
+        {
+            IsRegistering = isRegistering;
+
+            Task.Run(async () =>
+            {
+                if (!IsRegistering)
+                {
+                    var userService = App.Current.Services.GetService<UserSessionService>();
+
+                    using (var db = new AirContext())
+                    {
+                        var customerData = await db.CustomerDatas.SingleAsync(customerData => customerData.User.UserId == userService.UserId);
+
+                        FullName = customerData.Name;
+                        Age = customerData.Age;
+                        PhoneNumber = customerData.PhoneNumber;
+                        Address = customerData.Address;
+                        City = customerData.City;
+                        State = customerData.State;
+                        ZipCode = customerData.ZipCode;
+                        CreditCardNumber = customerData.CreditCardNumber;
+                    }
+                }
+            });
+        }
+
         private string _fullName;
 
         [Required(ErrorMessage = "Please enter your full name.")]
