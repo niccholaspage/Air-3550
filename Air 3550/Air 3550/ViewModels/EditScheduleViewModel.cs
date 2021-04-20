@@ -2,9 +2,7 @@
 using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,7 +31,7 @@ namespace Air_3550.ViewModels
             using (var db = new AirContext())
             {
                 var search = await db.Flights.SingleOrDefaultAsync(search => search.FlightId == cancelling.FlightId);
-                 search.IsCanceled = true;
+                search.IsCanceled = true;
                 await db.SaveChangesAsync();
             }
         }

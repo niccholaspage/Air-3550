@@ -1,9 +1,9 @@
-﻿using Air_3550.Views;
+﻿using Air_3550.Services;
+using Air_3550.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using Microsoft.Extensions.DependencyInjection;
-using Air_3550.Services;
 
 namespace Air_3550.ViewModels
 {

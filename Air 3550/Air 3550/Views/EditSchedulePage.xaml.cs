@@ -1,19 +1,8 @@
-﻿using Air_3550.ViewModels;
-using Air_3550.Models;
+﻿using Air_3550.Models;
+using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using Air_3550.Repository;
-using Microsoft.EntityFrameworkCore;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -70,7 +59,7 @@ namespace Air_3550.Views
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed
-                if(dialog1.Result != null)ViewModel.UpdateFlights();
+                if (dialog1.Result != null) ViewModel.UpdateFlights();
             }
         }
 

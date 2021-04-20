@@ -1,14 +1,12 @@
 ﻿using Air_3550.Repository;
 using Air_3550.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

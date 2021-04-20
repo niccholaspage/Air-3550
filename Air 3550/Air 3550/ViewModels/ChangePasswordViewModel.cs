@@ -1,11 +1,11 @@
 ﻿using Air_3550.Repository;
 using Air_3550.Services;
+using Database.Util;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Database.Util;
 using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
