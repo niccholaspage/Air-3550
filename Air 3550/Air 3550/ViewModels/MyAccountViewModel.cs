@@ -2,6 +2,8 @@
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using Air_3550.Services;
 
 namespace Air_3550.ViewModels
 {
@@ -14,7 +16,25 @@ namespace Air_3550.ViewModels
             CHANGE_PASSWORD
         }
 
-        private Tab _currentTab = Tab.BOOKINGS;
+        public bool IsCustomer;
+
+        private Tab _currentTab;
+
+        public MyAccountViewModel()
+        {
+            var userService = App.Current.Services.GetService<UserSessionService>();
+
+            IsCustomer = userService.Role == Models.Role.CUSTOMER;
+
+            if (IsCustomer)
+            {
+                _currentTab = Tab.BOOKINGS;
+            }
+            else
+            {
+                _currentTab = Tab.CHANGE_PASSWORD;
+            }
+        }
 
         public bool ViewingBookingsTab
         {

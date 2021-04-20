@@ -25,25 +25,23 @@ namespace Air_3550.Controls
 
             var userService = App.Current.Services.GetService<UserSessionService>();
 
-            Task.Run(async () =>
+            if (!IsRegistering)
             {
-                if (!IsRegistering)
+                using (var db = new AirContext())
                 {
-                    using (var db = new AirContext())
-                    {
-                        var customerData = await db.CustomerDatas.SingleAsync(customerData => customerData.User.UserId == userService.UserId);
+                    // TODO: How do we make this async?
+                    var customerData = db.CustomerDatas.Single(customerData => customerData.User.UserId == userService.UserId);
 
-                        FullName = customerData.Name;
-                        Age = customerData.Age;
-                        PhoneNumber = customerData.PhoneNumber;
-                        Address = customerData.Address;
-                        City = customerData.City;
-                        State = customerData.State;
-                        ZipCode = customerData.ZipCode;
-                        CreditCardNumber = customerData.CreditCardNumber;
-                    }
+                    FullName = customerData.Name;
+                    Age = customerData.Age;
+                    PhoneNumber = customerData.PhoneNumber;
+                    Address = customerData.Address;
+                    City = customerData.City;
+                    State = customerData.State;
+                    ZipCode = customerData.ZipCode;
+                    CreditCardNumber = customerData.CreditCardNumber;
                 }
-            });
+            }
         }
 
         private string _fullName;
