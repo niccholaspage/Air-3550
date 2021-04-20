@@ -74,9 +74,9 @@ namespace Air_3550.ViewModels
             }
         }
 
-        private Page BookingsPage = new LoginPage();
-        private Page ProfilePage = new EditProfileSubPage();
-        private Page ChangePasswordPage = new ChangePasswordSubPage();
+        private readonly Lazy<Page> BookingsPage = new(() => new LoginPage());
+        private readonly Lazy<Page> ProfilePage = new(() => new EditProfileSubPage());
+        private readonly Lazy<Page> ChangePasswordPage = new(() => new ChangePasswordSubPage());
 
         public Page DisplayedPage
         {
@@ -84,9 +84,9 @@ namespace Air_3550.ViewModels
             {
                 return _currentTab switch
                 {
-                    Tab.BOOKINGS => BookingsPage,
-                    Tab.PROFILE => ProfilePage,
-                    Tab.CHANGE_PASSWORD => ChangePasswordPage,
+                    Tab.BOOKINGS => BookingsPage.Value,
+                    Tab.PROFILE => ProfilePage.Value,
+                    Tab.CHANGE_PASSWORD => ChangePasswordPage.Value,
                     _ => throw new ArgumentException("This shouldn't have been reached.."),
                 };
             }
