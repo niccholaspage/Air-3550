@@ -23,12 +23,12 @@ namespace Air_3550.Controls
         {
             IsRegistering = isRegistering;
 
+            var userService = App.Current.Services.GetService<UserSessionService>();
+
             Task.Run(async () =>
             {
                 if (!IsRegistering)
                 {
-                    var userService = App.Current.Services.GetService<UserSessionService>();
-
                     using (var db = new AirContext())
                     {
                         var customerData = await db.CustomerDatas.SingleAsync(customerData => customerData.User.UserId == userService.UserId);
