@@ -40,7 +40,7 @@ namespace Air_3550.Views
             await PerformLogin();
         }
 
-        private async void StackPanel_KeyDown(object e, KeyRoutedEventArgs _)
+        private async void StackPanel_KeyDown(object _, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Enter)
             {
