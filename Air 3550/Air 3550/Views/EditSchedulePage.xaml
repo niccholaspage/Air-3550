@@ -18,20 +18,41 @@
 
     <Grid>
 
-        <ListView ItemsSource="{x:Bind FlightsA}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ListView ItemsSource="{x:Bind ViewModel.FlightsA, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="displayedList">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Flight">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="{x:Bind Number}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{x:Bind FlightId}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{x:Bind DestinationAirport.State}" HorizontalAlignment="Left"/>
+                    <StackPanel Width="300">
+                        <TextBlock  Grid.Column="2"
+                    Grid.Row="2"
+                    Style="{ThemeResource BodyTextBlockStyle}"
+                    Margin="12,0,0,6">
+                            <Run Text="Number: "/>
+                            <Run Text="{x:Bind Number}"/>
+                        </TextBlock>
+                        <TextBlock  Grid.Column="1"
+                    Grid.Row="1"
+                    Style="{ThemeResource BodyTextBlockStyle}"
+                    Margin="12,0,0,6">
+                            <Run Text="FlightID: "/>
+                            <Run Text="{x:Bind FlightId}"/>
+                        </TextBlock>
+                        <TextBlock  Grid.Column="1"
+                    Grid.Row="1"
+                    Style="{ThemeResource BodyTextBlockStyle}"
+                    Margin="12,0,0,6">
+                            <Run Text="Origin Airport Code: "/>
+                            <Run Text="{x:Bind OriginAirport.Code}"/>
+                        </TextBlock>
                     </StackPanel>
-            </DataTemplate>
+                </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Dialog</Button>
+            <Button Click="RemoveFlight_Click" HorizontalAlignment="Right">Remove Flight</Button>
+            <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
+            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

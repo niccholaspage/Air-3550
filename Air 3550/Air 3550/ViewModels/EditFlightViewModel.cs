@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {
-    class AddFlightViewModel : ObservableValidator
+    class EditFlightViewModel : ObservableValidator
     {
         private TimeSpan _depart;
 
@@ -53,7 +54,23 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _feedback, value);
         }
 
-        public async Task<Flight> CreateFlight()
+        public void GrabValues(Flight editting)
+        {
+            using (var db = new AirContext())
+            {
+                var search = db.Flights
+                    .Include(Flight => Flight.OriginAirport)
+                    .Include(Flight => Flight.DestinationAirport)
+                    .Where(f => f.IsCanceled == false).Single(search => search.FlightId == editting.FlightId);
+                Depart = search.DepartureTime;
+                Number = search.Number;
+                DestinationId = search.DestinationAirport.AirportId;
+                OriginId = search.OriginAirport.AirportId;
+            }
+
+        }
+
+        public async Task<Flight> EditFlight(Flight editting)
         {
             ValidateAllProperties();
 
@@ -66,6 +83,7 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
+                //Validate Airport1
                 var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => airport1.AirportId == (int)OriginId);
                 if (airport1 == null)
                 {
@@ -74,6 +92,7 @@ namespace Air_3550.ViewModels
                     return null;
                 }
 
+                //Validate Airport2
                 var airport2 = await db.Airports.SingleOrDefaultAsync(airport2 => airport2.AirportId == (int)DestinationId);
                 if (airport2 == null)
                 {
@@ -82,6 +101,12 @@ namespace Air_3550.ViewModels
                     return null;
                 }
 
+                //Remove Previous Flight
+                var search = await db.Flights.SingleOrDefaultAsync(search => search.FlightId == editting.FlightId);
+                search.IsCanceled = true;
+                await db.SaveChangesAsync();
+
+                //Add New Flight
                 var flight = new Flight
                 {
                     Number = (int)Number,
@@ -89,13 +114,15 @@ namespace Air_3550.ViewModels
                     DestinationAirport = airport2,
                     DepartureTime = Depart
                 };
-
                 await db.AddAsync(flight);
 
+                //Save Changes
                 await db.SaveChangesAsync();
                 Feedback = "Sucess";
                 return flight;
             }
         }
+
     }
+    
 }

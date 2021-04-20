@@ -21,26 +21,27 @@ namespace Air_3550.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    /// 
-
-    public sealed partial class AddFlightDialog : ContentDialog
+    public sealed partial class EditFlightDialog : ContentDialog
     {
+        private Flight Editting;
         public Flight Result { get; private set; }
 
-        public AddFlightDialog()
+        public EditFlightDialog(Flight editting)
         {
             this.InitializeComponent();
+            ViewModel.GrabValues(editting);
+            Editting = editting;
             Result = null;
         }
 
-        readonly AddFlightViewModel ViewModel = new();
+        readonly EditFlightViewModel ViewModel = new();
 
-        private async void AddFlight_Click(object sender, RoutedEventArgs e)
+        public async void EditFlight_Click(object sender, RoutedEventArgs e)
         {
-            var result = await ViewModel.CreateFlight();
-            if(result != null)this.Hide();
+            var result = await ViewModel.EditFlight(Editting);
+            if (result != null)this.Hide();
             Result = result;
         }
-
     }
+
 }

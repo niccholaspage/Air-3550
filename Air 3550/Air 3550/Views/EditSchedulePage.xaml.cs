@@ -13,6 +13,7 @@ using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Air_3550.Repository;
+using Microsoft.EntityFrameworkCore;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -26,24 +27,53 @@ namespace Air_3550.Views
     public sealed partial class EditSchedulePage : Page
     {
 
-        private List<Flight> FlightsA;
+        //readonly EditScheduleViewModel ViewModel = new();
 
         public EditSchedulePage()
         {
             this.InitializeComponent();
-            using (var db = new AirContext()) {
-                FlightsA = db.Flights.ToList();
-            }
+            ViewModel.UpdateFlights();
 
         }
+
+        readonly EditScheduleViewModel ViewModel = new();
 
         private async void AddFlight_Click(object sender, RoutedEventArgs e)
         {
             AddFlightDialog dialog1 = new AddFlightDialog();
             dialog1.XamlRoot = this.Content.XamlRoot;
             var result = await dialog1.ShowAsync();
+            //Update if something changed
+            if (dialog1.Result != null)
+            {
+                ViewModel.UpdateFlights();
+                ViewModel.Feedback = "FlightID:" + dialog1.Result.Number;
+            };
         }
-        
+
+        private async void RemoveFlight_Click(object sender, RoutedEventArgs e)
+        {
+            Flight cancel = (Flight)displayedList.SelectedItem;
+            if (cancel != null)
+            {
+                await ViewModel.CancelFlight(cancel);
+                ViewModel.UpdateFlights();
+            }
+        }
+
+        private async void EditFlight_Click(object sender, RoutedEventArgs e)
+        {
+            Flight edit = (Flight)displayedList.SelectedItem;
+            if (edit != null)
+            {
+                EditFlightDialog dialog1 = new EditFlightDialog(edit);
+                dialog1.XamlRoot = this.Content.XamlRoot;
+                var result = await dialog1.ShowAsync();
+                //Update if something changed
+                if(dialog1.Result != null)ViewModel.UpdateFlights();
+            }
+        }
+
 
     }
 }
