@@ -141,6 +141,15 @@ namespace Air_3550.Controls
         public new void ValidateAllProperties()
         {
             base.ValidateAllProperties();
+
+            if (!IsRegistering)
+            {
+                // If this is not being used for registering,
+                // we ignore any password related errors since
+                // we do not need the values of those fields.
+                ClearErrors(nameof(Password));
+                ClearErrors(nameof(ConfirmPassword));
+            }
         }
     }
 
