@@ -26,6 +26,9 @@
             <TextBox Text="{x:Bind Validator.ZipCode, Mode=TwoWay}" Width="148" Header="Postal Code" x:Name="ZipCodeBox"></TextBox>
         </StackPanel>
         <TextBox Text="{x:Bind Validator.CreditCardNumber, Mode=TwoWay}" Header="Credit Card Number" x:Name="CreditCardNumberBox"></TextBox>
-        <Button Content="{x:Bind ActionButtonText}" Margin="0 5 0 0" Click="ActionButton_Click" HorizontalAlignment="Right"></Button>
+        <RelativePanel>
+            <TextBlock Foreground="Red" Text="{x:Bind Validator.Feedback, Mode=OneWay}" RelativePanel.AlignVerticalCenterWithPanel="true"></TextBlock>
+            <Button Content="{x:Bind ActionButtonText}" Margin="0 5 0 0" Click="ActionButton_Click" RelativePanel.AlignRightWithPanel="True"></Button>
+        </RelativePanel>
     </StackPanel>
 </UserControl>

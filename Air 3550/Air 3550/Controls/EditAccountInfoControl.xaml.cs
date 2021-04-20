@@ -21,6 +21,8 @@ namespace Air_3550.Controls
         {
             IsRegistering = isRegistering;
 
+            _feedback = "";
+
             var userService = App.Current.Services.GetService<UserSessionService>();
 
             if (!IsRegistering)
@@ -40,6 +42,14 @@ namespace Air_3550.Controls
                     CreditCardNumber = customerData.CreditCardNumber;
                 }
             }
+        }
+
+        private string _feedback;
+
+        public string Feedback
+        {
+            get => _feedback;
+            private set => SetProperty(ref _feedback, value);
         }
 
         private string _fullName;
@@ -62,7 +72,6 @@ namespace Air_3550.Controls
 
         private string _confirmPassword;
 
-        [Required]
         [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword
         {
@@ -149,6 +158,17 @@ namespace Air_3550.Controls
                 // we do not need the values of those fields.
                 ClearErrors(nameof(Password));
                 ClearErrors(nameof(ConfirmPassword));
+            }
+
+            var firstError = GetErrors(null).FirstOrDefault();
+
+            if (firstError != null)
+            {
+                Feedback = firstError.ErrorMessage;
+            }
+            else
+            {
+                Feedback = "";
             }
         }
     }
