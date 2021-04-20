@@ -36,7 +36,7 @@ namespace Air_3550.Views
 
                 parentPage.Frame.Navigate(typeof(MainPage));
                 parentPage.Frame.BackStack.Clear();
-                parentPage.Frame.Navigate(typeof(LoginPage));
+                parentPage.Frame.Navigate(typeof(LoginPage), new LoginPage.Params.PasswordChanged());
             }
         }
     }

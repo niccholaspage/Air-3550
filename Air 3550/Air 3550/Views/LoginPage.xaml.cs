@@ -16,6 +16,21 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class LoginPage : Page
     {
+        public sealed class Params
+        {
+            public class NewUser
+            {
+                public string LoginId;
+
+                public NewUser(string LoginId)
+                {
+                    this.LoginId = LoginId;
+                }
+            }
+
+            public class PasswordChanged { }
+        }
+
         public LoginPage()
         {
             this.InitializeComponent();
@@ -27,11 +42,18 @@ namespace Air_3550.Views
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is string loginId)
+            if (e.Parameter is Params.NewUser param)
             {
-                ViewModel.Username = loginId;
-                AccountCreatedBar.Message = $"Your account has been successfully created. Your ID is {loginId}.";
-                AccountCreatedBar.IsOpen = true;
+                ViewModel.Username = param.LoginId;
+                InfoBar.Title = "Account Created";
+                InfoBar.Message = $"Your account has been successfully created. Your ID is {param.LoginId}.";
+                InfoBar.IsOpen = true;
+            }
+            else if (e.Parameter is Params.PasswordChanged)
+            {
+                InfoBar.Title = "Password Changed";
+                InfoBar.Message = $"Your password has been changed. Please login again.";
+                InfoBar.IsOpen = true;
             }
         }
 

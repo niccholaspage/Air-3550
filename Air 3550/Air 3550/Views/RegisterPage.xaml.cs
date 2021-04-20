@@ -26,7 +26,7 @@ namespace Air_3550.Views
 
             if (loginId != null)
             {
-                Frame.Navigate(typeof(LoginPage), loginId);
+                Frame.Navigate(typeof(LoginPage), new LoginPage.Params.NewUser(loginId));
             }
         }
     }
