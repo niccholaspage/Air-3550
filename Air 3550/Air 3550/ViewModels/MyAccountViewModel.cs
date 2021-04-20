@@ -53,13 +53,30 @@ namespace Air_3550.ViewModels
 
         public void SetCurrentTab(Tab tab)
         {
-            _currentTab = tab;
 
-            OnPropertyChanged(nameof(ViewingBookingsTab));
-            OnPropertyChanged(nameof(ViewingProfileTab));
-            OnPropertyChanged(nameof(ViewingChangePasswordTab));
-            OnPropertyChanged(nameof(DisplayedPage));
+            if (_currentTab != tab)
+            {
+                _currentTab = tab;
+
+                OnPropertyChanged(nameof(ViewingBookingsTab));
+                OnPropertyChanged(nameof(ViewingProfileTab));
+                OnPropertyChanged(nameof(ViewingChangePasswordTab));
+                OnPropertyChanged(nameof(DisplayedPage));
+            }
+            else
+            {
+                // If we don't call property changes on all tabs,
+                // the AppBarToggleButton will cause the button
+                // to toggle even though we don't want it to.
+                OnPropertyChanged(nameof(ViewingBookingsTab));
+                OnPropertyChanged(nameof(ViewingProfileTab));
+                OnPropertyChanged(nameof(ViewingChangePasswordTab));
+            }
         }
+
+        private Page BookingsPage = new LoginPage();
+        private Page ProfilePage = new EditProfileSubPage();
+        private Page ChangePasswordPage = new ChangePasswordSubPage();
 
         public Page DisplayedPage
         {
@@ -67,9 +84,9 @@ namespace Air_3550.ViewModels
             {
                 return _currentTab switch
                 {
-                    Tab.BOOKINGS => new LoginPage(),
-                    Tab.PROFILE => new EditProfileSubPage(),
-                    Tab.CHANGE_PASSWORD => new ChangePasswordSubPage(),
+                    Tab.BOOKINGS => BookingsPage,
+                    Tab.PROFILE => ProfilePage,
+                    Tab.CHANGE_PASSWORD => ChangePasswordPage,
                     _ => throw new ArgumentException("This shouldn't have been reached.."),
                 };
             }
