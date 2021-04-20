@@ -93,6 +93,8 @@ namespace Air_3550.ViewModels
                 await db.SaveChangesAsync();
             }
 
+            userSessionService.Logout();
+
             return true;
         }
     }
