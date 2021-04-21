@@ -46,6 +46,68 @@ namespace Air_3550.Repository
                 new User { UserId = 3, Role = Role.FLIGHT_MANAGER, LoginId = "flight_manager", PasswordHash = PasswordHandling.HashPassword("flight_manager") },
                 new User { UserId = 4, Role = Role.MARKETING_MANAGER, LoginId = "marketing_manager", PasswordHash = PasswordHandling.HashPassword("marketing_manager") }
                 );
+
+            modelBuilder.Entity<Flight>().HasData(
+                // Flights from CLE to BNA
+                new Flight { FlightId = 1, Number = 1, OriginAirportId = 1, DestinationAirportId = 2, DepartureTime = new TimeSpan(06, 35, 00), PlaneId = 1 },
+                new Flight { FlightId = 2, Number = 2, OriginAirportId = 1, DestinationAirportId = 2, DepartureTime = new TimeSpan(09, 30, 00), PlaneId = 1 },
+                new Flight { FlightId = 3, Number = 3, OriginAirportId = 1, DestinationAirportId = 2, DepartureTime = new TimeSpan(12, 35, 00), PlaneId = 1 },
+                new Flight { FlightId = 4, Number = 4, OriginAirportId = 1, DestinationAirportId = 2, DepartureTime = new TimeSpan(15, 30, 00), PlaneId = 1 },
+
+                // Flights from BNA to CLE
+                new Flight { FlightId = 5, Number = 5, OriginAirportId = 2, DestinationAirportId = 1, DepartureTime = new TimeSpan(09, 45, 00), PlaneId = 1 },
+                new Flight { FlightId = 6, Number = 6, OriginAirportId = 2, DestinationAirportId = 1, DepartureTime = new TimeSpan(12, 30, 00), PlaneId = 1 },
+                new Flight { FlightId = 7, Number = 7, OriginAirportId = 2, DestinationAirportId = 1, DepartureTime = new TimeSpan(15, 45, 00), PlaneId = 1 },
+                new Flight { FlightId = 8, Number = 8, OriginAirportId = 2, DestinationAirportId = 1, DepartureTime = new TimeSpan(18, 30, 00), PlaneId = 1 },
+
+                // Flights from CLE to DTW
+                new Flight { FlightId = 9, Number = 9, OriginAirportId = 1, DestinationAirportId = 3, DepartureTime = new TimeSpan(08, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 10, Number = 10, OriginAirportId = 1, DestinationAirportId = 3, DepartureTime = new TimeSpan(11, 30, 00), PlaneId = 1 },
+                new Flight { FlightId = 11, Number = 11, OriginAirportId = 1, DestinationAirportId = 3, DepartureTime = new TimeSpan(14, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 12, Number = 12, OriginAirportId = 1, DestinationAirportId = 3, DepartureTime = new TimeSpan(17, 15, 00), PlaneId = 1 },
+
+                // Flights from DTW to CLE
+                new Flight { FlightId = 13, Number = 13, OriginAirportId = 3, DestinationAirportId = 1, DepartureTime = new TimeSpan(11, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 14, Number = 14, OriginAirportId = 3, DestinationAirportId = 1, DepartureTime = new TimeSpan(14, 30, 00), PlaneId = 1 },
+                new Flight { FlightId = 15, Number = 15, OriginAirportId = 3, DestinationAirportId = 1, DepartureTime = new TimeSpan(17, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 16, Number = 16, OriginAirportId = 3, DestinationAirportId = 1, DepartureTime = new TimeSpan(20, 15, 00), PlaneId = 1 },
+
+                // Flights from CLE to ATL
+                new Flight { FlightId = 17, Number = 17, OriginAirportId = 1, DestinationAirportId = 4, DepartureTime = new TimeSpan(15, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 18, Number = 18, OriginAirportId = 1, DestinationAirportId = 4, DepartureTime = new TimeSpan(18, 30, 00), PlaneId = 1 },
+                new Flight { FlightId = 19, Number = 19, OriginAirportId = 1, DestinationAirportId = 4, DepartureTime = new TimeSpan(21, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 20, Number = 20, OriginAirportId = 1, DestinationAirportId = 4, DepartureTime = new TimeSpan(00, 15, 00), PlaneId = 1 },
+
+                // Flights from ATL to CLE
+                new Flight { FlightId = 21, Number = 21, OriginAirportId = 4, DestinationAirportId = 1, DepartureTime = new TimeSpan(12, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 22, Number = 22, OriginAirportId = 4, DestinationAirportId = 1, DepartureTime = new TimeSpan(15, 30, 00), PlaneId = 1 },
+                new Flight { FlightId = 23, Number = 23, OriginAirportId = 4, DestinationAirportId = 1, DepartureTime = new TimeSpan(18, 15, 00), PlaneId = 1 },
+                new Flight { FlightId = 24, Number = 24, OriginAirportId = 4, DestinationAirportId = 1, DepartureTime = new TimeSpan(21, 15, 00), PlaneId = 1 },
+
+                // Flights from CLE to MDW
+                new Flight { FlightId = 25, Number = 25, OriginAirportId = 1, DestinationAirportId = 7, DepartureTime = new TimeSpan(17, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 26, Number = 26, OriginAirportId = 1, DestinationAirportId = 7, DepartureTime = new TimeSpan(20, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 27, Number = 27, OriginAirportId = 1, DestinationAirportId = 7, DepartureTime = new TimeSpan(23, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 28, Number = 28, OriginAirportId = 1, DestinationAirportId = 7, DepartureTime = new TimeSpan(02, 05, 00), PlaneId = 1 },
+
+                // Flights from MDW to CLE
+                new Flight { FlightId = 29, Number = 29, OriginAirportId = 7, DestinationAirportId = 1, DepartureTime = new TimeSpan(14, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 30, Number = 30, OriginAirportId = 7, DestinationAirportId = 1, DepartureTime = new TimeSpan(17, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 31, Number = 31, OriginAirportId = 7, DestinationAirportId = 1, DepartureTime = new TimeSpan(20, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 32, Number = 32, OriginAirportId = 7, DestinationAirportId = 1, DepartureTime = new TimeSpan(23, 05, 00), PlaneId = 1 },
+
+                // Flights from CLE to DEN
+                new Flight { FlightId = 33, Number = 33, OriginAirportId = 1, DestinationAirportId = 9, DepartureTime = new TimeSpan(11, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 34, Number = 34, OriginAirportId = 1, DestinationAirportId = 9, DepartureTime = new TimeSpan(14, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 35, Number = 35, OriginAirportId = 1, DestinationAirportId = 9, DepartureTime = new TimeSpan(17, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 36, Number = 36, OriginAirportId = 1, DestinationAirportId = 9, DepartureTime = new TimeSpan(20, 15, 00), PlaneId = 2 },
+
+                // Flights from DEN to CLE
+                new Flight { FlightId = 37, Number = 37, OriginAirportId = 9, DestinationAirportId = 1, DepartureTime = new TimeSpan(14, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 38, Number = 38, OriginAirportId = 9, DestinationAirportId = 1, DepartureTime = new TimeSpan(17, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 39, Number = 39, OriginAirportId = 9, DestinationAirportId = 1, DepartureTime = new TimeSpan(20, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 40, Number = 40, OriginAirportId = 9, DestinationAirportId = 1, DepartureTime = new TimeSpan(23, 15, 00), PlaneId = 2 }
+                );
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)

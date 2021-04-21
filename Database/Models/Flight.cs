@@ -10,14 +10,20 @@ namespace Air_3550.Models
         [Required]
         public int Number { get; set; }
 
+        public int OriginAirportId { get; set; }
+
         [Required]
         public Airport OriginAirport { get; set; }
+
+        public int DestinationAirportId { get; set; }
 
         [Required]
         public Airport DestinationAirport { get; set; }
 
         [Required]
         public TimeSpan DepartureTime { get; set; }
+
+        public int PlaneId { get; set; }
 
         [Required]
         public Plane Plane { get; set; }
