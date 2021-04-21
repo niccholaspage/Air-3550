@@ -7,6 +7,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Air_3550.Util;
 
 namespace Air_3550.ViewModels
 {
@@ -39,9 +40,17 @@ namespace Air_3550.ViewModels
                 }
                 else
                 {
-                    return new ValidationResult("Your current password was incorrect.");
+                    return new ValidationResult("Your current password is incorrect.");
                 }
             }
+        }
+
+        private string _feedback;
+
+        public string Feedback
+        {
+            get => _feedback;
+            private set => SetProperty(ref _feedback, value);
         }
 
         private string _currentPassword;
@@ -76,6 +85,8 @@ namespace Air_3550.ViewModels
         public async Task<bool> ChangePassword()
         {
             ValidateAllProperties();
+
+            Feedback = this.GetFirstError();
 
             if (HasErrors)
             {

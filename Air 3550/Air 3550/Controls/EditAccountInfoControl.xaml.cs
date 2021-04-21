@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Air_3550.Util;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -160,16 +161,7 @@ namespace Air_3550.Controls
                 ClearErrors(nameof(ConfirmPassword));
             }
 
-            var firstError = GetErrors(null).FirstOrDefault();
-
-            if (firstError != null)
-            {
-                Feedback = firstError.ErrorMessage;
-            }
-            else
-            {
-                Feedback = "";
-            }
+            Feedback = this.GetFirstError();
         }
     }
 
