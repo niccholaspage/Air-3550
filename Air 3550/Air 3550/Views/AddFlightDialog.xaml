@@ -6,6 +6,7 @@
     xmlns:converters="using:Air_3550.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Air_3550.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Title="Add Flight"
@@ -20,8 +21,8 @@
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <!-- Content body -->
         <TimePicker Time="{x:Bind ViewModel.Depart, Mode=TwoWay}" Header="Departure time" MinuteIncrement="15"/>
-        <TextBox Text="{x:Bind ViewModel.OriginId, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Origin ID" x:Name="OriginIdBox"></TextBox>
-        <TextBox Text="{x:Bind ViewModel.DestinationId, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Destination ID" x:Name="DestinationIdBox"></TextBox>
+        <controls:AirportSuggestBox Text="{x:Bind ViewModel.OriginCity, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
+        <controls:AirportSuggestBox Text="{x:Bind ViewModel.DestinationCity, Mode=TwoWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
         <TextBox Text="{x:Bind ViewModel.Number, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Flight Number" x:Name="FlightNumber"></TextBox>
         <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
         <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Flight</Button>
