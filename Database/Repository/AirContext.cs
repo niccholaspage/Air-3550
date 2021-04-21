@@ -262,7 +262,43 @@ namespace Air_3550.Repository
                 new Flight { FlightId = 141, Number = 141, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(09, 30, 00), PlaneId = 3 },
                 new Flight { FlightId = 142, Number = 142, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(12, 00, 00), PlaneId = 3 },
                 new Flight { FlightId = 143, Number = 143, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(15, 30, 00), PlaneId = 3 },
-                new Flight { FlightId = 144, Number = 144, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(18, 00, 00), PlaneId = 3 }
+                new Flight { FlightId = 144, Number = 144, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(18, 00, 00), PlaneId = 3 },
+
+                // Flights from LGA to MDW,
+                new Flight { FlightId = 145, Number = 145, OriginAirportId = 5, DestinationAirportId = 7, DepartureTime = new TimeSpan(06, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 146, Number = 146, OriginAirportId = 5, DestinationAirportId = 7, DepartureTime = new TimeSpan(09, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 147, Number = 147, OriginAirportId = 5, DestinationAirportId = 7, DepartureTime = new TimeSpan(12, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 148, Number = 148, OriginAirportId = 5, DestinationAirportId = 7, DepartureTime = new TimeSpan(15, 00, 00), PlaneId = 2 },
+
+                // Flights from MDW to LGA,
+                new Flight { FlightId = 149, Number = 149, OriginAirportId = 7, DestinationAirportId = 5, DepartureTime = new TimeSpan(09, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 150, Number = 150, OriginAirportId = 7, DestinationAirportId = 5, DepartureTime = new TimeSpan(12, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 151, Number = 151, OriginAirportId = 7, DestinationAirportId = 5, DepartureTime = new TimeSpan(15, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 152, Number = 152, OriginAirportId = 7, DestinationAirportId = 5, DepartureTime = new TimeSpan(18, 00, 00), PlaneId = 2 },
+
+                // Flights from LGA to DFW,
+                new Flight { FlightId = 153, Number = 153, OriginAirportId = 5, DestinationAirportId = 8, DepartureTime = new TimeSpan(12, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 154, Number = 154, OriginAirportId = 5, DestinationAirportId = 8, DepartureTime = new TimeSpan(15, 20, 00), PlaneId = 3 },
+                new Flight { FlightId = 155, Number = 155, OriginAirportId = 5, DestinationAirportId = 8, DepartureTime = new TimeSpan(18, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 156, Number = 156, OriginAirportId = 5, DestinationAirportId = 8, DepartureTime = new TimeSpan(21, 20, 00), PlaneId = 3 },
+
+                // Flights from DFW to LGA,
+                new Flight { FlightId = 157, Number = 157, OriginAirportId = 8, DestinationAirportId = 5, DepartureTime = new TimeSpan(9, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 158, Number = 158, OriginAirportId = 8, DestinationAirportId = 5, DepartureTime = new TimeSpan(12, 20, 00), PlaneId = 3 },
+                new Flight { FlightId = 159, Number = 159, OriginAirportId = 8, DestinationAirportId = 5, DepartureTime = new TimeSpan(15, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 160, Number = 160, OriginAirportId = 8, DestinationAirportId = 5, DepartureTime = new TimeSpan(18, 20, 00), PlaneId = 3 },
+
+                // Flights from LGA to DEN,
+                new Flight { FlightId = 161, Number = 161, OriginAirportId = 5, DestinationAirportId = 9, DepartureTime = new TimeSpan(10, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 162, Number = 162, OriginAirportId = 5, DestinationAirportId = 9, DepartureTime = new TimeSpan(13, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 163, Number = 163, OriginAirportId = 5, DestinationAirportId = 9, DepartureTime = new TimeSpan(16, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 164, Number = 164, OriginAirportId = 5, DestinationAirportId = 9, DepartureTime = new TimeSpan(19, 30, 00), PlaneId = 3 },
+
+                // Flights from DEN to LGA,
+                new Flight { FlightId = 165, Number = 165, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(13, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 166, Number = 166, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(16, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 167, Number = 167, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(19, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 168, Number = 168, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(22, 30, 00), PlaneId = 3 }
                 );
         }
 
