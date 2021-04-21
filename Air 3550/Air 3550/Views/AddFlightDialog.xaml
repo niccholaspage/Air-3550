@@ -21,8 +21,8 @@
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <!-- Content body -->
         <TimePicker Time="{x:Bind ViewModel.Depart, Mode=TwoWay}" Header="Departure time" MinuteIncrement="15"/>
-        <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.OriginId, Mode=OneWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
-        <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.DestinationId, Mode=OneWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
+        <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.OriginId, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
+        <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.DestinationId, Mode=TwoWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
         <TextBox Text="{x:Bind ViewModel.Number, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Flight Number" x:Name="FlightNumber"></TextBox>
         <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
         <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Flight</Button>

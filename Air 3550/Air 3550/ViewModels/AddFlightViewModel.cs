@@ -67,17 +67,11 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                //Find origin Airport
-                var airport1 = await db.Airports.SingleOrDefaultAsync(airport => airport.AirportId == OriginId);
-
-                //Find destinition airport
-                var airport2 = await db.Airports.SingleOrDefaultAsync(airport => airport.AirportId == OriginId);
-
                 var flight = new Flight
                 {
                     Number = (int)Number,
-                    OriginAirport = airport1,
-                    DestinationAirport = airport2,
+                    OriginAirportId = (int)OriginId,
+                    DestinationAirportId = (int)DestinationId,
                     DepartureTime = Depart
                 };
 
