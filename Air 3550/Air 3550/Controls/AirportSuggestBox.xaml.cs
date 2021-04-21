@@ -29,25 +29,19 @@ namespace Air_3550.Controls
 
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(nameof(Label), typeof(string), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty SelectedAirportIdProperty = DependencyProperty.Register(nameof(SelectedAirportId), typeof(int?), typeof(AirportSuggestBox), new PropertyMetadata(default(int?)));
+
+        public int? SelectedAirportId
+        {
+            get => (int?)GetValue(SelectedAirportIdProperty);
+            set => SetValue(SelectedAirportIdProperty, value);
+        }
 
         public AirportSuggestBox()
         {
             this.InitializeComponent();
 
             this.Loaded += PopulateAirportNames;
-        }
-
-        public int? GetSelectedAirportId()
-        {
-            var index = AirportNames.IndexOf(Text);
-
-            if (index == -1)
-            {
-                return null;
-            } else
-            {
-                return index;
-            }
         }
 
         private async void PopulateAirportNames(object sender, RoutedEventArgs e)
@@ -85,6 +79,17 @@ namespace Air_3550.Controls
                 suitableItems.Add("No results found"); // Stop this from being selectable somehow
             }
             sender.ItemsSource = suitableItems;
+
+            var index = AirportNames.IndexOf(Text);
+
+            if (index == -1)
+            {
+                SelectedAirportId = null;
+            }
+            else
+            {
+                SelectedAirportId = index;
+            }
         }
     }
 }

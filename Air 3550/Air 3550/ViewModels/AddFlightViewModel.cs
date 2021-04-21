@@ -1,5 +1,6 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
+using Air_3550.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
@@ -18,27 +19,27 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _depart, value);
         }
 
-        private string _originCity;
+        private int? _originId;
 
-        //[Required(ErrorMessage = "Please enter City.")]
-        public string OriginCity
+        [Required(ErrorMessage = "Please enter a valid origin airport.")]
+        public int? OriginId
         {
-            get => _originCity;
-            set => SetProperty(ref _originCity, value);
+            get => _originId;
+            set => SetProperty(ref _originId, value);
         }
 
-        private string _destinationCity;
+        private int? _destinationId;
 
-        //[Required(ErrorMessage = "Please enter City.")]
-        public string DestinationCity
+        [Required(ErrorMessage = "Please enter a valid destination airport.")]
+        public int? DestinationId
         {
-            get => _destinationCity;
-            set => SetProperty(ref _destinationCity, value);
+            get => _destinationId;
+            set => SetProperty(ref _destinationId, value);
         }
 
         private int? _number;
 
-        [Required(ErrorMessage = "Please enter Number.")]
+        [Required(ErrorMessage = "Please enter number.")]
         public int? Number
         {
             get => _number;
@@ -59,7 +60,7 @@ namespace Air_3550.ViewModels
 
             if (HasErrors)
             {
-                Feedback = "Has Errors";
+                Feedback = this.GetFirstError();
 
                 return null;
             }
@@ -67,22 +68,10 @@ namespace Air_3550.ViewModels
             using (var db = new AirContext())
             {
                 //Find origin Airport
-                var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => OriginCity.Contains(airport1.City));
-                if (airport1 == null)
-                {
-                    Feedback = "Entered City: " + OriginCity;
-
-                    return null;
-                }
+                var airport1 = await db.Airports.SingleOrDefaultAsync(airport => airport.AirportId == OriginId);
 
                 //Find destinition airport
-                var airport2 = await db.Airports.SingleOrDefaultAsync(airport2 => DestinationCity.Contains(airport2.City));
-                if (airport2 == null)
-                {
-                    Feedback = "No destination Air Port";
-
-                    return null;
-                }
+                var airport2 = await db.Airports.SingleOrDefaultAsync(airport => airport.AirportId == OriginId);
 
                 var flight = new Flight
                 {
@@ -95,7 +84,7 @@ namespace Air_3550.ViewModels
                 await db.AddAsync(flight);
 
                 await db.SaveChangesAsync();
-                Feedback = "Sucess";
+                Feedback = "Success";
                 return flight;
             }
         }
