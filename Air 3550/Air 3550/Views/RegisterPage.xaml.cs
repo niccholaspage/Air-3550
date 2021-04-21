@@ -20,7 +20,7 @@ namespace Air_3550.Views
 
         readonly RegisterViewModel ViewModel = new();
 
-        private async void RegisterButton_Click(object _, RoutedEventArgs _1)
+        private async void RegisterButton_Click(object _, RoutedEventArgs __)
         {
             var loginId = await ViewModel.CreateAccount();
 

@@ -26,7 +26,7 @@ namespace Air_3550.Views
 
         readonly EditFlightViewModel ViewModel = new();
 
-        public async void EditFlight_Click(object sender, RoutedEventArgs e)
+        public async void EditFlight_Click(object _, RoutedEventArgs __)
         {
             var result = await ViewModel.EditFlight(Editting);
             if (result != null) this.Hide();

@@ -19,7 +19,7 @@ namespace Air_3550.Views
 
         readonly ChangePasswordViewModel ViewModel = new();
 
-        private async void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        private async void ChangePasswordButton_Click(object _, RoutedEventArgs __)
         {
             if (await ViewModel.ChangePassword())
             {

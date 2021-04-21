@@ -25,7 +25,7 @@ namespace Air_3550.Views
 
         readonly AddFlightViewModel ViewModel = new();
 
-        private async void AddFlight_Click(object sender, RoutedEventArgs e)
+        private async void AddFlight_Click(object _, RoutedEventArgs __)
         {
             var result = await ViewModel.CreateFlight();
             if (result != null) this.Hide();
