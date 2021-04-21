@@ -1,10 +1,9 @@
 ﻿using Air_3550.Controls;
-using Air_3550.Services;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Air_3550.Repository;
-using System.Linq;
+using Air_3550.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {

@@ -1,10 +1,5 @@
-﻿using Air_3550.Controls;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Air_3550.Util
 {

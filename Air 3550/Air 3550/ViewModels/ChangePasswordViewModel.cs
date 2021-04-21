@@ -1,5 +1,6 @@
 ﻿using Air_3550.Repository;
 using Air_3550.Services;
+using Air_3550.Util;
 using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,6 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Air_3550.Util;
 
 namespace Air_3550.ViewModels
 {
