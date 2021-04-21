@@ -18,6 +18,7 @@
     <None Remove="Views\EditPlanesPage.xaml" />
     <None Remove="Views\EditProfileSubPage.xaml" />
     <None Remove="Views\EditSchedulePage.xaml" />
+    <None Remove="Views\FlightSearchPage.xaml" />
     <None Remove="Views\LoginPage.xaml" />
     <None Remove="Views\MainPage.xaml" />
     <None Remove="Views\MyAccountPage.xaml" />
@@ -39,6 +40,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\FlightSearchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

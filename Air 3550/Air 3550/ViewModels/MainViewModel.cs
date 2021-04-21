@@ -51,7 +51,7 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _returnDate, value);
         }
 
-        public bool IsValidSearch()
+        public bool CheckAndGiveFeedbackOnSearch()
         {
             ValidateAllProperties();
 

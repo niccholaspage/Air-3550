@@ -26,12 +26,15 @@ namespace Air_3550.Views
 
         readonly MainViewModel ViewModel = new();
 
-        private void SearchButton_Click(object _, RoutedEventArgs _1)
+        private void SearchButton_Click(object _, RoutedEventArgs __)
         {
-            ViewModel.IsValidSearch();
+            if (ViewModel.CheckAndGiveFeedbackOnSearch())
+            {
+                Frame.Navigate(typeof(FlightSearchPage));
+            }
         }
 
-        private void EditButton_Click(object _, RoutedEventArgs _1)
+        private void EditButton_Click(object _, RoutedEventArgs __)
         {
             Frame.Navigate(typeof(EditSchedulePage));
         }
