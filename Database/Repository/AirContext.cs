@@ -334,7 +334,43 @@ namespace Air_3550.Repository
                 new Flight { FlightId = 189, Number = 189, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(12, 05, 00), PlaneId = 2 },
                 new Flight { FlightId = 190, Number = 190, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(15, 35, 00), PlaneId = 2 },
                 new Flight { FlightId = 191, Number = 191, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(18, 05, 00), PlaneId = 2 },
-                new Flight { FlightId = 192, Number = 192, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(21, 35, 00), PlaneId = 2 }
+                new Flight { FlightId = 192, Number = 192, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(21, 35, 00), PlaneId = 2 },
+
+                // Flights from MDW to DFW
+                new Flight { FlightId = 193, Number = 193, OriginAirportId = 7, DestinationAirportId = 8, DepartureTime = new TimeSpan(04, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 194, Number = 194, OriginAirportId = 7, DestinationAirportId = 8, DepartureTime = new TimeSpan(07, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 195, Number = 195, OriginAirportId = 7, DestinationAirportId = 8, DepartureTime = new TimeSpan(10, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 196, Number = 196, OriginAirportId = 7, DestinationAirportId = 8, DepartureTime = new TimeSpan(13, 30, 00), PlaneId = 2 },
+
+                // Flights from MDW to DFW
+                new Flight { FlightId = 197, Number = 197, OriginAirportId = 8, DestinationAirportId = 7, DepartureTime = new TimeSpan(07, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 198, Number = 198, OriginAirportId = 8, DestinationAirportId = 7, DepartureTime = new TimeSpan(10, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 199, Number = 199, OriginAirportId = 8, DestinationAirportId = 7, DepartureTime = new TimeSpan(13, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 200, Number = 200, OriginAirportId = 8, DestinationAirportId = 7, DepartureTime = new TimeSpan(16, 30, 00), PlaneId = 2 },
+
+                // Flights from MDW to DEN
+                new Flight { FlightId = 201, Number = 201, OriginAirportId = 7, DestinationAirportId = 9, DepartureTime = new TimeSpan(12, 55, 00), PlaneId = 2 },
+                new Flight { FlightId = 202, Number = 202, OriginAirportId = 7, DestinationAirportId = 9, DepartureTime = new TimeSpan(15, 25, 00), PlaneId = 2 },
+                new Flight { FlightId = 203, Number = 203, OriginAirportId = 7, DestinationAirportId = 9, DepartureTime = new TimeSpan(18, 55, 00), PlaneId = 2 },
+                new Flight { FlightId = 204, Number = 204, OriginAirportId = 7, DestinationAirportId = 9, DepartureTime = new TimeSpan(21, 25, 00), PlaneId = 2 },
+
+                // Flights from DEN to MDW
+                new Flight { FlightId = 205, Number = 205, OriginAirportId = 9, DestinationAirportId = 7, DepartureTime = new TimeSpan(12, 55, 00), PlaneId = 2 },
+                new Flight { FlightId = 206, Number = 206, OriginAirportId = 9, DestinationAirportId = 7, DepartureTime = new TimeSpan(15, 25, 00), PlaneId = 2 },
+                new Flight { FlightId = 207, Number = 207, OriginAirportId = 9, DestinationAirportId = 7, DepartureTime = new TimeSpan(18, 55, 00), PlaneId = 2 },
+                new Flight { FlightId = 208, Number = 208, OriginAirportId = 9, DestinationAirportId = 7, DepartureTime = new TimeSpan(21, 25, 00), PlaneId = 2 },
+
+                // Flights from MDW to SEA
+                new Flight { FlightId = 209, Number = 209, OriginAirportId = 7, DestinationAirportId = 10, DepartureTime = new TimeSpan(12, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 210, Number = 210, OriginAirportId = 7, DestinationAirportId = 10, DepartureTime = new TimeSpan(15, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 211, Number = 211, OriginAirportId = 7, DestinationAirportId = 10, DepartureTime = new TimeSpan(18, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 212, Number = 212, OriginAirportId = 7, DestinationAirportId = 10, DepartureTime = new TimeSpan(21, 50, 00), PlaneId = 3 },
+
+                // Flights from SEA to MDW
+                new Flight { FlightId = 213, Number = 213, OriginAirportId = 10, DestinationAirportId = 7, DepartureTime = new TimeSpan(09, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 214, Number = 214, OriginAirportId = 10, DestinationAirportId = 7, DepartureTime = new TimeSpan(12, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 215, Number = 215, OriginAirportId = 10, DestinationAirportId = 7, DepartureTime = new TimeSpan(15, 50, 00), PlaneId = 3 },
+                new Flight { FlightId = 216, Number = 216, OriginAirportId = 10, DestinationAirportId = 7, DepartureTime = new TimeSpan(18, 50, 00), PlaneId = 3 }
                 );
         }
 
