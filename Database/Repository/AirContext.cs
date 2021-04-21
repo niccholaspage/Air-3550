@@ -186,11 +186,35 @@ namespace Air_3550.Repository
                 new Flight { FlightId = 91, Number = 91, OriginAirportId = 2, DestinationAirportId = 9, DepartureTime = new TimeSpan(11, 40, 00), PlaneId = 2 },
                 new Flight { FlightId = 92, Number = 92, OriginAirportId = 2, DestinationAirportId = 9, DepartureTime = new TimeSpan(14, 10, 00), PlaneId = 2 },
 
-                // Flights from BNA to DEN
+                // Flights from DEN to BNA
                 new Flight { FlightId = 93, Number = 93, OriginAirportId = 9, DestinationAirportId = 2, DepartureTime = new TimeSpan(08, 40, 00), PlaneId = 2 },
                 new Flight { FlightId = 94, Number = 94, OriginAirportId = 9, DestinationAirportId = 2, DepartureTime = new TimeSpan(11, 10, 00), PlaneId = 2 },
                 new Flight { FlightId = 95, Number = 95, OriginAirportId = 9, DestinationAirportId = 2, DepartureTime = new TimeSpan(14, 40, 00), PlaneId = 2 },
-                new Flight { FlightId = 96, Number = 96, OriginAirportId = 9, DestinationAirportId = 2, DepartureTime = new TimeSpan(17, 10, 00), PlaneId = 2 }
+                new Flight { FlightId = 96, Number = 96, OriginAirportId = 9, DestinationAirportId = 2, DepartureTime = new TimeSpan(17, 10, 00), PlaneId = 2 },
+
+                // Flights from DTW to MDW
+                new Flight { FlightId = 97, Number = 97, OriginAirportId = 3, DestinationAirportId = 7, DepartureTime = new TimeSpan(07, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 98, Number = 98, OriginAirportId = 3, DestinationAirportId = 7, DepartureTime = new TimeSpan(10, 45, 00), PlaneId = 1 },
+                new Flight { FlightId = 99, Number = 99, OriginAirportId = 3, DestinationAirportId = 7, DepartureTime = new TimeSpan(13, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 100, Number = 100, OriginAirportId = 3, DestinationAirportId = 7, DepartureTime = new TimeSpan(16, 45, 00), PlaneId = 1 },
+
+                // Flights from MDW to DTW
+                new Flight { FlightId = 101, Number = 101, OriginAirportId = 7, DestinationAirportId = 3, DepartureTime = new TimeSpan(10, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 102, Number = 102, OriginAirportId = 7, DestinationAirportId = 3, DepartureTime = new TimeSpan(13, 45, 00), PlaneId = 1 },
+                new Flight { FlightId = 103, Number = 103, OriginAirportId = 7, DestinationAirportId = 3, DepartureTime = new TimeSpan(16, 05, 00), PlaneId = 1 },
+                new Flight { FlightId = 104, Number = 104, OriginAirportId = 7, DestinationAirportId = 3, DepartureTime = new TimeSpan(19, 45, 00), PlaneId = 1 },
+
+                // Flights from DTW to DEN
+                new Flight { FlightId = 105, Number = 105, OriginAirportId = 3, DestinationAirportId = 9, DepartureTime = new TimeSpan(16, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 106, Number = 106, OriginAirportId = 3, DestinationAirportId = 9, DepartureTime = new TimeSpan(19, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 107, Number = 107, OriginAirportId = 3, DestinationAirportId = 9, DepartureTime = new TimeSpan(22, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 108, Number = 108, OriginAirportId = 3, DestinationAirportId = 9, DepartureTime = new TimeSpan(25, 00, 00), PlaneId = 2 },
+
+                // Flights from DEN to DTW
+                new Flight { FlightId = 109, Number = 109, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(13, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 110, Number = 110, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(16, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 111, Number = 111, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(19, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 112, Number = 112, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(22, 00, 00), PlaneId = 2 }
                 );
         }
 
