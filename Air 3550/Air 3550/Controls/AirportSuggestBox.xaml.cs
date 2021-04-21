@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +10,7 @@ using System.Linq;
 
 namespace Air_3550.Controls
 {
-    public sealed class AirportSuggestBox : Control
+    public sealed partial class AirportSuggestBox : UserControl
     {
         private readonly List<string> AirportNames = new();
 
@@ -27,12 +26,12 @@ namespace Air_3550.Controls
             set => SetValue(LabelProperty, value);
         }
 
-        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(nameof(Label), typeof(String), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(String), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(nameof(Label), typeof(string), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(AirportSuggestBox), new PropertyMetadata(default(string)));
 
         public AirportSuggestBox()
         {
-            this.DefaultStyleKey = typeof(AirportSuggestBox);
+            this.InitializeComponent();
 
             this.Loaded += PopulateAirportNames;
         }
@@ -47,15 +46,8 @@ namespace Air_3550.Controls
             }
         }
 
-        protected override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            var autoSuggestBox = GetTemplateChild("SuggestBox") as AutoSuggestBox;
-            autoSuggestBox.TextChanged += AutoSuggestBox_TextChanged;
-        }
-
         // Handle text change and present suitable items
-        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private void SuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             var suitableItems = new List<string>();
             var splitText = sender.Text.ToLower().Split(" ");
