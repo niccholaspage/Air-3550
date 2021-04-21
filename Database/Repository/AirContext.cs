@@ -298,7 +298,43 @@ namespace Air_3550.Repository
                 new Flight { FlightId = 165, Number = 165, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(13, 00, 00), PlaneId = 3 },
                 new Flight { FlightId = 166, Number = 166, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(16, 30, 00), PlaneId = 3 },
                 new Flight { FlightId = 167, Number = 167, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(19, 00, 00), PlaneId = 3 },
-                new Flight { FlightId = 168, Number = 168, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(22, 30, 00), PlaneId = 3 }
+                new Flight { FlightId = 168, Number = 168, OriginAirportId = 9, DestinationAirportId = 5, DepartureTime = new TimeSpan(22, 30, 00), PlaneId = 3 },
+
+                // Flights from LAX to MDW
+                new Flight { FlightId = 169, Number = 169, OriginAirportId = 6, DestinationAirportId = 7, DepartureTime = new TimeSpan(09, 45, 00), PlaneId = 3 },
+                new Flight { FlightId = 170, Number = 170, OriginAirportId = 6, DestinationAirportId = 7, DepartureTime = new TimeSpan(12, 15, 00), PlaneId = 3 },
+                new Flight { FlightId = 171, Number = 171, OriginAirportId = 6, DestinationAirportId = 7, DepartureTime = new TimeSpan(15, 45, 00), PlaneId = 3 },
+                new Flight { FlightId = 172, Number = 171, OriginAirportId = 6, DestinationAirportId = 7, DepartureTime = new TimeSpan(18, 15, 00), PlaneId = 3 },
+
+                // Flights from MDW to LAX
+                new Flight { FlightId = 173, Number = 173, OriginAirportId = 7, DestinationAirportId = 6, DepartureTime = new TimeSpan(12, 45, 00), PlaneId = 3 },
+                new Flight { FlightId = 174, Number = 174, OriginAirportId = 7, DestinationAirportId = 6, DepartureTime = new TimeSpan(15, 15, 00), PlaneId = 3 },
+                new Flight { FlightId = 175, Number = 175, OriginAirportId = 7, DestinationAirportId = 6, DepartureTime = new TimeSpan(18, 45, 00), PlaneId = 3 },
+                new Flight { FlightId = 176, Number = 176, OriginAirportId = 7, DestinationAirportId = 6, DepartureTime = new TimeSpan(21, 15, 00), PlaneId = 3 },
+
+                // Flights from LAX to DFW
+                new Flight { FlightId = 177, Number = 177, OriginAirportId = 6, DestinationAirportId = 8, DepartureTime = new TimeSpan(17, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 178, Number = 178, OriginAirportId = 6, DestinationAirportId = 8, DepartureTime = new TimeSpan(20, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 179, Number = 179, OriginAirportId = 6, DestinationAirportId = 8, DepartureTime = new TimeSpan(23, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 180, Number = 180, OriginAirportId = 6, DestinationAirportId = 8, DepartureTime = new TimeSpan(02, 30, 00), PlaneId = 3 },
+
+                // Flights from DFW to LAX
+                new Flight { FlightId = 181, Number = 181, OriginAirportId = 8, DestinationAirportId = 6, DepartureTime = new TimeSpan(14, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 182, Number = 182, OriginAirportId = 8, DestinationAirportId = 6, DepartureTime = new TimeSpan(17, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 183, Number = 183, OriginAirportId = 8, DestinationAirportId = 6, DepartureTime = new TimeSpan(20, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 184, Number = 184, OriginAirportId = 8, DestinationAirportId = 6, DepartureTime = new TimeSpan(23, 30, 00), PlaneId = 3 },
+
+                // Flights from LAX to DEN
+                new Flight { FlightId = 185, Number = 185, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 05, 00), PlaneId = 2 },
+                new Flight { FlightId = 186, Number = 186, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 35, 00), PlaneId = 2 },
+                new Flight { FlightId = 187, Number = 187, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 05, 00), PlaneId = 2 },
+                new Flight { FlightId = 188, Number = 188, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 35, 00), PlaneId = 2 },
+
+                // Flights from DEN to LAX
+                new Flight { FlightId = 189, Number = 189, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(12, 05, 00), PlaneId = 2 },
+                new Flight { FlightId = 190, Number = 190, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(15, 35, 00), PlaneId = 2 },
+                new Flight { FlightId = 191, Number = 191, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(18, 05, 00), PlaneId = 2 },
+                new Flight { FlightId = 192, Number = 192, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(21, 35, 00), PlaneId = 2 }
                 );
         }
 
