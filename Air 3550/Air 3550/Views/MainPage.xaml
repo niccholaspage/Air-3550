@@ -11,8 +11,8 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Image x:Name="logo" Source="ms-appx:///Assets/logo.svg" Width="500" Height="154"></Image>
         <StackPanel x:Name="stack" Orientation="Horizontal" HorizontalAlignment="Center">
-            <controls:AirportSuggestBox Text="{x:Bind ViewModel.DepartureCity, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
-            <controls:AirportSuggestBox Text="{x:Bind ViewModel.ArrivalCity, Mode=TwoWay}" Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
+            <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.DepartureAirportId, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
+            <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.ArrivalAirportId, Mode=TwoWay}" Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
             <CalendarDatePicker Date="{x:Bind ViewModel.DepartureDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="125" Margin="3" Header="Departure Date" VerticalAlignment="Bottom" />
             <CalendarDatePicker Date="{x:Bind ViewModel.ArrivalDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="125" Margin="3" Header="Return Date" VerticalAlignment="Bottom" />
             <Button x:Name="SearchButton" Click="SearchButton_Click" Margin="3" VerticalAlignment="Bottom">Search</Button>

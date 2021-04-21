@@ -5,20 +5,20 @@ namespace Air_3550.ViewModels
 {
     class MainViewModel : ObservableObject
     {
-        private string _departureCity;
+        private int? _departureAirportId;
 
-        public string DepartureCity
+        public int? DepartureAirportId
         {
-            get => _departureCity;
-            set => SetProperty(ref _departureCity, value);
+            get => _departureAirportId;
+            set => SetProperty(ref _departureAirportId, value);
         }
 
-        private string _arrivalCity;
+        private int? _arrivalAirportId;
 
-        public string ArrivalCity
+        public int? ArrivalAirportId
         {
-            get => _arrivalCity;
-            set => SetProperty(ref _arrivalCity, value);
+            get => _arrivalAirportId;
+            set => SetProperty(ref _arrivalAirportId, value);
         }
 
         private DateTimeOffset? _departureDate;
