@@ -214,7 +214,55 @@ namespace Air_3550.Repository
                 new Flight { FlightId = 109, Number = 109, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(13, 30, 00), PlaneId = 2 },
                 new Flight { FlightId = 110, Number = 110, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(16, 00, 00), PlaneId = 2 },
                 new Flight { FlightId = 111, Number = 111, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(19, 30, 00), PlaneId = 2 },
-                new Flight { FlightId = 112, Number = 112, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(22, 00, 00), PlaneId = 2 }
+                new Flight { FlightId = 112, Number = 112, OriginAirportId = 9, DestinationAirportId = 3, DepartureTime = new TimeSpan(22, 00, 00), PlaneId = 2 },
+
+                // Flights from ATL to LGA
+                new Flight { FlightId = 113, Number = 113, OriginAirportId = 4, DestinationAirportId = 5, DepartureTime = new TimeSpan(07, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 114, Number = 114, OriginAirportId = 4, DestinationAirportId = 5, DepartureTime = new TimeSpan(10, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 115, Number = 115, OriginAirportId = 4, DestinationAirportId = 5, DepartureTime = new TimeSpan(13, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 116, Number = 116, OriginAirportId = 4, DestinationAirportId = 5, DepartureTime = new TimeSpan(16, 30, 00), PlaneId = 2 },
+
+                // Flights from LGA to ATL
+                new Flight { FlightId = 117, Number = 117, OriginAirportId = 5, DestinationAirportId = 4, DepartureTime = new TimeSpan(10, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 118, Number = 118, OriginAirportId = 5, DestinationAirportId = 4, DepartureTime = new TimeSpan(13, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 119, Number = 119, OriginAirportId = 5, DestinationAirportId = 4, DepartureTime = new TimeSpan(16, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 120, Number = 120, OriginAirportId = 5, DestinationAirportId = 4, DepartureTime = new TimeSpan(19, 30, 00), PlaneId = 2 },
+
+                // Flights from ATL to MDW
+                new Flight { FlightId = 121, Number = 121, OriginAirportId = 4, DestinationAirportId = 7, DepartureTime = new TimeSpan(14, 45, 00), PlaneId = 2 },
+                new Flight { FlightId = 122, Number = 122, OriginAirportId = 4, DestinationAirportId = 7, DepartureTime = new TimeSpan(17, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 123, Number = 123, OriginAirportId = 4, DestinationAirportId = 7, DepartureTime = new TimeSpan(20, 45, 00), PlaneId = 2 },
+                new Flight { FlightId = 124, Number = 124, OriginAirportId = 4, DestinationAirportId = 7, DepartureTime = new TimeSpan(23, 15, 00), PlaneId = 2 },
+
+                // Flights from MDW to ATL
+                new Flight { FlightId = 125, Number = 125, OriginAirportId = 7, DestinationAirportId = 4, DepartureTime = new TimeSpan(14, 45, 00), PlaneId = 2 },
+                new Flight { FlightId = 126, Number = 126, OriginAirportId = 7, DestinationAirportId = 4, DepartureTime = new TimeSpan(17, 15, 00), PlaneId = 2 },
+                new Flight { FlightId = 127, Number = 127, OriginAirportId = 7, DestinationAirportId = 4, DepartureTime = new TimeSpan(20, 45, 00), PlaneId = 2 },
+                new Flight { FlightId = 128, Number = 128, OriginAirportId = 7, DestinationAirportId = 4, DepartureTime = new TimeSpan(23, 15, 00), PlaneId = 2 },
+
+                // Flights from ATL to DFW,
+                new Flight { FlightId = 129, Number = 129, OriginAirportId = 4, DestinationAirportId = 8, DepartureTime = new TimeSpan(16, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 130, Number = 130, OriginAirportId = 4, DestinationAirportId = 8, DepartureTime = new TimeSpan(19, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 131, Number = 131, OriginAirportId = 4, DestinationAirportId = 8, DepartureTime = new TimeSpan(22, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 132, Number = 132, OriginAirportId = 4, DestinationAirportId = 8, DepartureTime = new TimeSpan(01, 30, 00), PlaneId = 2 },
+
+                // Flights from DFW to ATL,
+                new Flight { FlightId = 133, Number = 133, OriginAirportId = 8, DestinationAirportId = 4, DepartureTime = new TimeSpan(13, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 134, Number = 134, OriginAirportId = 8, DestinationAirportId = 4, DepartureTime = new TimeSpan(16, 30, 00), PlaneId = 2 },
+                new Flight { FlightId = 135, Number = 135, OriginAirportId = 8, DestinationAirportId = 4, DepartureTime = new TimeSpan(19, 00, 00), PlaneId = 2 },
+                new Flight { FlightId = 136, Number = 136, OriginAirportId = 8, DestinationAirportId = 4, DepartureTime = new TimeSpan(22, 30, 00), PlaneId = 2 },
+
+                // Flights from ATL to DEN,
+                new Flight { FlightId = 137, Number = 137, OriginAirportId = 4, DestinationAirportId = 9, DepartureTime = new TimeSpan(06, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 138, Number = 138, OriginAirportId = 4, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 139, Number = 139, OriginAirportId = 4, DestinationAirportId = 9, DepartureTime = new TimeSpan(12, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 140, Number = 140, OriginAirportId = 4, DestinationAirportId = 9, DepartureTime = new TimeSpan(15, 00, 00), PlaneId = 3 },
+
+                // Flights from DEN to ATL,
+                new Flight { FlightId = 141, Number = 141, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(09, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 142, Number = 142, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(12, 00, 00), PlaneId = 3 },
+                new Flight { FlightId = 143, Number = 143, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(15, 30, 00), PlaneId = 3 },
+                new Flight { FlightId = 144, Number = 144, OriginAirportId = 9, DestinationAirportId = 4, DepartureTime = new TimeSpan(18, 00, 00), PlaneId = 3 }
                 );
         }
 
