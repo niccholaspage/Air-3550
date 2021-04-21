@@ -29,7 +29,7 @@ namespace Air_3550.Views
 
         private async void AddFlight_Click(object sender, RoutedEventArgs e)
         {
-            AddFlightDialog dialog1 = new AddFlightDialog();
+            AddFlightDialog dialog1 = new();
             dialog1.XamlRoot = this.Content.XamlRoot;
             var result = await dialog1.ShowAsync();
             //Update if something changed
@@ -55,7 +55,7 @@ namespace Air_3550.Views
             Flight edit = (Flight)displayedList.SelectedItem;
             if (edit != null)
             {
-                EditFlightDialog dialog1 = new EditFlightDialog(edit);
+                EditFlightDialog dialog1 = new(edit);
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed

@@ -17,7 +17,7 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        MyAccountViewModel ViewModel = new();
+        readonly MyAccountViewModel ViewModel = new();
 
         private void BookingsButton_Click(object _, RoutedEventArgs __)
         {

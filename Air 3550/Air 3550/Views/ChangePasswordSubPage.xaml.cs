@@ -17,7 +17,7 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        ChangePasswordViewModel ViewModel = new();
+        readonly ChangePasswordViewModel ViewModel = new();
 
         private async void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {

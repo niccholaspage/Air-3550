@@ -13,7 +13,7 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class EditFlightDialog : ContentDialog
     {
-        private Flight Editting;
+        private readonly Flight Editting;
         public Flight Result { get; private set; }
 
         public EditFlightDialog(Flight editting)

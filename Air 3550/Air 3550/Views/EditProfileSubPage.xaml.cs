@@ -17,7 +17,7 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        EditProfileViewModel ViewModel = new();
+        readonly EditProfileViewModel ViewModel = new();
 
         private async void SaveChangesButton_Click(object _, RoutedEventArgs __)
         {
