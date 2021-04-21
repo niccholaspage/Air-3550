@@ -17,7 +17,7 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        MainViewModel ViewModel => new();
+        readonly MainViewModel ViewModel = new();
 
         private void SearchButton_Click(object _, RoutedEventArgs _1)
         {
