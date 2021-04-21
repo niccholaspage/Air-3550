@@ -12,6 +12,7 @@ namespace Air_3550.Controls
 {
     public sealed partial class AirportSuggestBox : UserControl
     {
+        private readonly List<int> AirportIds = new();
         private readonly List<string> AirportNames = new();
 
         public string Text
@@ -36,13 +37,30 @@ namespace Air_3550.Controls
             this.Loaded += PopulateAirportNames;
         }
 
+        public int? GetSelectedAirportId()
+        {
+            var index = AirportNames.IndexOf(Text);
+
+            if (index == -1)
+            {
+                return null;
+            } else
+            {
+                return index;
+            }
+        }
+
         private async void PopulateAirportNames(object sender, RoutedEventArgs e)
         {
             using (var db = new AirContext())
             {
                 var airports = await db.Airports.ToListAsync();
 
-                AirportNames.AddRange(airports.Select(airport => airport.City + ", " + airport.State + " (" + airport.Code + ")"));
+                foreach (var airport in airports)
+                {
+                    AirportIds.Add(airport.AirportId);
+                    AirportNames.Add(airport.City + ", " + airport.State + " (" + airport.Code + ")");
+                }
             }
         }
 
