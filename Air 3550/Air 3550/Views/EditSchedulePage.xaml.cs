@@ -63,6 +63,10 @@ namespace Air_3550.Views
             }
         }
 
+        private void EditPlanes_Click(object _, RoutedEventArgs _1)
+        {
+            Frame.Navigate(typeof(EditPlanesPage));
+        }
 
     }
 }

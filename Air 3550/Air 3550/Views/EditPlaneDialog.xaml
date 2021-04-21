@@ -1,5 +1,5 @@
 ﻿<ContentDialog
-    x:Class="Air_3550.Views.EditFlightDialog"
+    x:Class="Air_3550.Views.EditPlaneDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Air_3550.Views"
@@ -9,7 +9,7 @@
     xmlns:controls="using:Air_3550.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Title="Add Flight"
+    Title="Edit Plane"
     CloseButtonText="Cancel"
     DefaultButton="Close"
     >
@@ -20,12 +20,9 @@
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <!-- Content body -->
-        <TimePicker Time="{x:Bind ViewModel.Depart, Mode=TwoWay}" Header="Departure time" MinuteIncrement="15"/>
-        <controls:AirportSuggestBox Text="{x:Bind ViewModel.OriginCity, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
-        <controls:AirportSuggestBox Text="{x:Bind ViewModel.DestinationCity, Mode=TwoWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
-        <TextBox Text="{x:Bind ViewModel.Number, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Flight Number" x:Name="FlightNumber"></TextBox>
+        <TextBox Text="{x:Bind ViewModel.PlaneString, Mode=TwoWay}" Header="Plane Model" x:Name="PlaneModel"></TextBox>
         <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
-        <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
+        <Button Click="EditFlight_Click" HorizontalAlignment="Right">Update Plane</Button>
     </StackPanel>
 
 </ContentDialog>

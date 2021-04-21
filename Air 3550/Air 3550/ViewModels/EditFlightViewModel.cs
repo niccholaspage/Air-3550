@@ -19,22 +19,22 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _depart, value);
         }
 
-        private int? _originId;
+        private string _originCity;
 
-        [Required(ErrorMessage = "Please enter Id.")]
-        public int? OriginId
+        [Required(ErrorMessage = "Please enter Origin city.")]
+        public string OriginCity
         {
-            get => _originId;
-            set => SetProperty(ref _originId, value);
+            get => _originCity;
+            set => SetProperty(ref _originCity, value);
         }
 
-        private int? _destinationId;
+        private string _destinationCity;
 
         [Required(ErrorMessage = "Please enter Id.")]
-        public int? DestinationId
+        public string DestinationCity
         {
-            get => _destinationId;
-            set => SetProperty(ref _destinationId, value);
+            get => _destinationCity;
+            set => SetProperty(ref _destinationCity, value);
         }
 
         private int? _number;
@@ -64,8 +64,8 @@ namespace Air_3550.ViewModels
                     .Where(f => f.IsCanceled == false).Single(search => search.FlightId == editting.FlightId);
                 Depart = search.DepartureTime;
                 Number = search.Number;
-                DestinationId = search.DestinationAirport.AirportId;
-                OriginId = search.OriginAirport.AirportId;
+                DestinationCity = search.DestinationAirport.City + ", " + search.DestinationAirport.State + " (" + search.DestinationAirport.Code + ")";
+                OriginCity = search.OriginAirport.City + ", " + search.OriginAirport.State + " (" + search.OriginAirport.Code + ")";
             }
 
         }
@@ -83,20 +83,20 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                //Validate Airport1
-                var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => airport1.AirportId == (int)OriginId);
+                //Find origin Airport
+                var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => OriginCity.Contains(airport1.City));
                 if (airport1 == null)
                 {
-                    Feedback = "No Origin Air Port";
+                    Feedback = "No Origin Airport";
 
                     return null;
                 }
 
-                //Validate Airport2
-                var airport2 = await db.Airports.SingleOrDefaultAsync(airport2 => airport2.AirportId == (int)DestinationId);
+                //Find destinition airport
+                var airport2 = await db.Airports.SingleOrDefaultAsync(airport2 => DestinationCity.Contains(airport2.City));
                 if (airport2 == null)
                 {
-                    Feedback = "No destination Air Port";
+                    Feedback = "No destination Airport";
 
                     return null;
                 }

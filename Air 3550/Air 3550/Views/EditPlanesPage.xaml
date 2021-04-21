@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Air_3550.Views.EditSchedulePage"
+    x:Class="Air_3550.Views.EditPlanesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Air_3550.Views"
@@ -68,10 +68,7 @@
         </ListView>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Dialog</Button>
-            <Button Click="RemoveFlight_Click" HorizontalAlignment="Right">Remove Flight</Button>
-            <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
-            <Button Click="EditPlanes_Click" HorizontalAlignment="Right">Edit Planes</Button>
+            <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Plane</Button>
             <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
         </StackPanel>
     </Grid>
