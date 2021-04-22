@@ -38,7 +38,31 @@ namespace Air_3550.Util
         {
             get
             {
-                var timeSpan = Flights.Last().GetArrivalTime() - Flights.First().DepartureTime;
+                var timeSpan = new TimeSpan();
+
+                // For the first flight, we just add its duration directly.
+                timeSpan += Flights[0].GetDuration();
+
+                for (int i = 1; i < Flights.Count; i++)
+                {
+                    var previousFlight = Flights[i - 1];
+                    var flight = Flights[i];
+
+                    if (flight.DepartureTime < previousFlight.GetArrivalTime())
+                    {
+                        // The flight departs before the previous flight arrives, so we
+                        // need to proceed to the next day to determine where the proper
+                        // flight duration.
+                        timeSpan += new TimeSpan(1, 0, 0, 0); // Add a day
+                        timeSpan -= previousFlight.GetArrivalTime() - flight.DepartureTime; // Subtract the previous flight arrival time from the current flight's departure time
+                    }
+                    else
+                    {
+                        timeSpan += flight.DepartureTime - previousFlight.GetArrivalTime();
+                    }
+
+                    timeSpan += flight.GetDuration();
+                }
 
                 string result = "";
 
