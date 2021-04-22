@@ -1,9 +1,7 @@
 ﻿using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Air_3550.Util
@@ -36,15 +34,8 @@ namespace Air_3550.Util
                             select new FlightPath(flight, connection);
 
                 return await query.ToListAsync();
-                //return await db.Flights
-                //    .Include(flight => flight.OriginAirport)
-                //    .Include(flight => flight.DestinationAirport)
-                //    .Where(flight => !flight.IsCanceled && flight.DestinationAirportId == ArrivalAirportId)
-                //    .Join(db.Flights,
-                //    firstFlight => firstFlight.DestinationAirportId,
-                //    connectionFlight => connectionFlight.OriginAirportId,
-                //    (firstFlight, connectionFlight) => new FlightPath(firstFlight, connectionFlight)
-                //    ).ToListAsync();
+
+                // TODO: Three legged
             }
 
             return new();

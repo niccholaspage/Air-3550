@@ -1,11 +1,7 @@
 ﻿using Air_3550.Models;
-using Air_3550.Repository;
 using Air_3550.Util;
-using Microsoft.UI.Xaml.Shapes;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels

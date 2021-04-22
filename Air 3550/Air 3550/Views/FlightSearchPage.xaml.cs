@@ -1,10 +1,8 @@
 ﻿using Air_3550.Repository;
 using Air_3550.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
