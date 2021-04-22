@@ -63,9 +63,17 @@ namespace Air_3550.Views
             }
         }
 
-        private void EditPlanes_Click(object _, RoutedEventArgs __)
+        private async void EditPlane_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(EditPlanesPage));
+            Flight edit = (Flight)displayedList.SelectedItem;
+            if (edit != null)
+            {
+                EditPlaneDialog dialog1 = new EditPlaneDialog(edit);
+                dialog1.XamlRoot = this.Content.XamlRoot;
+                var result = await dialog1.ShowAsync();
+                //Update if something changed
+                if (dialog1.Result != null)await ViewModel.UpdateFlights();
+            }
         }
 
     }

@@ -15,7 +15,6 @@
     <None Remove="Views\AddFlightDialog.xaml" />
     <None Remove="Views\ChangePasswordSubPage.xaml" />
     <None Remove="Views\EditPlaneDialog.xaml" />
-    <None Remove="Views\EditPlanesPage.xaml" />
     <None Remove="Views\EditProfileSubPage.xaml" />
     <None Remove="Views\EditSchedulePage.xaml" />
     <None Remove="Views\FlightSearchPage.xaml" />
@@ -52,9 +51,6 @@
     <Page Update="Views\EditPlaneDialog.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\EditPlanesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
 
