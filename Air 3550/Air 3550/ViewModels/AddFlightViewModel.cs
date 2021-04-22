@@ -1,7 +1,6 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
 using Air_3550.Util;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;

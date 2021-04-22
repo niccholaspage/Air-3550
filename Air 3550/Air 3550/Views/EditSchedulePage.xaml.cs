@@ -72,7 +72,7 @@ namespace Air_3550.Views
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed
-                if (dialog1.Result != null)await ViewModel.UpdateFlights();
+                if (dialog1.Result != null) await ViewModel.UpdateFlights();
             }
         }
 

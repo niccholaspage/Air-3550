@@ -2,12 +2,9 @@
 using Air_3550.Repository;
 using Air_3550.Util;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {
