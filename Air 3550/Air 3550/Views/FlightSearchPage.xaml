@@ -4,11 +4,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Air_3550.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:util="using:Air_3550.Util" xmlns:converters="using:Air_3550.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <RelativePanel Margin="5 45 0 0">
-        <TextBlock>This is the flight search page, eventually.</TextBlock>
-    </RelativePanel>
+    <Page.Resources>
+        <converters:StopsFormatConverter x:Key="StopsFormatConverter"></converters:StopsFormatConverter>
+        <DataTemplate x:Key="RouteListViewTemplate" x:DataType="util:ScheduledFlightPath">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Bind DepartureTime.ToShortTimeString()}" x:Phase="1"></TextBlock>
+                <SymbolIcon Margin="2" Symbol="Forward"></SymbolIcon>
+                <TextBlock Text="{x:Bind ArrivalTime.ToShortTimeString()}" x:Phase="2"></TextBlock>
+                <TextBlock Text="{x:Bind NumberOfStops, Converter={StaticResource StopsFormatConverter}}" Margin="50 0 0 0"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <StackPanel Orientation="Vertical" Margin="5 45 0 0">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Depart:</TextBlock>
+            <TextBlock FontSize="50" Text="{x:Bind ViewModel.OriginAirport.Code}"></TextBlock>
+            <SymbolIcon Margin="2" Symbol="Forward" VerticalAlignment="Center"></SymbolIcon>
+            <TextBlock FontSize="50" Text="{x:Bind ViewModel.DestinationAirport.Code}"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{x:Bind Subtitle}"></TextBlock>
+        </StackPanel>
+        <ListView
+            ItemTemplate="{StaticResource RouteListViewTemplate}"
+            ItemsSource="{x:Bind ViewModel.Paths}"/>
+    </StackPanel>
 </Page>

@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Air_3550.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -27,5 +28,9 @@ namespace Air_3550.Views
         {
             this.InitializeComponent();
         }
+
+        FlightSearchViewModel ViewModel = new();
+
+        public string Subtitle => ViewModel.OriginAirport.CityWithState + " to " + ViewModel.DestinationAirport.CityWithState;
     }
 }

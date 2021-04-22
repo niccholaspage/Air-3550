@@ -23,5 +23,7 @@ namespace Air_3550.Models
 
         [Required]
         public string State { get; set; } // TODO: Determine this as well
+
+        public string CityWithState => City + ", " + State;
     }
 }
