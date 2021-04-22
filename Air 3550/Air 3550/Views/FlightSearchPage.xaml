@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <RelativePanel>
+    <RelativePanel Margin="5 45 0 0">
         <TextBlock>This is the flight search page, eventually.</TextBlock>
     </RelativePanel>
 </Page>

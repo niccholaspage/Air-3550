@@ -38,5 +38,24 @@ namespace Air_3550.Views
         {
             Frame.Navigate(typeof(EditSchedulePage));
         }
+
+        private void TripTypeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is RadioButtons radioButtons)
+            {
+                // Round trip
+                if (radioButtons.SelectedIndex == 0)
+                {
+                    ViewModel.IsRoundTrip = true;
+                    ReturnDatePicker.IsEnabled = true;
+                }
+                else // One-way
+                {
+                    ViewModel.IsRoundTrip = false;
+                    ViewModel.ReturnDate = null;
+                    ReturnDatePicker.IsEnabled = false;
+                }
+            }
+        }
     }
 }

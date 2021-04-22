@@ -7,12 +7,37 @@ namespace Air_3550.ViewModels
 {
     class MainViewModel : ObservableValidator
     {
+        private class RequiredIfRoundTrip : ValidationAttribute
+        {
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            {
+                var viewModel = validationContext.ObjectInstance as MainViewModel;
+
+                if (viewModel.IsRoundTrip && value == null)
+                {
+                    return new ValidationResult(ErrorMessage);
+                }
+                else
+                {
+                    return ValidationResult.Success;
+                }
+            }
+        }
+
         private string _feedback;
 
         public string Feedback
         {
             get => _feedback;
             set => SetProperty(ref _feedback, value);
+        }
+
+        private bool _isRoundTrip = true;
+
+        public bool IsRoundTrip
+        {
+            get => _isRoundTrip;
+            set => SetProperty(ref _isRoundTrip, value);
         }
 
         private int? _departureAirportId;
@@ -44,7 +69,7 @@ namespace Air_3550.ViewModels
 
         private DateTimeOffset? _returnDate;
 
-        [Required(ErrorMessage = "Please enter a valid return date.")]
+        [RequiredIfRoundTrip(ErrorMessage = "Please enter a valid return date.")]
         public DateTimeOffset? ReturnDate
         {
             get => _returnDate;

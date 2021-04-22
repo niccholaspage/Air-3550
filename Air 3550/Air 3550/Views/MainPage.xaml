@@ -11,7 +11,11 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Image x:Name="logo" Source="ms-appx:///Assets/logo.svg" Width="500" Height="154"></Image>
         <StackPanel Orientation="Vertical">
-            <StackPanel x:Name="stack" Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButtons SelectedIndex="0" MaxColumns="2" SelectionChanged="TripTypeRadioButtons_SelectionChanged">
+                <x:String>Round trip</x:String>
+                <x:String>One-way</x:String>
+            </RadioButtons>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.DepartureAirportId, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
                 <controls:AirportSuggestBox SelectedAirportId="{x:Bind ViewModel.ArrivalAirportId, Mode=TwoWay}" Label="Arrival City" Margin="3" VerticalAlignment="Bottom"/>
                 <CalendarDatePicker x:Name="DepartureDatePicker" Date="{x:Bind ViewModel.DepartureDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="125" Margin="3" Header="Departure Date" VerticalAlignment="Bottom" />
