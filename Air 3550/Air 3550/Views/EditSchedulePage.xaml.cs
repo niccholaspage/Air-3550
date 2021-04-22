@@ -89,15 +89,16 @@ namespace Air_3550.Views
                 //SuggestedStartLocation = PickerLocationId.DocumentsLibrary
             };
 
+            MainWindow.FixPicker(savePicker);
+
             // Dropdown of file types the user can save the file as
             savePicker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
 
             // Default file name if the user does not type one in or select a file to replace
             savePicker.SuggestedFileName = "New Document";
 
-
-
             StorageFile file = await savePicker.PickSaveFileAsync();
+
             if (file != null)
             {
                 // Prevent updates to the remote version of the file until we 
