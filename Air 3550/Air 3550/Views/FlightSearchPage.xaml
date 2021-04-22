@@ -42,7 +42,7 @@
             ItemTemplate="{StaticResource RouteListViewTemplate}"
             ItemsSource="{x:Bind ViewModel.Paths}">
             <ListView.Header>
-                <Grid>
+                <Grid Margin="10 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"></ColumnDefinition>
                         <ColumnDefinition Width="150"></ColumnDefinition>
