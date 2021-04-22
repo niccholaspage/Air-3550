@@ -11,9 +11,9 @@ namespace Air_3550.Util
     {
         public List<Flight> Flights;
 
-        public FlightPath(List<Flight> Flights)
+        public FlightPath(params Flight[] flights)
         {
-            this.Flights = Flights;
+            this.Flights = new(flights);
         }
 
         public string FormattedDepartureTime
@@ -33,6 +33,7 @@ namespace Air_3550.Util
         }
 
         public int NumberOfStops => Flights.Count - 1;
+
         public string FormattedDuration
         {
             get
@@ -59,6 +60,20 @@ namespace Air_3550.Util
                 return result.Trim();
             }
         }
+
+        public string FormattedStops
+        {
+            get
+            {
+                return NumberOfStops switch
+                {
+                    0 => "Nonstop",
+                    1 => NumberOfStops + " stop (" + Flights[0].DestinationAirport.Code + ")",
+                    _ => NumberOfStops + " stops (" + Flights[0].DestinationAirport.Code + ", " + Flights[1].DestinationAirport.Code + ")"
+                };
+            }
+        }
+
         public string FormattedPrice => "$" + Pricing.CalculatePriceOfFlights(Flights);
     }
 }

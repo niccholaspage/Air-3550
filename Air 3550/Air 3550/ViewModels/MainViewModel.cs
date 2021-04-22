@@ -49,13 +49,13 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _departureAirportId, value);
         }
 
-        private int? _arrivalAirportId;
+        private int? _destinationAirportId;
 
         [Required(ErrorMessage = "Please enter a valid arrival city.")]
-        public int? ArrivalAirportId
+        public int? DestinationAirportId
         {
-            get => _arrivalAirportId;
-            set => SetProperty(ref _arrivalAirportId, value);
+            get => _destinationAirportId;
+            set => SetProperty(ref _destinationAirportId, value);
         }
 
         private DateTimeOffset? _departureDate;

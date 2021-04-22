@@ -1,35 +1,37 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
 using Air_3550.Util;
+using Microsoft.UI.Xaml.Shapes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {
     class FlightSearchViewModel
     {
-        public readonly Airport OriginAirport;
+        public Airport OriginAirport;
 
-        public readonly Airport DestinationAirport;
+        public Airport DestinationAirport;
+
+        public DateTime Date;
 
         public ObservableCollection<FlightPath> Paths = new();
 
-        public FlightSearchViewModel()
+        public async Task SearchForFlights(Airport originAirport, Airport destinationAirport, DateTime date)
         {
-            // Temporarily populate for UI testing, clearly this is awful.
-            using (var db = new AirContext())
+            OriginAirport = originAirport;
+            DestinationAirport = destinationAirport;
+            Date = date;
+
+            var paths = await FlightSearchAlgorithm.FindFlightPaths(originAirport.AirportId, destinationAirport.AirportId);
+
+            // TODO: This is cursed...
+            foreach (var path in paths)
             {
-                if (db.ScheduledFlights.Count() == 3)
-                {
-                    OriginAirport = db.Airports.First();
-                    DestinationAirport = db.Airports.ToList()[1];
-
-                    var flights = db.Flights.ToList();
-
-                    Paths.Add(new(new List<Flight> { flights[0] }));
-                    Paths.Add(new(new List<Flight> { flights[1], flights[2] }));
-                }
+                Paths.Add(path);
             }
         }
     }

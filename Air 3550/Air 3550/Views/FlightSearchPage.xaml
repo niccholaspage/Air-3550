@@ -9,13 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <converters:StopsFormatConverter x:Key="StopsFormatConverter"></converters:StopsFormatConverter>
         <DataTemplate x:Key="RouteListViewTemplate" x:DataType="util:FlightPath">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
                     <ColumnDefinition Width="30"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="110"></ColumnDefinition>
                     <ColumnDefinition Width="150"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
@@ -23,7 +22,7 @@
                 <TextBlock Grid.Column="0" Text="{x:Bind FormattedDepartureTime}" x:Phase="1"></TextBlock>
                 <SymbolIcon Grid.Column="1" Symbol="Forward"></SymbolIcon>
                 <TextBlock Grid.Column="2" Text="{x:Bind FormattedArrivalTime}" x:Phase="2"></TextBlock>
-                <TextBlock Grid.Column="3" Text="{x:Bind NumberOfStops, Converter={StaticResource StopsFormatConverter}}" x:Phase="3"></TextBlock>
+                <TextBlock Grid.Column="3" Text="{x:Bind FormattedStops}" x:Phase="3"></TextBlock>
                 <TextBlock Grid.Column="4" Text="{x:Bind FormattedDuration}" x:Phase="4"></TextBlock>
                 <TextBlock Grid.Column="5" Text="{x:Bind FormattedPrice}" x:Phase="5"></TextBlock>
             </Grid>
@@ -46,7 +45,7 @@
             <ListView.Header>
                 <Grid Margin="10 0 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
                         <ColumnDefinition Width="150"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>

@@ -48,7 +48,7 @@ namespace Air_3550.Controls
             }
             else
             {
-                airportSuggestBox.SelectedAirportId = index;
+                airportSuggestBox.SelectedAirportId = index + 1;
             }
         }
 
