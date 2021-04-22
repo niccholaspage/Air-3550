@@ -75,7 +75,7 @@ namespace Air_3550.Models
             date2 = tickets[0].ScheduledFlight.GetArrivalTimestamp();
             foreach (var ticket in tickets)
             {
-                totalCost += ticket.GetCost();
+                totalCost += ticket.ScheduledFlight.GetCost();
                 if (ticket.ScheduledFlight.GetDepartureTimestamp() < date1)
                 {
                     date1 = ticket.ScheduledFlight.GetDepartureTimestamp();

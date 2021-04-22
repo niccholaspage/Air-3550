@@ -22,5 +22,21 @@ namespace Air_3550.Models
         {
             return GetDepartureTimestamp().Add(Flight.GetDuration());
         }
+
+        public decimal GetCost()
+        {
+            decimal flightCost = 0;
+            double duration = Flight.GetDistance();
+            flightCost += Convert.ToDecimal(duration) * 0.12m;
+            if (GetDepartureTimestamp().Hour < 5 || GetArrivalTimestamp().Hour < 5)
+            {
+                flightCost -= flightCost * 0.20m;
+            }
+            else if (GetDepartureTimestamp().Hour < 8 || GetArrivalTimestamp().Hour > 19)
+            {
+                flightCost -= flightCost * 0.10m;
+            }
+            return flightCost;
+        }
     }
 }
