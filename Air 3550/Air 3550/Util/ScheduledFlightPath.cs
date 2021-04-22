@@ -18,5 +18,6 @@ namespace Air_3550.Util
         public DateTime DepartureTime => ScheduledFlights.First().GetDepartureTimestamp();
         public DateTime ArrivalTime => ScheduledFlights.Last().GetArrivalTimestamp();
         public int NumberOfStops => ScheduledFlights.Count - 1;
+        public TimeSpan Duration => ScheduledFlights.Last().GetArrivalTimestamp() - ScheduledFlights.First().GetDepartureTimestamp();
     }
 }

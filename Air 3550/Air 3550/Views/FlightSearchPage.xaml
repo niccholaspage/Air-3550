@@ -11,12 +11,20 @@
     <Page.Resources>
         <converters:StopsFormatConverter x:Key="StopsFormatConverter"></converters:StopsFormatConverter>
         <DataTemplate x:Key="RouteListViewTemplate" x:DataType="util:ScheduledFlightPath">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{x:Bind DepartureTime.ToShortTimeString()}" x:Phase="1"></TextBlock>
-                <SymbolIcon Margin="2" Symbol="Forward"></SymbolIcon>
-                <TextBlock Text="{x:Bind ArrivalTime.ToShortTimeString()}" x:Phase="2"></TextBlock>
-                <TextBlock Text="{x:Bind NumberOfStops, Converter={StaticResource StopsFormatConverter}}" Margin="50 0 0 0"></TextBlock>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{x:Bind DepartureTime.ToShortTimeString()}" x:Phase="1"></TextBlock>
+                <SymbolIcon Grid.Column="1" Symbol="Forward"></SymbolIcon>
+                <TextBlock Grid.Column="2" Text="{x:Bind ArrivalTime.ToShortTimeString()}" x:Phase="2"></TextBlock>
+                <TextBlock Grid.Column="3" Text="{x:Bind NumberOfStops, Converter={StaticResource StopsFormatConverter}}" x:Phase="3"></TextBlock>
+                <TextBlock Grid.Column="4" Text="{x:Bind Duration}" x:Phase="4"></TextBlock>
+            </Grid>
         </DataTemplate>
     </Page.Resources>
 
@@ -32,6 +40,19 @@
         </StackPanel>
         <ListView
             ItemTemplate="{StaticResource RouteListViewTemplate}"
-            ItemsSource="{x:Bind ViewModel.Paths}"/>
+            ItemsSource="{x:Bind ViewModel.Paths}">
+            <ListView.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0">Departing flights</TextBlock>
+                    <TextBlock Grid.Column="1">Number of stops</TextBlock>
+                    <TextBlock Grid.Column="2">Duration</TextBlock>
+                </Grid>
+            </ListView.Header>
+        </ListView>
     </StackPanel>
 </Page>
