@@ -60,15 +60,15 @@ namespace Air_3550.Models
             }
         }
 
-        private double GetCost(bool departingTickets)
+        private decimal GetCost(bool departingTickets)
         {
             var tickets = departingTickets ? GetDepartureTickets() : GetReturnTickets();
             if (tickets.Count == 0)
             {
-                return 0.0;
+                return 0.0m;
             }
             int basePrice = 50;
-            double totalCost = 0;
+            decimal totalCost = 0;
             totalCost += basePrice;
             DateTime date1 = DateTime.Now; // TODO: This needs to be updated, why are we using current time?
             DateTime date2;
@@ -86,13 +86,13 @@ namespace Air_3550.Models
                 }
             }
             totalCost += (8 * (tickets.Count - 1));
-            if (date1.Hour < 5 || date2.Hour < 5) totalCost -= basePrice * 0.20;
-            else if (date1.Hour < 8 || date2.Hour > 19) totalCost -= basePrice * 0.10;
+            if (date1.Hour < 5 || date2.Hour < 5) totalCost -= basePrice * 0.20m;
+            else if (date1.Hour < 8 || date2.Hour > 19) totalCost -= basePrice * 0.10m;
             return totalCost;
         }
 
 
-        public double GetTotalCost()
+        public decimal GetTotalCost()
         {
             return GetCost(true) + GetCost(false);
         }
