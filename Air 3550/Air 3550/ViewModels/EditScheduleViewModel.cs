@@ -2,6 +2,8 @@
 using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Xaml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +28,7 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _flightsA, value);
         }
 
-        public async Task CancelFlight(Flight cancelling)
+        public async void CancelFlight(Flight cancelling)
         {
             using (var db = new AirContext())
             {
@@ -36,18 +38,21 @@ namespace Air_3550.ViewModels
             }
         }
 
-        public void UpdateFlights()
+        public async void UpdateFlights(object sender, RoutedEventArgs e)
         {
             using (var db = new AirContext())
             {
-                FlightsA = db.Flights
+                FlightsA = await db.Flights
                     .Include(Flight => Flight.OriginAirport)
                     .Include(Flight => Flight.DestinationAirport)
                     .Where(f => f.IsCanceled == false)
-                    .ToList();
+                    .ToListAsync();
             }
         }
 
-
+        internal Task<RoutedEventHandler> UpdateFlights()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Air_3550.Views
         public EditSchedulePage()
         {
             this.InitializeComponent();
-            ViewModel.UpdateFlights();
+            this.Loaded += ViewModel.UpdateFlights;
 
         }
 
@@ -35,7 +35,7 @@ namespace Air_3550.Views
             //Update if something changed
             if (dialog1.Result != null)
             {
-                ViewModel.UpdateFlights();
+                await ViewModel.UpdateFlights();
                 ViewModel.Feedback = "FlightID:" + dialog1.Result.Number;
             };
         }
@@ -45,8 +45,8 @@ namespace Air_3550.Views
             Flight cancel = (Flight)displayedList.SelectedItem;
             if (cancel != null)
             {
-                await ViewModel.CancelFlight(cancel);
-                ViewModel.UpdateFlights();
+                ViewModel.CancelFlight(cancel);
+                await ViewModel.UpdateFlights();
             }
         }
 
@@ -59,7 +59,7 @@ namespace Air_3550.Views
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed
-                if (dialog1.Result != null) ViewModel.UpdateFlights();
+                if (dialog1.Result != null) await ViewModel.UpdateFlights();
             }
         }
 
