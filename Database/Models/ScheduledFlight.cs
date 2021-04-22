@@ -30,7 +30,7 @@ namespace Air_3550.Models
             double duration = Flight.GetDistance();
             flightCost += Convert.ToDecimal(duration) * 0.12m;
             flightCost *= 1m - Pricing.GetDiscountPercentage(GetDepartureTimestamp(), GetArrivalTimestamp());
-            return flightCost;
+            return Math.Truncate(100 * flightCost) / 100;
         }
     }
 }

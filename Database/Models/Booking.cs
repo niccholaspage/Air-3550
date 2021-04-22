@@ -65,19 +65,7 @@ namespace Air_3550.Models
         private decimal GetCost(bool departingTickets)
         {
             var tickets = departingTickets ? GetDepartureTickets() : GetReturnTickets();
-            if (tickets.Count == 0)
-            {
-                return 0.0m;
-            }
-            decimal basePrice = 50 * (1m - Pricing.GetDiscountPercentage(tickets.First().ScheduledFlight.GetDepartureTimestamp(), tickets.Last().ScheduledFlight.GetArrivalTimestamp()));
-            decimal totalCost = 0;
-            totalCost += basePrice;
-            foreach (var ticket in tickets)
-            {
-                totalCost += ticket.ScheduledFlight.GetCost();
-            }
-            totalCost += (8 * (tickets.Count - 1));
-            return totalCost;
+            return Pricing.CalculatePriceOfScheduledFlights(tickets.Select(ticket => ticket.ScheduledFlight).ToList());
         }
 
 
