@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Database.Util;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Air_3550.Models
 {
@@ -67,27 +69,14 @@ namespace Air_3550.Models
             {
                 return 0.0m;
             }
-            int basePrice = 50;
+            decimal basePrice = 50 * (1m - Pricing.GetDiscountPercentage(tickets.First().ScheduledFlight.GetDepartureTimestamp(), tickets.Last().ScheduledFlight.GetArrivalTimestamp()));
             decimal totalCost = 0;
             totalCost += basePrice;
-            DateTime date1 = DateTime.Now; // TODO: This needs to be updated, why are we using current time?
-            DateTime date2;
-            date2 = tickets[0].ScheduledFlight.GetArrivalTimestamp();
             foreach (var ticket in tickets)
             {
                 totalCost += ticket.ScheduledFlight.GetCost();
-                if (ticket.ScheduledFlight.GetDepartureTimestamp() < date1)
-                {
-                    date1 = ticket.ScheduledFlight.GetDepartureTimestamp();
-                }
-                if (ticket.ScheduledFlight.GetArrivalTimestamp() > date2)
-                {
-                    date2 = ticket.ScheduledFlight.GetArrivalTimestamp();
-                }
             }
             totalCost += (8 * (tickets.Count - 1));
-            if (date1.Hour < 5 || date2.Hour < 5) totalCost -= basePrice * 0.20m;
-            else if (date1.Hour < 8 || date2.Hour > 19) totalCost -= basePrice * 0.10m;
             return totalCost;
         }
 

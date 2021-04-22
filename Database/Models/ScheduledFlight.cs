@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Database.Util;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Air_3550.Models
@@ -28,14 +29,7 @@ namespace Air_3550.Models
             decimal flightCost = 0;
             double duration = Flight.GetDistance();
             flightCost += Convert.ToDecimal(duration) * 0.12m;
-            if (GetDepartureTimestamp().Hour < 5 || GetArrivalTimestamp().Hour < 5)
-            {
-                flightCost -= flightCost * 0.20m;
-            }
-            else if (GetDepartureTimestamp().Hour < 8 || GetArrivalTimestamp().Hour > 19)
-            {
-                flightCost -= flightCost * 0.10m;
-            }
+            flightCost *= 1m - Pricing.GetDiscountPercentage(GetDepartureTimestamp(), GetArrivalTimestamp());
             return flightCost;
         }
     }
