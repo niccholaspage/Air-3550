@@ -65,7 +65,7 @@ namespace Air_3550.Models
         private decimal GetCost(bool departingTickets)
         {
             var tickets = departingTickets ? GetDepartureTickets() : GetReturnTickets();
-            return Pricing.CalculatePriceOfScheduledFlights(tickets.Select(ticket => ticket.ScheduledFlight).ToList());
+            return Pricing.CalculatePriceOfFlights(tickets.Select(ticket => ticket.ScheduledFlight.Flight).ToList());
         }
 
 

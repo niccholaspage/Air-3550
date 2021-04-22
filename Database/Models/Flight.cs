@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Database.Util;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Air_3550.Models
@@ -60,6 +61,11 @@ namespace Air_3550.Models
             return Math.Sqrt(distance) / 1000 / 0.62137119; // We convert our distance we are about to return from meters to kilometers to miles.
         }
 
+        public TimeSpan GetArrivalTime()
+        {
+            return DepartureTime.Add(GetDuration());
+        }
+
         // this calculates the duration of each flight
         public TimeSpan GetDuration()
         {
@@ -67,6 +73,15 @@ namespace Air_3550.Models
             int hours = (int)permDuration / 60;
             int min = (int)permDuration % 60;
             return new(hours, min, 0);
+        }
+
+        public decimal GetCost()
+        {
+            decimal flightCost = 0;
+            double duration = GetDistance();
+            flightCost += Convert.ToDecimal(duration) * 0.12m;
+            flightCost *= 1m - Pricing.GetDiscountPercentage(DepartureTime, GetArrivalTime());
+            return Math.Truncate(100 * flightCost) / 100;
         }
     }
 }

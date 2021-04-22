@@ -1,7 +1,6 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
 using Air_3550.Util;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace Air_3550.ViewModels
 
         public readonly Airport DestinationAirport;
 
-        public ObservableCollection<ScheduledFlightPath> Paths = new();
+        public ObservableCollection<FlightPath> Paths = new();
 
         public FlightSearchViewModel()
         {
@@ -26,13 +25,10 @@ namespace Air_3550.ViewModels
                     OriginAirport = db.Airports.First();
                     DestinationAirport = db.Airports.ToList()[1];
 
-                    var scheduledFlights = db.ScheduledFlights
-                        .Include(scheduledFlight => scheduledFlight.Flight).ThenInclude(flight => flight.OriginAirport)
-                        .Include(scheduledFlight => scheduledFlight.Flight).ThenInclude(flight => flight.DestinationAirport)
-                        .ToList();
+                    var flights = db.Flights.ToList();
 
-                    Paths.Add(new(new List<ScheduledFlight> { scheduledFlights[0] }));
-                    Paths.Add(new(new List<ScheduledFlight> { scheduledFlights[1], scheduledFlights[2] }));
+                    Paths.Add(new(new List<Flight> { flights[0] }));
+                    Paths.Add(new(new List<Flight> { flights[1], flights[2] }));
                 }
             }
         }
