@@ -17,6 +17,11 @@ namespace Air_3550.Views
         {
             this.InitializeComponent();
 
+            this.Loaded += (_, __) =>
+            {
+                DepartureCityBox.Focus(FocusState.Programmatic);
+            };
+
             DepartureDatePicker.MinDate = DateTime.Now;
             DepartureDatePicker.MaxDate = DateTime.Now.AddMonths(6);
 
