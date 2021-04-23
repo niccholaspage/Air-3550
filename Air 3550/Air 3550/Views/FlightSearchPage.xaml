@@ -37,7 +37,7 @@
                     <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">Departing flights</TextBlock>
                     <TextBlock Grid.Column="1" VerticalAlignment="Center">Number of stops</TextBlock>
                     <TextBlock Grid.Column="2" VerticalAlignment="Center">Duration</TextBlock>
-                    <TextBlock Grid.Column="3" VerticalAlignment="Center">Distance</TextBlock>
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center">Price</TextBlock>
                 </Grid>
             </ListView.Header>
         </ListView>
