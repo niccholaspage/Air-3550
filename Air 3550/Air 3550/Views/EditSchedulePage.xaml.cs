@@ -25,7 +25,7 @@ namespace Air_3550.Views
         public EditSchedulePage()
         {
             this.InitializeComponent();
-            this.Loaded += ViewModel.UpdateFlights;
+            this.Loaded += async (_, __) => await ViewModel.UpdateFlights();
 
         }
 

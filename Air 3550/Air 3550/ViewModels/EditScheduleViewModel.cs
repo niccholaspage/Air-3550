@@ -38,7 +38,7 @@ namespace Air_3550.ViewModels
             }
         }
 
-        public async void UpdateFlights(object sender, RoutedEventArgs e)
+        public async Task UpdateFlights()
         {
             using (var db = new AirContext())
             {
@@ -49,11 +49,5 @@ namespace Air_3550.ViewModels
                     .ToListAsync();
             }
         }
-        
-        internal Task<RoutedEventHandler> UpdateFlights()
-        {
-            throw new NotImplementedException();
-        }
-        
     }
 }

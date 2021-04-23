@@ -68,16 +68,12 @@ namespace Air_3550.ViewModels
             using (var db = new AirContext())
             {
                 var plane1 = await db.Planes.SingleOrDefaultAsync(plane1 => plane1.Model == "Boeing 777");
-                var Oairport = await db.Airports.SingleOrDefaultAsync(Oairport => Oairport.AirportId == (int)OriginId);
-                var Dairport = await db.Airports.SingleOrDefaultAsync(Dairport => Dairport.AirportId == (int)DestinationId);
 
                 var flightN = new Flight
                 {
                     Number = (int)Number,
                     OriginAirportId = (int)OriginId,
-                    OriginAirport = Oairport,
                     DestinationAirportId = (int)DestinationId,
-                    DestinationAirport = Dairport,
                     DepartureTime = Depart,
                     Plane = plane1,
                     PlaneId = 3
