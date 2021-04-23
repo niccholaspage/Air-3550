@@ -112,7 +112,8 @@ namespace Air_3550.ViewModels
                     Number = (int)Number,
                     OriginAirport = airport1,
                     DestinationAirport = airport2,
-                    DepartureTime = Depart
+                    DepartureTime = Depart,
+                    PlaneId = editting.PlaneId
                 };
                 await db.AddAsync(flight);
 
