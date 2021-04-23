@@ -40,25 +40,26 @@ namespace Air_3550.Models
         {
             static double toRadians(decimal angdeg)
             {
-                return (double)angdeg / 180.0 * Math.PI;
+                return (double)(Math.PI * (double) angdeg) / 180;
             }
 
-            const int R = 6371; // Radius of the earth
+            //const int R = 6371; // Radius of the earth in meters
+            const int R = 3956; // Radius of the earth in miles
 
             double latitudeDistance = toRadians(DestinationAirport.Latitude - OriginAirport.Latitude);
             double longitudeDistance = toRadians(DestinationAirport.Longitude - OriginAirport.Longitude);
             double a = Math.Sin(latitudeDistance / 2) * Math.Sin(latitudeDistance / 2)
                     + Math.Cos(toRadians(OriginAirport.Latitude)) * Math.Cos(toRadians(DestinationAirport.Latitude))
                     * Math.Sin(longitudeDistance / 2) * Math.Sin(longitudeDistance / 2);
-            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-            double distance = R * c * 1000; // convert to meters
+            
+            double c = 2 * Math.Asin(Math.Sqrt(a)) * R;
 
-            // Divide resulting height by 3.281 to convert feet to meters
-            double height = (OriginAirport.Elevation - DestinationAirport.Elevation) / 3.281;
-
-            distance = Math.Pow(distance, 2) + Math.Pow(height, 2);
-
-            return Math.Sqrt(distance) / 1000 / 0.62137119; // We convert our distance we are about to return from meters to kilometers to miles.
+            // Below three lines of codes can be used to calculate distance using elevation
+            // Multiplying resulting height by 0.000189394 to convert feet to miles
+            //double height = (OriginAirport.Elevation - DestinationAirport.Elevation) * 0.000189394;
+            //double finalDist = Math.Pow(c, 2) + Math.Pow(height, 2);
+            //return Math.Sqrt(finalDist);
+            return c;
         }
 
         public TimeSpan GetArrivalTime()
