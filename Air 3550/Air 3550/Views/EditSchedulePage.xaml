@@ -72,7 +72,7 @@
             <Button Click="RemoveFlight_Click" HorizontalAlignment="Right">Remove Flight</Button>
             <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
             <Button Click="EditPlane_Click" HorizontalAlignment="Right">Edit Plane</Button>
-            <Button Click="GetSummary_Click" HorizontalAlignment="Right">Open File Save</Button>
+            <Button Click="GetSummary_Click" HorizontalAlignment="Right">Summary Page</Button>
             <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
         </StackPanel>
     </Grid>

@@ -81,45 +81,9 @@ namespace Air_3550.Views
             }
         }
 
-        private async void GetSummary_Click(object sender, RoutedEventArgs e)
+        private void GetSummary_Click(object _, RoutedEventArgs __)
         {
-            FileSavePicker savePicker = new FileSavePicker
-            {
-                //SuggestedStartLocation = PickerLocationId.DocumentsLibrary
-            };
-
-            MainWindow.FixPicker(savePicker);
-
-            // Dropdown of file types the user can save the file as
-            savePicker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
-
-            // Default file name if the user does not type one in or select a file to replace
-            savePicker.SuggestedFileName = "New Document";
-
-            StorageFile file = await savePicker.PickSaveFileAsync();
-
-            if (file != null)
-            {
-                // Prevent updates to the remote version of the file until we 
-                // finish making changes and call CompleteUpdatesAsync.
-                CachedFileManager.DeferUpdates(file);
-                // write to file
-                using (Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                    await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite))
-                {
-                    //editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.FormatRtf, randAccStream);
-                }
-
-                // Let Windows know that we're finished changing the file so the 
-                // other app can update the remote version of the file.
-                FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
-                if (status != FileUpdateStatus.Complete)
-                {
-                    Windows.UI.Popups.MessageDialog errorBox =
-                        new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
-                    await errorBox.ShowAsync();
-                }
-            }
+            Frame.Navigate(typeof(SummaryPage));
         }
 
     }
