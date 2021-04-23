@@ -8,27 +8,6 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <DataTemplate x:Key="RouteListViewTemplate" x:DataType="util:FlightPath">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"></ColumnDefinition>
-                    <ColumnDefinition Width="30"></ColumnDefinition>
-                    <ColumnDefinition Width="110"></ColumnDefinition>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Bind FormattedDepartureTime}" HorizontalAlignment="Right" x:Phase="1"></TextBlock>
-                <SymbolIcon Grid.Column="1" Symbol="Forward"></SymbolIcon>
-                <TextBlock Grid.Column="2" Text="{x:Bind FormattedArrivalTime}" x:Phase="2"></TextBlock>
-                <TextBlock Grid.Column="3" Text="{x:Bind FormattedStops}" x:Phase="3"></TextBlock>
-                <TextBlock Grid.Column="4" Text="{x:Bind FormattedDuration}" x:Phase="4"></TextBlock>
-                <TextBlock Grid.Column="5" Text="{x:Bind FormattedPrice}" x:Phase="5"></TextBlock>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>
-
     <RelativePanel Margin="5 45 0 0">
         <StackPanel Margin="0 0 0 30" Orientation="Vertical" x:Name="Header">
             <StackPanel Orientation="Horizontal">
