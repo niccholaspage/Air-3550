@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Air_3550.Models
@@ -12,6 +13,8 @@ namespace Air_3550.Models
 
         [Required]
         public DateTime DepartureDate { get; set; }
+
+        public List<Ticket> Tickets { get; }
 
         public DateTime GetDepartureTimestamp()
         {

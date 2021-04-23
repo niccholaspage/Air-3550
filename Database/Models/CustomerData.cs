@@ -36,6 +36,6 @@ namespace Air_3550.Models
         public int RewardPointsBalance { get; set; }
         public int RewardPointsUsed { get; set; }
 
-        public List<Booking> Bookings { get; set; }
+        public List<Booking> Bookings { get; } = new();
     }
 }
