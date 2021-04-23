@@ -27,7 +27,7 @@ namespace Air_3550.Views
 
         private async void AddFlight_Click(object _, RoutedEventArgs __)
         {
-            var result = await ViewModel.CreateFlight();
+            Flight result = await ViewModel.CreateFlight();
             if (result != null) this.Hide();
             Result = result;
         }

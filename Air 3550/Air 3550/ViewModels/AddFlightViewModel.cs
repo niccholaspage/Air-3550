@@ -1,6 +1,7 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
 using Air_3550.Util;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -66,19 +67,27 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                var flight = new Flight
+                var plane1 = await db.Planes.SingleOrDefaultAsync(plane1 => plane1.Model == "Boeing 777");
+                var Oairport = await db.Airports.SingleOrDefaultAsync(Oairport => Oairport.AirportId == (int)OriginId);
+                var Dairport = await db.Airports.SingleOrDefaultAsync(Dairport => Dairport.AirportId == (int)DestinationId);
+
+                var flightN = new Flight
                 {
                     Number = (int)Number,
                     OriginAirportId = (int)OriginId,
+                    OriginAirport = Oairport,
                     DestinationAirportId = (int)DestinationId,
-                    DepartureTime = Depart
+                    DestinationAirport = Dairport,
+                    DepartureTime = Depart,
+                    Plane = plane1,
+                    PlaneId = 3
                 };
 
-                await db.AddAsync(flight);
+                await db.Flights.AddAsync(flightN);
 
                 await db.SaveChangesAsync();
                 Feedback = "Success";
-                return flight;
+                return flightN;
             }
         }
     }

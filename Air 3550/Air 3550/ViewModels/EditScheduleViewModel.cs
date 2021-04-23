@@ -49,10 +49,11 @@ namespace Air_3550.ViewModels
                     .ToListAsync();
             }
         }
-
+        
         internal Task<RoutedEventHandler> UpdateFlights()
         {
             throw new NotImplementedException();
         }
+        
     }
 }
