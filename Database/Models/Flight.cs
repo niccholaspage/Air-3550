@@ -64,10 +64,12 @@ namespace Air_3550.Models
         // this calculates the duration of each flight
         public TimeSpan GetDuration()
         {
+            // 30 minutes for departure + landing time
+            TimeSpan initialDuration = new(0, 30, 0);
             double permDuration = 30 + (60 / 500) * GetDistance();
             int hours = (int)permDuration / 60;
             int min = (int)permDuration % 60;
-            return new(hours, min, 0);
+            return initialDuration + new TimeSpan(hours, min, 0);
         }
 
         public decimal GetCost()
