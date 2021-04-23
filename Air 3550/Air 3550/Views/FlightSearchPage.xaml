@@ -62,6 +62,6 @@
                 </Grid>
             </ListView.Header>
         </ListView>
-        <Button IsEnabled="{x:Bind ViewModel.CanContinue, Mode=OneWay}" Margin="5 0 0 5" RelativePanel.RightOf="FlightList" RelativePanel.AlignBottomWithPanel="true">Continue</Button>
+        <Button IsEnabled="{x:Bind ViewModel.CanContinue, Mode=OneWay}" Click="OpenPayment_Click" Margin="5 0 0 5" RelativePanel.RightOf="FlightList" RelativePanel.AlignBottomWithPanel="true">Continue</Button>
     </RelativePanel>
 </Page>

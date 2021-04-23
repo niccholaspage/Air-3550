@@ -12,6 +12,7 @@
     <None Remove="Controls\AirportSuggestBox.xaml" />
     <None Remove="Controls\EditAccountInfoControl.xaml" />
     <None Remove="Controls\HeaderControl.xaml" />
+    <None Remove="Controls\ResourceDictionary1.xaml" />
     <None Remove="Views\AddFlightDialog.xaml" />
     <None Remove="Views\ChangePasswordSubPage.xaml" />
     <None Remove="Views\EditPlaneDialog.xaml" />
@@ -21,6 +22,7 @@
     <None Remove="Views\LoginPage.xaml" />
     <None Remove="Views\MainPage.xaml" />
     <None Remove="Views\MyAccountPage.xaml" />
+    <None Remove="Views\PaymentPage.xaml" />
     <None Remove="Views\RegisterPage.xaml" />
     <None Remove="Views\SummaryPage.xaml" />
   </ItemGroup>
@@ -40,6 +42,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\PaymentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\ResourceDictionary1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

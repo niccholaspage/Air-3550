@@ -7,7 +7,7 @@ using System.Linq;
 namespace Air_3550.Util
 {
     // TODO: Move this into another package.
-    class FlightPath
+    public class FlightPath
     {
         public List<Flight> Flights;
 
