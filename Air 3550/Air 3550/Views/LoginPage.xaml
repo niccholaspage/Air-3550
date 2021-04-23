@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <InfoBar x:Name="InfoBar" IsOpen="False" Width="600" Severity="Success" Margin="0 5 0 5"></InfoBar>
         <StackPanel KeyDown="StackPanel_KeyDown" Width="300">
             <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>

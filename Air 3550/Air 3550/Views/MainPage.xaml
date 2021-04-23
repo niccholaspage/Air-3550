@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" KeyDown="StackPanel_KeyDown">
         <Image x:Name="logo" Source="ms-appx:///Assets/logo.svg" Width="500" Height="154"></Image>
         <StackPanel Orientation="Vertical">
             <RadioButtons SelectedIndex="0" MaxColumns="2" SelectionChanged="TripTypeRadioButtons_SelectionChanged">

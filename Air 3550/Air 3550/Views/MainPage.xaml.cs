@@ -1,7 +1,9 @@
 ﻿using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using System;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,7 +33,7 @@ namespace Air_3550.Views
 
         readonly MainViewModel ViewModel = new();
 
-        private void SearchButton_Click(object _, RoutedEventArgs __)
+        private void handleSearch()
         {
             if (ViewModel.CheckAndGiveFeedbackOnSearch())
             {
@@ -39,6 +41,11 @@ namespace Air_3550.Views
                 DateTime? returnDate = ViewModel.ReturnDate == null ? null : ViewModel.ReturnDate.Value.Date;
                 Frame.Navigate(typeof(FlightSearchPage), new FlightSearchPage.Params(ViewModel.DepartureAirportId.Value, ViewModel.DestinationAirportId.Value, departureDate, returnDate));
             }
+        }
+
+        private void SearchButton_Click(object _, RoutedEventArgs __)
+        {
+            handleSearch();
         }
 
         private void EditButton_Click(object _, RoutedEventArgs __)
@@ -62,6 +69,14 @@ namespace Air_3550.Views
                     ViewModel.ReturnDate = null;
                     ReturnDatePicker.IsEnabled = false;
                 }
+            }
+        }
+
+        private void StackPanel_KeyDown(object _, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                handleSearch();
             }
         }
     }
