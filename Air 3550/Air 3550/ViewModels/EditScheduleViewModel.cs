@@ -2,8 +2,6 @@
 using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.UI.Xaml;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
