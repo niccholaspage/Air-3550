@@ -19,7 +19,7 @@
                     <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Bind FormattedDepartureTime}" x:Phase="1"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{x:Bind FormattedDepartureTime}" HorizontalAlignment="Right" x:Phase="1"></TextBlock>
                 <SymbolIcon Grid.Column="1" Symbol="Forward"></SymbolIcon>
                 <TextBlock Grid.Column="2" Text="{x:Bind FormattedArrivalTime}" x:Phase="2"></TextBlock>
                 <TextBlock Grid.Column="3" Text="{x:Bind FormattedStops}" x:Phase="3"></TextBlock>
@@ -30,7 +30,7 @@
     </Page.Resources>
 
     <RelativePanel Margin="5 45 0 0">
-        <StackPanel Orientation="Vertical" x:Name="Header">
+        <StackPanel Margin="0 0 0 30" Orientation="Vertical" x:Name="Header">
             <StackPanel Orientation="Horizontal">
                 <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Depart:</TextBlock>
                 <TextBlock FontSize="50" Text="{x:Bind ViewModel.OriginAirport.Code}"></TextBlock>
@@ -41,21 +41,21 @@
                 <TextBlock Text="{x:Bind Subtitle}"></TextBlock>
             </StackPanel>
         </StackPanel>
-        <ListView RelativePanel.Below="Header"
+        <ListView RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.Below="Header"
             ItemTemplate="{StaticResource RouteListViewTemplate}"
             ItemsSource="{x:Bind ViewModel.Paths}">
             <ListView.Header>
-                <Grid Margin="10 0 0 0">
+                <Grid Margin="10 0 0 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"></ColumnDefinition>
                         <ColumnDefinition Width="150"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0">Departing flights</TextBlock>
-                    <TextBlock Grid.Column="1">Number of stops</TextBlock>
-                    <TextBlock Grid.Column="2">Duration</TextBlock>
-                    <TextBlock Grid.Column="3">Price</TextBlock>
+                    <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">Departing flights</TextBlock>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center">Number of stops</TextBlock>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center">Duration</TextBlock>
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center">Price</TextBlock>
                 </Grid>
             </ListView.Header>
         </ListView>
