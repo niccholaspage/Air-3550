@@ -41,7 +41,10 @@
                 <TextBlock Text="{x:Bind Subtitle}"></TextBlock>
             </StackPanel>
         </StackPanel>
-        <ListView RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.Below="Header"
+        <ListView x:Name="FlightList"
+            SelectedIndex="{x:Bind ViewModel.SelectedPathIndex, Mode=TwoWay}"
+            RelativePanel.AlignHorizontalCenterWithPanel="true"
+            RelativePanel.Below="Header"
             ItemTemplate="{StaticResource RouteListViewTemplate}"
             ItemsSource="{x:Bind ViewModel.Paths}">
             <ListView.Header>
@@ -59,5 +62,6 @@
                 </Grid>
             </ListView.Header>
         </ListView>
+        <Button IsEnabled="{x:Bind ViewModel.CanContinue, Mode=OneWay}" Margin="5 0 0 5" RelativePanel.RightOf="FlightList" RelativePanel.AlignBottomWithPanel="true">Continue</Button>
     </RelativePanel>
 </Page>

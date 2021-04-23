@@ -1,12 +1,13 @@
 ﻿using Air_3550.Models;
 using Air_3550.Util;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {
-    class FlightSearchViewModel
+    class FlightSearchViewModel : ObservableObject
     {
         public Airport OriginAirport;
 
@@ -15,6 +16,21 @@ namespace Air_3550.ViewModels
         public DateTime Date;
 
         public ObservableCollection<FlightPath> Paths = new();
+
+        private int _selectedPathIndex = -1;
+
+        public int SelectedPathIndex
+        {
+            get => _selectedPathIndex;
+            set
+            {
+                SetProperty(ref _selectedPathIndex, value);
+
+                OnPropertyChanged(nameof(CanContinue));
+            }
+        }
+
+        public bool CanContinue => SelectedPathIndex != -1;
 
         public async Task SearchForFlights(Airport originAirport, Airport destinationAirport, DateTime date)
         {
