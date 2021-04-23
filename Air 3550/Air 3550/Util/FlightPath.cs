@@ -101,6 +101,7 @@ namespace Air_3550.Util
             }
         }
 
-        public string FormattedPrice => "$" + Pricing.CalculatePriceOfFlights(Flights);
+        //public string FormattedPrice => "$" + Pricing.CalculatePriceOfFlights(Flights);
+        public string FormattedPrice => "" + Flights.Last().GetDistance();
     }
 }
