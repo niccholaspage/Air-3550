@@ -24,7 +24,12 @@ namespace Air_3550.Views
 
         public async void SaveCSV_Click(object sender, RoutedEventArgs e)
         {
-            await ViewModel.SaveFile();
+            await ViewModel.SaveSummary();
+        }
+
+        public async void UpdateDates_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.updateSflightsDate();
         }
     }
 }

@@ -32,7 +32,9 @@
     </Page.Resources>
 
     <Grid>
-        <RelativePanel>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <CalendarDatePicker x:Name="StartDatePicker" Date="{x:Bind ViewModel.StartDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="150" Margin="3" Header="Start Date" VerticalAlignment="Bottom" />
+            <CalendarDatePicker x:Name="EndDatePicker" Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="150" Margin="3" Header="End Date" VerticalAlignment="Bottom" />
             <ListView ItemsSource="{x:Bind ViewModel.Sflights, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="displayedList">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="data:ScheduledFlight">
@@ -84,6 +86,7 @@
         </RelativePanel>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Click="SaveCSV_Click" HorizontalAlignment="Right">Generate CSV</Button>
+            <Button Click="UpdateDates_Click" HorizontalAlignment="Right">Update Date</Button>
         </StackPanel>
 
     </Grid>

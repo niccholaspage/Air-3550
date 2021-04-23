@@ -10,6 +10,7 @@ using Windows.Storage;
 using Windows.Storage.Provider;
 using FileSavePicker = Windows.Storage.Pickers.FileSavePicker;
 using System.IO;
+using System.Linq;
 
 namespace Air_3550.Views
 {
@@ -22,6 +23,22 @@ namespace Air_3550.Views
         {
             get => _sflights;
             set => SetProperty(ref _sflights, value);
+        }
+
+        private DateTimeOffset? _startDate;
+
+        public DateTimeOffset? StartDate
+        {
+            get => _startDate;
+            set => SetProperty(ref _startDate, value);
+        }
+
+        private DateTimeOffset? _endDate;
+
+        public DateTimeOffset? EndDate
+        {
+            get => _endDate;
+            set => SetProperty(ref _endDate, value);
         }
 
         public async Task updateSflights()
@@ -37,7 +54,22 @@ namespace Air_3550.Views
             }
         }
 
-        public async Task SaveFile()
+        public async Task updateSflightsDate()
+        {
+            if (StartDate != null && EndDate != null)
+            using (var db = new AirContext())
+            {
+                Sflights = await db.ScheduledFlights
+                    .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
+                    .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
+                    .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
+                    .Include(ScheduledFlight => ScheduledFlight.Tickets)
+                    .Where(ScheduledFlight => ((ScheduledFlight.DepartureDate <= EndDate) &&(ScheduledFlight.DepartureDate >= StartDate)))
+                    .ToListAsync();
+            }
+        }
+
+        public async Task SaveSummary()
         {
             FileSavePicker savePicker = new FileSavePicker
             {
