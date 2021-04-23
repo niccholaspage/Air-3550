@@ -31,7 +31,7 @@
     </DataTemplate>
     </Page.Resources>
 
-    <RelativePanel Margin="5 45 0 0">
+    <Grid>
         <ListView ItemsSource="{x:Bind ViewModel.Sflights, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="displayedList">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:ScheduledFlight">
@@ -80,5 +80,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </RelativePanel>
+        <StackPanel HorizontalAlignment="Right">
+            <Button Click="SaveCSV_Click" HorizontalAlignment="Right">Generate CSV</Button>
+        </StackPanel>
+
+    </Grid>
 </Page>

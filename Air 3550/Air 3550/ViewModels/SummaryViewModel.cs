@@ -5,6 +5,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Provider;
 using FileSavePicker = Windows.Storage.Pickers.FileSavePicker;
@@ -21,7 +22,7 @@ namespace Air_3550.Views
             set => SetProperty(ref _sflights, value);
         }
 
-        public async void updateSflights(object sender, RoutedEventArgs e)
+        public async Task updateSflights()
         {
             using (var db = new AirContext())
             {
@@ -32,7 +33,7 @@ namespace Air_3550.Views
             }
         }
 
-        public async void SaveFile()
+        public async Task SaveFile()
         {
             FileSavePicker savePicker = new FileSavePicker
             {
