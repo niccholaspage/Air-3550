@@ -1,4 +1,5 @@
-﻿using Air_3550.Models;
+﻿using ABI.Microsoft.UI.Xaml;
+using Air_3550.Models;
 using Database.Util;
 using System;
 using System.Collections.Generic;
@@ -11,32 +12,24 @@ namespace Air_3550.Util
     {
         public List<Flight> Flights;
 
+        private Lazy<string> _formattedDepartureTime;
+        private Lazy<string> _formattedArrivalTime;
+        private Lazy<decimal> _price;
+        private Lazy<TimeSpan> _duration;
+
+        public string FormattedDepartureTime => _formattedDepartureTime.Value;
+        public string FormattedArrivalTime => _formattedArrivalTime.Value;
+        public decimal Price => _price.Value;
+        public TimeSpan Duration => _duration.Value;
+
         public FlightPath(params Flight[] flights)
         {
-            this.Flights = new(flights);
-        }
+            Flights = new(flights);
 
-        public string FormattedDepartureTime
-        {
-            get
-            {
-                return DateTime.Today.Add(Flights.First().DepartureTime).ToString("h:mm tt");
-            }
-        }
-
-        public string FormattedArrivalTime
-        {
-            get
-            {
-                return DateTime.Today.Add(Flights.Last().GetArrivalTime()).ToString("h:mm tt");
-            }
-        }
-
-        public int NumberOfStops => Flights.Count - 1;
-
-        public string FormattedDuration
-        {
-            get
+            _formattedDepartureTime = new(() => DateTime.Today.Add(Flights.First().DepartureTime).ToString("h:mm tt"));
+            _formattedArrivalTime = new(() => DateTime.Today.Add(Flights.Last().GetArrivalTime()).ToString("h:mm tt"));
+            _price = new(() => Pricing.CalculatePriceOfFlights(Flights));
+            _duration = new(() =>
             {
                 var timeSpan = new TimeSpan();
 
@@ -52,10 +45,8 @@ namespace Air_3550.Util
 
                     if (flight.DepartureTime < previousFlight.GetArrivalTime().Add(fourtyMinutes))
                     {
-                        // The flight departs before the previous flight arrives (plus the 40
-                        // minute layovver), so we
-                        // need to proceed to the next day to determine where the proper
-                        // flight duration.
+                        // The flight departs before the previous flight arrives (plus the 40 minute layover), so we
+                        // need to proceed to the next day to determine where the proper flight duration.
                         timeSpan += new TimeSpan(1, 0, 0, 0); // Add a day
                         timeSpan -= previousFlight.GetArrivalTime() - flight.DepartureTime; // Subtract the previous flight arrival time from the current flight's departure time
                     }
@@ -66,6 +57,20 @@ namespace Air_3550.Util
 
                     timeSpan += flight.GetDuration();
                 }
+
+                return timeSpan;
+            });
+        }
+
+        public int NumberOfStops => Flights.Count - 1;
+
+        public string FormattedPrice => "$" + Price;
+
+        public string FormattedDuration
+        {
+            get
+            {
+                var timeSpan = Duration;
 
                 string result = "";
 
@@ -100,7 +105,5 @@ namespace Air_3550.Util
                 };
             }
         }
-
-        public string FormattedPrice => "$" + Pricing.CalculatePriceOfFlights(Flights);
     }
 }

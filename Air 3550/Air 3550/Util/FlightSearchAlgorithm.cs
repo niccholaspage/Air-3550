@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Globalization.DateTimeFormatting;
 
 namespace Air_3550.Util
 {
@@ -67,6 +68,14 @@ namespace Air_3550.Util
 
                 return await doubleConnectedQuery.ToListAsync(); //  and return them as a list.
             }
+        }
+
+        public static async Task<List<FlightPath>> GetValidAndOptimizedFlightPaths(List<FlightPath> flightPaths)
+        {
+            // Sort the flight paths by the cheapest price,
+            // or the shortest duration if the prices match.
+            flightPaths.Sort((x, y) => x.Price == y.Price ? x.Duration.CompareTo(y.Duration) : x.Price.CompareTo(y.Price));
+            return flightPaths;
         }
     }
 }
