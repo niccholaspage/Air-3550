@@ -13,7 +13,7 @@
     </UserControl.Resources>
 
     <RelativePanel x:Name="HeaderPanel" Height="60">
-        <Button Click="BackButton_Click" RelativePanel.AlignLeftWithPanel="true" Margin="5">Back</Button>
+        <Button Visibility="{x:Bind ContentFrame.CanGoBack, Mode=OneWay}" Click="BackButton_Click" RelativePanel.AlignLeftWithPanel="true" Margin="5">Back</Button>
         <Button Visibility="{x:Bind userSession.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterInverted}}" Click="LoginButton_Click" RelativePanel.AlignRightWithPanel="true" Margin="5">Login</Button>
         <DropDownButton Content="My Account" Visibility="{x:Bind userSession.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" RelativePanel.AlignRightWithPanel="true" Margin="5">
             <DropDownButton.Flyout>
