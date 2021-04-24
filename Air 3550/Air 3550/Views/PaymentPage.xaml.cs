@@ -1,7 +1,11 @@
-﻿using Air_3550.Util;
+﻿using Air_3550.Models;
+using Air_3550.Repository;
+using Air_3550.Util;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -13,6 +17,8 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class PaymentPage : Page
     {
+        private Params pageParams;
+
         public class Params
         {
             public FlightPath DepartingFlightPath;
@@ -31,10 +37,10 @@ namespace Air_3550.Views
         {
             base.OnNavigatedTo(e);
 
-            var param = e.Parameter as Params;
+            pageParams = e.Parameter as Params;
 
-            ViewModel.DepartingFlightPath = param.DepartingFlightPath;
-            ViewModel.ReturnFlightPath = param.ReturnFlightPath;
+            ViewModel.DepartingFlightPath = pageParams.DepartingFlightPath;
+            ViewModel.ReturnFlightPath = pageParams.ReturnFlightPath;
 
             DepartureFlightPathControl.DataContext = ViewModel.DepartingFlightPath;
 

@@ -12,6 +12,7 @@
         <StackPanel Orientation="Vertical">
             <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource RouteListViewTemplate}"></ContentControl>
             <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource RouteListViewTemplate}"></ContentControl>
+            
         </StackPanel>
     </RelativePanel>
 </Page>
