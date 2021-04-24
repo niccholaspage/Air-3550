@@ -26,11 +26,13 @@ namespace Air_3550.Util
         public TimeSpan Duration => _duration.Value;
         public List<TimeSpan> FlightDepartureTimeline => _flightDepartureTimeline.Value;
 
+        public TimeSpan FirstFlightDepartureTime => Flights.First().DepartureTime;
+
         public FlightPath(params Flight[] flights)
         {
             Flights = new(flights);
 
-            _formattedDepartureTime = new(() => DateTime.Today.Add(Flights.First().DepartureTime).ToString("h:mm tt"));
+            _formattedDepartureTime = new(() => DateTime.Today.Add(FirstFlightDepartureTime).ToString("h:mm tt"));
             _formattedArrivalTime = new(() => DateTime.Today.Add(Flights.Last().GetArrivalTime()).ToString("h:mm tt"));
             _price = new(() => Pricing.CalculatePriceOfFlights(Flights));
 

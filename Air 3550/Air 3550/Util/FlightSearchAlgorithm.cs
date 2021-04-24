@@ -70,7 +70,7 @@ namespace Air_3550.Util
             }
         }
 
-        public static async Task<List<FlightPath>> GetValidAndOptimizedFlightPaths(List<FlightPath> flightPaths)
+        public static async Task<List<FlightPath>> GetValidAndOptimizedFlightPaths(List<FlightPath> flightPaths, DateTime departureDate)
         {
             // This method takes a list of flight paths, usually found from
             // the above FindFlightPaths method, and returns a sorted list of
@@ -88,6 +88,43 @@ namespace Air_3550.Util
             // We first start by sorting the flight paths by the cheapest price,
             // or the shortest duration if the prices match.
             flightPaths.Sort((x, y) => x.Price == y.Price ? x.Duration.CompareTo(y.Duration) : x.Price.CompareTo(y.Price));
+
+            // TODO: Optimize this - this is doing way to many queries and has tons of room for optimization.
+            using (var db = new AirContext())
+            {
+                var index = 0;
+                while (index < flightPaths.Count)
+                {
+                    var flightPath = flightPaths[index];
+
+                    var departureDateAndTime = departureDate + flightPath.FirstFlightDepartureTime;
+
+                    var flightDepartureTimeline = flightPath.FlightDepartureTimeline;
+
+                    for (int i = 0; i < flightPath.Flights.Count; i++)
+                    {
+                        var flight = flightPath.Flights[i];
+
+                        var flightDepartureDate = (departureDateAndTime + flightDepartureTimeline[i]).Date;
+
+                        // TODO: Why on earth does the DepartureDate comparision only work if
+                        // we turn the query into a list then check for it?
+                        var allScheduledFlightsForFlightAsList = await (from scheduledFlight in db.ScheduledFlights
+                                                                        where scheduledFlight.Flight == flight
+                                                                        select new { scheduledFlight.DepartureDate, TicketCount = scheduledFlight.Tickets.Count, PlaneCapacity = scheduledFlight.Flight.Plane.MaxSeats })
+                                                                        .ToListAsync();
+
+                        if (allScheduledFlightsForFlightAsList.Any(scheduledFlight => scheduledFlight.DepartureDate == flightDepartureDate && scheduledFlight.TicketCount >= scheduledFlight.PlaneCapacity))
+                        {
+                            flightPaths.RemoveAt(index);
+                        }
+                        else
+                        {
+                            index++;
+                        }
+                    }
+                }
+            }
 
             return flightPaths;
         }

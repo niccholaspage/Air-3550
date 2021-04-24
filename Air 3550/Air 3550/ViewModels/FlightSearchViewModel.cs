@@ -40,7 +40,7 @@ namespace Air_3550.ViewModels
 
             var possiblePaths = await FlightSearchAlgorithm.FindFlightPaths(originAirport.AirportId, destinationAirport.AirportId);
 
-            var optimizedPaths = await FlightSearchAlgorithm.GetValidAndOptimizedFlightPaths(possiblePaths);
+            var optimizedPaths = await FlightSearchAlgorithm.GetValidAndOptimizedFlightPaths(possiblePaths, date);
 
             // TODO: This is cursed...
             foreach (var path in optimizedPaths)
