@@ -38,24 +38,28 @@ namespace Air_3550.Util
 
                 TimeSpan fourtyMinutes = new(0, 40, 0);
 
+                TimeSpan oneDay = new(1, 0, 0, 0);
+
                 for (int i = 1; i < Flights.Count; i++)
                 {
                     var previousFlight = Flights[i - 1];
                     var flight = Flights[i];
 
+                    TimeSpan layover;
+
                     if (flight.DepartureTime < previousFlight.GetArrivalTime().Add(fourtyMinutes))
                     {
-                        // The flight departs before the previous flight arrives (plus the 40 minute layover), so we
-                        // need to proceed to the next day to determine where the proper flight duration.
-                        timeSpan += new TimeSpan(1, 0, 0, 0); // Add a day
-                        timeSpan -= previousFlight.GetArrivalTime() - flight.DepartureTime; // Subtract the previous flight arrival time from the current flight's departure time
+                        // The flight departs before the previous flight arrives (plus the 40 minute minimum layover), so we
+                        // need to proceed to the next day to determine the proper flight duration. Our layover is a day
+                        // minus the difference of the previous flight's arrival time and the current flight's departure time.
+                        layover = oneDay - (previousFlight.GetArrivalTime() - flight.DepartureTime);
                     }
                     else
                     {
-                        timeSpan += flight.DepartureTime - previousFlight.GetArrivalTime();
+                        layover = flight.DepartureTime - previousFlight.GetArrivalTime();
                     }
 
-                    timeSpan += flight.GetDuration();
+                    timeSpan += layover + flight.GetDuration();
                 }
 
                 return timeSpan;
