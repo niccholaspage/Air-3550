@@ -15,6 +15,8 @@ namespace Air_3550.ViewModels
 
         public DateTime Date;
 
+        public string FormattedDate => Date.ToString("ddd, MMMM dd");
+
         public ObservableCollection<FlightPath> Paths = new();
 
         private int _selectedPathIndex = -1;

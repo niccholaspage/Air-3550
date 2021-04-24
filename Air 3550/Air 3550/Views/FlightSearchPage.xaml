@@ -23,6 +23,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{x:Bind Subtitle}"></TextBlock>
             </StackPanel>
+            <TextBlock Text="{x:Bind ViewModel.FormattedDate}"></TextBlock>
         </StackPanel>
         <ListView x:Name="FlightList"
             SelectedIndex="{x:Bind ViewModel.SelectedPathIndex, Mode=TwoWay}"
