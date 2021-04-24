@@ -12,7 +12,7 @@
         <StackPanel Orientation="Vertical">
             <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource RouteListViewTemplate}"></ContentControl>
             <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource RouteListViewTemplate}"></ContentControl>
-            
+            <TextBlock Text="{x:Bind test, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
         </StackPanel>
     </RelativePanel>
 </Page>

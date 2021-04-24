@@ -50,7 +50,7 @@ namespace Air_3550.Views
             }
         }
 
-        public string test => pageParams.DepartingFlightPath.FirstFlightDepartureAirportCode
+        public string test => pageParams.DepartingFlightPath.FirstFlightDepartureAirportCode;
 
         public PaymentPage()
         {
