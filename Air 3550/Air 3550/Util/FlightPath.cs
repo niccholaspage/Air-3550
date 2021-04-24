@@ -29,7 +29,9 @@ namespace Air_3550.Util
         public TimeSpan FirstFlightDepartureTime => Flights.First().DepartureTime;
 
         public string FirstFlightDepartureAirportCode => Flights.First().OriginAirport.Code;
-        public string LastFlightArrivalAirportCode => Flights.Last().OriginAirport.Code;
+        public string FirstFlightArrivalAirportCode => Flights.First().DestinationAirport.Code;
+        public string LastFlightDepartureAirportCode => Flights.Last().OriginAirport.Code;
+        public string LastFlightArrivalAirportCode => Flights.Last().DestinationAirport.Code;
 
         public FlightPath(params Flight[] flights)
         {
