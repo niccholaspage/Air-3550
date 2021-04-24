@@ -20,30 +20,35 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class PaymentPage : Page
     {
-        
-
         public class Params
         {
-            public FlightPath Purchasing;
+            public FlightPath DepartingFlightPath;
+            public FlightPath ReturnFlightPath;
 
-            public Params(FlightPath purchasing)
+            public Params(FlightPath departingFlightPath, FlightPath returnFlightPath)
             {
-                this.Purchasing = purchasing;
+                DepartingFlightPath = departingFlightPath;
+                ReturnFlightPath = returnFlightPath;
             }
         }
+
+        readonly PaymentViewModel ViewModel = new();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             var param = e.Parameter as Params;
+
+            ViewModel.DepartingFlightPath = param.DepartingFlightPath;
+            ViewModel.ReturnFlightPath = param.ReturnFlightPath;
+
+            DepartureFlightPathControl.DataContext = ViewModel.DepartingFlightPath;
         }
 
         public PaymentPage()
         {
             this.InitializeComponent();
         }
-
-        readonly SummaryViewModel ViewModel = new();
     }
 }

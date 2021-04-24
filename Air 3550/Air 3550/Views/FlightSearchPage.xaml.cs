@@ -75,8 +75,10 @@ namespace Air_3550.Views
 
         private void OpenPayment_Click(object _, RoutedEventArgs __)
         {
-            FlightPath Purchasing = (FlightPath)FlightList.SelectedItem;
-            Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(Purchasing));
+            FlightPath departingFlightPath = (FlightPath)FlightList.SelectedItem;
+
+            // TODO: Take care of picking the return flight then going to the payment page.
+            Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(departingFlightPath, null));
         }
     }
 }

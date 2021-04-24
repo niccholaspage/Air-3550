@@ -8,7 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <RelativePanel Margin="5 45 0 0">
+        <StackPanel Orientation="Vertical">
+            <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource RouteListViewTemplate}"></ContentControl>
+            <!-- Show return one here too. -->
+        </StackPanel>
+    </RelativePanel>
 </Page>
