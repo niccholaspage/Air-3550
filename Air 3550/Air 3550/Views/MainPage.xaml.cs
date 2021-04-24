@@ -39,7 +39,7 @@ namespace Air_3550.Views
             {
                 var departureDate = ViewModel.DepartureDate.Value.Date;
                 DateTime? returnDate = ViewModel.ReturnDate == null ? null : ViewModel.ReturnDate.Value.Date;
-                Frame.Navigate(typeof(FlightSearchPage), new FlightSearchPage.Params(ViewModel.DepartureAirportId.Value, ViewModel.DestinationAirportId.Value, departureDate, returnDate));
+                Frame.Navigate(typeof(FlightSearchPage), new FlightSearchPage.Params(ViewModel.DepartureAirportId.Value, ViewModel.DestinationAirportId.Value, departureDate, returnDate, null));
             }
         }
 

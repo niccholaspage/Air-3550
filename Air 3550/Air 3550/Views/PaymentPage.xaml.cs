@@ -37,6 +37,11 @@ namespace Air_3550.Views
             ViewModel.ReturnFlightPath = param.ReturnFlightPath;
 
             DepartureFlightPathControl.DataContext = ViewModel.DepartingFlightPath;
+
+            if (ViewModel.ReturnFlightPath != null)
+            {
+                ReturnFlightPathControl.DataContext = ViewModel.ReturnFlightPath;
+            }
         }
 
         public PaymentPage()

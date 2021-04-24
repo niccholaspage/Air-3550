@@ -17,19 +17,23 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class FlightSearchPage : Page
     {
+        private Params pageParams;
+
         public class Params
         {
             public int DepartureAirportId;
             public int DestinationAirportId;
             public DateTime DepartureDate;
             public DateTime? ReturnDate;
+            public FlightPath DepartureFlightPath;
 
-            public Params(int departureAirportId, int destinationAirportId, DateTime departureDate, DateTime? returnDate)
+            public Params(int departureAirportId, int destinationAirportId, DateTime departureDate, DateTime? returnDate, FlightPath departureFlightPath)
             {
-                this.DepartureAirportId = departureAirportId;
-                this.DestinationAirportId = destinationAirportId;
-                this.DepartureDate = departureDate;
-                this.ReturnDate = returnDate;
+                DepartureAirportId = departureAirportId;
+                DestinationAirportId = destinationAirportId;
+                DepartureDate = departureDate;
+                ReturnDate = returnDate;
+                DepartureFlightPath = departureFlightPath;
             }
         }
 
@@ -37,16 +41,18 @@ namespace Air_3550.Views
         {
             base.OnNavigatedTo(e);
 
-            var param = e.Parameter as Params;
+            pageParams = e.Parameter as Params;
 
+
+            // TODO: Don't await.
             Task.Run(async () =>
             {
                 using (var db = new AirContext())
                 {
-                    var departureAirport = await db.Airports.FindAsync(param.DepartureAirportId);
-                    var destinationAirport = await db.Airports.FindAsync(param.DestinationAirportId);
+                    var departureAirport = await db.Airports.FindAsync(pageParams.DepartureAirportId);
+                    var destinationAirport = await db.Airports.FindAsync(pageParams.DestinationAirportId);
 
-                    await ViewModel.SearchForFlights(departureAirport, destinationAirport, param.DepartureDate);
+                    await ViewModel.SearchForFlights(departureAirport, destinationAirport, pageParams.DepartureDate);
                 }
             }).Wait();
         }
@@ -57,6 +63,8 @@ namespace Air_3550.Views
         }
 
         FlightSearchViewModel ViewModel = new();
+
+        public string PathType => pageParams.DepartureFlightPath == null ? "Depart:" : "Return:";
 
         public string Subtitle
         {
@@ -73,12 +81,25 @@ namespace Air_3550.Views
             }
         }
 
-        private void OpenPayment_Click(object _, RoutedEventArgs __)
+        private void ContinueButton_Click(object _, RoutedEventArgs __)
         {
-            FlightPath departingFlightPath = (FlightPath)FlightList.SelectedItem;
+            FlightPath flightPath = (FlightPath)FlightList.SelectedItem;
 
-            // TODO: Take care of picking the return flight then going to the payment page.
-            Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(departingFlightPath, null));
+            if (pageParams.ReturnDate != null)
+            {
+                if (pageParams.DepartureFlightPath == null)
+                {
+                    Frame.Navigate(typeof(FlightSearchPage), new Params(pageParams.DestinationAirportId, pageParams.DepartureAirportId, pageParams.DepartureDate, pageParams.ReturnDate, flightPath));
+                }
+                else
+                {
+                    Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(pageParams.DepartureFlightPath, flightPath));
+                }
+            }
+            else
+            {
+                Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(flightPath, null));
+            }
         }
     }
 }

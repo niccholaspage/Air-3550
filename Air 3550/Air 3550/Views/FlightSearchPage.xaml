@@ -8,10 +8,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+    </Page.Resources>
+
     <RelativePanel Margin="5 45 0 0">
         <StackPanel Margin="0 0 0 30" Orientation="Vertical" x:Name="Header">
             <StackPanel Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Depart:</TextBlock>
+                <TextBlock Text="{x:Bind PathType}" FontWeight="Bold" FontSize="50" Margin="0 0 10 0"></TextBlock>
                 <TextBlock FontSize="50" Text="{x:Bind ViewModel.OriginAirport.Code}"></TextBlock>
                 <SymbolIcon Margin="2" Symbol="Forward" VerticalAlignment="Center"></SymbolIcon>
                 <TextBlock FontSize="50" Text="{x:Bind ViewModel.DestinationAirport.Code}"></TextBlock>
@@ -41,6 +45,6 @@
                 </Grid>
             </ListView.Header>
         </ListView>
-        <Button IsEnabled="{x:Bind ViewModel.CanContinue, Mode=OneWay}" Click="OpenPayment_Click" Margin="5 0 0 5" RelativePanel.RightOf="FlightList" RelativePanel.AlignBottomWithPanel="true">Continue</Button>
+        <Button IsEnabled="{x:Bind ViewModel.CanContinue, Mode=OneWay}" Click="ContinueButton_Click" Margin="5 0 0 5" RelativePanel.RightOf="FlightList" RelativePanel.AlignBottomWithPanel="true">Continue</Button>
     </RelativePanel>
 </Page>
