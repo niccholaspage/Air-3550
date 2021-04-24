@@ -6,51 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:util="using:Air_3550.Util"
+    xmlns:converters="using:Air_3550.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+    </Page.Resources>
+
+
     <Grid>
-        <Grid Width="650" Height="100" Background="Gray">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
 
-            <TextBlock Text="{x:Bind pageParams.DepartureDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
-            <TextBlock Text="{x:Bind pageParams.DepartingFlightPath.FirstFlightDepartureAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="1" Grid.Row="0"/>
-            <TextBlock Text="{x:Bind pageParams.DepartingFlightPath.FormattedDepartureTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="1" Grid.Row="1"/>
-            <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
-            <TextBlock Text="{x:Bind pageParams.DepartingFlightPath.LastFlightArrivalAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="3" Grid.Row="0"/>
-            <TextBlock Text="{x:Bind pageParams.DepartingFlightPath.FormattedArrivalTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="3" Grid.Row="1"/>
-            <TextBlock Text="{x:Bind pageParams.DepartingFlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
-            <Button Content="{x:Bind pageParams.DepartingFlightPath.FormattedStops}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="5" Grid.Row="0" Grid.RowSpan="2">
-            <Button.Flyout>
-                    <Flyout>
-                        <StackPanel>
-                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="View Stops" Margin="0,0,0,12" />
-                        </StackPanel>
-                    </Flyout>
-                </Button.Flyout>
-            </Button>
-
-        </Grid>
+        <StackPanel>
+            <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}"/>
+            <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsreturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        </StackPanel>
+        
     </Grid>
 </Page>

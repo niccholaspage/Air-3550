@@ -37,6 +37,8 @@ namespace Air_3550.ViewModels
 
         public bool CanContinue => SelectedPathIndex != -1;
 
+        public bool IsreturnFlight => ReturnFlightPath != null;
+
         public void GrabPaths()
         {
             FlightPaths.Add(DepartingFlightPath);
