@@ -95,11 +95,11 @@ namespace Air_3550.Util
                     var previousFlightDepartureTime = FlightDepartureTimeline[i - 1];
                     var currentFlightDepartureTime = FlightDepartureTimeline[i];
 
-                    var currentMaxLayoverDuration = currentFlightDepartureTime - (previousFlightDepartureTime + Flights[i - 1].GetDuration());
+                    var layoverDuration = currentFlightDepartureTime - (previousFlightDepartureTime + Flights[i - 1].GetDuration());
 
-                    if (maxLayoverDuration < currentMaxLayoverDuration)
+                    if (maxLayoverDuration < layoverDuration)
                     {
-                        maxLayoverDuration = currentMaxLayoverDuration;
+                        maxLayoverDuration = layoverDuration;
                     }
                 }
 
