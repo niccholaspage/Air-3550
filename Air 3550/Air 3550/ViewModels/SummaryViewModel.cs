@@ -2,15 +2,13 @@
 using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.Storage.Provider;
-using FileSavePicker = Windows.Storage.Pickers.FileSavePicker;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Windows.Storage;
+using FileSavePicker = Windows.Storage.Pickers.FileSavePicker;
 
 namespace Air_3550.Views
 {
@@ -57,16 +55,16 @@ namespace Air_3550.Views
         public async Task updateSflightsDate()
         {
             if (StartDate != null && EndDate != null)
-            using (var db = new AirContext())
-            {
-                Sflights = await db.ScheduledFlights
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
-                    .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                    .Where(ScheduledFlight => ((ScheduledFlight.DepartureDate <= EndDate) &&(ScheduledFlight.DepartureDate >= StartDate)))
-                    .ToListAsync();
-            }
+                using (var db = new AirContext())
+                {
+                    Sflights = await db.ScheduledFlights
+                        .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
+                        .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
+                        .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
+                        .Include(ScheduledFlight => ScheduledFlight.Tickets)
+                        .Where(ScheduledFlight => ScheduledFlight.DepartureDate <= EndDate && ScheduledFlight.DepartureDate >= StartDate)
+                        .ToListAsync();
+                }
         }
 
         public async Task SaveSummary()
@@ -98,7 +96,7 @@ namespace Air_3550.Views
             //Grabs File Path to write using System.IO
             String FilePath = file.Path;
             File.WriteAllLines(FilePath, lines);
-            
+
         }
     }
 }

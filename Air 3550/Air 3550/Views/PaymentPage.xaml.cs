@@ -1,14 +1,7 @@
-﻿using Air_3550.Repository;
-using Air_3550.Util;
+﻿using Air_3550.Util;
 using Air_3550.ViewModels;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Threading.Tasks;
-using Air_3550.Models;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
