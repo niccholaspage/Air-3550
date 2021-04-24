@@ -41,7 +41,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="PaymentListViewTemplate">
-        <Grid Width="650" Height="100" Background="Gray">
+        <Grid Width="650" Height="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="100" />
@@ -59,13 +59,13 @@
 
             <TextBlock Text="Date Placeholder" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
-            <TextBlock Text="{Binding FirstFlightDepartureAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <TextBlock FontSize="35" Text="{Binding FirstFlightDepartureAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="1" Grid.Row="0"/>
             <TextBlock Text="{Binding FormattedDepartureTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="1" Grid.Row="1"/>
             <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
-            <TextBlock Text="{Binding LastFlightArrivalAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <TextBlock FontSize="35" Text="{Binding LastFlightArrivalAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="3" Grid.Row="0"/>
             <TextBlock Text="{Binding FormattedArrivalTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="3" Grid.Row="1"/>

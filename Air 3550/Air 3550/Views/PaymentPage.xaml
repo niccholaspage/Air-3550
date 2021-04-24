@@ -14,13 +14,10 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
     </Page.Resources>
 
-
-    <Grid>
-
+    <RelativePanel Margin="5 45 0 0">
         <StackPanel>
             <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}"/>
-            <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsreturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </StackPanel>
-        
-    </Grid>
+    </RelativePanel>
 </Page>

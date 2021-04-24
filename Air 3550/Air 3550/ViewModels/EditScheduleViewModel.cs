@@ -2,7 +2,6 @@
 using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,7 +54,7 @@ namespace Air_3550.ViewModels
                     .Include(Flight => Flight.DestinationAirport)
                     .Where(f => f.IsCanceled == false)
                     .ToListAsync();
-                foreach(Flight a in FlightsT)
+                foreach (Flight a in FlightsT)
                 {
                     FlightsA.Add(a);
                 }

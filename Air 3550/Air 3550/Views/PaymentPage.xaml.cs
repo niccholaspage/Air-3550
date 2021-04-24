@@ -1,12 +1,8 @@
-﻿using Air_3550.Models;
-using Air_3550.Repository;
-using Air_3550.Util;
+﻿using Air_3550.Util;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,6 +32,11 @@ namespace Air_3550.Views
             }
         }
 
+        public PaymentPage()
+        {
+            this.InitializeComponent();
+        }
+
         readonly PaymentViewModel ViewModel = new();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -46,19 +47,13 @@ namespace Air_3550.Views
 
             ViewModel.DepartingFlightPath = pageParams.DepartingFlightPath;
             ViewModel.ReturnFlightPath = pageParams.ReturnFlightPath;
-            
+
             DepartureFlightPathControl.DataContext = ViewModel.DepartingFlightPath;
 
             if (ViewModel.ReturnFlightPath != null)
             {
                 ReturnFlightPathControl.DataContext = ViewModel.ReturnFlightPath;
             }
-        }
-
-        public PaymentPage()
-        {
-            this.InitializeComponent();
-            ViewModel.GrabPaths();
         }
     }
 }
