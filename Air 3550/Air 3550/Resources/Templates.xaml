@@ -23,21 +23,21 @@
 
     <DataTemplate x:Key="ScheduleListViewTemplate">
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-            <ColumnDefinition Width="150"></ColumnDefinition>
-            <ColumnDefinition Width="320"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Text="{Binding FlightId}" HorizontalAlignment="Center"></TextBlock>
-        <TextBlock Grid.Column="1" Text="{Binding Number}" HorizontalAlignment="Center"></TextBlock>
-        <TextBlock Grid.Column="2" Text="{Binding DepartureTime}" HorizontalAlignment="Center"></TextBlock>
-        <TextBlock Grid.Column="3" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="320"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{Binding FlightId}" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="1" Text="{Binding Number}" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="2" Text="{Binding DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="3" HorizontalAlignment="Center">
             <Run Text="{Binding OriginAirport.CityWithState}"/>
             <Run Text="to"/>
             <Run Text="{Binding DestinationAirport.CityWithState}"/>
-        </TextBlock>
-    </Grid>
+            </TextBlock>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="PaymentListViewTemplate">
@@ -59,16 +59,16 @@
 
             <TextBlock Text="Date Placeholder" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
-            <TextBlock FontSize="35" Text="{Binding FirstFlightDepartureAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="1" Grid.Row="0"/>
-            <TextBlock Text="{Binding FormattedDepartureTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="1" Grid.Row="1"/>
+            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock FontSize="35" Text="{Binding FirstFlightDepartureAirportCode}" />
+                <TextBlock Text="{Binding FormattedDepartureTime}" HorizontalAlignment="Center" />
+            </StackPanel>
             <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
-            <TextBlock FontSize="35" Text="{Binding LastFlightArrivalAirportCode}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="3" Grid.Row="0"/>
-            <TextBlock Text="{Binding FormattedArrivalTime}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="3" Grid.Row="1"/>
+            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock FontSize="35" Text="{Binding LastFlightArrivalAirportCode}" />
+                <TextBlock Text="{Binding FormattedArrivalTime}" HorizontalAlignment="Center" />
+            </StackPanel>
             <TextBlock Text="{Binding FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
             <Button Content="{Binding FormattedStops}" IsEnabled="{Binding NoStop, Mode=OneWay}"
