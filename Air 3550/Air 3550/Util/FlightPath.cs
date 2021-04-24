@@ -84,6 +84,29 @@ namespace Air_3550.Util
             });
         }
 
+        public TimeSpan MaxLayoverDuration
+        {
+            get
+            {
+                var maxLayoverDuration = new TimeSpan(0, 0, 0);
+
+                for (int i = 1; i < FlightDepartureTimeline.Count; i++)
+                {
+                    var previousFlightDepartureTime = FlightDepartureTimeline[i - 1];
+                    var currentFlightDepartureTime = FlightDepartureTimeline[i];
+
+                    var currentMaxLayoverDuration = currentFlightDepartureTime - (previousFlightDepartureTime + Flights[i - 1].GetDuration());
+
+                    if (maxLayoverDuration < currentMaxLayoverDuration)
+                    {
+                        maxLayoverDuration = currentMaxLayoverDuration;
+                    }
+                }
+
+                return maxLayoverDuration;
+            }
+        }
+
         public int NumberOfStops => Flights.Count - 1;
 
         public string FormattedPrice => "$" + Price;
