@@ -3,6 +3,7 @@ using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,13 +19,22 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _feedback, value);
         }
 
-        private List<Flight> _flightsA;
+        public ObservableCollection<Flight> FlightsA = new();
 
-        public List<Flight> FlightsA
+        private int _selectedPathIndex = -1;
+
+        public int SelectedPathIndex
         {
-            get => _flightsA;
-            set => SetProperty(ref _flightsA, value);
+            get => _selectedPathIndex;
+            set
+            {
+                SetProperty(ref _selectedPathIndex, value);
+
+                OnPropertyChanged(nameof(CanContinue));
+            }
         }
+
+        public bool CanContinue => SelectedPathIndex != -1;
 
         public async void CancelFlight(Flight cancelling)
         {
@@ -40,11 +50,15 @@ namespace Air_3550.ViewModels
         {
             using (var db = new AirContext())
             {
-                FlightsA = await db.Flights
+                var FlightsT = await db.Flights
                     .Include(Flight => Flight.OriginAirport)
                     .Include(Flight => Flight.DestinationAirport)
                     .Where(f => f.IsCanceled == false)
                     .ToListAsync();
+                foreach(Flight a in FlightsT)
+                {
+                    FlightsA.Add(a);
+                }
             }
         }
     }

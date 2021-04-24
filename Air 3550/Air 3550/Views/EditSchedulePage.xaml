@@ -18,55 +18,34 @@
 
     <Grid>
 
-        <ListView ItemsSource="{x:Bind ViewModel.FlightsA, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="displayedList">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:Flight">
-                    <StackPanel Width="500">
-                        <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text=" "/>
-                        </TextBlock>
-                        <TextBlock  Grid.Column="2"
-                    Grid.Row="2"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Number: "/>
-                            <Run Text="{x:Bind Number}"/>
-                        </TextBlock>
-                        <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Flight ID: "/>
-                            <Run Text="{x:Bind FlightId}"/>
-                        </TextBlock>
-                        <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Departing at: "/>
-                            <Run Text="{x:Bind DepartureTime}"/>
-                        </TextBlock>
-                        <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Traveling from "/>
-                            <Run Text="{x:Bind OriginAirport.City}"/>
-                            <Run Text=", "/>
-                            <Run Text="{x:Bind OriginAirport.State}"/>
-                            <Run Text=" to "/>
-                            <Run Text="{x:Bind DestinationAirport.City}"/>
-                            <Run Text=", "/>
-                            <Run Text="{x:Bind DestinationAirport.State}"/>
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+        <RelativePanel Margin="5 45 0 0">
+            <StackPanel Margin="0 0 0 30" Orientation="Vertical" x:Name="Header">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Flights</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <ListView x:Name="displayedList"
+            SelectedIndex="{x:Bind ViewModel.SelectedPathIndex, Mode=TwoWay}"
+            RelativePanel.AlignHorizontalCenterWithPanel="true"
+            RelativePanel.Below="Header"
+            ItemTemplate="{StaticResource ScheduleListViewTemplate}"
+            ItemsSource="{x:Bind ViewModel.FlightsA}">
+                <ListView.Header>
+                    <Grid Margin="10 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="320"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight ID</TextBlock>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
+                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    </Grid>
+                </ListView.Header>
+            </ListView>
+        </RelativePanel>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Dialog</Button>
             <Button Click="RemoveFlight_Click" HorizontalAlignment="Right">Remove Flight</Button>
