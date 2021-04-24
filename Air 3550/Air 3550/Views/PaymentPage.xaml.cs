@@ -4,6 +4,7 @@ using Air_3550.Util;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,11 +24,15 @@ namespace Air_3550.Views
         {
             public FlightPath DepartingFlightPath;
             public FlightPath ReturnFlightPath;
+            public DateTime DepartureDate;
+            public DateTime? ReturnDate;
 
-            public Params(FlightPath departingFlightPath, FlightPath returnFlightPath)
+            public Params(FlightPath departingFlightPath, FlightPath returnFlightPath, DateTime departureDate, DateTime? returnDate)
             {
                 DepartingFlightPath = departingFlightPath;
                 ReturnFlightPath = returnFlightPath;
+                DepartureDate = departureDate;
+                ReturnDate = returnDate;
             }
         }
 
@@ -41,20 +46,20 @@ namespace Air_3550.Views
 
             ViewModel.DepartingFlightPath = pageParams.DepartingFlightPath;
             ViewModel.ReturnFlightPath = pageParams.ReturnFlightPath;
-
+            /*
             DepartureFlightPathControl.DataContext = ViewModel.DepartingFlightPath;
 
             if (ViewModel.ReturnFlightPath != null)
             {
                 ReturnFlightPathControl.DataContext = ViewModel.ReturnFlightPath;
             }
+            */
         }
-
-        public string test => pageParams.DepartingFlightPath.FirstFlightDepartureAirportCode;
 
         public PaymentPage()
         {
             this.InitializeComponent();
+            ViewModel.GrabPaths();
         }
     }
 }

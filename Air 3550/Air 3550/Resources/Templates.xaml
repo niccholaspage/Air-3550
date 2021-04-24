@@ -21,8 +21,27 @@
         </Grid>
     </DataTemplate>
 
-        <DataTemplate x:Key="ScheduleListViewTemplate">
-            <Grid>
+    <DataTemplate x:Key="ScheduleListViewTemplate">
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="320"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="{Binding FlightId}" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="1" Text="{Binding Number}" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="2" Text="{Binding DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="3" HorizontalAlignment="Center">
+            <Run Text="{Binding OriginAirport.CityWithState}"/>
+            <Run Text="to"/>
+            <Run Text="{Binding DestinationAirport.CityWithState}"/>
+        </TextBlock>
+    </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PaymentListViewTemplate">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -38,5 +57,7 @@
                 <Run Text="{Binding DestinationAirport.CityWithState}"/>
             </TextBlock>
         </Grid>
-        </DataTemplate>
-    </ResourceDictionary>
+    </DataTemplate>
+
+
+</ResourceDictionary>

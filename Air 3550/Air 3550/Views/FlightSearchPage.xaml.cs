@@ -93,12 +93,14 @@ namespace Air_3550.Views
                 }
                 else
                 {
-                    Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(pageParams.DepartureFlightPath, flightPath));
+                    Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(pageParams.DepartureFlightPath, flightPath,
+                        pageParams.DepartureDate, pageParams.ReturnDate));
                 }
             }
             else
             {
-                Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(flightPath, null));
+                Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(flightPath, null,
+                    pageParams.DepartureDate, pageParams.ReturnDate));
             }
         }
     }
