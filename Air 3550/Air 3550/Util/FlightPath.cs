@@ -3,7 +3,9 @@ using Air_3550.Models;
 using Database.Util;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using Windows.Services.Maps;
 
 namespace Air_3550.Util
 {
@@ -15,12 +17,14 @@ namespace Air_3550.Util
         private Lazy<string> _formattedDepartureTime;
         private Lazy<string> _formattedArrivalTime;
         private Lazy<decimal> _price;
+        private Lazy<List<TimeSpan>> _flightDepartureTimeline;
         private Lazy<TimeSpan> _duration;
 
         public string FormattedDepartureTime => _formattedDepartureTime.Value;
         public string FormattedArrivalTime => _formattedArrivalTime.Value;
         public decimal Price => _price.Value;
         public TimeSpan Duration => _duration.Value;
+        public List<TimeSpan> FlightDepartureTimeline => _flightDepartureTimeline.Value;
 
         public FlightPath(params Flight[] flights)
         {
@@ -29,11 +33,16 @@ namespace Air_3550.Util
             _formattedDepartureTime = new(() => DateTime.Today.Add(Flights.First().DepartureTime).ToString("h:mm tt"));
             _formattedArrivalTime = new(() => DateTime.Today.Add(Flights.Last().GetArrivalTime()).ToString("h:mm tt"));
             _price = new(() => Pricing.CalculatePriceOfFlights(Flights));
-            _duration = new(() =>
+
+            _flightDepartureTimeline = new(() =>
             {
+                var flightDepartureTimeline = new List<TimeSpan>();
+
                 var timeSpan = new TimeSpan();
 
-                // For the first flight, we just add its duration directly.
+                // For the first flight, we just add its duration directly,
+                // and its departure time is at 0 hours, 0 minutes, and 0 seconds.
+                flightDepartureTimeline.Add(new TimeSpan(0, 0, 0));
                 timeSpan += Flights[0].GetDuration();
 
                 TimeSpan fourtyMinutes = new(0, 40, 0);
@@ -59,10 +68,19 @@ namespace Air_3550.Util
                         layover = flight.DepartureTime - previousFlight.GetArrivalTime();
                     }
 
+                    // For this flight, it's departure time occurs at our timespan + the layover.
+                    flightDepartureTimeline.Add(timeSpan + layover);
                     timeSpan += layover + flight.GetDuration();
                 }
 
-                return timeSpan;
+                return flightDepartureTimeline;
+            });
+
+            _duration = new(() =>
+            {
+                // If we take the time the last flight departs in the timeline and
+                // add it's duration, we get the total duration of the flight path.
+                return FlightDepartureTimeline.Last() + Flights.Last().GetDuration();
             });
         }
 
