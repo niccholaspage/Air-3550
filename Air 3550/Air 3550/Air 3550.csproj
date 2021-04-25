@@ -16,6 +16,7 @@
     <None Remove="Controls\ResourceDictionary1.xaml" />
     <None Remove="Resources\Templates.xaml" />
     <None Remove="Views\AddFlightDialog.xaml" />
+    <None Remove="Views\BookingsSubPage.xaml" />
     <None Remove="Views\ChangePasswordSubPage.xaml" />
     <None Remove="Views\EditPlaneDialog.xaml" />
     <None Remove="Views\EditProfileSubPage.xaml" />
@@ -44,6 +45,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\BookingsSubPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

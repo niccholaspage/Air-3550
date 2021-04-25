@@ -74,7 +74,7 @@ namespace Air_3550.ViewModels
             }
         }
 
-        private readonly Lazy<Page> BookingsPage = new(() => new LoginPage());
+        private readonly Lazy<Page> BookingsPage = new(() => new BookingSubPage());
         private readonly Lazy<Page> ProfilePage = new(() => new EditProfileSubPage());
         private readonly Lazy<Page> ChangePasswordPage = new(() => new ChangePasswordSubPage());
 
