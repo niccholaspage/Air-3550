@@ -8,19 +8,19 @@ namespace Database.Util
     public class Pricing
     {
 
-        private static readonly TimeSpan hourFive = new TimeSpan(0, 5, 0, 0);
-        private static readonly TimeSpan hourEight = new TimeSpan(0, 8, 0, 0);
-        private static readonly TimeSpan hourNineteen = new TimeSpan(0, 19, 0, 0);
+        private static readonly TimeSpan HOUR_FIVE = new TimeSpan(0, 5, 0, 0);
+        private static readonly TimeSpan HOUR_EIGHT = new TimeSpan(0, 8, 0, 0);
+        private static readonly TimeSpan HOUR_NINETEEN = new TimeSpan(0, 19, 0, 0);
 
         //TODO: Determine if this is a good resting place
         public static decimal GetDiscountPercentage(TimeSpan departureTime, TimeSpan arrivalTime)
         {
             TimeSpan newArrivalTime = new TimeSpan(0, arrivalTime.Hours, arrivalTime.Minutes, arrivalTime.Seconds);
-            if ((departureTime < hourFive) || (newArrivalTime < hourFive) )
+            if (departureTime < HOUR_FIVE || newArrivalTime < HOUR_FIVE)
             {
                 return 0.20m;
             }
-            else if (departureTime < hourEight || newArrivalTime > hourNineteen)
+            else if (departureTime < HOUR_EIGHT || newArrivalTime > HOUR_NINETEEN)
             {
                 return 0.10m;
             }
