@@ -1,5 +1,4 @@
-﻿using Air_3550.Util;
-using Database.Util;
+﻿using Database.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

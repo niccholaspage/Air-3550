@@ -10,6 +10,7 @@ using System.Text;
 using Air_3550.Models;
 using Air_3550.Util;
 using System.Collections.Generic;
+using Database.Util;
 
 namespace Air_3550.ViewModels
 {

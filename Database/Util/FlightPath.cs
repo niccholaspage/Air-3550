@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Air_3550.Util
+namespace Database.Util
 {
     // TODO: Move this into another package.
     public class FlightPath

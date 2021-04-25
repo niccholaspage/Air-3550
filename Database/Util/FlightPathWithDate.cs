@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Air_3550.Util
+namespace Database.Util
 {
     public class FlightPathWithDate
     {
