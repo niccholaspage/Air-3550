@@ -94,8 +94,11 @@ namespace Air_3550.Views
             }
 
             //Grabs File Path to write using System.IO
-            String FilePath = file.Path;
-            File.WriteAllLines(FilePath, lines);
+            if (file != null)
+            {
+                String FilePath = file.Path;
+                File.WriteAllLines(FilePath, lines);
+            }
 
         }
     }

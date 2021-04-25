@@ -11,82 +11,75 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-    <DataTemplate x:Key="RouteListViewTemplate" x:DataType="data:ScheduledFlight">
+    <DataTemplate x:Key="SummaryListViewTemplate" x:DataType="data:ScheduledFlight">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"></ColumnDefinition>
-                <ColumnDefinition Width="30"></ColumnDefinition>
-                <ColumnDefinition Width="110"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Right" x:Phase="1"></TextBlock>
-            <SymbolIcon Grid.Column="1" Symbol="Forward"></SymbolIcon>
-            <TextBlock Grid.Column="2" Text="{x:Bind Flight.OriginAirport.CityWithState}" x:Phase="2"></TextBlock>
-            <TextBlock Grid.Column="3" Text="{x:Bind Flight.DestinationAirport.CityWithState}" x:Phase="3"></TextBlock>
-            <TextBlock Grid.Column="4" Text="{x:Bind Flight.Number}" x:Phase="4"></TextBlock>
-            <TextBlock Grid.Column="5" Text="{x:Bind Tickets.Count}" x:Phase="5"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{x:Bind Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <SymbolIcon Grid.Column="2" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
+                <TextBlock Grid.Column="3" Text="{x:Bind Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="4" Text="{x:Bind Flight.Number}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="5" HorizontalAlignment="Center">
+                    <Run Text="{x:Bind Tickets.Count}"/>
+                    <Run Text="/"/>
+                    <Run Text="{x:Bind Flight.Plane.MaxSeats}"/>
+                </TextBlock>
         </Grid>
     </DataTemplate>
     </Page.Resources>
 
     <Grid>
-        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top">
-            <CalendarDatePicker x:Name="StartDatePicker" Date="{x:Bind ViewModel.StartDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="150" Margin="3" Header="Start Date" VerticalAlignment="Bottom" />
-            <CalendarDatePicker x:Name="EndDatePicker" Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="150" Margin="3" Header="End Date" VerticalAlignment="Bottom" />
-            <ListView ItemsSource="{x:Bind ViewModel.Sflights, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="displayedList">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="data:ScheduledFlight">
-                        <StackPanel Width="500">
-                            <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text=" "/>
-                            </TextBlock>
-                            <TextBlock  Grid.Column="2"
-                    Grid.Row="2"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Number: "/>
-                            <Run Text="{x:Bind Flight.Number}"/>
-                            </TextBlock>
-                            <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Flight ID: "/>
-                            <Run Text="{x:Bind Flight.FlightId}"/>
-                            </TextBlock>
-                            <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Departing at: "/>
-                            <Run Text="{x:Bind Flight.DepartureTime}"/>
-                            </TextBlock>
-                            <TextBlock  Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ThemeResource BodyTextBlockStyle}"
-                    Margin="12,0,0,6">
-                            <Run Text="Traveling from "/>
-                            <Run Text="{x:Bind Flight.OriginAirport.City}"/>
-                            <Run Text=", "/>
-                            <Run Text="{x:Bind Flight.OriginAirport.State}"/>
-                            <Run Text=" to "/>
-                            <Run Text="{x:Bind Flight.DestinationAirport.City}"/>
-                            <Run Text=", "/>
-                            <Run Text="{x:Bind Flight.DestinationAirport.State}"/>
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        <RowDefinition />
+            
+        </Grid.RowDefinitions>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1">
+            <ListView 
+                ItemsSource="{x:Bind ViewModel.Sflights, Mode=TwoWay}" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                x:Name="displayedList"
+                ItemTemplate="{StaticResource SummaryListViewTemplate}">
+                <ListView.Header>
+                    <Grid Margin="10 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Departure Time</TextBlock>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
+                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Tickets</TextBlock>
+                    </Grid>
+                </ListView.Header>
             </ListView>
         </RelativePanel>
-        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0">
+            
+            <CalendarDatePicker x:Name="StartDatePicker" Date="{x:Bind ViewModel.StartDate, Mode=TwoWay}" 
+                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="Start Date" VerticalAlignment="Bottom" />
+            
+            <CalendarDatePicker x:Name="EndDatePicker" Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}" 
+                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="End Date" VerticalAlignment="Bottom" />
+            
             <Button Click="SaveCSV_Click" HorizontalAlignment="Right">Generate CSV</Button>
             <Button Click="UpdateDates_Click" HorizontalAlignment="Right">Update Date</Button>
+            
         </StackPanel>
 
     </Grid>

@@ -44,6 +44,7 @@
                         <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
                     </Grid>
                 </ListView.Header>
+
             </ListView>
         </RelativePanel>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
@@ -52,7 +53,7 @@
             <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
             <Button Click="EditPlane_Click" HorizontalAlignment="Right">Edit Plane</Button>
             <Button Click="GetSummary_Click" HorizontalAlignment="Right">Summary Page</Button>
-            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"/>
         </StackPanel>
     </Grid>
 </Page>
