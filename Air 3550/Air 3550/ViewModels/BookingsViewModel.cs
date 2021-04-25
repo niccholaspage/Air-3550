@@ -16,7 +16,7 @@ namespace Air_3550.ViewModels
 {
     class BookingsViewModel
     {
-        public ObservableCollection<FlightPathWithDate> BookingsC = new();
+        public ObservableCollection<Booking> BookingsC = new();
         public ObservableCollection<Ticket> TicketsC = new();
 
         private readonly UserSessionService _userSessionService;
@@ -33,24 +33,17 @@ namespace Air_3550.ViewModels
             {
                 var bookings = await db.Bookings
                     .Where(Booking => Booking.UserId == _userSessionService.UserId)
-                    .Include(Booking => Booking.Tickets)
-                    .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                    .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                    .ThenInclude(Flight => Flight.OriginAirport)
-                    .Include(Booking => Booking.Tickets)
-                    .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                    .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                    .ThenInclude(Flight => Flight.DestinationAirport)
+                    .Include(Booking => Booking.DepartureFlightPathWithDate)
+                    .ThenInclude(FlightPathWithDate => FlightPathWithDate.FlightPath)
+                    .ThenInclude(FlightPath => FlightPath.Flights)
+                    .Include(Booking => Booking.ReturnFlightPathWithDate)
+                    .ThenInclude(FlightPathWithDate => FlightPathWithDate.FlightPath)
+                    .ThenInclude(FlightPath => FlightPath.Flights)
                     .ToListAsync();
                 //Turns booking items into FlightPaths 
-                List<Flight> adding = new List<Flight>();
                 foreach (Booking a in bookings)
                 {
-                    foreach(Ticket b in a.Tickets)
-                    {
-                        adding.Add(b.ScheduledFlight.Flight);
-                    }
-                    BookingsC.Add(new FlightPathWithDate(new FlightPath(adding.ToArray()), a.Tickets.First().ScheduledFlight.DepartureDate));                
+                    BookingsC.Append(a);
                 }
             }
         }
