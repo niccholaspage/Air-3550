@@ -19,17 +19,13 @@ namespace Air_3550.Views
 
         public class Params
         {
-            public FlightPath DepartingFlightPath;
-            public FlightPath ReturnFlightPath;
-            public DateTime DepartureDate;
-            public DateTime? ReturnDate;
+            public FlightPathWithDate DepartingFlightPathWithDate;
+            public FlightPathWithDate ReturnFlightPathWithDate;
 
-            public Params(FlightPath departingFlightPath, FlightPath returnFlightPath, DateTime departureDate, DateTime? returnDate)
+            public Params(FlightPathWithDate departingFlightPathWithDate, FlightPathWithDate returnFlightPathWithDate)
             {
-                DepartingFlightPath = departingFlightPath;
-                ReturnFlightPath = returnFlightPath;
-                DepartureDate = departureDate;
-                ReturnDate = returnDate;
+                DepartingFlightPathWithDate = departingFlightPathWithDate;
+                ReturnFlightPathWithDate = returnFlightPathWithDate;
             }
         }
 
@@ -46,14 +42,14 @@ namespace Air_3550.Views
 
             pageParams = e.Parameter as Params;
 
-            ViewModel.DepartingFlightPath = pageParams.DepartingFlightPath;
-            ViewModel.ReturnFlightPath = pageParams.ReturnFlightPath;
+            ViewModel.DepartingFlightPathWithDate = pageParams.DepartingFlightPathWithDate;
+            ViewModel.ReturnFlightPathWithDate = pageParams.ReturnFlightPathWithDate;
 
-            DepartureFlightPathControl.DataContext = new FlightPathWithDate(ViewModel.DepartingFlightPath, pageParams.DepartureDate);
+            DepartureFlightPathControl.DataContext = ViewModel.DepartingFlightPathWithDate;
 
-            if (pageParams.ReturnDate is DateTime returnDate)
+            if (ViewModel.ReturnFlightPathWithDate != null)
             {
-                ReturnFlightPathControl.DataContext = new FlightPathWithDate(ViewModel.ReturnFlightPath, returnDate);
+                ReturnFlightPathControl.DataContext = ViewModel.ReturnFlightPathWithDate;
             }
         }
 

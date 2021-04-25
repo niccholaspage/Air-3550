@@ -2,7 +2,7 @@
 
 namespace Air_3550.Util
 {
-    class FlightPathWithDate
+    public class FlightPathWithDate
     {
         private readonly FlightPath _flightPath;
         private readonly DateTime _date;

@@ -7,6 +7,9 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using Air_3550.Models;
 
 namespace Air_3550.ViewModels
 {
@@ -27,20 +30,20 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _feedback, value);
         }
 
-        private FlightPath _departingFlightPath;
+        private FlightPathWithDate _departingFlightPathWithDate;
 
-        public FlightPath DepartingFlightPath
+        public FlightPathWithDate DepartingFlightPathWithDate
         {
-            get => _departingFlightPath;
-            set => SetProperty(ref _departingFlightPath, value);
+            get => _departingFlightPathWithDate;
+            set => SetProperty(ref _departingFlightPathWithDate, value);
         }
 
-        private FlightPath _returnFlightPath;
+        private FlightPathWithDate _returnFlightPathWithDate;
 
-        public FlightPath ReturnFlightPath
+        public FlightPathWithDate ReturnFlightPathWithDate
         {
-            get => _returnFlightPath;
-            set => SetProperty(ref _returnFlightPath, value);
+            get => _returnFlightPathWithDate;
+            set => SetProperty(ref _returnFlightPathWithDate, value);
         }
 
         private PaymentMethod _selectedPaymentMethod;
@@ -51,14 +54,28 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _selectedPaymentMethod, value);
         }
 
-        public decimal TotalCost => DepartingFlightPath.Price + (ReturnFlightPath != null ? ReturnFlightPath.Price : 0.0m);
+        public decimal TotalCost => DepartingFlightPathWithDate.FlightPath.Price + (ReturnFlightPathWithDate != null ? ReturnFlightPathWithDate.FlightPath.Price : 0.0m);
 
         // A point corresponds to a single cent, so we
         // multiply the cost by 100 to get the total cost
         // in points.
         public int TotalCostInPoints => (int)(TotalCost * 100);
 
-        public bool IsReturnFlight => ReturnFlightPath != null;
+        public bool IsReturnFlight => ReturnFlightPathWithDate != null;
+
+        private async Task<List<Ticket>> CreateTicketsForFlightPath(AirContext db, FlightPathWithDate flightPathWithDate)
+        {
+            // We need to create tickets for a flight path. To do this,
+            // we start from the date this flight path will be departing from,
+            // and determine each day the flight will be departing from. We
+            // try to find a scheduled flight for it, create one if it doesn't
+            // exist, then make a ticket for it, then return a list of the tickets.
+            List<Ticket> tickets = new();
+
+
+
+            return tickets;
+        }
 
         public async Task<bool> PurchaseTrip()
         {
@@ -92,6 +109,11 @@ namespace Air_3550.ViewModels
                     }
                 }
             }
+
+            // TODO: Actually process the payment, deducting the necessary
+            // account balance/reward points as needed.
+
+
 
             Feedback = "Passed.";
 

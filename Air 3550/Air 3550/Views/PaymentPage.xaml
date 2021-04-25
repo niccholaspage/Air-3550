@@ -37,7 +37,7 @@
                            Text="Departure Flight Cost:"/>
                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
                             <Run Text="$"/>
-                            <Run Text="{x:Bind ViewModel.DepartingFlightPath.Price}"/>
+                            <Run Text="{x:Bind ViewModel.DepartingFlightPathWithDate.FlightPath.Price}"/>
                     </TextBlock>
                 </Grid>
                 <Grid Grid.Row="1" Width="250" Padding="7">
@@ -47,7 +47,7 @@
                     <TextBlock Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"
                            HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
                         <Run Text="$"/>
-                        <Run Text="{x:Bind ViewModel.ReturnFlightPath.Price}"/>
+                        <Run Text="{x:Bind ViewModel.ReturnFlightPathWithDate.FlightPath.Price}"/>
                     </TextBlock>
                 </Grid>
                 <Grid Grid.Row="2" Width="250" Padding="7">

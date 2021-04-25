@@ -92,15 +92,17 @@ namespace Air_3550.Views
             var nextPage = typeof(PaymentPage);
             PaymentPage.Params paymentPageParams;
 
+            var departureFlightPathWithDate = new FlightPathWithDate(pageParams.DepartureFlightPath, pageParams.DepartureDate);
+
             if (pageParams.ReturnDate != null)
             {
-                paymentPageParams = new PaymentPage.Params(pageParams.DepartureFlightPath, flightPath,
-                        pageParams.DepartureDate, pageParams.ReturnDate);
+                var returnFlightPathWithDate = new FlightPathWithDate(flightPath, (DateTime)pageParams.ReturnDate);
+
+                paymentPageParams = new PaymentPage.Params(departureFlightPathWithDate, returnFlightPathWithDate);
             }
             else
             {
-                paymentPageParams = new PaymentPage.Params(flightPath, null,
-    pageParams.DepartureDate, pageParams.ReturnDate);
+                paymentPageParams = new PaymentPage.Params(departureFlightPathWithDate, null);
             }
 
             if (!userSession.IsLoggedIn)
