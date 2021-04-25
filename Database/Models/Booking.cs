@@ -1,6 +1,7 @@
 ﻿using Database.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Air_3550.Models
@@ -8,6 +9,12 @@ namespace Air_3550.Models
     public class Booking
     {
         public int BookingId { get; set; }
+
+        public int UserId { get; set; }
+
+        [Required]
+        public User User { get; set; }
+
         public List<Ticket> Tickets { get; } = new();
 
         private int GetFirstReturnTicketIndex()
