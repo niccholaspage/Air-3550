@@ -14,6 +14,7 @@ using Air_3550.Models;
 using System;
 using System.Reflection.Metadata;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Air_3550.Views
 {
@@ -22,9 +23,9 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class LoginPage : Page
     {
-        public sealed class Params
+        public class Params
         {
-            public class NewUser
+            public class NewUser : Params
             {
                 public string LoginId;
 
@@ -34,9 +35,9 @@ namespace Air_3550.Views
                 }
             }
 
-            public class PasswordChanged { }
+            public class PasswordChanged : Params { }
 
-            public class RedirectToPage
+            public class RedirectToPage : Params
             {
                 public Type PageType;
                 public object Parameter;
@@ -63,27 +64,42 @@ namespace Air_3550.Views
 
         readonly LoginViewModel ViewModel = new();
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void handleParams(Params param)
         {
-            base.OnNavigatedTo(e);
-
-            if (e.Parameter is Params.NewUser param)
+            if (param is Params.NewUser newUserParam)
             {
-                ViewModel.Username = param.LoginId;
+                ViewModel.Username = newUserParam.LoginId;
                 InfoBar.Title = "Account Created";
-                InfoBar.Message = $"Your account has been successfully created. Your ID is {param.LoginId}.";
+                InfoBar.Message = $"Your account has been successfully created. Your ID is {newUserParam.LoginId}.";
                 InfoBar.IsOpen = true;
             }
-            else if (e.Parameter is Params.PasswordChanged)
+            else if (param is Params.PasswordChanged)
             {
                 InfoBar.Title = "Password Changed";
                 InfoBar.Message = $"Your password has been changed. Please login again.";
                 InfoBar.IsOpen = true;
             }
-            else if (e.Parameter is Params.RedirectToPage redirect)
+            else if (param is Params.RedirectToPage redirect)
             {
                 redirectPageType = redirect.PageType;
                 redirectParam = redirect.Parameter;
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is List<Params> paramsList)
+            {
+                foreach (var param in paramsList)
+                {
+                    handleParams(param);
+                }
+            }
+            else if (e.Parameter is Params param)
+            {
+                handleParams(param);
             }
         }
 
@@ -143,7 +159,7 @@ namespace Air_3550.Views
 
         private void RegisterButton_Click(object _, RoutedEventArgs __)
         {
-            Frame.Navigate(typeof(RegisterPage));
+            Frame.Navigate(typeof(RegisterPage), new LoginPage.Params.RedirectToPage(redirectPageType, redirectParam));
         }
     }
 }
