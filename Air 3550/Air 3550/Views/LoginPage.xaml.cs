@@ -101,7 +101,7 @@ namespace Air_3550.Views
                     }
                     else if (role == Role.MARKETING_MANAGER || role == Role.LOAD_ENGINEER)
                     {
-                        Frame.Navigate(typeof(SummaryPage));
+                        Frame.Navigate(typeof(EditSchedulePage));
                     }
 
                     // Clear every item in the backstack except for the first one, the main page.
