@@ -7,9 +7,5 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <DropDownButton x:Name="PaymentDropDownButton" Width="150" HorizontalContentAlignment="Left">
-        <DropDownButton.Flyout>
-            <MenuFlyout x:Name="PaymentFlyout" Placement="Bottom" />
-        </DropDownButton.Flyout>
-    </DropDownButton>
+    <ComboBox x:Name="PaymentComboBox" Width="150"></ComboBox>
 </UserControl>

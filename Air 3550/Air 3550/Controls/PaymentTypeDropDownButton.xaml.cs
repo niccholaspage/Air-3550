@@ -9,30 +9,23 @@ namespace Air_3550.Controls
 {
     public sealed partial class PaymentTypeDropDownButton : UserControl
     {
-        public PaymentMethod SelectedPaymentMethod;
-
         public PaymentTypeDropDownButton()
         {
             this.InitializeComponent();
 
-            SelectedPaymentMethod = PaymentMethod.CREDIT_CARD;
-            PaymentDropDownButton.Content = PaymentMethod.CREDIT_CARD.FormattedString();
-
             foreach (PaymentMethod paymentMethod in Enum.GetValues(typeof(PaymentMethod)))
             {
-                var item = new MenuFlyoutItem
-                {
-                    Text = paymentMethod.FormattedString()
-                };
+                PaymentComboBox.Items.Add(paymentMethod.FormattedString());
+            }
 
-                item.Click += (_, __) =>
-                {
-                    SelectedPaymentMethod = paymentMethod;
+            PaymentComboBox.SelectedIndex = 0;
+        }
 
-                    PaymentDropDownButton.Content = SelectedPaymentMethod.FormattedString();
-                };
-
-                PaymentFlyout.Items.Add(item);
+        public PaymentMethod SelectedPaymentMethod
+        {
+            get
+            {
+                return (PaymentMethod)PaymentComboBox.SelectedIndex;
             }
         }
     }
