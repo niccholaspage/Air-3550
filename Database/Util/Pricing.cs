@@ -7,14 +7,20 @@ namespace Database.Util
 {
     public class Pricing
     {
+
+        private static readonly TimeSpan hourFive = new TimeSpan(0, 5, 0, 0);
+        private static readonly TimeSpan hourEight = new TimeSpan(0, 8, 0, 0);
+        private static readonly TimeSpan hourNineteen = new TimeSpan(0, 19, 0, 0);
+
         //TODO: Determine if this is a good resting place
         public static decimal GetDiscountPercentage(TimeSpan departureTime, TimeSpan arrivalTime)
         {
-            if ((departureTime.Hours > 0 && departureTime.Hours < 5) || (arrivalTime.Hours > 0 && arrivalTime.Hours < 5))
+            TimeSpan newArrivalTime = new TimeSpan(0, arrivalTime.Hours, arrivalTime.Minutes, arrivalTime.Seconds);
+            if ((departureTime < hourFive) || (newArrivalTime < hourFive) )
             {
                 return 0.20m;
             }
-            else if (departureTime.Hours < 8 || arrivalTime.Hours > 19)
+            else if (departureTime < hourEight || newArrivalTime > hourNineteen)
             {
                 return 0.10m;
             }
