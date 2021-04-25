@@ -27,6 +27,11 @@ namespace Air_3550.Views
             if (loginId != null)
             {
                 Frame.Navigate(typeof(LoginPage), new LoginPage.Params.NewUser(loginId));
+
+                // Remove the registration page from the back
+                // stack as well as the login page before it.
+                Frame.BackStack.RemoveAt(Frame.BackStackDepth - 1);
+                Frame.BackStack.RemoveAt(Frame.BackStackDepth - 1);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Air_3550.Repository;
+using Air_3550.Services;
 using Air_3550.Util;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
@@ -6,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -17,6 +19,8 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class FlightSearchPage : Page
     {
+        private readonly UserSessionService userSession;
+
         private Params pageParams;
 
         public class Params
@@ -59,6 +63,8 @@ namespace Air_3550.Views
 
         public FlightSearchPage()
         {
+            userSession = App.Current.Services.GetService<UserSessionService>();
+
             this.InitializeComponent();
         }
 
@@ -81,6 +87,32 @@ namespace Air_3550.Views
             }
         }
 
+        private void proceedToPayment(FlightPath flightPath)
+        {
+            var nextPage = typeof(PaymentPage);
+            PaymentPage.Params paymentPageParams;
+
+            if (pageParams.ReturnDate != null)
+            {
+                paymentPageParams = new PaymentPage.Params(pageParams.DepartureFlightPath, flightPath,
+                        pageParams.DepartureDate, pageParams.ReturnDate);
+            }
+            else
+            {
+                paymentPageParams = new PaymentPage.Params(flightPath, null,
+    pageParams.DepartureDate, pageParams.ReturnDate);
+            }
+
+            if (!userSession.IsLoggedIn)
+            {
+                Frame.Navigate(typeof(LoginPage), new LoginPage.Params.RedirectToPage(typeof(PaymentPage), paymentPageParams));
+            }
+            else
+            {
+                Frame.Navigate(typeof(PaymentPage), paymentPageParams);
+            }
+        }
+
         private void ContinueButton_Click(object _, RoutedEventArgs __)
         {
             FlightPath flightPath = (FlightPath)FlightList.SelectedItem;
@@ -93,14 +125,12 @@ namespace Air_3550.Views
                 }
                 else
                 {
-                    Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(pageParams.DepartureFlightPath, flightPath,
-                        pageParams.DepartureDate, pageParams.ReturnDate));
+                    proceedToPayment(flightPath);
                 }
             }
             else
             {
-                Frame.Navigate(typeof(PaymentPage), new PaymentPage.Params(flightPath, null,
-                    pageParams.DepartureDate, pageParams.ReturnDate));
+                proceedToPayment(flightPath);
             }
         }
     }

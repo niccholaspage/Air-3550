@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using Windows.System;
 using Microsoft.Extensions.DependencyInjection;
 using Air_3550.Models;
+using System;
+using System.Reflection.Metadata;
+using System.Linq;
 
 namespace Air_3550.Views
 {
@@ -32,7 +35,22 @@ namespace Air_3550.Views
             }
 
             public class PasswordChanged { }
+
+            public class RedirectToPage
+            {
+                public Type PageType;
+                public object Parameter;
+
+                public RedirectToPage(Type pageType, object parameter)
+                {
+                    PageType = pageType;
+                    Parameter = parameter;
+                }
+            }
         }
+
+        private Type redirectPageType;
+        private object redirectParam;
 
         private readonly UserSessionService userSession;
 
@@ -62,6 +80,11 @@ namespace Air_3550.Views
                 InfoBar.Message = $"Your password has been changed. Please login again.";
                 InfoBar.IsOpen = true;
             }
+            else if (e.Parameter is Params.RedirectToPage redirect)
+            {
+                redirectPageType = redirect.PageType;
+                redirectParam = redirect.Parameter;
+            }
         }
 
         public async void LoginButton_Clicked(object _, RoutedEventArgs __)
@@ -90,6 +113,11 @@ namespace Air_3550.Views
                 if (role == Role.CUSTOMER)
                 {
                     Frame.GoBack();
+
+                    if (redirectPageType != null)
+                    {
+                        Frame.Navigate(redirectPageType, redirectParam);
+                    }
                 }
                 else
                 {
