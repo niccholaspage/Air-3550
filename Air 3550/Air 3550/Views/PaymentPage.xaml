@@ -20,23 +20,44 @@
                 <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}"/>
                 <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
             </StackPanel>
-            <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="200" Background="Gray">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Run Text="Departure Flight Cost:"/>
-                    <Run Text="{x:Bind ViewModel.DepartingFlightPath.Price}"/>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="250" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Width="250" Padding="7">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="0" 
+                           Text="Departure Flight Cost:"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
+                            <Run Text="$"/>
+                            <Run Text="{x:Bind ViewModel.DepartingFlightPath.Price}"/>
                     </TextBlock>
+                </Grid>
+                <Grid Grid.Row="1" Width="250" Padding="7">
                     <TextBlock Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"
-                           HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Run Text="Return Flight Cost:"/>
-                    <Run Text="{x:Bind ViewModel.ReturnFlightPath.Price}"/>
+                           HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
+                           Text="Return Flight Cost:"/>
+                    <TextBlock Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"
+                           HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
+                        <Run Text="$"/>
+                        <Run Text="{x:Bind ViewModel.ReturnFlightPath.Price}"/>
                     </TextBlock>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Run Text="Total Flight Cost:"/>
-                    <Run Text="{x:Bind ViewModel.TotalCost}"/>
+                </Grid>
+                <Grid Grid.Row="2" Width="250" Padding="7">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
+                    Text="Total Flight Cost:"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
+                        <Run Text="$"/>
+                        <Run Text="{x:Bind ViewModel.TotalCost}"/>
                     </TextBlock>
-                </StackPanel>
-            </RelativePanel>
+                </Grid>
+            </Grid>
         </StackPanel>
     </RelativePanel>
 </Page>
