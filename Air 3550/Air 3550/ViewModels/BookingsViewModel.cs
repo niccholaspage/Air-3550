@@ -32,7 +32,7 @@ namespace Air_3550.ViewModels
             using (var db = new AirContext())
             {
                 var bookings = await db.Bookings
-                    .Where(Booking => Booking.UserId == _userSessionService.UserId)
+                    .Where(Booking => Booking.CustomerDataId == _userSessionService.CustomerDataId)
                     .Include(Booking => Booking.DepartureFlightPathWithDate)
                     .ThenInclude(FlightPathWithDate => FlightPathWithDate.FlightPath)
                     .ThenInclude(FlightPath => FlightPath.Flights)

@@ -11,10 +11,10 @@ namespace Air_3550.Models
     {
         public int BookingId { get; set; }
 
-        public int UserId { get; set; }
+        public int CustomerDataId { get; set; }
 
         [Required]
-        public User User { get; set; }
+        public CustomerData customerData { get; set; }
 
         public List<Ticket> Tickets { get; } = new();
 
