@@ -1,6 +1,7 @@
 ﻿// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+using Air_3550.Services;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,6 +9,8 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.System;
+using Microsoft.Extensions.DependencyInjection;
+using Air_3550.Models;
 
 namespace Air_3550.Views
 {
@@ -31,8 +34,12 @@ namespace Air_3550.Views
             public class PasswordChanged { }
         }
 
+        private readonly UserSessionService userSession;
+
         public LoginPage()
         {
+            userSession = App.Current.Services.GetService<UserSessionService>();
+
             this.InitializeComponent();
         }
 
@@ -74,7 +81,35 @@ namespace Air_3550.Views
         {
             if (await ViewModel.PerformLogin())
             {
-                Frame.GoBack();
+                // If the user that logged in is a customer,
+                // then we just take them back to the previous
+                // page. Otherwise, we take them to the proper
+                // page based on their role.
+                var role = userSession.Role;
+
+                if (role == Role.CUSTOMER)
+                {
+                    Frame.GoBack();
+                }
+                else
+                {
+                    Frame.Navigate(typeof(MainPage));
+
+                    if (role == Role.ACCOUNTANT || role == Role.FLIGHT_MANAGER)
+                    {
+                        Frame.Navigate(typeof(SummaryPage));
+                    }
+                    else if (role == Role.MARKETING_MANAGER || role == Role.LOAD_ENGINEER)
+                    {
+                        Frame.Navigate(typeof(SummaryPage));
+                    }
+
+                    // Clear every item in the backstack except for the first one, the main page.
+                    while (Frame.BackStack.Count > 1)
+                    {
+                        Frame.BackStack.RemoveAt(0);
+                    }
+                }
             }
         }
 
