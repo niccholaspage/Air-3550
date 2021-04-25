@@ -72,7 +72,35 @@ namespace Air_3550.ViewModels
             // exist, then make a ticket for it, then return a list of the tickets.
             List<Ticket> tickets = new();
 
+            var flightPath = flightPathWithDate.FlightPath;
+            var departureDate = flightPathWithDate.Date;
 
+            for (int i = 0; i < flightPath.Flights.Count; i++)
+            {
+                var flight = flightPath.Flights[i];
+                var flightDepartureTimeline = flightPath.FlightDepartureTimeline[i];
+
+                var flightDepartureDate = (departureDate + flightDepartureTimeline).Date;
+                var scheduledFlight = await db.ScheduledFlights
+                    .SingleOrDefaultAsync(scheduledFlight => scheduledFlight.Flight == flight && scheduledFlight.DepartureDate == flightDepartureDate);
+
+                if (scheduledFlight == null)
+                {
+                    scheduledFlight = new ScheduledFlight
+                    {
+                        FlightId = flight.FlightId,
+                        DepartureDate = flightDepartureDate
+                    };
+                };
+
+                var ticket = new Ticket()
+                {
+                    ScheduledFlight = scheduledFlight,
+                    PaymentMethod = SelectedPaymentMethod
+                };
+
+                tickets.Add(ticket);
+            }
 
             return tickets;
         }
@@ -108,11 +136,27 @@ namespace Air_3550.ViewModels
                         return false;
                     }
                 }
+
+                // TODO: Actually process the payment, deducting the necessary
+                // account balance/reward points as needed.
+
+                List<Ticket> tickets = await CreateTicketsForFlightPath(db, DepartingFlightPathWithDate);
+
+                if (ReturnFlightPathWithDate != null)
+                {
+                    tickets.AddRange(await CreateTicketsForFlightPath(db, ReturnFlightPathWithDate));
+                }
+
+                var booking = new Booking();
+
+                booking.Tickets.AddRange(tickets);
+
+                booking.CustomerDataId = (int)userSession.CustomerDataId;
+
+                await db.AddAsync(booking);
+
+                await db.SaveChangesAsync();
             }
-
-            // TODO: Actually process the payment, deducting the necessary
-            // account balance/reward points as needed.
-
 
 
             Feedback = "Passed.";
