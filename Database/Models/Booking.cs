@@ -14,7 +14,7 @@ namespace Air_3550.Models
         public int CustomerDataId { get; set; }
 
         [Required]
-        public CustomerData customerData { get; set; }
+        public CustomerData CustomerData { get; set; }
 
         public List<Ticket> Tickets { get; } = new();
 
