@@ -8,6 +8,8 @@ namespace Air_3550.Models
     {
         public int ScheduledFlightId { get; set; }
 
+        public int FlightId { get; set; }
+
         [Required]
         public Flight Flight { get; set; }
 
