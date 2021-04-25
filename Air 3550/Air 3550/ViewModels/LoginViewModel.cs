@@ -69,7 +69,7 @@ namespace Air_3550.ViewModels
                         if (user.Role == Role.CUSTOMER)
                         {
                             var customerData = await db.CustomerDatas.SingleAsync(customerData => customerData.UserId == user.UserId);
-                            userSession.Login(user, customerData.UserId);
+                            userSession.Login(user, customerData.CustomerDataId);
                         }
                         else
                         {
