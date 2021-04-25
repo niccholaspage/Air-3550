@@ -1,9 +1,11 @@
-﻿using Air_3550.Repository;
+﻿using Air_3550.Models;
+using Air_3550.Repository;
 using Air_3550.Services;
 using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
@@ -64,7 +66,15 @@ namespace Air_3550.ViewModels
                 {
                     if (PasswordHandling.CheckPassword(Password, user.PasswordHash))
                     {
-                        userSession.Login(user);
+                        if (user.Role == Role.CUSTOMER)
+                        {
+                            var customerData = await db.CustomerDatas.SingleAsync(customerData => customerData.UserId == user.UserId);
+                            userSession.Login(user, customerData.UserId);
+                        }
+                        else
+                        {
+                            userSession.Login(user, null);
+                        }
 
                         Feedback = null;
 

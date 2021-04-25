@@ -7,6 +7,8 @@ namespace Air_3550.Models
     {
         public int CustomerDataId { get; set; }
 
+        public int UserId { get; set; }
+
         public User User { get; set; }
 
         [Required]

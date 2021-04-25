@@ -18,6 +18,14 @@ namespace Air_3550.Services
             }
         }
 
+        private int? _customerDataId;
+
+        public int? CustomerDataId
+        {
+            get => _customerDataId;
+            private set => SetProperty(ref _customerDataId, value);
+        }
+
         private Role? _role;
 
         public Role? Role
@@ -26,7 +34,7 @@ namespace Air_3550.Services
             private set => SetProperty(ref _role, value);
         }
 
-        public void Login(User user)
+        public void Login(User user, int? CustomerDataId)
         {
             UserId = user.UserId;
 
@@ -41,6 +49,7 @@ namespace Air_3550.Services
         public void Logout()
         {
             UserId = null;
+            CustomerDataId = null;
             Role = null;
         }
     }
