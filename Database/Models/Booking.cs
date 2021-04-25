@@ -1,4 +1,5 @@
-﻿using Database.Util;
+﻿using Air_3550.Util;
+using Database.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,35 @@ namespace Air_3550.Models
         public User User { get; set; }
 
         public List<Ticket> Tickets { get; } = new();
+
+        public FlightPathWithDate DepartureFlightPathWithDate
+        {
+            get
+            {
+                List<Ticket> DepartingTickets = GetDepartureTickets();
+
+                FlightPath path = new(DepartingTickets.Select(Ticket => Ticket.ScheduledFlight.Flight).ToArray());
+
+                return new FlightPathWithDate(path, DepartingTickets.First().ScheduledFlight.DepartureDate);
+            }
+        }
+
+        public FlightPathWithDate ReturnFlightPathWithDate
+        {
+            get
+            {
+                List<Ticket> ReturnTickets = GetReturnTickets();
+
+                if (ReturnTickets.Count == 0)
+                {
+                    return null;
+                }
+
+                FlightPath path = new(ReturnTickets.Select(Ticket => Ticket.ScheduledFlight.Flight).ToArray());
+
+                return new FlightPathWithDate(path, ReturnTickets.First().ScheduledFlight.DepartureDate);
+            }
+        }
 
         private int GetFirstReturnTicketIndex()
         {
