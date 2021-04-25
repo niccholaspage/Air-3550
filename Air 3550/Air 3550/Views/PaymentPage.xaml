@@ -17,8 +17,8 @@
     <RelativePanel Margin="5 45 0 0" >
         <StackPanel Orientation="Horizontal" x:Name="PaymentInfo">
             <StackPanel>
-                <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}"/>
-                <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}"/>
+                <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
             </StackPanel>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="250" >
                 <Grid.ColumnDefinitions>

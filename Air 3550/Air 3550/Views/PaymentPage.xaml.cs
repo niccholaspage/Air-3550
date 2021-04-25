@@ -48,12 +48,12 @@ namespace Air_3550.Views
             ViewModel.DepartingFlightPath = pageParams.DepartingFlightPath;
             ViewModel.ReturnFlightPath = pageParams.ReturnFlightPath;
 
-            DepartureFlightPathControl.DataContext = ViewModel.DepartingFlightPath;
+            DepartureFlightPathControl.DataContext = new FlightPathWithDate(ViewModel.DepartingFlightPath, pageParams.DepartureDate);
             ViewModel.TotalCost = ViewModel.DepartingFlightPath.Price;
 
-            if (ViewModel.ReturnFlightPath != null)
+            if (pageParams.ReturnDate is DateTime returnDate)
             {
-                ReturnFlightPathControl.DataContext = ViewModel.ReturnFlightPath;
+                ReturnFlightPathControl.DataContext = new FlightPathWithDate(ViewModel.ReturnFlightPath, returnDate);
                 ViewModel.TotalCost += ViewModel.DepartingFlightPath.Price;
             }
         }
