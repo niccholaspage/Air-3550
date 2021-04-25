@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Air_3550.Models
@@ -17,6 +18,7 @@ namespace Air_3550.Models
 
         public List<Ticket> Tickets { get; } = new();
 
+        [NotMapped]
         public FlightPathWithDate DepartureFlightPathWithDate
         {
             get
@@ -29,6 +31,7 @@ namespace Air_3550.Models
             }
         }
 
+        [NotMapped]
         public FlightPathWithDate ReturnFlightPathWithDate
         {
             get
