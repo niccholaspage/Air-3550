@@ -9,12 +9,11 @@
 
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverterInverted" OnTrue="Collapsed" OnFalse="Visible"></converters:BoolToVisibilityConverter>
     </UserControl.Resources>
 
     <RelativePanel x:Name="HeaderPanel" Height="60">
         <Button Visibility="{x:Bind ContentFrame.CanGoBack, Mode=OneWay}" Click="BackButton_Click" RelativePanel.AlignLeftWithPanel="true" Margin="5">Back</Button>
-        <Button Visibility="{x:Bind userSession.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterInverted}}" Click="LoginButton_Click" RelativePanel.AlignRightWithPanel="true" Margin="5">Login</Button>
+        <Button Visibility="{x:Bind ShowLoginButton, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" Click="LoginButton_Click" RelativePanel.AlignRightWithPanel="true" Margin="5">Login</Button>
         <DropDownButton Content="My Account" Visibility="{x:Bind userSession.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" RelativePanel.AlignRightWithPanel="true" Margin="5">
             <DropDownButton.Flyout>
                 <MenuFlyout Placement="Bottom">
