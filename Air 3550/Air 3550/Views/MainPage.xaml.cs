@@ -48,11 +48,6 @@ namespace Air_3550.Views
             handleSearch();
         }
 
-        private void EditButton_Click(object _, RoutedEventArgs __)
-        {
-            Frame.Navigate(typeof(EditSchedulePage));
-        }
-
         private void TripTypeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is RadioButtons radioButtons)

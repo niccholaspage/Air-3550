@@ -21,7 +21,6 @@
                 <CalendarDatePicker x:Name="DepartureDatePicker" Date="{x:Bind ViewModel.DepartureDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="125" Margin="3" Header="Departure Date" VerticalAlignment="Bottom" />
                 <CalendarDatePicker x:Name="ReturnDatePicker" Date="{x:Bind ViewModel.ReturnDate, Mode=TwoWay}" PlaceholderText="Pick a date" Width="125" Margin="3" Header="Return Date" VerticalAlignment="Bottom" />
                 <Button x:Name="SearchButton" Click="SearchButton_Click" Margin="3" VerticalAlignment="Bottom">Search</Button>
-                <Button x:Name="EditButton" Click="EditButton_Click" Margin="3" VerticalAlignment="Bottom">Edit</Button>
             </StackPanel>
             <TextBlock HorizontalAlignment="Center" Text="{x:Bind ViewModel.Feedback, Mode=OneWay}" Foreground="Red"></TextBlock>
         </StackPanel>
