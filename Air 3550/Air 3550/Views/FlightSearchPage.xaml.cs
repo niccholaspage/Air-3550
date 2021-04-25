@@ -89,19 +89,20 @@ namespace Air_3550.Views
 
         private void proceedToPayment(FlightPath flightPath)
         {
-            var nextPage = typeof(PaymentPage);
             PaymentPage.Params paymentPageParams;
-
-            var departureFlightPathWithDate = new FlightPathWithDate(pageParams.DepartureFlightPath, pageParams.DepartureDate);
 
             if (pageParams.ReturnDate != null)
             {
+                var departureFlightPathWithDate = new FlightPathWithDate(pageParams.DepartureFlightPath, pageParams.DepartureDate);
+
                 var returnFlightPathWithDate = new FlightPathWithDate(flightPath, (DateTime)pageParams.ReturnDate);
 
                 paymentPageParams = new PaymentPage.Params(departureFlightPathWithDate, returnFlightPathWithDate);
             }
             else
             {
+                var departureFlightPathWithDate = new FlightPathWithDate(flightPath, pageParams.DepartureDate);
+
                 paymentPageParams = new PaymentPage.Params(departureFlightPathWithDate, null);
             }
 

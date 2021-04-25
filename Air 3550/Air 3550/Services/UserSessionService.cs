@@ -34,11 +34,13 @@ namespace Air_3550.Services
             private set => SetProperty(ref _role, value);
         }
 
-        public void Login(User user, int? CustomerDataId)
+        public void Login(User user, int? customerDataId)
         {
             UserId = user.UserId;
 
             Role = user.Role;
+
+            CustomerDataId = customerDataId;
         }
 
         public bool IsLoggedIn
