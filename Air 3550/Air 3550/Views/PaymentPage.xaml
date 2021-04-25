@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:util="using:Air_3550.Util"
-    xmlns:converters="using:Air_3550.Converters"
+    xmlns:converters="using:Air_3550.Converters" xmlns:controls="using:Air_3550.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -15,7 +15,7 @@
     </Page.Resources>
 
     <RelativePanel Margin="5 45 0 0" >
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" x:Name="PaymentInfo">
             <StackPanel>
                 <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}"/>
                 <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
@@ -26,6 +26,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="65" />
                     <RowDefinition Height="65" />
                     <RowDefinition Height="65" />
                     <RowDefinition Height="65" />
@@ -59,5 +60,10 @@
                 </Grid>
             </Grid>
         </StackPanel>
+        <RelativePanel RelativePanel.AlignRightWith="PaymentInfo" RelativePanel.Below="PaymentInfo">
+            <TextBlock Margin="2" RelativePanel.LeftOf="PaymentMethodDropdown" RelativePanel.AlignVerticalCenterWith="PurchaseButton">Payment Method:</TextBlock>
+            <controls:PaymentTypeDropDownButton Margin="2" x:Name="PaymentMethodDropdown" RelativePanel.LeftOf="PurchaseButton" RelativePanel.AlignVerticalCenterWith="PurchaseButton"></controls:PaymentTypeDropDownButton>
+            <Button Margin="2" x:Name="PurchaseButton" RelativePanel.AlignRightWithPanel="true">Purchase</Button>
+        </RelativePanel>
     </RelativePanel>
 </Page>

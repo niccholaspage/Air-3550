@@ -12,6 +12,7 @@
     <None Remove="Controls\AirportSuggestBox.xaml" />
     <None Remove="Controls\EditAccountInfoControl.xaml" />
     <None Remove="Controls\HeaderControl.xaml" />
+    <None Remove="Controls\PaymentTypeDropDownButton.xaml" />
     <None Remove="Controls\ResourceDictionary1.xaml" />
     <None Remove="Resources\Templates.xaml" />
     <None Remove="Views\AddFlightDialog.xaml" />
@@ -43,6 +44,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\PaymentTypeDropDownButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

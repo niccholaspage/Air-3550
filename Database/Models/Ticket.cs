@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Database.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Air_3550.Models
 {
@@ -10,6 +11,8 @@ namespace Air_3550.Models
         public ScheduledFlight ScheduledFlight { get; set; }
 
         public bool IsCanceled { get; set; }
+
+        public PaymentMethod PaymentMethod { get; set; }
 
         [Required]
         public Booking Booking { get; set; }
