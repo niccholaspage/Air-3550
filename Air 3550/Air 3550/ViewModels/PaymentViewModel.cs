@@ -19,6 +19,14 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _returnFlightPath, value);
         }
 
+        private decimal _totalCost;
+
+        public decimal TotalCost
+        {
+            get => _totalCost;
+            set => SetProperty(ref _totalCost, value);
+        }
+
         public bool IsReturnFlight => ReturnFlightPath != null;
     }
 }

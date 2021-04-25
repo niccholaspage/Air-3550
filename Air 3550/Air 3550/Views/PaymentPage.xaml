@@ -14,10 +14,29 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
     </Page.Resources>
 
-    <RelativePanel Margin="5 45 0 0">
-        <StackPanel>
-            <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}"/>
-            <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
+    <RelativePanel Margin="5 45 0 0" >
+        <StackPanel Orientation="Horizontal">
+            <StackPanel>
+                <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}"/>
+                <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </StackPanel>
+            <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="200" Background="Gray">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Run Text="Departure Flight Cost:"/>
+                    <Run Text="{x:Bind ViewModel.DepartingFlightPath.Price}"/>
+                    </TextBlock>
+                    <TextBlock Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Run Text="Return Flight Cost:"/>
+                    <Run Text="{x:Bind ViewModel.ReturnFlightPath.Price}"/>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Run Text="Total Flight Cost:"/>
+                    <Run Text="{x:Bind ViewModel.TotalCost}"/>
+                    </TextBlock>
+                </StackPanel>
+            </RelativePanel>
         </StackPanel>
     </RelativePanel>
 </Page>
