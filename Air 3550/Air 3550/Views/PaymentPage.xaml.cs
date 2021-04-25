@@ -1,5 +1,6 @@
 ﻿using Air_3550.Util;
 using Air_3550.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
@@ -54,6 +55,11 @@ namespace Air_3550.Views
             {
                 ReturnFlightPathControl.DataContext = new FlightPathWithDate(ViewModel.ReturnFlightPath, returnDate);
             }
+        }
+
+        private async void PurchaseButton_Click(object _, RoutedEventArgs __)
+        {
+            await ViewModel.PurchaseTrip();
         }
     }
 }

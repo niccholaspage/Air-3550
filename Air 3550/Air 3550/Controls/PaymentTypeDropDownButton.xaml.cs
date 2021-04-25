@@ -1,4 +1,5 @@
 ﻿using Database.Models;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 
@@ -9,6 +10,14 @@ namespace Air_3550.Controls
 {
     public sealed partial class PaymentTypeDropDownButton : UserControl
     {
+        public static readonly DependencyProperty SelectedPaymentMethodProperty = DependencyProperty.Register(nameof(SelectedPaymentMethod), typeof(PaymentMethod), typeof(AirportSuggestBox), new PropertyMetadata(default(PaymentMethod)));
+
+        public PaymentMethod SelectedPaymentMethod
+        {
+            get => (PaymentMethod)GetValue(SelectedPaymentMethodProperty);
+            set => SetValue(SelectedPaymentMethodProperty, value);
+        }
+
         public PaymentTypeDropDownButton()
         {
             this.InitializeComponent();
@@ -19,14 +28,11 @@ namespace Air_3550.Controls
             }
 
             PaymentComboBox.SelectedIndex = 0;
-        }
 
-        public PaymentMethod SelectedPaymentMethod
-        {
-            get
+            PaymentComboBox.SelectionChanged += (_, __) =>
             {
-                return (PaymentMethod)PaymentComboBox.SelectedIndex;
-            }
+                SelectedPaymentMethod = (PaymentMethod)PaymentComboBox.SelectedIndex;
+            };
         }
     }
 }
