@@ -39,6 +39,14 @@ namespace Air_3550.Views
             set => SetProperty(ref _endDate, value);
         }
 
+        private string _feedback;
+
+        public string Feedback
+        {
+            get => _feedback;
+            set => SetProperty(ref _feedback, value);
+        }
+
         public async Task updateSflights()
         {
             using (var db = new AirContext())
@@ -54,17 +62,19 @@ namespace Air_3550.Views
 
         public async Task updateSflightsDate()
         {
-            if (StartDate != null && EndDate != null)
-                using (var db = new AirContext())
-                {
-                    Sflights = await db.ScheduledFlights
-                        .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
-                        .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
-                        .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
-                        .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                        .Where(ScheduledFlight => ScheduledFlight.DepartureDate <= EndDate && ScheduledFlight.DepartureDate >= StartDate)
-                        .ToListAsync();
-                }
+            DateTime Start = ((DateTimeOffset)StartDate).DateTime.Date;
+            DateTime End = ((DateTimeOffset)EndDate).DateTime.Date;
+            //Do null trick to Go to infinity/-infinity if one is not set
+            using (var db = new AirContext())
+            {
+                Sflights = await db.ScheduledFlights
+                    .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
+                    .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
+                    .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
+                    .Include(ScheduledFlight => ScheduledFlight.Tickets)
+                    .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start)&&(ScheduledFlight.DepartureDate <= End))
+                    .ToListAsync();
+            }
         }
 
         public async Task SaveSummary()

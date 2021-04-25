@@ -15,18 +15,20 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="50"></ColumnDefinition>
                 <ColumnDefinition Width="30"></ColumnDefinition>
                 <ColumnDefinition Width="50"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{x:Bind Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
-                <SymbolIcon Grid.Column="2" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
-                <TextBlock Grid.Column="3" Text="{x:Bind Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="4" Text="{x:Bind Flight.Number}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="5" HorizontalAlignment="Center">
+                <TextBlock Grid.Column="0" Text="{x:Bind DepartureDate}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Text="{x:Bind Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <SymbolIcon Grid.Column="3" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
+                <TextBlock Grid.Column="4" Text="{x:Bind Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="5" Text="{x:Bind Flight.Number}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="6" HorizontalAlignment="Center">
                     <Run Text="{x:Bind Tickets.Count}"/>
                     <Run Text="/"/>
                     <Run Text="{x:Bind Flight.Plane.MaxSeats}"/>
@@ -57,10 +59,12 @@
                     <Grid Margin="10 0 0 10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
                             <ColumnDefinition Width="130"></ColumnDefinition>
                             <ColumnDefinition Width="150"></ColumnDefinition>
                             <ColumnDefinition Width="150"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Departure Date</TextBlock>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Departure Time</TextBlock>
                         <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
                         <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
@@ -79,6 +83,7 @@
             
             <Button Click="SaveCSV_Click" HorizontalAlignment="Right">Generate CSV</Button>
             <Button Click="UpdateDates_Click" HorizontalAlignment="Right">Update Date</Button>
+            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"/>
             
         </StackPanel>
 
