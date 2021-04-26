@@ -42,5 +42,15 @@ namespace Air_3550.Views
             dialog1.XamlRoot = this.Content.XamlRoot;
             await dialog1.ShowAsync();
         }
+
+        private async void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void CancelReturn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

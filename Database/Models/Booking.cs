@@ -21,6 +21,9 @@ namespace Air_3550.Models
 
         public int? FirstReturnTicketIndex { get; set; }
 
+        public bool CanCancel => DateTime.Now <= DepartureFlightPathWithDate.Date.Add(DepartureFlightPathWithDate.FirstDepartureFlightTimestamp.TimeOfDay).AddHours(-1);
+        public bool CanCancelReturn => (!CanCancel)&&(HasReturnTickets)&&(DateTime.Now <= ReturnFlightPathWithDate.Date.Add(ReturnFlightPathWithDate.FirstDepartureFlightTimestamp.TimeOfDay).AddHours(-1));
+
         [NotMapped]
         public FlightPathWithDate DepartureFlightPathWithDate
         {
