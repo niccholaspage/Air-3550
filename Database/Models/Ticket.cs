@@ -12,6 +12,8 @@ namespace Air_3550.Models
 
         public bool IsCanceled { get; set; }
 
+        public bool PointsEarned { get; set; }
+
         public PaymentMethod PaymentMethod { get; set; }
 
         [Required]
