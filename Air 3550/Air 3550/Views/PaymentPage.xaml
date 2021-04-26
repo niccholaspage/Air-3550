@@ -22,37 +22,20 @@
         </StackPanel>
         <StackPanel x:Name="PricingInfo" Padding="10 10 0 10" Orientation="Vertical" VerticalAlignment="Center" RelativePanel.RightOf="FlightPaths" RelativePanel.AlignBottomWith="FlightPaths">
             <Grid Width="250">
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="0" 
-                           Text="Departure Flight Cost:"/>
-                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
-                            <Run Text="$"/>
-                            <Run Text="{x:Bind ViewModel.DepartingFlightPathWithDate.FlightPath.Price}"/>
-                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="0"  Text="Departure Flight Cost:"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind ViewModel.DepartingFlightPathWithDate.FlightPath.FormattedPrice}" />
             </Grid>
             <Grid Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}" Width="250">
-                <TextBlock
-                           HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
-                           Text="Return Flight Cost:"/>
-                <TextBlock
-                           HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
-                        <Run Text="$"/>
-                        <Run Text="{x:Bind ViewModel.ReturnFlightPathWithDate.FlightPath.Price}"/>
-                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Text="Return Flight Cost:"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind ViewModel.ReturnFlightPathWithDate.FlightPath.FormattedPrice}"></TextBlock>
             </Grid>
             <Grid Width="250">
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
-                    Text="Total Flight Cost in Points:"/>
-                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
-                        <Run Text="{x:Bind ViewModel.TotalCostInPoints}"/>
-                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Text="Total Flight Cost in Points:"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind ViewModel.TotalCostInPoints}"></TextBlock>
             </Grid>
             <Grid Width="250">
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
-                    Text="Total Flight Cost:"/>
-                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
-                        <Run Text="$"/>
-                        <Run Text="{x:Bind ViewModel.TotalCost}"/>
-                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Text="Total Flight Cost:"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind GetFormattedTotalCost()}"></TextBlock>
             </Grid>
         </StackPanel>
         <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls" RelativePanel.Below="FlightPaths">

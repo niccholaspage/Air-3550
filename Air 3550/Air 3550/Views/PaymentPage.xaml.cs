@@ -35,6 +35,11 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
+        public string GetFormattedTotalCost()
+        {
+            return ViewModel.TotalCost.FormatAsMoney();
+        }
+
         public string GetFormattedAccountBalance()
         {
             return "Account Balance: " + ViewModel.AccountBalance.FormatAsMoney();
