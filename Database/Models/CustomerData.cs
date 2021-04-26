@@ -34,7 +34,8 @@ namespace Air_3550.Models
         [Required]
         public string CreditCardNumber { get; set; } // Don't ever store it like this in a real app...
 
-        public int AccountBalance { get; set; } // Store account balance in cents, make it look like dollars in the UI.
+        public decimal AccountBalance { get; set; } // Store account balance as a decimal, make it look like dollars in the UI.
+
         public int RewardPointsBalance { get; set; }
         public int RewardPointsUsed { get; set; }
 
