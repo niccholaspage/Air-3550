@@ -10,7 +10,7 @@ namespace Air_3550.Controls
 {
     public sealed partial class PaymentTypeDropDownButton : UserControl
     {
-        public static readonly DependencyProperty SelectedPaymentMethodProperty = DependencyProperty.Register(nameof(SelectedPaymentMethod), typeof(PaymentMethod), typeof(AirportSuggestBox), new PropertyMetadata(default(PaymentMethod)));
+        public static readonly DependencyProperty SelectedPaymentMethodProperty = DependencyProperty.Register(nameof(SelectedPaymentMethod), typeof(PaymentMethod), typeof(EntitySuggestBox), new PropertyMetadata(default(PaymentMethod)));
 
         public PaymentMethod SelectedPaymentMethod
         {

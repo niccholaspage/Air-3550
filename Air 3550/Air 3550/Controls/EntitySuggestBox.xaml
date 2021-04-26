@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Air_3550.Controls.AirportSuggestBox"
+    x:Class="Air_3550.Controls.EntitySuggestBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Air_3550.Controls"

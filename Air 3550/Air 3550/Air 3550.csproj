@@ -9,8 +9,8 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Controls\AirportSuggestBox.xaml" />
     <None Remove="Controls\EditAccountInfoControl.xaml" />
+    <None Remove="Controls\EntitySuggestBox.xaml" />
     <None Remove="Controls\HeaderControl.xaml" />
     <None Remove="Controls\PaymentTypeDropDownButton.xaml" />
     <None Remove="Controls\ResourceDictionary1.xaml" />
@@ -98,7 +98,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Controls\AirportSuggestBox.xaml">
+    <Page Update="Controls\EntitySuggestBox.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
