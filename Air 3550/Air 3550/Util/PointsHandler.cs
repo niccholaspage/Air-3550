@@ -25,13 +25,13 @@ namespace Air_3550.Util
 
             foreach (var booking in customerData.Bookings)
             {
-                if (booking.HasFirstDepartureFlightDeparted())
+                if (booking.DepartureFlightPathWithDate.HasFirstFlightDeparted())
                 {
                     booking.GetDepartureTickets().ForEach(ticket => ticket.PointsEarned = true);
                     newPoints += (int)(booking.DepartureFlightPathWithDate.FlightPath.Price * 10);
                 }
 
-                if (booking.HasReturnTickets && booking.HasFirstReturnFlightDeparted())
+                if (booking.HasReturnTickets && booking.ReturnFlightPathWithDate.HasFirstFlightDeparted())
                 {
                     booking.GetReturnTickets().ForEach(ticket => ticket.PointsEarned = true);
                     newPoints += (int)(booking.ReturnFlightPathWithDate.FlightPath.Price * 10);

@@ -17,5 +17,12 @@ namespace Database.Util
             _flightPath = flightPath;
             _date = date;
         }
+
+        public bool HasFirstFlightDeparted()
+        {
+            var departureDateAndTime = _date + _flightPath.FirstFlightDepartureTime;
+
+            return DateTime.Now >= departureDateAndTime;
+        }
     }
 }

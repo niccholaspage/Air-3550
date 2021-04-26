@@ -120,23 +120,5 @@ namespace Air_3550.Models
             totalDuration += finalFlightTime;
             return totalDuration;
         }
-
-        public bool HasFirstDepartureFlightDeparted()
-        {
-            var firstTicket = Tickets.First();
-
-            var departureTimestamp = firstTicket.ScheduledFlight.DepartureDate + firstTicket.ScheduledFlight.Flight.DepartureTime;
-
-            return DateTime.Now >= departureTimestamp;
-        }
-
-        public bool HasFirstReturnFlightDeparted()
-        {
-            var firstReturnTicket = GetReturnTickets()[0];
-
-            var departureTimestamp = firstReturnTicket.ScheduledFlight.DepartureDate + firstReturnTicket.ScheduledFlight.Flight.DepartureTime;
-
-            return DateTime.Now >= departureTimestamp;
-        }
     }
 }
