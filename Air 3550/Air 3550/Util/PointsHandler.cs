@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Air_3550.Util
 {
-    class PointsHandler
+    public class PointsHandler
     {
         public static async Task<int> UpdateAndRetrievePointsBalance(AirContext db)
         {

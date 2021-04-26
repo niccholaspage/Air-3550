@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using Air_3550.Models;
+using Air_3550.Util;
 
 namespace Air_3550.ViewModels
 {
@@ -76,13 +77,13 @@ namespace Air_3550.ViewModels
         {
             using (var db = new AirContext())
             {
-                var customerDataBalances = await db.CustomerDatas
+                var accountBalance = await db.CustomerDatas
                     .Where(customerData => customerData.UserId == userSession.UserId)
-                .Select(customerData => new { customerData.RewardPointsBalance, customerData.AccountBalance })
+                .Select(customerData => customerData.AccountBalance)
                 .SingleAsync();
 
-                AccountBalance = customerDataBalances.AccountBalance;
-                RewardPoints = customerDataBalances.RewardPointsBalance;
+                AccountBalance = accountBalance;
+                RewardPoints = await PointsHandler.UpdateAndRetrievePointsBalance(db);
             }
         }
 
