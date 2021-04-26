@@ -12,22 +12,7 @@ namespace Air_3550.ViewModels
     {
         public ObservableCollection<Flight> Flights = new();
 
-        private int _selectedPathIndex = -1;
-
-        public int SelectedPathIndex
-        {
-            get => _selectedPathIndex;
-            set
-            {
-                SetProperty(ref _selectedPathIndex, value);
-
-                OnPropertyChanged(nameof(CanContinue));
-            }
-        }
-
-        public bool CanContinue => SelectedPathIndex != -1;
-
-        public async void CancelFlight(Flight flight)
+        public async Task CancelFlight(Flight flight)
         {
             using (var db = new AirContext())
             {

@@ -14,6 +14,30 @@
 
     <Page.Resources>
         <converters:IntConverter x:Key="IntConverter"></converters:IntConverter>
+
+        <DataTemplate x:Key="ScheduleListViewTemplate" x:DataType="data:Flight">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="320"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{x:Bind FlightId}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{x:Bind Number}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Text="{x:Bind DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="3" HorizontalAlignment="Center">
+            <Run Text="{Binding OriginAirport.CityWithState}"/>
+            <Run Text="to"/>
+            <Run Text="{Binding DestinationAirport.CityWithState}"/>
+                </TextBlock>
+                <StackPanel Grid.Column="4" Orientation="Horizontal">
+                    <AppBarButton Icon="Edit" Click="EditFlight_Click" CommandParameter="{x:Bind}" Label="Edit"></AppBarButton>
+                    <AppBarButton Icon="Delete" Click="RemoveFlight_Click" CommandParameter="{x:Bind}" Label="Delete"></AppBarButton>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid>
@@ -24,8 +48,8 @@
                     <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Flights</TextBlock>
                 </StackPanel>
             </StackPanel>
-            <ListView x:Name="displayedList"
-            SelectedIndex="{x:Bind ViewModel.SelectedPathIndex, Mode=TwoWay}"
+            <ListView
+            SelectionMode="None"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
             ItemTemplate="{StaticResource ScheduleListViewTemplate}"
@@ -49,9 +73,6 @@
         </RelativePanel>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Flight</Button>
-            <Button Click="RemoveFlight_Click" HorizontalAlignment="Right">Remove Flight</Button>
-            <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
-            <Button Click="EditPlane_Click" HorizontalAlignment="Right">Edit Plane</Button>
         </StackPanel>
     </Grid>
 </Page>

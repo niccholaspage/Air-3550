@@ -1,9 +1,11 @@
 ﻿
 using Air_3550.Models;
+using Air_3550.Services;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using Microsoft.Extensions.DependencyInjection;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -15,14 +17,17 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class EditSchedulePage : Page
     {
+        readonly EditScheduleViewModel ViewModel = new();
+
+        private readonly UserSessionService userSessionService;
+
         public EditSchedulePage()
         {
+            userSessionService = App.Current.Services.GetService<UserSessionService>();
+
             this.InitializeComponent();
             this.Loaded += async (_, __) => await ViewModel.UpdateFlights();
-
         }
-
-        readonly EditScheduleViewModel ViewModel = new();
 
 
         private async void AddFlight_Click(object sender, RoutedEventArgs e)
@@ -38,38 +43,36 @@ namespace Air_3550.Views
             }
         }
 
-        private async void RemoveFlight_Click(object sender, RoutedEventArgs e)
+        private async void RemoveFlight_Click(object sender, RoutedEventArgs _)
         {
-            Flight cancel = (Flight)displayedList.SelectedItem;
-            if (cancel != null)
-            {
-                ViewModel.CancelFlight(cancel);
-            }
+            var button = (Button)sender;
+            var flight = (Flight)button.CommandParameter;
+            await ViewModel.CancelFlight(flight);
         }
 
-        private async void EditFlight_Click(object sender, RoutedEventArgs e)
+        private async void EditFlight_Click(object sender, RoutedEventArgs _)
         {
-            Flight edit = (Flight)displayedList.SelectedItem;
-            if (edit != null)
+            var button = (Button)sender;
+            Flight flight = (Flight)button.CommandParameter;
+
+            if (userSessionService.Role == Role.MARKETING_MANAGER)
             {
-                EditFlightDialog dialog1 = new(edit);
+                EditPlaneDialog dialog1 = new EditPlaneDialog(flight);
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed
                 if (dialog1.Result != null) await ViewModel.UpdateFlights();
             }
-        }
-
-        private async void EditPlane_Click(object sender, RoutedEventArgs e)
-        {
-            Flight edit = (Flight)displayedList.SelectedItem;
-            if (edit != null)
+            else
             {
-                EditPlaneDialog dialog1 = new EditPlaneDialog(edit);
+                EditFlightDialog dialog1 = new(flight);
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed
-                if (dialog1.Result != null) await ViewModel.UpdateFlights();
+                if (dialog1.Result != null)
+                {
+                    await ViewModel.UpdateFlights();
+                }
             }
         }
     }
