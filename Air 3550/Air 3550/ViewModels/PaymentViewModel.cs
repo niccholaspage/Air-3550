@@ -21,8 +21,6 @@ namespace Air_3550.ViewModels
         public PaymentViewModel()
         {
             userSession = App.Current.Services.GetService<UserSessionService>();
-
-            Task.Run(FetchBalances);
         }
 
         private string _feedback;
@@ -57,23 +55,23 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _selectedPaymentMethod, value);
         }
 
-        private decimal _accountBalance;
+        private string _formattedAccountBalance;
 
-        public decimal AccountBalance
+        public string FormattedAccountBalance
         {
-            get => _accountBalance;
-            set => SetProperty(ref _accountBalance, value);
+            get => _formattedAccountBalance;
+            set => SetProperty(ref _formattedAccountBalance, value);
         }
 
-        private int _rewardPoints;
+        private string _formattedRewardPoints;
 
-        public int RewardPoints
+        public string FormattedRewardPoints
         {
-            get => _rewardPoints;
-            set => SetProperty(ref _rewardPoints, value);
+            get => _formattedRewardPoints;
+            set => SetProperty(ref _formattedRewardPoints, value);
         }
 
-        public async void FetchBalances()
+        public async Task FetchBalances()
         {
             using (var db = new AirContext())
             {
@@ -82,8 +80,11 @@ namespace Air_3550.ViewModels
                 .Select(customerData => customerData.AccountBalance)
                 .SingleAsync();
 
-                AccountBalance = accountBalance;
-                RewardPoints = (await PointsHandler.UpdateAndRetrievePointsBalance(db)).RewardPointsBalance;
+                FormattedAccountBalance = "Account Balance: " + accountBalance.FormatAsMoney();
+
+                var pointValues = await PointsHandler.UpdateAndRetrievePointsBalance(db);
+
+                FormattedRewardPoints = "Reward Points: " + pointValues.RewardPointsBalance;
             }
         }
 

@@ -33,21 +33,13 @@ namespace Air_3550.Views
         public PaymentPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += async (_, __) => await ViewModel.FetchBalances();
         }
 
         public string GetFormattedTotalCost()
         {
             return ViewModel.TotalCost.FormatAsMoney();
-        }
-
-        public string GetFormattedAccountBalance()
-        {
-            return "Account Balance: " + ViewModel.AccountBalance.FormatAsMoney();
-        }
-
-        public string GetRewardPoints()
-        {
-            return "Reward Points: " + ViewModel.RewardPoints;
         }
 
         readonly PaymentViewModel ViewModel = new();
