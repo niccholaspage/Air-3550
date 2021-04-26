@@ -71,7 +71,12 @@ namespace Air_3550.Views
 
         private async void PurchaseButton_Click(object _, RoutedEventArgs __)
         {
-            await ViewModel.PurchaseTrip();
+            if (await ViewModel.PurchaseTrip())
+            {
+                Frame.Navigate(typeof(MainPage), true);
+
+                Frame.BackStack.Clear();
+            }
         }
     }
 }

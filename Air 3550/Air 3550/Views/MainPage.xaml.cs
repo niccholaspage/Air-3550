@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 using Windows.System;
 
@@ -32,6 +33,16 @@ namespace Air_3550.Views
         }
 
         readonly MainViewModel ViewModel = new();
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is not null)
+            {
+                BookedFlightsInfoBar.IsOpen = true;
+            }
+        }
 
         private void handleSearch()
         {
