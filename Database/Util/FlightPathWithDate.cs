@@ -18,11 +18,11 @@ namespace Database.Util
             _date = date;
         }
 
+        public DateTime FirstDepartureFlightTimestamp => _date + _flightPath.FirstFlightDepartureTime;
+
         public bool HasFirstFlightDeparted()
         {
-            var departureDateAndTime = _date + _flightPath.FirstFlightDepartureTime;
-
-            return DateTime.Now >= departureDateAndTime;
+            return DateTime.Now >= FirstDepartureFlightTimestamp;
         }
     }
 }

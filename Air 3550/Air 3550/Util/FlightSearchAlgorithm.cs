@@ -100,6 +100,15 @@ namespace Air_3550.Util
 
                     var departureDateAndTime = departureDate + flightPath.FirstFlightDepartureTime;
 
+                    // Check if the first flight of the flight path has already departed. If so,
+                    // remove the flight path.
+                    if (DateTime.Now >= departureDateAndTime)
+                    {
+                        flightPaths.RemoveAt(index);
+
+                        continue;
+                    }
+
                     var flightDepartureTimeline = flightPath.FlightDepartureTimeline;
 
                     for (int i = 0; i < flightPath.Flights.Count; i++)
