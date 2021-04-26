@@ -37,6 +37,15 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _destinationId, value);
         }
 
+        private int? _planeId;
+
+        [Required(ErrorMessage = "Please enter a valid plane.")]
+        public int? PlaneId
+        {
+            get => _planeId;
+            set => SetProperty(ref _planeId, value);
+        }
+
         private int? _number;
 
         [Required(ErrorMessage = "Please enter number.")]
@@ -67,16 +76,12 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                var plane1 = await db.Planes.SingleOrDefaultAsync(plane1 => plane1.Model == "Boeing 777");
-
                 var flightN = new Flight
                 {
-                    Number = (int)Number,
                     OriginAirportId = (int)OriginId,
                     DestinationAirportId = (int)DestinationId,
                     DepartureTime = Depart,
-                    Plane = plane1,
-                    PlaneId = 3
+                    PlaneId = (int)_planeId
                 };
 
                 await db.Flights.AddAsync(flightN);

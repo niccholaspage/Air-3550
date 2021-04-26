@@ -88,7 +88,7 @@ namespace Air_3550.Controls
                     foreach (var plane in planes)
                     {
                         EntityIds.Add(plane.PlaneId);
-                        EntityNames.Add(plane.Model + "(" + plane.MaxSeats + " seats)");
+                        EntityNames.Add(plane.Model + " (" + plane.MaxSeats + " seats)");
                     }
                 }
             }

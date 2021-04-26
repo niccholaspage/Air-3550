@@ -31,6 +31,5 @@ namespace Air_3550.Views
             if (result != null) this.Hide();
             Result = result;
         }
-
     }
 }
