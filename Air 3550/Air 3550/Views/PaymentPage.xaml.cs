@@ -34,6 +34,16 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
+        public string GetFormattedAccountBalance()
+        {
+            return "Account Balance: $" + ViewModel.AccountBalance;
+        }
+
+        public string GetRewardPoints()
+        {
+            return "Reward Points: " + ViewModel.RewardPoints;
+        }
+
         readonly PaymentViewModel ViewModel = new();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

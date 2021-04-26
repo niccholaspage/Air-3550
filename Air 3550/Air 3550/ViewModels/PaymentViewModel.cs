@@ -20,6 +20,8 @@ namespace Air_3550.ViewModels
         public PaymentViewModel()
         {
             userSession = App.Current.Services.GetService<UserSessionService>();
+
+            Task.Run(FetchBalances);
         }
 
         private string _feedback;
@@ -52,6 +54,36 @@ namespace Air_3550.ViewModels
         {
             get => _selectedPaymentMethod;
             set => SetProperty(ref _selectedPaymentMethod, value);
+        }
+
+        private decimal _accountBalance;
+
+        public decimal AccountBalance
+        {
+            get => _accountBalance;
+            set => SetProperty(ref _accountBalance, value);
+        }
+
+        private int _rewardPoints;
+
+        public int RewardPoints
+        {
+            get => _rewardPoints;
+            set => SetProperty(ref _rewardPoints, value);
+        }
+
+        public async void FetchBalances()
+        {
+            using (var db = new AirContext())
+            {
+                var customerDataBalances = await db.CustomerDatas
+                    .Where(customerData => customerData.UserId == userSession.UserId)
+                .Select(customerData => new { customerData.RewardPointsBalance, customerData.AccountBalance })
+                .SingleAsync();
+
+                AccountBalance = customerDataBalances.AccountBalance;
+                RewardPoints = customerDataBalances.RewardPointsBalance;
+            }
         }
 
         public decimal TotalCost => DepartingFlightPathWithDate.FlightPath.Price + (ReturnFlightPathWithDate != null ? ReturnFlightPathWithDate.FlightPath.Price : 0.0m);
