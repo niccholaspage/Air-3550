@@ -14,13 +14,14 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
     </Page.Resources>
 
-    <RelativePanel Margin="5 45 0 0" >
-        <StackPanel Orientation="Horizontal" x:Name="PaymentInfo">
-            <StackPanel>
+    <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <TextBlock FontSize="50" x:Name="Header" Text="Purchase Booking" RelativePanel.AlignHorizontalCenterWithPanel="true"></TextBlock>
+        <RelativePanel RelativePanel.Below="Header" x:Name="PaymentInfo">
+            <StackPanel x:Name="FlightPaths">
                 <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}"/>
                 <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
             </StackPanel>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="250" >
+            <Grid RelativePanel.RightOf="FlightPaths" HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="250" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250" />
                     <ColumnDefinition />
@@ -59,6 +60,10 @@
                     </TextBlock>
                 </Grid>
             </Grid>
+        </RelativePanel>
+        <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls">
+            <TextBlock x:Name="AccountBalanceText" Text="Account Balance: "></TextBlock>
+            <TextBlock x:Name="RewardPoints" Text="Reward Points: "></TextBlock>
         </StackPanel>
         <RelativePanel x:Name="PurchaseControls" RelativePanel.AlignRightWith="PaymentInfo" RelativePanel.Below="PaymentInfo">
             <TextBlock Margin="2" RelativePanel.LeftOf="PaymentMethodDropdown" RelativePanel.AlignVerticalCenterWith="PurchaseButton">Payment Method:</TextBlock>
