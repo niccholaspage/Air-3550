@@ -21,6 +21,12 @@ namespace Air_3550.Util
                 .ThenInclude(booking => booking.Tickets)
                 .ThenInclude(ticket => ticket.ScheduledFlight)
                 .ThenInclude(scheduledFlight => scheduledFlight.Flight)
+                .ThenInclude(flight => flight.OriginAirport)
+                .Include(customerData => customerData.Bookings)
+                .ThenInclude(booking => booking.Tickets)
+                .ThenInclude(ticket => ticket.ScheduledFlight)
+                .ThenInclude(scheduledFlight => scheduledFlight.Flight)
+                .ThenInclude(flight => flight.DestinationAirport)
                 .SingleOrDefaultAsync(customerData => customerData.CustomerDataId == userSessionService.CustomerDataId);
 
             int newPoints = 0;
