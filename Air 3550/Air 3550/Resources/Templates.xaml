@@ -86,4 +86,95 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="BookingListTemplate">
+        <StackPanel Orientation="Vertical">
+            <Grid Width="650" Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding DepartureFlightPathWithDate.FormattedDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock FontSize="35" Text="{Binding DepartureFlightPathWithDate.FlightPath.FirstFlightDepartureAirportCode}" />
+                    <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedDepartureTime}" HorizontalAlignment="Center" />
+                </StackPanel>
+                <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
+                <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock FontSize="35" Text="{Binding DepartureFlightPathWithDate.FlightPath.LastFlightArrivalAirportCode}" />
+                    <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedArrivalTime}" HorizontalAlignment="Center" />
+                </StackPanel>
+                <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
+                <Button Content="{Binding DepartureFlightPathWithDate.FlightPath.FormattedStops}" IsEnabled="{Binding NoStop, Mode=OneWay}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" >
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="View Stops" Margin="0,0,0,12" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
+
+
+            <Grid Width="650" Height="100" Visibility="{Binding HasReturnTickets, Converter={StaticResource BoolToVisibilityConverter}}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding ReturnFlightPathWithDate.FormattedDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock FontSize="35" Text="{Binding ReturnFlightPathWithDate.FlightPath.FirstFlightDepartureAirportCode}" />
+                    <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedDepartureTime}" HorizontalAlignment="Center" />
+                </StackPanel>
+                <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
+                <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock FontSize="35" Text="{Binding ReturnFlightPathWithDate.FlightPath.LastFlightArrivalAirportCode}" />
+                    <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedArrivalTime}" HorizontalAlignment="Center" />
+                </StackPanel>
+                <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
+                <Button Content="{Binding ReturnFlightPathWithDate.FlightPath.FormattedStops}" IsEnabled="{Binding NoStop, Mode=OneWay}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" >
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="View Stops" Margin="0,0,0,12" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>

@@ -13,25 +13,15 @@
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
     </Page.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <ListView x:Name="displayedList" Grid.Column="0" Grid.Row="0"
+    <RelativePanel>
+        <ListView x:Name="displayedList"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
             SelectedItem="{x:Bind ViewModel.SelectedBooking, Mode=TwoWay}"
             SelectionMode="Single"
             ItemsSource="{x:Bind ViewModel.BookingsC}">
             <ListView.Header>
-                <Grid Margin="10 0 0 10">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
@@ -138,7 +128,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="TicketsDisplayedList" Grid.Column="1" Grid.Row="0"
+        <ListView x:Name="TicketsDisplayedList"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
             ItemsSource="{x:Bind ViewModel.SelectedBooking.Tickets, Mode=OneWay}">
@@ -166,5 +156,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+    </RelativePanel>
 </Page>
