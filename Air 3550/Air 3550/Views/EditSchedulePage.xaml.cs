@@ -44,7 +44,6 @@ namespace Air_3550.Views
             if (cancel != null)
             {
                 ViewModel.CancelFlight(cancel);
-                await ViewModel.UpdateFlights();
             }
         }
 

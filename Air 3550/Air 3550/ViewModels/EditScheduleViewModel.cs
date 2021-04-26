@@ -27,15 +27,17 @@ namespace Air_3550.ViewModels
 
         public bool CanContinue => SelectedPathIndex != -1;
 
-        public async void CancelFlight(Flight cancelling)
+        public async void CancelFlight(Flight flight)
         {
             using (var db = new AirContext())
             {
-                var search = await db.Flights.SingleOrDefaultAsync(search => search.FlightId == cancelling.FlightId);
+                var lookupFlight = await db.Flights.FindAsync(flight.FlightId);
 
-                search.IsCanceled = true;
+                lookupFlight.IsCanceled = true;
 
                 await db.SaveChangesAsync();
+
+                Flights.RemoveAt(Flights.IndexOf(flight));
             }
         }
 
@@ -48,7 +50,7 @@ namespace Air_3550.ViewModels
                 var queriedFlights = await db.Flights
                     .Include(Flight => Flight.OriginAirport)
                     .Include(Flight => Flight.DestinationAirport)
-                    .Where(f => f.IsCanceled == false)
+                    .Where(flight => !flight.IsCanceled)
                     .ToListAsync();
 
                 foreach (Flight a in queriedFlights)
