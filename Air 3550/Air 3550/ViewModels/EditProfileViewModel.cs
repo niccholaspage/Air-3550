@@ -2,11 +2,13 @@
 using Air_3550.Repository;
 using Air_3550.Services;
 using Air_3550.Util;
+using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 
 namespace Air_3550.ViewModels
 {
@@ -14,38 +16,36 @@ namespace Air_3550.ViewModels
     {
         private readonly UserSessionService userSession;
 
-        private decimal _accountBalance;
+        private string _formattedAccountBalance;
 
-        public decimal AccountBalance
+        public string FormattedAccountBalance
         {
-            get => _accountBalance;
-            set => SetProperty(ref _accountBalance, value);
+            get => _formattedAccountBalance;
+            set => SetProperty(ref _formattedAccountBalance, value);
         }
 
-        private int _rewardPoints;
+        private string _formattedRewardPoints;
 
-        public int RewardPoints
+        public string FormattedRewardPoints
         {
-            get => _rewardPoints;
-            set => SetProperty(ref _rewardPoints, value);
+            get => _formattedRewardPoints;
+            set => SetProperty(ref _formattedRewardPoints, value);
         }
 
-        private int _totalRewardPointsUsed;
+        private string _formattedTotalRewardPointsUsed;
 
-        public int TotalRewardPointsUsed
+        public string FormattedTotalRewardPointsUsed
         {
-            get => _totalRewardPointsUsed;
-            set => SetProperty(ref _totalRewardPointsUsed, value);
+            get => _formattedTotalRewardPointsUsed;
+            set => SetProperty(ref _formattedTotalRewardPointsUsed, value);
         }
 
         public EditProfileViewModel()
         {
             userSession = App.Current.Services.GetService<UserSessionService>();
-
-            Task.Run(FetchBalances);
         }
 
-        public async void FetchBalances()
+        public async Task FetchBalances()
         {
             using (var db = new AirContext())
             {
@@ -54,11 +54,12 @@ namespace Air_3550.ViewModels
                 .Select(customerData => customerData.AccountBalance)
                 .SingleAsync();
 
-                AccountBalance = accountBalance;
+                FormattedAccountBalance = "Account Balance: " + accountBalance.FormatAsMoney();
 
                 var pointValues = await PointsHandler.UpdateAndRetrievePointsBalance(db);
-                RewardPoints = pointValues.RewardPointsBalance;
-                TotalRewardPointsUsed = pointValues.TotalRewardPointsUsed;
+
+                FormattedRewardPoints = "Reward Points: " + pointValues.RewardPointsBalance;
+                FormattedTotalRewardPointsUsed = "Total Reward Points Used: " + pointValues.TotalRewardPointsUsed;
             }
         }
 

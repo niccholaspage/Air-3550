@@ -16,6 +16,8 @@ namespace Air_3550.Views
         public EditProfileSubPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += async (_, __) => await ViewModel.FetchBalances();
         }
 
         readonly EditProfileViewModel ViewModel = new();
@@ -26,21 +28,6 @@ namespace Air_3550.Views
             {
 
             }
-        }
-
-        public string GetFormattedAccountBalance()
-        {
-            return "Account Balance: " + ViewModel.AccountBalance.FormatAsMoney();
-        }
-
-        public string GetRewardPoints()
-        {
-            return "Reward Points: " + ViewModel.RewardPoints;
-        }
-
-        public string GetTotalRewardPointsUsed()
-        {
-            return "Total Reward Points Used: " + ViewModel.TotalRewardPointsUsed;
         }
     }
 }
