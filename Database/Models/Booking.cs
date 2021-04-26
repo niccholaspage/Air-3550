@@ -121,10 +121,22 @@ namespace Air_3550.Models
             return totalDuration;
         }
 
-        // this calculates the duration of round-trip flight
-        public TimeSpan GetTotalDuration()
+        public bool HasFirstDepartureFlightDeparted()
         {
-            return GetDuration(true) + GetDuration(false);
+            var firstTicket = Tickets.First();
+
+            var departureTimestamp = firstTicket.ScheduledFlight.DepartureDate + firstTicket.ScheduledFlight.Flight.DepartureTime;
+
+            return DateTime.Now >= departureTimestamp;
+        }
+
+        public bool HasFirstReturnFlightDeparted()
+        {
+            var firstReturnTicket = GetReturnTickets()[0];
+
+            var departureTimestamp = firstReturnTicket.ScheduledFlight.DepartureDate + firstReturnTicket.ScheduledFlight.Flight.DepartureTime;
+
+            return DateTime.Now >= departureTimestamp;
         }
     }
 }
