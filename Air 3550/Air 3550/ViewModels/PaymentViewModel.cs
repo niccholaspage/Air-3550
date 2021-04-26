@@ -146,7 +146,7 @@ namespace Air_3550.ViewModels
 
                 if (ReturnFlightPathWithDate != null)
                 {
-                    booking.FirstReturnTicketIndex = tickets.Count - 1;
+                    booking.FirstReturnTicketIndex = tickets.Count;
 
                     tickets.AddRange(await CreateTicketsForFlightPath(db, ReturnFlightPathWithDate));
                 }
