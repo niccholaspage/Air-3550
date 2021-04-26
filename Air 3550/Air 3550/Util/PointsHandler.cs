@@ -16,7 +16,7 @@ namespace Air_3550.Util
 
             var customerData = await db.CustomerDatas
                 .Include(customerData => customerData.Bookings)
-                .ThenInclude(booking => booking.Tickets.Where(ticket => !ticket.PointsEarned && !ticket.IsCanceled))
+                .ThenInclude(booking => booking.Tickets)
                 .ThenInclude(ticket => ticket.ScheduledFlight)
                 .ThenInclude(scheduledFlight => scheduledFlight.Flight)
                 .SingleOrDefaultAsync(customerData => customerData.CustomerDataId == userSessionService.CustomerDataId);
@@ -25,13 +25,16 @@ namespace Air_3550.Util
 
             foreach (var booking in customerData.Bookings)
             {
-                if (booking.DepartureFlightPathWithDate.HasFirstFlightDeparted())
+                var departureTickets = booking.GetDepartureTickets();
+                var returnTickets = booking.GetReturnTickets();
+
+                if (departureTickets.All(ticket => !ticket.IsCanceled && !ticket.PointsEarned) && booking.DepartureFlightPathWithDate.HasFirstFlightDeparted())
                 {
                     booking.GetDepartureTickets().ForEach(ticket => ticket.PointsEarned = true);
                     newPoints += (int)(booking.DepartureFlightPathWithDate.FlightPath.Price * 10);
                 }
 
-                if (booking.HasReturnTickets && booking.ReturnFlightPathWithDate.HasFirstFlightDeparted())
+                if (booking.HasReturnTickets && returnTickets.All(ticket => !ticket.IsCanceled && !ticket.PointsEarned) && booking.ReturnFlightPathWithDate.HasFirstFlightDeparted())
                 {
                     booking.GetReturnTickets().ForEach(ticket => ticket.PointsEarned = true);
                     newPoints += (int)(booking.ReturnFlightPathWithDate.FlightPath.Price * 10);
