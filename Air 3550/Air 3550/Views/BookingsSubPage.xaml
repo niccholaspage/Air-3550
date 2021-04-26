@@ -25,10 +25,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <ListView x:Name="displayedList" Grid.Column="0" Grid.Row="0"
-            SelectedIndex="{x:Bind ViewModel.SelectedIndex, Mode=TwoWay}"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
-            SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
+            SelectedItem="{x:Bind ViewModel.SelectedBooking, Mode=TwoWay}"
             SelectionMode="Single"
             ItemsSource="{x:Bind ViewModel.BookingsC}">
             <ListView.Header>
@@ -139,11 +138,10 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <TextBlock Text="{x:Bind ViewModel.Feedback}" Grid.Column="1" Grid.Row="1"/>
         <ListView x:Name="TicketsDisplayedList" Grid.Column="1" Grid.Row="0"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
-            ItemsSource="{x:Bind ViewModel.SelectedItem.Tickets}">
+            ItemsSource="{x:Bind ViewModel.SelectedBooking.Tickets, Mode=OneWay}">
             <ListView.Header>
                 <Grid Margin="10 0 0 10">
                     <Grid.ColumnDefinitions>

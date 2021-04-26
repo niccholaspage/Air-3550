@@ -23,41 +23,21 @@ namespace Air_3550.ViewModels
 
         private readonly UserSessionService _userSessionService;
 
-        private int _selectedIndex = -1;
+        private Booking _selectedBooking;
 
-        public int SelectedIndex
+        public Booking SelectedBooking
         {
-            get => _selectedIndex;
+            get => _selectedBooking;
             set
             {
-                SetProperty(ref _selectedIndex, value);
-
-                OnPropertyChanged(nameof(Feedback));
+                SetProperty(ref _selectedBooking, value);
             }
-        }
-
-        private Booking _selectedItem = new();
-
-        public Booking SelectedItem
-        {
-            get => _selectedItem;
-            set => SetProperty(ref _selectedItem, value);
         }
 
         public BookingsViewModel()
         {
             _userSessionService = App.Current.Services.GetService<UserSessionService>();
         }
-        /*
-        private string _feedback;
-
-        public string Feedback
-        {
-            get => _feedback;
-            set => SetProperty(ref _feedback, value);
-        }
-        */
-        public string Feedback => "Currently: " + SelectedIndex;
 
         public async Task GetBookings()
         {
@@ -81,7 +61,7 @@ namespace Air_3550.ViewModels
                 }
                 //Feedback = "" + BookingsC.Count;
             }
-        } 
+        }
     }
 
 
