@@ -13,22 +13,20 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class EditFlightDialog : ContentDialog
     {
-        private readonly Flight Editting;
+        readonly EditFlightViewModel ViewModel;
+
         public Flight Result { get; private set; }
 
-        public EditFlightDialog(Flight editting)
+        public EditFlightDialog(Flight flight)
         {
             this.InitializeComponent();
-            ViewModel.GrabValues(editting);
-            Editting = editting;
             Result = null;
+            ViewModel = new(flight);
         }
-
-        readonly EditFlightViewModel ViewModel = new();
 
         public async void EditFlight_Click(object _, RoutedEventArgs __)
         {
-            var result = await ViewModel.EditFlight(Editting);
+            var result = await ViewModel.EditFlight();
             if (result != null) this.Hide();
             Result = result;
         }

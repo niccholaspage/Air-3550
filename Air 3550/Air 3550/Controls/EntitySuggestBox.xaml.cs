@@ -91,6 +91,11 @@ namespace Air_3550.Controls
                         EntityNames.Add(plane.Model + " (" + plane.MaxSeats + " seats)");
                     }
                 }
+
+                if (SelectedEntityId is int index)
+                {
+                    Text = EntityNames[index - 1];
+                }
             }
         }
 

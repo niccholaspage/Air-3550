@@ -1,5 +1,6 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
+using Air_3550.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
@@ -11,6 +12,17 @@ namespace Air_3550.ViewModels
 {
     class EditFlightViewModel : ObservableValidator
     {
+        private readonly int FlightId;
+
+        public EditFlightViewModel(Flight flight)
+        {
+            FlightId = flight.FlightId;
+
+            Depart = flight.DepartureTime;
+            OriginId = flight.OriginAirportId;
+            DestinationId = flight.DestinationAirportId;
+            PlaneId = flight.PlaneId;
+        }
         private TimeSpan _depart;
 
         public TimeSpan Depart
@@ -19,31 +31,31 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _depart, value);
         }
 
-        private string _originCity;
+        private int _originId;
 
-        [Required(ErrorMessage = "Please enter Origin city.")]
-        public string OriginCity
+        [Required(ErrorMessage = "Please enter a valid origin airport.")]
+        public int OriginId
         {
-            get => _originCity;
-            set => SetProperty(ref _originCity, value);
+            get => _originId;
+            set => SetProperty(ref _originId, value);
         }
 
-        private string _destinationCity;
+        private int _destinationId;
 
-        [Required(ErrorMessage = "Please enter Id.")]
-        public string DestinationCity
+        [Required(ErrorMessage = "Please enter a valid destination airport.")]
+        public int DestinationId
         {
-            get => _destinationCity;
-            set => SetProperty(ref _destinationCity, value);
+            get => _destinationId;
+            set => SetProperty(ref _destinationId, value);
         }
 
-        private int? _number;
+        private int? _planeId;
 
-        [Required(ErrorMessage = "Please enter Number.")]
-        public int? Number
+        [Required(ErrorMessage = "Please enter a valid plane.")]
+        public int? PlaneId
         {
-            get => _number;
-            set => SetProperty(ref _number, value);
+            get => _planeId;
+            set => SetProperty(ref _planeId, value);
         }
 
         private string _feedback;
@@ -54,71 +66,42 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _feedback, value);
         }
 
-        public void GrabValues(Flight editting)
-        {
-            using (var db = new AirContext())
-            {
-                var search = db.Flights
-                    .Include(Flight => Flight.OriginAirport)
-                    .Include(Flight => Flight.DestinationAirport)
-                    .Where(f => f.IsCanceled == false).Single(search => search.FlightId == editting.FlightId);
-                Depart = search.DepartureTime;
-                Number = search.Number;
-                DestinationCity = search.DestinationAirport.City + ", " + search.DestinationAirport.State + " (" + search.DestinationAirport.Code + ")";
-                OriginCity = search.OriginAirport.City + ", " + search.OriginAirport.State + " (" + search.OriginAirport.Code + ")";
-            }
-
-        }
-
-        public async Task<Flight> EditFlight(Flight editting)
+        public async Task<Flight> EditFlight()
         {
             ValidateAllProperties();
 
             if (HasErrors)
             {
-                Feedback = "Has Errors";
+                Feedback = this.GetFirstError();
 
                 return null;
             }
 
             using (var db = new AirContext())
             {
-                //Find origin Airport
-                var airport1 = await db.Airports.SingleOrDefaultAsync(airport1 => OriginCity.Contains(airport1.City));
-                if (airport1 == null)
-                {
-                    Feedback = "No Origin Airport";
-
-                    return null;
-                }
-
-                //Find destinition airport
-                var airport2 = await db.Airports.SingleOrDefaultAsync(airport2 => DestinationCity.Contains(airport2.City));
-                if (airport2 == null)
-                {
-                    Feedback = "No destination Airport";
-
-                    return null;
-                }
-
-                //Remove Previous Flight
-                var search = await db.Flights.SingleOrDefaultAsync(search => search.FlightId == editting.FlightId);
+                // Cancel previous flight
+                var search = await db.Flights.FindAsync(FlightId);
                 search.IsCanceled = true;
-                await db.SaveChangesAsync();
 
-                //Add New Flight
+                // Add New Flight
                 var flight = new Flight
                 {
-                    Number = (int)Number,
-                    OriginAirport = airport1,
-                    DestinationAirport = airport2,
+                    OriginAirportId = OriginId,
+                    DestinationAirportId = DestinationId,
                     DepartureTime = Depart,
-                    PlaneId = editting.PlaneId
+                    PlaneId = (int) PlaneId
                 };
+
                 await db.AddAsync(flight);
 
-                //Save Changes
+                // Save Changes
                 await db.SaveChangesAsync();
+
+                // Set the flight number to be the flight ID,
+                // since we don't have any system for rolling
+                // over flight numbers.
+                flight.Number = flight.FlightId;
+
                 Feedback = "Sucess";
                 return flight;
             }

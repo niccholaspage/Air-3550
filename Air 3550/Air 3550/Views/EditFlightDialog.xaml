@@ -9,7 +9,7 @@
     xmlns:controls="using:Air_3550.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Title="Add Flight"
+    Title="Edit Flight"
     CloseButtonText="Cancel"
     DefaultButton="Close"
     >
@@ -19,11 +19,10 @@
     </ContentDialog.Resources>
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <!-- Content body -->
         <TimePicker Time="{x:Bind ViewModel.Depart, Mode=TwoWay}" Header="Departure time" MinuteIncrement="15"/>
-        <controls:EntitySuggestBox EntityType="Airport"  Text="{x:Bind ViewModel.OriginCity, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
-        <controls:EntitySuggestBox EntityType="Airport" Text="{x:Bind ViewModel.DestinationCity, Mode=TwoWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
-        <TextBox Text="{x:Bind ViewModel.Number, Mode=TwoWay, Converter={StaticResource IntConverter}}" InputScope="Number" Header="Flight Number" x:Name="FlightNumber"></TextBox>
+        <controls:EntitySuggestBox EntityType="Airport" SelectedEntityId="{x:Bind ViewModel.OriginId, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
+        <controls:EntitySuggestBox EntityType="Airport" SelectedEntityId="{x:Bind ViewModel.DestinationId, Mode=TwoWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
+        <controls:EntitySuggestBox EntityType="Plane" SelectedEntityId="{x:Bind ViewModel.PlaneId, Mode=TwoWay}" Label="Plane" Margin="3" VerticalAlignment="Bottom" />
         <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
         <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
     </StackPanel>

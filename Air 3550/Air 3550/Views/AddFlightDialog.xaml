@@ -19,7 +19,6 @@
     </ContentDialog.Resources>
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <!-- Content body -->
         <TimePicker Time="{x:Bind ViewModel.Depart, Mode=TwoWay}" Header="Departure time" MinuteIncrement="15"/>
         <controls:EntitySuggestBox EntityType="Airport" SelectedEntityId="{x:Bind ViewModel.OriginId, Mode=TwoWay}" Label="Departure City" Margin="3" VerticalAlignment="Bottom" />
         <controls:EntitySuggestBox EntityType="Airport" SelectedEntityId="{x:Bind ViewModel.DestinationId, Mode=TwoWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
