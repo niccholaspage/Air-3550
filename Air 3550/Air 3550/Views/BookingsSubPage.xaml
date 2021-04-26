@@ -14,9 +14,7 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
     </Page.Resources>
     <RelativePanel>
-        <ListView x:Name="displayedList"
-            RelativePanel.AlignHorizontalCenterWithPanel="true"
-            RelativePanel.Below="Header"
+        <ListView x:Name="BookingsListView"
             SelectedItem="{x:Bind ViewModel.SelectedBooking, Mode=TwoWay}"
             SelectionMode="Single"
             ItemsSource="{x:Bind ViewModel.BookingsC}">
@@ -128,10 +126,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="TicketsDisplayedList"
-            RelativePanel.AlignHorizontalCenterWithPanel="true"
-            RelativePanel.Below="Header"
-            ItemsSource="{x:Bind ViewModel.SelectedBooking.Tickets, Mode=OneWay}">
+        <ListView x:Name="TicketsDisplayedList" RelativePanel.RightOf="BookingsListView" ItemsSource="{x:Bind ViewModel.SelectedBooking.Tickets, Mode=OneWay}">
             <ListView.Header>
                 <Grid Margin="10 0 0 10">
                     <Grid.ColumnDefinitions>
