@@ -71,7 +71,7 @@ namespace Air_3550.Models
         {
             if (FirstReturnTicketIndex is int index)
             {
-                return Tickets.GetRange(index, Tickets.Count - 1);
+                return Tickets.TakeLast(Tickets.Count - index).ToList();
             }
             else
             {
