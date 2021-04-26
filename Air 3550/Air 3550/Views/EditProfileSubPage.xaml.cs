@@ -40,7 +40,7 @@ namespace Air_3550.Views
 
         public string GetTotalRewardPointsUsed()
         {
-            return "Total Reward Points Used: " + ViewModel.RewardPoints;
+            return "Total Reward Points Used: " + ViewModel.TotalRewardPointsUsed;
         }
     }
 }

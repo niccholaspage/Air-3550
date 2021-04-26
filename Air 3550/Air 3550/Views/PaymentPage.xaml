@@ -39,8 +39,8 @@
             </Grid>
         </StackPanel>
         <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls" RelativePanel.Below="FlightPaths">
-            <TextBlock x:Name="AccountBalanceText" Text="{x:Bind GetFormattedAccountBalance()}"></TextBlock>
-            <TextBlock x:Name="RewardPoints" Text="{x:Bind GetRewardPoints()}"></TextBlock>
+            <TextBlock x:Name="AccountBalanceText" Text="{x:Bind GetFormattedAccountBalance(), Mode=OneWay}"></TextBlock>
+            <TextBlock x:Name="RewardPoints" Text="{x:Bind GetRewardPoints(), Mode=OneWay}"></TextBlock>
         </StackPanel>
         <RelativePanel x:Name="PurchaseControls" RelativePanel.AlignRightWith="PricingInfo" RelativePanel.Below="FlightPaths">
             <TextBlock Margin="2" RelativePanel.LeftOf="PaymentMethodDropdown" RelativePanel.AlignVerticalCenterWith="PurchaseButton">Payment Method:</TextBlock>

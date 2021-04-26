@@ -11,9 +11,9 @@
     <StackPanel>
         <controls:EditAccountInfoControl Validator="{x:Bind ViewModel.Validator}" Width="400" x:Name="EditAccountInfoControl" Header="Profile" ActionButtonText="Save Changes" Click="SaveChangesButton_Click"></controls:EditAccountInfoControl>
         <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls" RelativePanel.Below="FlightPaths">
-            <TextBlock Text="{x:Bind GetFormattedAccountBalance()}"></TextBlock>
-            <TextBlock Text="{x:Bind GetRewardPoints()}"></TextBlock>
-            <TextBlock Text="{x:Bind GetTotalRewardPointsUsed()}"></TextBlock>
+            <TextBlock Text="{x:Bind GetFormattedAccountBalance(), Mode=OneWay}"></TextBlock>
+            <TextBlock Text="{x:Bind GetRewardPoints(), Mode=OneWay}"></TextBlock>
+            <TextBlock Text="{x:Bind GetTotalRewardPointsUsed(), Mode=OneWay}"></TextBlock>
             <TextBlock></TextBlock>
         </StackPanel>
     </StackPanel>
