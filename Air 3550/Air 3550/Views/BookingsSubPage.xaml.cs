@@ -43,5 +43,10 @@ namespace Air_3550.Views
                 await dialog1.ShowAsync();
             }
         }
+
+        private void BoardingPass_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

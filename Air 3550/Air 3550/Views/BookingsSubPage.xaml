@@ -152,6 +152,7 @@
                         <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" />
                         <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" />
+                        <Button Click="BoardingPass_Click">Get Boarding Pass</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
