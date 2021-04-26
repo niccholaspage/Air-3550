@@ -46,15 +46,6 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _planeId, value);
         }
 
-        private int? _number;
-
-        [Required(ErrorMessage = "Please enter number.")]
-        public int? Number
-        {
-            get => _number;
-            set => SetProperty(ref _number, value);
-        }
-
         private string _feedback;
 
         public string Feedback
@@ -76,7 +67,7 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                var flightN = new Flight
+                var flight = new Flight
                 {
                     OriginAirportId = (int)OriginId,
                     DestinationAirportId = (int)DestinationId,
@@ -84,11 +75,20 @@ namespace Air_3550.ViewModels
                     PlaneId = (int)_planeId
                 };
 
-                await db.Flights.AddAsync(flightN);
+                await db.Flights.AddAsync(flight);
 
                 await db.SaveChangesAsync();
+
+                // Set the flight number to be the flight ID,
+                // since we don't have any system for rolling
+                // over flight numbers.
+                flight.Number = flight.FlightId;
+
+                await db.SaveChangesAsync();
+
                 Feedback = "Success";
-                return flightN;
+
+                return flight;
             }
         }
     }
