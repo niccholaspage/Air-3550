@@ -1,6 +1,5 @@
 ﻿using Air_3550.Models;
 using Air_3550.ViewModels;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -25,7 +24,7 @@ namespace Air_3550.Views
 
         readonly AddFlightViewModel ViewModel = new();
 
-        private async void AddFlight_Click(object _, RoutedEventArgs __)
+        private async void AddFlight_Click(object _, ContentDialogButtonClickEventArgs __)
         {
             Flight result = await ViewModel.CreateFlight();
             if (result != null) this.Hide();

@@ -10,8 +10,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Title="Add Flight"
+    PrimaryButtonText="Add Flight"
+    PrimaryButtonClick="AddFlight_Click"
     CloseButtonText="Cancel"
-    DefaultButton="Close"
+    DefaultButton="Primary"
     >
 
     <ContentDialog.Resources>
@@ -24,7 +26,6 @@
         <controls:EntitySuggestBox EntityType="Airport" SelectedEntityId="{x:Bind ViewModel.DestinationId, Mode=TwoWay}" Label="Destination City" Margin="3" VerticalAlignment="Bottom" />
         <controls:EntitySuggestBox EntityType="Plane" SelectedEntityId="{x:Bind ViewModel.PlaneId, Mode=TwoWay}" Label="Plane" Margin="3" VerticalAlignment="Bottom" />
         <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
-        <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Flight</Button>
     </StackPanel>
 
 </ContentDialog>

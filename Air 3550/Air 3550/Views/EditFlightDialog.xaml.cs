@@ -24,7 +24,7 @@ namespace Air_3550.Views
             ViewModel = new(flight);
         }
 
-        public async void EditFlight_Click(object _, RoutedEventArgs __)
+        public async void EditFlight_Click(object _, ContentDialogButtonClickEventArgs __)
         {
             var result = await ViewModel.EditFlight();
             if (result != null) this.Hide();
