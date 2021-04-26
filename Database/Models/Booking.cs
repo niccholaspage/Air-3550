@@ -73,6 +73,9 @@ namespace Air_3550.Models
             return -1;
         }
 
+        [NotMapped]
+        public bool HasReturnTickets => GetFirstReturnTicketIndex() != -1;
+
         public List<Ticket> GetDepartureTickets()
         {
             int index = GetFirstReturnTicketIndex();
