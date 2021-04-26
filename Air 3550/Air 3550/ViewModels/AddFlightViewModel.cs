@@ -31,6 +31,7 @@ namespace Air_3550.ViewModels
         private int? _destinationId;
 
         [Required(ErrorMessage = "Please enter a valid destination airport.")]
+        [NotEqualTo(nameof(OriginId), ErrorMessage = "Departure and arrival airports cannot match.")]
         public int? DestinationId
         {
             get => _destinationId;
