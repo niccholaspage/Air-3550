@@ -60,12 +60,12 @@ namespace Air_3550.ViewModels
                     .Include(Booking => Booking.Tickets)
                     .ThenInclude(Ticket => Ticket.ScheduledFlight)
                     .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                    .ThenInclude(Flight =>  Flight.OriginAirport)
+                    .ThenInclude(Flight => Flight.OriginAirport)
                     .Include(Booking => Booking.Tickets)
                     .ThenInclude(Ticket => Ticket.ScheduledFlight)
                     .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
                     .ThenInclude(Flight => Flight.DestinationAirport)
-                    .Where(Booking => Booking.CustomerDataId == 1)
+                    .Where(Booking => Booking.CustomerDataId == _userSessionService.CustomerDataId)
                     .ToListAsync();
                 foreach (Booking a in bookings)
                 {
