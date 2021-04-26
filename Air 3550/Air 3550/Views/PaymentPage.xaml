@@ -21,19 +21,8 @@
                 <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}"/>
                 <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
             </StackPanel>
-            <Grid RelativePanel.RightOf="FlightPaths" HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="250" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="65" />
-                    <RowDefinition Height="65" />
-                    <RowDefinition Height="65" />
-                    <RowDefinition Height="65" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Width="250" Padding="7">
+            <StackPanel Margin="7 0 0 0" Orientation="Vertical" RelativePanel.RightOf="FlightPaths" RelativePanel.AlignBottomWith="FlightPaths" Height="200" Width="250">
+                <Grid Width="250">
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="0" 
                            Text="Departure Flight Cost:"/>
                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
@@ -41,17 +30,24 @@
                             <Run Text="{x:Bind ViewModel.DepartingFlightPathWithDate.FlightPath.Price}"/>
                     </TextBlock>
                 </Grid>
-                <Grid Grid.Row="1" Width="250" Padding="7">
-                    <TextBlock Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"
+                <Grid Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}" Width="250">
+                    <TextBlock
                            HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
                            Text="Return Flight Cost:"/>
-                    <TextBlock Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"
+                    <TextBlock
                            HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
                         <Run Text="$"/>
                         <Run Text="{x:Bind ViewModel.ReturnFlightPathWithDate.FlightPath.Price}"/>
                     </TextBlock>
                 </Grid>
-                <Grid Grid.Row="2" Width="250" Padding="7">
+                <Grid Width="250">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
+                    Text="Total Flight Cost in Points:"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
+                        <Run Text="{x:Bind ViewModel.TotalCostInPoints}"/>
+                    </TextBlock>
+                </Grid>
+                <Grid Width="250">
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
                     Text="Total Flight Cost:"/>
                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
@@ -59,7 +55,7 @@
                         <Run Text="{x:Bind ViewModel.TotalCost}"/>
                     </TextBlock>
                 </Grid>
-            </Grid>
+            </StackPanel>
         </RelativePanel>
         <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls">
             <TextBlock x:Name="AccountBalanceText" Text="{x:Bind GetFormattedAccountBalance()}"></TextBlock>
