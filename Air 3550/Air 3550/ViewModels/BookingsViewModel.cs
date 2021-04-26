@@ -20,8 +20,20 @@ namespace Air_3550.ViewModels
     {
         public ObservableCollection<Booking> BookingsC = new();
         public ObservableCollection<Ticket> TicketsC = new();
+        
 
         private readonly UserSessionService _userSessionService;
+
+        private String _customerName;
+
+        public String CustomerName
+        {
+            get => _customerName;
+            set
+            {
+                SetProperty(ref _customerName, value);
+            }
+        }
 
         private Booking _selectedBooking;
 
@@ -31,6 +43,17 @@ namespace Air_3550.ViewModels
             set
             {
                 SetProperty(ref _selectedBooking, value);
+            }
+        }
+
+        private Ticket _selectedTicket;
+
+        public Ticket SelectedTicket
+        {
+            get => _selectedTicket;
+            set
+            {
+                SetProperty(ref _selectedTicket, value);
             }
         }
 
@@ -44,6 +67,11 @@ namespace Air_3550.ViewModels
             //Grab all useful data related to a booking _userSessionService.CustomerDataId
             using (var db = new AirContext())
             {
+                CustomerName = await db.CustomerDatas
+                    .Where(customerData => customerData.UserId == _userSessionService.UserId)
+                    .Select(customerData => customerData.Name)
+                .SingleAsync();
+
                 var bookings = await db.Bookings
                     .Include(Booking => Booking.Tickets)
                     .ThenInclude(Ticket => Ticket.ScheduledFlight)

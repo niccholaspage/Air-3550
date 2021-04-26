@@ -126,7 +126,12 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="TicketsDisplayedList" RelativePanel.RightOf="BookingsListView" ItemsSource="{x:Bind ViewModel.SelectedBooking.Tickets, Mode=OneWay}">
+        <ListView x:Name="TicketsDisplayedList" 
+                  RelativePanel.RightOf="BookingsListView" 
+                  SelectedItem="{x:Bind ViewModel.SelectedTicket, Mode=TwoWay}"
+                  ItemsSource="{x:Bind ViewModel.SelectedBooking.Tickets, Mode=OneWay}"
+                  SelectionChanged="TicketsDisplayedList_SelectionChanged">
+                  
             <ListView.Header>
                 <Grid Margin="10 0 0 10">
                     <Grid.ColumnDefinitions>

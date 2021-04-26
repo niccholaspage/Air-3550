@@ -1,0 +1,24 @@
+﻿<ContentDialog
+    x:Class="Air_3550.Views.BoardingPass"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Air_3550.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Title="Boarding Pass"
+    CloseButtonText="Close">
+
+    <StackPanel Orientation="Vertical">
+        <TextBlock>
+            <Run Text="Customer: "></Run>
+            <Run Text="{x:Bind CustomerName}"></Run>
+        </TextBlock>
+
+        <TextBlock>
+            <Run Text="Ticket ID: "></Run>
+            <Run Text="{x:Bind Viewing.TicketId}"></Run>
+        </TextBlock>
+    </StackPanel>
+</ContentDialog>
