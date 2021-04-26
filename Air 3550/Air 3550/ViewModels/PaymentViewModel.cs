@@ -142,12 +142,14 @@ namespace Air_3550.ViewModels
 
                 List<Ticket> tickets = await CreateTicketsForFlightPath(db, DepartingFlightPathWithDate);
 
+                var booking = new Booking();
+
                 if (ReturnFlightPathWithDate != null)
                 {
+                    booking.FirstReturnTicketIndex = tickets.Count - 1;
+
                     tickets.AddRange(await CreateTicketsForFlightPath(db, ReturnFlightPathWithDate));
                 }
-
-                var booking = new Booking();
 
                 booking.Tickets.AddRange(tickets);
 

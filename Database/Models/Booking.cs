@@ -1,4 +1,5 @@
-﻿using Database.Util;
+﻿using Database.Migrations;
+using Database.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,8 @@ namespace Air_3550.Models
         public CustomerData CustomerData { get; set; }
 
         public List<Ticket> Tickets { get; } = new();
+
+        public int? FirstReturnTicketIndex { get; set; }
 
         [NotMapped]
         public FlightPathWithDate DepartureFlightPathWithDate
@@ -49,58 +52,30 @@ namespace Air_3550.Models
             }
         }
 
-        private int GetFirstReturnTicketIndex()
-        {
-            // TODO: See if reference equality is enough,
-            // or if we will need to be checking IDs.
-            Ticket previousTicket = null;
-
-            for (int i = 0; i < Tickets.Count; i++)
-            {
-                Ticket ticket = Tickets[i];
-
-                if (previousTicket != null)
-                {
-                    if (previousTicket.ScheduledFlight.Flight.DestinationAirport == ticket.ScheduledFlight.Flight.OriginAirport)
-                    {
-                        return i;
-                    }
-                }
-
-                previousTicket = ticket;
-            }
-
-            return -1;
-        }
-
         [NotMapped]
-        public bool HasReturnTickets => GetFirstReturnTicketIndex() != -1;
+        public bool HasReturnTickets => FirstReturnTicketIndex != -1;
 
         public List<Ticket> GetDepartureTickets()
         {
-            int index = GetFirstReturnTicketIndex();
-
-            if (index == -1)
+            if (FirstReturnTicketIndex is int index)
             {
-                return Tickets;
+                return Tickets.GetRange(0, index);
             }
             else
             {
-                return Tickets.GetRange(0, index);
+                return Tickets;
             }
         }
 
         public List<Ticket> GetReturnTickets()
         {
-            int index = GetFirstReturnTicketIndex();
-
-            if (index == -1)
+            if (FirstReturnTicketIndex is int index)
             {
-                return new List<Ticket>();
+                return Tickets.GetRange(index, Tickets.Count - 1);
             }
             else
             {
-                return Tickets.GetRange(index, Tickets.Count);
+                return new List<Ticket>();
             }
         }
 
