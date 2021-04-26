@@ -83,7 +83,7 @@ namespace Air_3550.ViewModels
                 .SingleAsync();
 
                 AccountBalance = accountBalance;
-                RewardPoints = await PointsHandler.UpdateAndRetrievePointsBalance(db);
+                RewardPoints = (await PointsHandler.UpdateAndRetrievePointsBalance(db)).RewardPointsBalance;
             }
         }
 

@@ -8,5 +8,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <controls:EditAccountInfoControl Validator="{x:Bind ViewModel.Validator}" Width="400" x:Name="EditAccountInfoControl" Header="Profile" ActionButtonText="Save Changes" Click="SaveChangesButton_Click"></controls:EditAccountInfoControl>
+    <StackPanel>
+        <controls:EditAccountInfoControl Validator="{x:Bind ViewModel.Validator}" Width="400" x:Name="EditAccountInfoControl" Header="Profile" ActionButtonText="Save Changes" Click="SaveChangesButton_Click"></controls:EditAccountInfoControl>
+        <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls" RelativePanel.Below="FlightPaths">
+            <TextBlock Text="{x:Bind GetFormattedAccountBalance()}"></TextBlock>
+            <TextBlock Text="{x:Bind GetRewardPoints()}"></TextBlock>
+            <TextBlock Text="{x:Bind GetTotalRewardPointsUsed()}"></TextBlock>
+            <TextBlock></TextBlock>
+        </StackPanel>
+    </StackPanel>
 </Page>

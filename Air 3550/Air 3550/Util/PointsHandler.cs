@@ -10,7 +10,9 @@ namespace Air_3550.Util
 {
     public class PointsHandler
     {
-        public static async Task<int> UpdateAndRetrievePointsBalance(AirContext db)
+        public record PointValues(int RewardPointsBalance, int TotalRewardPointsUsed);
+
+        public static async Task<PointValues> UpdateAndRetrievePointsBalance(AirContext db)
         {
             var userSessionService = App.Current.Services.GetService<UserSessionService>();
 
@@ -48,7 +50,7 @@ namespace Air_3550.Util
                 await db.SaveChangesAsync();
             }
 
-            return customerData.RewardPointsBalance;
+            return new PointValues(customerData.RewardPointsBalance, customerData.RewardPointsUsed);
         }
     }
 }

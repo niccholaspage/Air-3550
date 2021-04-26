@@ -1,4 +1,5 @@
 ﻿using Air_3550.ViewModels;
+using Database.Util;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -25,6 +26,21 @@ namespace Air_3550.Views
             {
 
             }
+        }
+
+        public string GetFormattedAccountBalance()
+        {
+            return "Account Balance: " + ViewModel.AccountBalance.FormatAsMoney();
+        }
+
+        public string GetRewardPoints()
+        {
+            return "Reward Points: " + ViewModel.RewardPoints;
+        }
+
+        public string GetTotalRewardPointsUsed()
+        {
+            return "Total Reward Points Used: " + ViewModel.RewardPoints;
         }
     }
 }
