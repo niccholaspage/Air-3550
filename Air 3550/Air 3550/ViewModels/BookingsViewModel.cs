@@ -16,7 +16,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Air_3550.ViewModels
 {
-    class BookingsViewModel : ObservableValidator
+    class BookingsViewModel : ObservableObject
     {
         public ObservableCollection<Booking> BookingsC = new();
         public ObservableCollection<Ticket> TicketsC = new();
@@ -33,16 +33,28 @@ namespace Air_3550.ViewModels
                 SetProperty(ref _selectedPathIndex, value);
 
                 OnPropertyChanged(nameof(CanContinue));
+                OnPropertyChanged(nameof(Feedback));
+                OnPropertyChanged(nameof(SelectedPathIndex2));
             }
         }
 
+        private Booking _selectedIndex = new();
+
+        public Booking SelectedIndex
+        {
+            get => _selectedIndex;
+            set => SetProperty(ref _selectedIndex, value);
+        }
+
         public bool CanContinue => SelectedPathIndex != -1;
+
+        public Booking SelectedPathIndex2 => BookingsC[SelectedPathIndex];
 
         public BookingsViewModel()
         {
             _userSessionService = App.Current.Services.GetService<UserSessionService>();
         }
-
+        /*
         private string _feedback;
 
         public string Feedback
@@ -50,6 +62,8 @@ namespace Air_3550.ViewModels
             get => _feedback;
             set => SetProperty(ref _feedback, value);
         }
+        */
+        public string Feedback => "Currently: " + SelectedPathIndex;
 
         public async Task GetBookings()
         {
@@ -71,9 +85,9 @@ namespace Air_3550.ViewModels
                 {
                     BookingsC.Add(a);
                 }
-                Feedback = "" + BookingsC.Count;
+                //Feedback = "" + BookingsC.Count;
             }
-        }
+        } 
     }
 
 
