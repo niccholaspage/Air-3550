@@ -93,14 +93,14 @@ namespace Air_3550.ViewModels
                 };
 
                 await db.AddAsync(flight);
-
-                // Save Changes
                 await db.SaveChangesAsync();
 
                 // Set the flight number to be the flight ID,
                 // since we don't have any system for rolling
                 // over flight numbers.
                 flight.Number = flight.FlightId;
+
+                await db.SaveChangesAsync();
 
                 Feedback = "Sucess";
                 return flight;
