@@ -137,8 +137,6 @@ namespace Air_3550.Views
                 }
                 else
                 {
-                    Frame.Navigate(typeof(MainPage));
-
                     if (role == Role.ACCOUNTANT || role == Role.FLIGHT_MANAGER)
                     {
                         Frame.Navigate(typeof(SummaryPage));
@@ -148,11 +146,7 @@ namespace Air_3550.Views
                         Frame.Navigate(typeof(EditSchedulePage));
                     }
 
-                    // Clear every item in the backstack except for the first one, the main page.
-                    while (Frame.BackStack.Count > 1)
-                    {
-                        Frame.BackStack.RemoveAt(0);
-                    }
+                    Frame.BackStack.Clear();
                 }
             }
         }
