@@ -130,8 +130,8 @@
                   RelativePanel.RightOf="BookingsListView" 
                   SelectedItem="{x:Bind ViewModel.SelectedTicket, Mode=TwoWay}"
                   ItemsSource="{x:Bind ViewModel.SelectedBooking.Tickets, Mode=OneWay}"
-                  SelectionChanged="TicketsDisplayedList_SelectionChanged">
-                  
+                  SelectionMode="None">
+
             <ListView.Header>
                 <Grid Margin="10 0 0 10">
                     <Grid.ColumnDefinitions>
@@ -152,7 +152,7 @@
                         <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" />
                         <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" />
-                        <Button Click="BoardingPass_Click">Get Boarding Pass</Button>
+                        <Button Click="BoardingPass_Click" CommandParameter="{x:Bind}">Get Boarding Pass</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

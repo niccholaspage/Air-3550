@@ -34,19 +34,13 @@ namespace Air_3550.Views
 
         readonly BookingsViewModel ViewModel = new();
 
-        private async void TicketsDisplayedList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void BoardingPass_Click(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.SelectedTicket != null)
-            {
-                BoardingPass dialog1 = new(ViewModel.SelectedTicket, ViewModel.CustomerName);
-                dialog1.XamlRoot = this.Content.XamlRoot;
-                await dialog1.ShowAsync();
-            }
-        }
-
-        private void BoardingPass_Click(object sender, RoutedEventArgs e)
-        {
-
+            Button button = (Button)sender;
+            var ticket = (Ticket)button.CommandParameter;
+            BoardingPass dialog1 = new(ticket, ViewModel.CustomerName);
+            dialog1.XamlRoot = this.Content.XamlRoot;
+            await dialog1.ShowAsync();
         }
     }
 }
