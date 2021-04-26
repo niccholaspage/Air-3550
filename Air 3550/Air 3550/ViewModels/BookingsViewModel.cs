@@ -23,32 +23,26 @@ namespace Air_3550.ViewModels
 
         private readonly UserSessionService _userSessionService;
 
-        private int _selectedPathIndex = -1;
+        private int _selectedIndex = -1;
 
-        public int SelectedPathIndex
+        public int SelectedIndex
         {
-            get => _selectedPathIndex;
+            get => _selectedIndex;
             set
             {
-                SetProperty(ref _selectedPathIndex, value);
+                SetProperty(ref _selectedIndex, value);
 
-                OnPropertyChanged(nameof(CanContinue));
                 OnPropertyChanged(nameof(Feedback));
-                OnPropertyChanged(nameof(SelectedPathIndex2));
             }
         }
 
-        private Booking _selectedIndex = new();
+        private Booking _selectedItem = new();
 
-        public Booking SelectedIndex
+        public Booking SelectedItem
         {
-            get => _selectedIndex;
-            set => SetProperty(ref _selectedIndex, value);
+            get => _selectedItem;
+            set => SetProperty(ref _selectedItem, value);
         }
-
-        public bool CanContinue => SelectedPathIndex != -1;
-
-        public Booking SelectedPathIndex2 => BookingsC[SelectedPathIndex];
 
         public BookingsViewModel()
         {
@@ -63,7 +57,7 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _feedback, value);
         }
         */
-        public string Feedback => "Currently: " + SelectedPathIndex;
+        public string Feedback => "Currently: " + SelectedIndex;
 
         public async Task GetBookings()
         {
