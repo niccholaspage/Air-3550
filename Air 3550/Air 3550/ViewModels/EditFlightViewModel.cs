@@ -31,19 +31,19 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _depart, value);
         }
 
-        private int _originId;
+        private int? _originId;
 
         [Required(ErrorMessage = "Please enter a valid origin airport.")]
-        public int OriginId
+        public int? OriginId
         {
             get => _originId;
             set => SetProperty(ref _originId, value);
         }
 
-        private int _destinationId;
+        private int? _destinationId;
 
         [Required(ErrorMessage = "Please enter a valid destination airport.")]
-        public int DestinationId
+        public int? DestinationId
         {
             get => _destinationId;
             set => SetProperty(ref _destinationId, value);
@@ -86,10 +86,10 @@ namespace Air_3550.ViewModels
                 // Add New Flight
                 var flight = new Flight
                 {
-                    OriginAirportId = OriginId,
-                    DestinationAirportId = DestinationId,
+                    OriginAirportId = (int)OriginId,
+                    DestinationAirportId = (int)DestinationId,
                     DepartureTime = Depart,
-                    PlaneId = (int) PlaneId
+                    PlaneId = (int)PlaneId
                 };
 
                 await db.AddAsync(flight);
