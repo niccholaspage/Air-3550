@@ -113,7 +113,7 @@ namespace Database.Util
 
         public int NumberOfStops => Flights.Count - 1;
 
-        public string FormattedPrice => "$" + Price;
+        public string FormattedPrice => Price.FormatAsMoney();
 
         public string FormattedDuration
         {
