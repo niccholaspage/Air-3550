@@ -171,6 +171,18 @@ namespace Air_3550.ViewModels
 
                 // TODO: Actually process the payment, deducting the necessary
                 // account balance/reward points as needed.
+                if (SelectedPaymentMethod == PaymentMethod.ACCOUNT_BALANCE)
+                {
+                    db.CustomerDatas.Find(userSession.CustomerDataId).AccountBalance -= TotalCost;
+                    await db.SaveChangesAsync();
+                }
+                else if (SelectedPaymentMethod == PaymentMethod.POINTS)
+                {
+                    var customerData = db.CustomerDatas.Find(userSession.CustomerDataId);
+                    customerData.RewardPointsBalance -= TotalCostInPoints;
+                    customerData.RewardPointsUsed += TotalCostInPoints;
+                    await db.SaveChangesAsync();
+                }
 
                 List<Ticket> tickets = await CreateTicketsForFlightPath(db, DepartingFlightPathWithDate);
 

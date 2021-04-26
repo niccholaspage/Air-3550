@@ -16,56 +16,54 @@
 
     <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" >
         <TextBlock FontSize="50" x:Name="Header" Text="Purchase Booking" RelativePanel.AlignHorizontalCenterWithPanel="true"></TextBlock>
-        <RelativePanel RelativePanel.Below="Header" x:Name="PaymentInfo">
-            <StackPanel x:Name="FlightPaths">
-                <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}"/>
-                <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
-            </StackPanel>
-            <StackPanel Margin="7 0 0 0" Orientation="Vertical" RelativePanel.RightOf="FlightPaths" RelativePanel.AlignBottomWith="FlightPaths" Height="200" Width="250">
-                <Grid Width="250">
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="0" 
+        <StackPanel RelativePanel.Below="Header" x:Name="FlightPaths">
+            <ContentControl x:Name="DepartureFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}"/>
+            <ContentControl x:Name="ReturnFlightPathControl" ContentTemplate="{StaticResource PaymentFlightPathWithDateListViewTemplate}" Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        </StackPanel>
+        <StackPanel x:Name="PricingInfo" Padding="10 10 0 10" Orientation="Vertical" VerticalAlignment="Center" RelativePanel.RightOf="FlightPaths" RelativePanel.AlignBottomWith="FlightPaths">
+            <Grid Width="250">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="0" 
                            Text="Departure Flight Cost:"/>
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
                             <Run Text="$"/>
                             <Run Text="{x:Bind ViewModel.DepartingFlightPathWithDate.FlightPath.Price}"/>
-                    </TextBlock>
-                </Grid>
-                <Grid Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}" Width="250">
-                    <TextBlock
+                </TextBlock>
+            </Grid>
+            <Grid Visibility="{x:Bind ViewModel.IsReturnFlight, Converter={StaticResource BoolToVisibilityConverter}}" Width="250">
+                <TextBlock
                            HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
                            Text="Return Flight Cost:"/>
-                    <TextBlock
+                <TextBlock
                            HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
                         <Run Text="$"/>
                         <Run Text="{x:Bind ViewModel.ReturnFlightPathWithDate.FlightPath.Price}"/>
-                    </TextBlock>
-                </Grid>
-                <Grid Width="250">
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
+                </TextBlock>
+            </Grid>
+            <Grid Width="250">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
                     Text="Total Flight Cost in Points:"/>
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
                         <Run Text="{x:Bind ViewModel.TotalCostInPoints}"/>
-                    </TextBlock>
-                </Grid>
-                <Grid Width="250">
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
+                </TextBlock>
+            </Grid>
+            <Grid Width="250">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" 
                     Text="Total Flight Cost:"/>
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1">
                         <Run Text="$"/>
                         <Run Text="{x:Bind ViewModel.TotalCost}"/>
-                    </TextBlock>
-                </Grid>
-            </StackPanel>
-        </RelativePanel>
-        <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls">
+                </TextBlock>
+            </Grid>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWithPanel="true" RelativePanel.AlignVerticalCenterWith="PurchaseControls" RelativePanel.Below="FlightPaths">
             <TextBlock x:Name="AccountBalanceText" Text="{x:Bind GetFormattedAccountBalance()}"></TextBlock>
             <TextBlock x:Name="RewardPoints" Text="{x:Bind GetRewardPoints()}"></TextBlock>
         </StackPanel>
-        <RelativePanel x:Name="PurchaseControls" RelativePanel.AlignRightWith="PaymentInfo" RelativePanel.Below="PaymentInfo">
+        <RelativePanel x:Name="PurchaseControls" RelativePanel.AlignRightWith="PricingInfo" RelativePanel.Below="FlightPaths">
             <TextBlock Margin="2" RelativePanel.LeftOf="PaymentMethodDropdown" RelativePanel.AlignVerticalCenterWith="PurchaseButton">Payment Method:</TextBlock>
             <controls:PaymentTypeDropDownButton SelectedPaymentMethod="{x:Bind ViewModel.SelectedPaymentMethod, Mode=TwoWay}" Margin="2" x:Name="PaymentMethodDropdown" RelativePanel.LeftOf="PurchaseButton" RelativePanel.AlignVerticalCenterWith="PurchaseButton"></controls:PaymentTypeDropDownButton>
             <Button Margin="2" x:Name="PurchaseButton" RelativePanel.AlignRightWithPanel="true" Click="PurchaseButton_Click">Purchase</Button>
         </RelativePanel>
-        <TextBlock RelativePanel.AlignRightWith="PaymentInfo" RelativePanel.Below="PurchaseControls" Foreground="Red" Text="{x:Bind ViewModel.Feedback, Mode=OneWay}"></TextBlock>
+        <TextBlock RelativePanel.AlignRightWith="PricingInfo" RelativePanel.Below="PurchaseControls" Foreground="Red" Text="{x:Bind ViewModel.Feedback, Mode=OneWay}"></TextBlock>
     </RelativePanel>
 </Page>
