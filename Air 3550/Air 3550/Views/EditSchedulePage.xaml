@@ -29,7 +29,7 @@
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
             ItemTemplate="{StaticResource ScheduleListViewTemplate}"
-            ItemsSource="{x:Bind ViewModel.FlightsA}">
+            ItemsSource="{x:Bind ViewModel.Flights}">
                 <ListView.Header>
                     <Grid Margin="10 0 0 10">
                         <Grid.ColumnDefinitions>
@@ -48,12 +48,10 @@
             </ListView>
         </RelativePanel>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Dialog</Button>
+            <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Flight</Button>
             <Button Click="RemoveFlight_Click" HorizontalAlignment="Right">Remove Flight</Button>
             <Button Click="EditFlight_Click" HorizontalAlignment="Right">Edit Flight</Button>
             <Button Click="EditPlane_Click" HorizontalAlignment="Right">Edit Plane</Button>
-            <Button Click="GetSummary_Click" HorizontalAlignment="Right">Summary Page</Button>
-            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -10,15 +10,7 @@ namespace Air_3550.ViewModels
 {
     class EditScheduleViewModel : ObservableValidator
     {
-        private string _feedback;
-
-        public string Feedback
-        {
-            get => _feedback;
-            set => SetProperty(ref _feedback, value);
-        }
-
-        public ObservableCollection<Flight> FlightsA = new();
+        public ObservableCollection<Flight> Flights = new();
 
         private int _selectedPathIndex = -1;
 
@@ -40,7 +32,9 @@ namespace Air_3550.ViewModels
             using (var db = new AirContext())
             {
                 var search = await db.Flights.SingleOrDefaultAsync(search => search.FlightId == cancelling.FlightId);
+
                 search.IsCanceled = true;
+
                 await db.SaveChangesAsync();
             }
         }
@@ -49,14 +43,17 @@ namespace Air_3550.ViewModels
         {
             using (var db = new AirContext())
             {
-                var FlightsT = await db.Flights
+                Flights.Clear();
+
+                var queriedFlights = await db.Flights
                     .Include(Flight => Flight.OriginAirport)
                     .Include(Flight => Flight.DestinationAirport)
                     .Where(f => f.IsCanceled == false)
                     .ToListAsync();
-                foreach (Flight a in FlightsT)
+
+                foreach (Flight a in queriedFlights)
                 {
-                    FlightsA.Add(a);
+                    Flights.Add(a);
                 }
             }
         }

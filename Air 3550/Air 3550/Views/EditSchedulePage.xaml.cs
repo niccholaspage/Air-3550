@@ -15,9 +15,6 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class EditSchedulePage : Page
     {
-
-        //readonly EditScheduleViewModel ViewModel = new();
-
         public EditSchedulePage()
         {
             this.InitializeComponent();
@@ -30,14 +27,14 @@ namespace Air_3550.Views
 
         private async void AddFlight_Click(object sender, RoutedEventArgs e)
         {
-            AddFlightDialog dialog1 = new();
-            dialog1.XamlRoot = this.Content.XamlRoot;
-            var result = await dialog1.ShowAsync();
+            AddFlightDialog dialog = new();
+            dialog.XamlRoot = Content.XamlRoot;
+            await dialog.ShowAsync();
+
             //Update if something changed
-            if (dialog1.Result != null)
+            if (dialog.Result != null)
             {
                 await ViewModel.UpdateFlights();
-                ViewModel.Feedback = "FlightID:" + dialog1.Result.Number;
             }
         }
 
@@ -76,11 +73,5 @@ namespace Air_3550.Views
                 if (dialog1.Result != null) await ViewModel.UpdateFlights();
             }
         }
-
-        private void GetSummary_Click(object _, RoutedEventArgs __)
-        {
-            Frame.Navigate(typeof(SummaryPage));
-        }
-
     }
 }
