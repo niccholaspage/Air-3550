@@ -1,5 +1,10 @@
 ﻿using Database.Models;
 using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Air_3550.Models
 {
@@ -18,5 +23,8 @@ namespace Air_3550.Models
 
         [Required]
         public Booking Booking { get; set; }
+
+        public bool BoardingPassAvailable => DateTime.Now >= ScheduledFlight.DepartureDate.Add((ScheduledFlight.GetDepartureTimestamp()).TimeOfDay).AddDays(-1);
+        public bool NotBoardingPassAvailable => DateTime.Now < ScheduledFlight.DepartureDate.Add((ScheduledFlight.GetDepartureTimestamp()).TimeOfDay).AddDays(-1);
     }
 }

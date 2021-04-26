@@ -152,7 +152,8 @@
                         <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" />
                         <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" />
-                        <Button Click="BoardingPass_Click" CommandParameter="{x:Bind}">Get Boarding Pass</Button>
+                        <Button Click="BoardingPass_Click" CommandParameter="{x:Bind}" Visibility="{Binding BoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}">Get Boarding Pass</Button>
+                        <TextBlock Text="Boarding Pass Unavailable" Visibility="{Binding NotBoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
