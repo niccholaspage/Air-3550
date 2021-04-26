@@ -4,11 +4,131 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Air_3550.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:converters="using:Air_3550.Converters" 
+    xmlns:data="using:Air_3550.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+    </Page.Resources>
 
+    <Grid>
+        <ListView x:Name="displayedList"
+            SelectedIndex="{x:Bind ViewModel.SelectedPathIndex, Mode=TwoWay}"
+            RelativePanel.AlignHorizontalCenterWithPanel="true"
+            RelativePanel.Below="Header"
+            ItemsSource="{x:Bind ViewModel.BookingsC}">
+                <ListView.Header>
+                    <Grid Margin="10 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="320"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight ID</TextBlock>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
+                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    </Grid>
+                </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Booking">
+                    <StackPanel Orientation="Vertical">
+                        <Grid Width="650" Height="100">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{Binding DepartureFlightPathWithDate.FormattedDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock FontSize="35" Text="{Binding DepartureFlightPathWithDate.FlightPath.FirstFlightDepartureAirportCode}" />
+                                <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedDepartureTime}" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
+                            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock FontSize="35" Text="{x:Bind DepartureFlightPathWithDate.FlightPath.LastFlightArrivalAirportCode}" />
+                                <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedArrivalTime}" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
+                            <Button Content="{Binding DepartureFlightPathWithDate.FlightPath.FormattedStops}" IsEnabled="{Binding NoStop, Mode=OneWay}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" >
+                                <Button.Flyout>
+                                    <Flyout>
+                                        <StackPanel>
+                                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="View Stops" Margin="0,0,0,12" />
+                                        </StackPanel>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                        </Grid>
+
+
+                        <Grid Width="650" Height="100" Visibility="{Binding HasReturnTickets, Converter={StaticResource BoolToVisibilityConverter}}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{Binding ReturnFlightPathWithDate.FormattedDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock FontSize="35" Text="{Binding ReturnFlightPathWithDate.FlightPath.FirstFlightDepartureAirportCode}" />
+                                <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedDepartureTime}" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
+                            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock FontSize="35" Text="{Binding ReturnFlightPathWithDate.FlightPath.LastFlightArrivalAirportCode}" />
+                                <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedArrivalTime}" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
+                            <Button Content="{Binding ReturnFlightPathWithDate.FlightPath.FormattedStops}" IsEnabled="{Binding NoStop, Mode=OneWay}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" >
+                                <Button.Flyout>
+                                    <Flyout>
+                                        <StackPanel>
+                                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="View Stops" Margin="0,0,0,12" />
+                                        </StackPanel>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <RelativePanel>
+            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"/>
+        </RelativePanel>
     </Grid>
 </Page>

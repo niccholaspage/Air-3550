@@ -1,4 +1,5 @@
 ﻿using Air_3550.ViewModels;
+using Air_3550.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -27,6 +28,7 @@ namespace Air_3550.Views
         public BookingSubPage()
         {
             this.InitializeComponent();
+            this.Loaded += async (_, __) => await ViewModel.GetBookings();
         }
 
         readonly BookingsViewModel ViewModel = new();
