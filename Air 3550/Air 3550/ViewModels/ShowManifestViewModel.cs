@@ -45,7 +45,7 @@ namespace Air_3550.ViewModels
             using var db = new AirContext();
 
             // Get all customer names of current selected flight
-            var customerNames = await db.Tickets.Where(Ticket => Ticket.ScheduledFlight.ScheduledFlightId == SFlight.ScheduledFlightId).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
+            var customerNames = await db.Tickets.Where(Ticket => (Ticket.ScheduledFlight.ScheduledFlightId == SFlight.ScheduledFlightId)&&(!Ticket.IsCanceled)).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
 
 
             //Add Ticket name to Observable collection to be displayed
