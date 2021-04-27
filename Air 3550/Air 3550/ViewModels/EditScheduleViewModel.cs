@@ -50,35 +50,31 @@ namespace Air_3550.ViewModels
 
         public async Task CancelFlight(FlightWithDeletionActive flight)
         {
-            using (var db = new AirContext())
-            {
-                var lookupFlight = await db.Flights.FindAsync(flight.Flight.FlightId);
+            using var db = new AirContext();
+            var lookupFlight = await db.Flights.FindAsync(flight.Flight.FlightId);
 
-                lookupFlight.IsCanceled = true;
+            lookupFlight.IsCanceled = true;
 
-                await db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
-                Flights.RemoveAt(Flights.IndexOf(flight));
-            }
+            Flights.RemoveAt(Flights.IndexOf(flight));
         }
 
         public async Task UpdateFlights()
         {
-            using (var db = new AirContext())
+            using var db = new AirContext();
+            Flights.Clear();
+
+            var queriedFlights = await db.Flights
+                .Include(Flight => Flight.Plane)
+                .Include(Flight => Flight.OriginAirport)
+                .Include(Flight => Flight.DestinationAirport)
+                .Where(flight => !flight.IsCanceled)
+                .ToListAsync();
+
+            foreach (Flight flight in queriedFlights)
             {
-                Flights.Clear();
-
-                var queriedFlights = await db.Flights
-                    .Include(Flight => Flight.Plane)
-                    .Include(Flight => Flight.OriginAirport)
-                    .Include(Flight => Flight.DestinationAirport)
-                    .Where(flight => !flight.IsCanceled)
-                    .ToListAsync();
-
-                foreach (Flight flight in queriedFlights)
-                {
-                    Flights.Add(new FlightWithDeletionActive(flight, IsLoadEngineer));
-                }
+                Flights.Add(new FlightWithDeletionActive(flight, IsLoadEngineer));
             }
         }
     }

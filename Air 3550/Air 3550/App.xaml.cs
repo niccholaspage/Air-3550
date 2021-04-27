@@ -47,7 +47,7 @@ namespace Air_3550
             return services.BuildServiceProvider();
         }
 
-        public new static App Current => (App)Application.Current;
+        public static new App Current => (App)Application.Current;
 
         public IServiceProvider Services { get; }
 

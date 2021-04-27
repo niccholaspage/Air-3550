@@ -87,19 +87,17 @@ namespace Air_3550.ViewModels
 
         public async Task UpdateScheduledFlights()
         {
-            using (var db = new AirContext())
-            {
-                ScheduledFlights = await db.ScheduledFlights
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
-                    .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                    .ToListAsync();
+            using var db = new AirContext();
+            ScheduledFlights = await db.ScheduledFlights
+                .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
+                .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
+                .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
+                .Include(ScheduledFlight => ScheduledFlight.Tickets)
+                .ToListAsync();
 
-                foreach (ScheduledFlight a in ScheduledFlights)
-                {
-                    ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
-                }
+            foreach (ScheduledFlight a in ScheduledFlights)
+            {
+                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
             }
         }
 
@@ -109,20 +107,18 @@ namespace Air_3550.ViewModels
             DateTime End = ((DateTimeOffset)EndDate).DateTime.Date;
 
             //Do null trick to Go to infinity/-infinity if one is not set
-            using (var db = new AirContext())
-            {
-                ScheduledFlights = await db.ScheduledFlights
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
-                    .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
-                    .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                    .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start) && (ScheduledFlight.DepartureDate <= End))
-                    .ToListAsync();
+            using var db = new AirContext();
+            ScheduledFlights = await db.ScheduledFlights
+                .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
+                .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
+                .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
+                .Include(ScheduledFlight => ScheduledFlight.Tickets)
+                .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start) && (ScheduledFlight.DepartureDate <= End))
+                .ToListAsync();
 
-                foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
-                {
-                    ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager));
-                }
+            foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
+            {
+                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager));
             }
         }
 

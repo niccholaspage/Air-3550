@@ -20,9 +20,9 @@ namespace Database.Util
     public class Pricing
     {
 
-        private static readonly TimeSpan HOUR_FIVE = new TimeSpan(0, 5, 0, 0);
-        private static readonly TimeSpan HOUR_EIGHT = new TimeSpan(0, 8, 0, 0);
-        private static readonly TimeSpan HOUR_NINETEEN = new TimeSpan(0, 19, 0, 0);
+        private static readonly TimeSpan HOUR_FIVE = new(0, 5, 0, 0);
+        private static readonly TimeSpan HOUR_EIGHT = new(0, 8, 0, 0);
+        private static readonly TimeSpan HOUR_NINETEEN = new(0, 19, 0, 0);
 
         //TODO: Determine if this is a good resting place
         public static decimal GetDiscountPercentage(TimeSpan departureTime, TimeSpan arrivalTime)

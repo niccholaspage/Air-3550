@@ -63,13 +63,11 @@ namespace Air_3550.Views
             // TODO: Don't await.
             Task.Run(async () =>
             {
-                using (var db = new AirContext())
-                {
-                    var departureAirport = await db.Airports.FindAsync(pageParams.DepartureAirportId);
-                    var destinationAirport = await db.Airports.FindAsync(pageParams.DestinationAirportId);
+                using var db = new AirContext();
+                var departureAirport = await db.Airports.FindAsync(pageParams.DepartureAirportId);
+                var destinationAirport = await db.Airports.FindAsync(pageParams.DestinationAirportId);
 
-                    await ViewModel.SearchForFlights(departureAirport, destinationAirport, pageParams.DepartureDate);
-                }
+                await ViewModel.SearchForFlights(departureAirport, destinationAirport, pageParams.DepartureDate);
             }).Wait();
         }
 
@@ -80,7 +78,7 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        FlightSearchViewModel ViewModel = new();
+        readonly FlightSearchViewModel ViewModel = new();
 
         public string PathType => pageParams.DepartureFlightPath == null ? "Depart:" : "Return:";
 

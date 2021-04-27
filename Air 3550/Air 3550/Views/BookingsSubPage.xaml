@@ -66,7 +66,7 @@
                             <TextBlock Text="{x:Bind Type}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
                             <Button Content="Cancel" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Visibility="{x:Bind CanCancelSomeTickets, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                                    Visibility="{x:Bind CanCancelSomeTickets, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Button.Flyout>
                                     <Flyout x:Name="CancelFlyout">
                                         <StackPanel>

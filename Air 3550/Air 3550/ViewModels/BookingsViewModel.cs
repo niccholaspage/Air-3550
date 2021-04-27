@@ -72,28 +72,26 @@ namespace Air_3550.ViewModels
         {
             Bookings.Clear();
 
-            using (var db = new AirContext())
-            {
-                CustomerName = await db.CustomerDatas
-                    .Where(customerData => customerData.CustomerDataId == _userSessionService.CustomerDataId)
-                    .Select(customerData => customerData.Name)
-                .SingleAsync();
+            using var db = new AirContext();
+            CustomerName = await db.CustomerDatas
+                .Where(customerData => customerData.CustomerDataId == _userSessionService.CustomerDataId)
+                .Select(customerData => customerData.Name)
+            .SingleAsync();
 
-                var bookings = await db.Bookings
-                    .Include(Booking => Booking.Tickets)
-                    .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                    .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                    .ThenInclude(Flight => Flight.OriginAirport)
-                    .Include(Booking => Booking.Tickets)
-                    .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                    .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                    .ThenInclude(Flight => Flight.DestinationAirport)
-                    .Where(Booking => Booking.CustomerDataId == _userSessionService.CustomerDataId)
-                    .ToListAsync();
-                foreach (Booking a in bookings)
-                {
-                    Bookings.Add(a);
-                }
+            var bookings = await db.Bookings
+                .Include(Booking => Booking.Tickets)
+                .ThenInclude(Ticket => Ticket.ScheduledFlight)
+                .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
+                .ThenInclude(Flight => Flight.OriginAirport)
+                .Include(Booking => Booking.Tickets)
+                .ThenInclude(Ticket => Ticket.ScheduledFlight)
+                .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
+                .ThenInclude(Flight => Flight.DestinationAirport)
+                .Where(Booking => Booking.CustomerDataId == _userSessionService.CustomerDataId)
+                .ToListAsync();
+            foreach (Booking a in bookings)
+            {
+                Bookings.Add(a);
             }
         }
 

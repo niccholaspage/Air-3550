@@ -84,19 +84,17 @@ namespace Air_3550.ViewModels
 
         public async Task FetchBalances()
         {
-            using (var db = new AirContext())
-            {
-                var accountBalance = await db.CustomerDatas
-                    .Where(customerData => customerData.UserId == userSession.UserId)
-                .Select(customerData => customerData.AccountBalance)
-                .SingleAsync();
+            using var db = new AirContext();
+            var accountBalance = await db.CustomerDatas
+                .Where(customerData => customerData.UserId == userSession.UserId)
+            .Select(customerData => customerData.AccountBalance)
+            .SingleAsync();
 
-                FormattedAccountBalance = "Account Balance: " + accountBalance.FormatAsMoney();
+            FormattedAccountBalance = "Account Balance: " + accountBalance.FormatAsMoney();
 
-                var pointValues = await PointsHandler.UpdateAndRetrievePointsBalance(db);
+            var pointValues = await PointsHandler.UpdateAndRetrievePointsBalance(db);
 
-                FormattedRewardPoints = "Reward Points: " + pointValues.RewardPointsBalance;
-            }
+            FormattedRewardPoints = "Reward Points: " + pointValues.RewardPointsBalance;
         }
 
         public decimal TotalCost => DepartingFlightPathWithDate.FlightPath.Price + (ReturnFlightPathWithDate != null ? ReturnFlightPathWithDate.FlightPath.Price : 0.0m);

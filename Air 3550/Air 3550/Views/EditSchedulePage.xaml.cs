@@ -61,8 +61,10 @@ namespace Air_3550.Views
 
             if (!ViewModel.IsLoadEngineer)
             {
-                EditPlaneDialog dialog1 = new EditPlaneDialog(flightWithDeletion.Flight);
-                dialog1.XamlRoot = this.Content.XamlRoot;
+                var dialog1 = new EditPlaneDialog(flightWithDeletion.Flight)
+                {
+                    XamlRoot = this.Content.XamlRoot
+                };
                 var result = await dialog1.ShowAsync();
 
                 // Update flights if a flight was edited.

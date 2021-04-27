@@ -77,31 +77,29 @@ namespace Air_3550.ViewModels
                 return null;
             }
 
-            using (var db = new AirContext())
+            using var db = new AirContext();
+            var flight = new Flight
             {
-                var flight = new Flight
-                {
-                    OriginAirportId = (int)OriginId,
-                    DestinationAirportId = (int)DestinationId,
-                    DepartureTime = Depart,
-                    PlaneId = (int)_planeId
-                };
+                OriginAirportId = (int)OriginId,
+                DestinationAirportId = (int)DestinationId,
+                DepartureTime = Depart,
+                PlaneId = (int)_planeId
+            };
 
-                await db.Flights.AddAsync(flight);
+            await db.Flights.AddAsync(flight);
 
-                await db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
-                // Set the flight number to be the flight ID,
-                // since we don't have any system for rolling
-                // over flight numbers.
-                flight.Number = flight.FlightId;
+            // Set the flight number to be the flight ID,
+            // since we don't have any system for rolling
+            // over flight numbers.
+            flight.Number = flight.FlightId;
 
-                await db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
-                Feedback = "Success";
+            Feedback = "Success";
 
-                return flight;
-            }
+            return flight;
         }
     }
 }

@@ -22,12 +22,12 @@ namespace Database.Util
     {
         public List<Flight> Flights;
 
-        private Lazy<string> _formattedDepartureTime;
-        private Lazy<string> _formattedArrivalTime;
-        private Lazy<decimal> _price;
-        private Lazy<int> _priceInPoints;
-        private Lazy<List<TimeSpan>> _flightDepartureTimeline;
-        private Lazy<TimeSpan> _duration;
+        private readonly Lazy<string> _formattedDepartureTime;
+        private readonly Lazy<string> _formattedArrivalTime;
+        private readonly Lazy<decimal> _price;
+        private readonly Lazy<int> _priceInPoints;
+        private readonly Lazy<List<TimeSpan>> _flightDepartureTimeline;
+        private readonly Lazy<TimeSpan> _duration;
 
         public string FormattedDepartureTime => _formattedDepartureTime.Value;
         public string FormattedArrivalTime => _formattedArrivalTime.Value;

@@ -16,7 +16,7 @@ namespace Air_3550.Util
 {
     class NotEqualTo : ValidationAttribute
     {
-        private string _otherProperty;
+        private readonly string _otherProperty;
 
         public NotEqualTo(string otherProperty)
         {

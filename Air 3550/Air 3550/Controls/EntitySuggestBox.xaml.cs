@@ -81,33 +81,31 @@ namespace Air_3550.Controls
 
         private async void PopulateEntityNames(object sender, RoutedEventArgs e)
         {
-            using (var db = new AirContext())
+            using var db = new AirContext();
+            if (EntityType == Controls.EntityType.Airport)
             {
-                if (EntityType == Controls.EntityType.Airport)
-                {
-                    var airports = await db.Airports.ToListAsync();
+                var airports = await db.Airports.ToListAsync();
 
-                    foreach (var airport in airports)
-                    {
-                        EntityIds.Add(airport.AirportId);
-                        EntityNames.Add(airport.CityWithStateWithCode);
-                    }
-                }
-                else
+                foreach (var airport in airports)
                 {
-                    var planes = await db.Planes.ToListAsync();
-
-                    foreach (var plane in planes)
-                    {
-                        EntityIds.Add(plane.PlaneId);
-                        EntityNames.Add(plane.Model + " (" + plane.MaxSeats + " seats)");
-                    }
+                    EntityIds.Add(airport.AirportId);
+                    EntityNames.Add(airport.CityWithStateWithCode);
                 }
+            }
+            else
+            {
+                var planes = await db.Planes.ToListAsync();
 
-                if (SelectedEntityId is int index)
+                foreach (var plane in planes)
                 {
-                    Text = EntityNames[index - 1];
+                    EntityIds.Add(plane.PlaneId);
+                    EntityNames.Add(plane.Model + " (" + plane.MaxSeats + " seats)");
                 }
+            }
+
+            if (SelectedEntityId is int index)
+            {
+                Text = EntityNames[index - 1];
             }
         }
 
