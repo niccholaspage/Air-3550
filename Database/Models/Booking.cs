@@ -10,6 +10,16 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * The booking model is used to represent a
+ * booking/trip that a customer makes. A booking
+ * includes tickets (which are per scheduled flight)
+ * for both the departure path and return path. While
+ * tickets are stored in a single list, the model has
+ * convenient accessors to get only departure or
+ * return tickets.
+ */
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
