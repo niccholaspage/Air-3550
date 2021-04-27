@@ -24,11 +24,16 @@ namespace Air_3550.Views
 
         readonly AddFlightViewModel ViewModel = new();
 
-        private async void AddFlight_Click(object _, ContentDialogButtonClickEventArgs __)
+        private async void AddFlight_Click(object _, ContentDialogButtonClickEventArgs e)
         {
             Flight result = await ViewModel.CreateFlight();
-            if (result != null) this.Hide();
-            Result = result;
+
+            if (result == null)
+            {
+                Result = result;
+
+                e.Cancel = true;
+            }
         }
     }
 }

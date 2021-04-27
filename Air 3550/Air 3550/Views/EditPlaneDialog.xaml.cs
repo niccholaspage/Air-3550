@@ -24,11 +24,16 @@ namespace Air_3550.Views
             Result = null;
         }
 
-        public async void EditPlane_Click(object _, ContentDialogButtonClickEventArgs __)
+        public async void EditPlane_Click(object _, ContentDialogButtonClickEventArgs e)
         {
             var result = await ViewModel.EditFlight();
-            if (result != null) this.Hide();
-            Result = result;
+
+            if (result == null)
+            {
+                Result = result;
+
+                e.Cancel = true;
+            }
         }
     }
 
