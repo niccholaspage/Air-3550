@@ -10,10 +10,10 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-using Air_3550.Views;
-using Microsoft.UI.Xaml;
 using System;
 using System.Runtime.InteropServices;
+using Air_3550.Views;
+using Microsoft.UI.Xaml;
 using Windows.Storage.Pickers;
 using WinRT;
 

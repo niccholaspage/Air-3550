@@ -10,10 +10,10 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-using Air_3550.Util;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Air_3550.Util;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Air_3550.ViewModels
 {

@@ -10,13 +10,13 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-using Air_3550.Repository;
-using Database.Util;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Air_3550.Repository;
+using Database.Util;
+using Microsoft.EntityFrameworkCore;
 
 namespace Air_3550.Util
 {
