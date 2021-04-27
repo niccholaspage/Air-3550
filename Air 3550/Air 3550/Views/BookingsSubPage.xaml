@@ -91,15 +91,15 @@
             <ListView.Header>
                 <Grid Margin="10 0 0 10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="320"></ColumnDefinition>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="190" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight ID</TextBlock>
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
-                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Date</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    <TextBlock Grid.Column="4" Margin="20 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">Boarding Pass</TextBlock>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -111,7 +111,7 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="170" />
+                                <ColumnDefinition Width="190" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50" />
@@ -119,20 +119,20 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="{x:Bind ScheduledFlight.DepartureDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            <TextBlock Text="{x:Bind ScheduledFlight.FormattedDepartureDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
                             <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" />
-                                <TextBlock Text="{x:Bind ScheduledFlight.Flight.DepartureTime}" HorizontalAlignment="Center" />
+                                <TextBlock Text="{x:Bind ScheduledFlight.Flight.FormattedDepartureTime}" HorizontalAlignment="Center" />
                             </StackPanel>
                             <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
                             <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" />
-                                <TextBlock Text="{x:Bind ScheduledFlight.Flight.DepartureTime}" HorizontalAlignment="Center" />
+                                <TextBlock Text="{x:Bind ScheduledFlight.Flight.FormattedArrivalTime}" HorizontalAlignment="Center" />
                             </StackPanel>
-                            <Button Grid.Column="4" Click="BoardingPass_Click" CommandParameter="{x:Bind}" Visibility="{Binding BoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}">Get Boarding Pass</Button>
-                            <TextBlock Grid.Column="4" Text="Boarding Pass Unavailable" Visibility="{Binding NotBoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            <Button Grid.Column="4" Grid.RowSpan="2" Margin="20 0 0 0" VerticalAlignment="Center" Click="BoardingPass_Click" CommandParameter="{x:Bind}" Visibility="{x:Bind BoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}">Get Boarding Pass</Button>
+                            <TextBlock Grid.Column="4" Grid.RowSpan="2" Margin="20 0 0 0" VerticalAlignment="Center" Text="Boarding Pass Unavailable" Visibility="{x:Bind NotBoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>

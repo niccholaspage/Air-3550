@@ -10,7 +10,7 @@ namespace Database.Util
         public FlightPath FlightPath => _flightPath;
         public DateTime Date => _date;
 
-        public string FormattedDate => _date.ToString("ddd, MM/dd");
+        public string FormattedDate => _date.FormatNicely();
 
         public FlightPathWithDate(FlightPath flightPath, DateTime date)
         {

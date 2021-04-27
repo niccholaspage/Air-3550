@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Database.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Air_3550.Models
 {
@@ -15,6 +17,9 @@ namespace Air_3550.Models
 
         [Required]
         public DateTime DepartureDate { get; set; }
+
+        [NotMapped]
+        public string FormattedDepartureDate => DepartureDate.FormatNicely();
 
         public List<Ticket> Tickets { get; }
 

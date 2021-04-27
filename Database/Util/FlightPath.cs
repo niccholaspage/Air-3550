@@ -25,6 +25,7 @@ namespace Database.Util
         public List<TimeSpan> FlightDepartureTimeline => _flightDepartureTimeline.Value;
 
         public TimeSpan FirstFlightDepartureTime => Flights.First().DepartureTime;
+        public TimeSpan LastFlightArrivalTime => Flights.Last().GetArrivalTime();
 
         public string FirstFlightDepartureAirportCode => Flights.First().OriginAirport.Code;
         public string FirstFlightArrivalAirportCode => Flights.First().DestinationAirport.Code;
@@ -35,8 +36,8 @@ namespace Database.Util
         {
             Flights = new(flights);
 
-            _formattedDepartureTime = new(() => DateTime.Today.Add(FirstFlightDepartureTime).ToString("h:mm tt"));
-            _formattedArrivalTime = new(() => DateTime.Today.Add(Flights.Last().GetArrivalTime()).ToString("h:mm tt"));
+            _formattedDepartureTime = new(() => FirstFlightDepartureTime.FormatAsTimeNicely());
+            _formattedArrivalTime = new(() => LastFlightArrivalTime.FormatAsTimeNicely());
             _price = new(() => Pricing.CalculatePriceOfFlights(Flights));
             _priceInPoints = new(() => (int)(Price * 100));
 
@@ -117,32 +118,7 @@ namespace Database.Util
 
         public string FormattedPrice => Price.FormatAsMoney();
 
-        public string FormattedDuration
-        {
-            get
-            {
-                var timeSpan = Duration;
-
-                string result = "";
-
-                if (timeSpan.Days > 0)
-                {
-                    result += timeSpan.Days + "d ";
-                }
-
-                if (timeSpan.Hours > 0)
-                {
-                    result += timeSpan.Hours + "h ";
-                }
-
-                if (timeSpan.Minutes > 0)
-                {
-                    result += timeSpan.Minutes + "m";
-                }
-
-                return result.Trim();
-            }
-        }
+        public string FormattedDuration => Duration.FormatAsDurationNicely();
 
         public string FormattedStops
         {

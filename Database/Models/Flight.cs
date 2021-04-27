@@ -1,6 +1,7 @@
 ﻿using Database.Util;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Air_3550.Models
 {
@@ -30,6 +31,12 @@ namespace Air_3550.Models
         public Plane Plane { get; set; }
 
         public bool IsCanceled { get; set; }
+
+        [NotMapped]
+        public string FormattedDepartureTime => DepartureTime.FormatAsTimeNicely();
+
+        [NotMapped]
+        public string FormattedArrivalTime => GetArrivalTime().FormatAsTimeNicely();
 
         /**
          * Calculate distance between the origin airport and destination
