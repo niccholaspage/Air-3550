@@ -34,24 +34,13 @@ namespace Air_3550.Views
 
         private async void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            var booking = (Booking)button.CommandParameter;
-            await ViewModel.cancelFlight(booking);
-            booking.Tickets.First().IsCanceled = true;
-            /*
-            if (this.Cancel1 is Flyout f)
-            {
-                f.Hide();
-            }
-            */
-        }
+            var button = (Button)sender;
+            var flyout = (Flyout) button.FindName("CancelFlyout");
+            flyout.Hide();
 
-        private async void CancelReturn_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
             var booking = (Booking)button.CommandParameter;
-            await ViewModel.cancelReturnFlight(booking);
-            booking.GetReturnTickets().First().IsCanceled = true;
+            await ViewModel.CancelBooking(booking);
+            booking.Tickets.First().IsCanceled = true;
         }
     }
 }

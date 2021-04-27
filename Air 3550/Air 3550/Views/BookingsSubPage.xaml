@@ -51,11 +51,11 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="{Binding DepartureFlightPathWithDate.FormattedDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            <TextBlock Text="{x:Bind DepartureFlightPathWithDate.FormattedDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
                             <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock FontSize="35" Text="{Binding DepartureFlightPathWithDate.FlightPath.FirstFlightDepartureAirportCode}" />
-                                <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedDepartureTime}" HorizontalAlignment="Center" />
+                                <TextBlock Text="{x:Bind DepartureFlightPathWithDate.FlightPath.FormattedDepartureTime}" HorizontalAlignment="Center" />
                             </StackPanel>
                             <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
@@ -63,63 +63,19 @@
                                 <TextBlock FontSize="35" Text="{x:Bind DepartureFlightPathWithDate.FlightPath.LastFlightArrivalAirportCode}" />
                                 <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedArrivalTime}" HorizontalAlignment="Center" />
                             </StackPanel>
-                            <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            <TextBlock Text="{x:Bind DepartureFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
-                            <Button x:Name="Cancel1" Content="Cancel Flight"  Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Visibility="{Binding CanCancel, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
-                                    <Button.Flyout>
-                                        <Flyout>
-                                            <StackPanel>
-                                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Do you wish to cancel your flight?" Margin="0,0,0,12" HorizontalAlignment="Center"/>
-                                                <Button Click="Cancel_Click" CommandParameter="{x:Bind}" Content="Yes, Cancel Flight" HorizontalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Flyout>
-                                    </Button.Flyout>
-                                </Button>
-                        </Grid>
-
-
-                        <Grid Width="600" Height="100" Visibility="{Binding HasReturnTickets, Converter={StaticResource BoolToVisibilityConverter}}" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Text="{Binding ReturnFlightPathWithDate.FormattedDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
-                            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock FontSize="35" Text="{Binding ReturnFlightPathWithDate.FlightPath.FirstFlightDepartureAirportCode}" />
-                                <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedDepartureTime}" HorizontalAlignment="Center" />
-                            </StackPanel>
-                            <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
-                            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock FontSize="35" Text="{Binding ReturnFlightPathWithDate.FlightPath.LastFlightArrivalAirportCode}" />
-                                <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedArrivalTime}" HorizontalAlignment="Center" />
-                            </StackPanel>
-                            <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
-                            <Button x:Name="Cancel2" Content="Cancel Return" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Visibility="{Binding CanCancelReturn, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
-                                    <Button.Flyout>
-                                        <Flyout>
-                                            <StackPanel>
-                                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Do you wish to cancel your return flight?" Margin="0,0,0,12" HorizontalAlignment="Center"/>
-                                                <Button Click="CancelReturn_Click" CommandParameter="{x:Bind}" Content="Yes, Cancel Flight" HorizontalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Flyout>
-                                    </Button.Flyout>
-                                </Button>
+                            <Button Content="Cancel"  Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Visibility="{x:Bind CanCancelSomeTickets, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="CancelFlyout">
+                                        <StackPanel>
+                                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="This booking will be canceled. Do you want to continue?" Margin="0,0,0,12" HorizontalAlignment="Center"/>
+                                            <Button Click="Cancel_Click" CommandParameter="{x:Bind}" Content="Yes, cancel the booking" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>

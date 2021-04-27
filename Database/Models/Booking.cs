@@ -21,10 +21,13 @@ namespace Air_3550.Models
         public int? FirstReturnTicketIndex { get; set; }
 
         [NotMapped]
-        public bool CanCancel => (!Tickets.First().IsCanceled) && (DateTime.Now <= DepartureFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1));
+        public bool CanCancelAllTickets => (!Tickets.First().IsCanceled) && (DateTime.Now <= DepartureFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1));
 
         [NotMapped]
-        public bool CanCancelReturn => (HasReturnTickets && !GetReturnTickets().First().IsCanceled) && !CanCancel && DateTime.Now <= ReturnFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1);
+        public bool CanCancelReturnTickets => HasReturnTickets && !GetReturnTickets().First().IsCanceled && !CanCancelAllTickets && DateTime.Now <= ReturnFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1);
+
+        [NotMapped]
+        public bool CanCancelSomeTickets => CanCancelAllTickets || CanCancelReturnTickets;
 
         [NotMapped]
         public bool AreDepartureTicketsCanceled => Tickets.First().IsCanceled;

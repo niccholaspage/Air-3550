@@ -89,10 +89,7 @@ namespace Air_3550.ViewModels
 
         public decimal TotalCost => DepartingFlightPathWithDate.FlightPath.Price + (ReturnFlightPathWithDate != null ? ReturnFlightPathWithDate.FlightPath.Price : 0.0m);
 
-        // A point corresponds to a single cent, so we
-        // multiply the cost by 100 to get the total cost
-        // in points.
-        public int TotalCostInPoints => (int)(TotalCost * 100);
+        public int TotalCostInPoints => DepartingFlightPathWithDate.FlightPath.PriceInPoints + (ReturnFlightPathWithDate != null ? ReturnFlightPathWithDate.FlightPath.PriceInPoints : 0);
 
         public bool IsReturnFlight => ReturnFlightPathWithDate != null;
 

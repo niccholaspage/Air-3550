@@ -13,12 +13,14 @@ namespace Database.Util
         private Lazy<string> _formattedDepartureTime;
         private Lazy<string> _formattedArrivalTime;
         private Lazy<decimal> _price;
+        private Lazy<int> _priceInPoints;
         private Lazy<List<TimeSpan>> _flightDepartureTimeline;
         private Lazy<TimeSpan> _duration;
 
         public string FormattedDepartureTime => _formattedDepartureTime.Value;
         public string FormattedArrivalTime => _formattedArrivalTime.Value;
         public decimal Price => _price.Value;
+        public int PriceInPoints => _priceInPoints.Value;
         public TimeSpan Duration => _duration.Value;
         public List<TimeSpan> FlightDepartureTimeline => _flightDepartureTimeline.Value;
 
@@ -36,6 +38,7 @@ namespace Database.Util
             _formattedDepartureTime = new(() => DateTime.Today.Add(FirstFlightDepartureTime).ToString("h:mm tt"));
             _formattedArrivalTime = new(() => DateTime.Today.Add(Flights.Last().GetArrivalTime()).ToString("h:mm tt"));
             _price = new(() => Pricing.CalculatePriceOfFlights(Flights));
+            _priceInPoints = new(() => (int)(Price * 100));
 
             _flightDepartureTimeline = new(() =>
             {

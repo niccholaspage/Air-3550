@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -59,11 +60,11 @@ namespace Air_3550.ViewModels
         public async Task GetBookings()
         {
             Bookings.Clear();
-            //Grab all useful data related to a booking _userSessionService.CustomerDataId
+
             using (var db = new AirContext())
             {
-                CustomerName = await db.CustomerDatas
-                    .Where(customerData => customerData.UserId == _userSessionService.UserId)
+                CustomerName = CustomerName = await db.CustomerDatas
+                    .Where(customerData => customerData.CustomerDataId == _userSessionService.CustomerDataId)
                     .Select(customerData => customerData.Name)
                 .SingleAsync();
 
@@ -82,16 +83,14 @@ namespace Air_3550.ViewModels
                 {
                     Bookings.Add(a);
                 }
-                //Feedback = "" + BookingsC.Count;
             }
         }
 
-        public async Task cancelFlight(Booking cancelling)
+        public async Task CancelBooking(Booking booking)
         {
-            decimal refund = 0;
             using (var db = new AirContext())
             {
-                var Cancelling = await db.Bookings
+                var canceledBooking = await db.Bookings
                         .Include(Booking => Booking.Tickets)
                         .ThenInclude(Ticket => Ticket.ScheduledFlight)
                         .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
@@ -100,70 +99,56 @@ namespace Air_3550.ViewModels
                         .ThenInclude(Ticket => Ticket.ScheduledFlight)
                         .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
                         .ThenInclude(Flight => Flight.DestinationAirport)
-                        .Where(Booking => Booking.BookingId == cancelling.BookingId)
-                        .SingleAsync();
-                foreach (Ticket a in Cancelling.Tickets)
+                        .SingleAsync(Booking => Booking.BookingId == booking.BookingId);
+
+                List<Ticket> tickets;
+
+                decimal refundedAmount;
+                int refundedAmountInPoints;
+
+                if (canceledBooking.CanCancelAllTickets)
                 {
-                    a.IsCanceled = true;
-                    if (a.PaymentMethod == PaymentMethod.POINTS)
+                    tickets = canceledBooking.Tickets;
+
+                    refundedAmount = canceledBooking.DepartureFlightPathWithDate.FlightPath.Price;
+                    refundedAmountInPoints = canceledBooking.DepartureFlightPathWithDate.FlightPath.PriceInPoints;
+
+                    if (canceledBooking.HasReturnTickets)
                     {
-                        //Point return
-                    }
-                    else
-                    {
-                        refund += a.ScheduledFlight.Flight.GetCost();
+                        refundedAmount += canceledBooking.ReturnFlightPathWithDate.FlightPath.Price;
+                        refundedAmountInPoints += canceledBooking.ReturnFlightPathWithDate.FlightPath.PriceInPoints;
                     }
                 }
-
-                var customer = await db.CustomerDatas
-                    .Where(customerData => customerData.UserId == _userSessionService.UserId)
-                    .SingleAsync();
-
-                customer.AccountBalance += refund;
-
-                db.SaveChanges();
-            }
-            await GetBookings();
-
-        }
-
-        public async Task cancelReturnFlight(Booking cancelling)
-        {
-            decimal refund = 0;
-            using (var db = new AirContext())
-            {
-                var Cancelling = await db.Bookings
-                        .Include(Booking => Booking.Tickets)
-                        .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                        .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                        .ThenInclude(Flight => Flight.OriginAirport)
-                        .Include(Booking => Booking.Tickets)
-                        .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                        .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                        .ThenInclude(Flight => Flight.DestinationAirport)
-                        .Where(Booking => Booking.BookingId == cancelling.BookingId)
-                        .SingleAsync();
-                foreach (Ticket a in Cancelling.GetReturnTickets())
+                else
                 {
-                    a.IsCanceled = true;
-                    if (a.PaymentMethod == PaymentMethod.POINTS)
-                    {
-                        //Point return
-                    }
-                    else
-                    {
-                        refund += a.ScheduledFlight.Flight.GetCost();
-                    }
+                    tickets = canceledBooking.GetReturnTickets();
+                    refundedAmount = canceledBooking.ReturnFlightPathWithDate.FlightPath.Price;
+                    refundedAmountInPoints = canceledBooking.ReturnFlightPathWithDate.FlightPath.PriceInPoints;
                 }
 
-                var customer = await db.CustomerDatas
-                    .Where(customerData => customerData.UserId == _userSessionService.UserId)
-                    .SingleAsync();
+                foreach (Ticket ticket in tickets)
+                {
+                    ticket.IsCanceled = true;
+                }
 
-                customer.AccountBalance += refund;
+                var paymentMethod = tickets.First().PaymentMethod;
 
-                db.SaveChanges();
+                var customer = await db.CustomerDatas.FindAsync(_userSessionService.CustomerDataId);
+
+                if (paymentMethod == PaymentMethod.POINTS)
+                {
+                    // Refund to customer's points.
+                    customer.RewardPointsBalance += refundedAmountInPoints;
+                }
+                else
+                {
+                    // Refund to account balance
+                    customer.AccountBalance += refundedAmount;
+                }
+
+                await db.SaveChangesAsync();
             }
+
             await GetBookings();
 
         }
