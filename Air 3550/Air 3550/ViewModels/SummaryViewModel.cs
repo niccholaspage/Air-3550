@@ -91,7 +91,7 @@ namespace Air_3550.ViewModels
             }
         }
 
-        public async Task updateSflightsDate()
+        public async Task UpdateScheduledFlightsDate()
         {
             DateTime Start = ((DateTimeOffset)StartDate).DateTime.Date;
             DateTime End = ((DateTimeOffset)EndDate).DateTime.Date;

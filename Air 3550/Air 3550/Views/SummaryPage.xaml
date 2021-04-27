@@ -15,22 +15,21 @@
       <DataTemplate x:Key="SummaryListViewTemplate" x:DataType="data1:ScheduledFlightWithManifest">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"></ColumnDefinition>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
                 <ColumnDefinition Width="50"></ColumnDefinition>
-                <ColumnDefinition Width="30"></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{x:Bind ScheduledFlight.DepartureDate}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{x:Bind ScheduledFlight.Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="2" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
-                <SymbolIcon Grid.Column="3" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
-                <TextBlock Grid.Column="4" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="5" Text="{x:Bind ScheduledFlight.Flight.Number}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="6" HorizontalAlignment="Center">
+                <TextBlock Grid.Column="1" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <SymbolIcon Grid.Column="2" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
+                <TextBlock Grid.Column="3" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="4" Margin="10 0 0 0" Text="{x:Bind ScheduledFlight.Flight.Number}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="5" HorizontalAlignment="Center">
                     <Run Text="{x:Bind ScheduledFlight.Tickets.Count}"/>
                     <Run Text="/"/>
                     <Run Text="{x:Bind ScheduledFlight.Flight.Plane.MaxSeats}"/>
@@ -61,17 +60,19 @@
                 <ListView.Header>
                     <Grid Margin="10 0 0 10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="40"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="40"></ColumnDefinition>
+                            <ColumnDefinition Width="70"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
                             <ColumnDefinition Width="150"></ColumnDefinition>
                             <ColumnDefinition Width="150"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Departure Date</TextBlock>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Departure Time</TextBlock>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
-                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
-                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Tickets</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                        <TextBlock Grid.Column="4" Margin="10 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
+                        <TextBlock Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center">Tickets</TextBlock>
                     </Grid>
                 </ListView.Header>
             </ListView>

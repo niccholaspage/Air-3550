@@ -27,7 +27,7 @@ namespace Air_3550.Views
 
         public async void UpdateDates_Click(object sender, RoutedEventArgs e)
         {
-            await ViewModel.updateSflightsDate();
+            await ViewModel.UpdateScheduledFlightsDate();
         }
     }
 }
