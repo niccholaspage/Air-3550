@@ -26,24 +26,25 @@ namespace Air_3550.Models
         public int AirportId { get; set; } // The primary ID of the airport, used to relate the airport to other data.
 
         [Required]
-        public string Code { get; set; }
+        public string Code { get; set; } // The airport's code, used in the UI to represent the code of an airport.
 
+        // The airport's latitude. This is used with the longitude below to calculate the distance between two airports.
         [Column(TypeName = "Decimal(8,6)")]
         public decimal Latitude { get; set; }
 
         [Column(TypeName = "Decimal(9,6)")]
-        public decimal Longitude { get; set; }
+        public decimal Longitude { get; set; } // The airport's longitude.
 
         [Required]
-        public string City { get; set; }
+        public string City { get; set; } // The airport's city, used to show the user where an airport is located in. 
 
         [Required]
-        public string State { get; set; } // TODO: Determine this as well
+        public string State { get; set; } // The airport's state, used to show the user where an airport is located in. 
 
         [NotMapped]
-        public string CityWithState => City + ", " + State;
+        public string CityWithState => City + ", " + State; // A convenient computed property to return the city and state, nicely formatted.
 
         [NotMapped]
-        public string CityWithStateWithCode => CityWithState + " (" + Code + ")";
+        public string CityWithStateWithCode => CityWithState + " (" + Code + ")"; // A conveinent computed property to return the city, state, and airport code, nicely formatted.
     }
 }
