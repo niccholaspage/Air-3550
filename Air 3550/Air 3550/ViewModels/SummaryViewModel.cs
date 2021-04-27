@@ -21,7 +21,7 @@ namespace Air_3550.ViewModels
     {
         private readonly UserSessionService userSessionService;
 
-        public ObservableCollection<ScheduledFlightWithManifest> SflightsM = new();
+        public ObservableCollection<ScheduledFlightWithManifest> ScheduledFlightsWithManifest = new();
 
         private bool _isFlightManager;
 
@@ -31,14 +31,12 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _isFlightManager, value);
         }
 
-        private List<string> lines = new List<string>();
+        private List<ScheduledFlight> _scheduledFlights;
 
-        private List<ScheduledFlight> _sflights;
-
-        public List<ScheduledFlight> Sflights
+        public List<ScheduledFlight> ScheduledFlights
         {
-            get => _sflights;
-            set => SetProperty(ref _sflights, value);
+            get => _scheduledFlights;
+            set => SetProperty(ref _scheduledFlights, value);
         }
 
         private DateTimeOffset? _startDate;
@@ -75,20 +73,20 @@ namespace Air_3550.ViewModels
             IsFlightManager = userSessionService.Role == Role.FLIGHT_MANAGER;
         }
 
-        public async Task updateSflights()
+        public async Task UpdateScheduledFlights()
         {
             using (var db = new AirContext())
             {
-                Sflights = await db.ScheduledFlights
+                ScheduledFlights = await db.ScheduledFlights
                     .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
                     .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
                     .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
                     .Include(ScheduledFlight => ScheduledFlight.Tickets)
                     .ToListAsync();
 
-                foreach (ScheduledFlight a in Sflights)
+                foreach (ScheduledFlight a in ScheduledFlights)
                 {
-                    SflightsM.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
+                    ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
                 }
             }
         }
@@ -97,10 +95,11 @@ namespace Air_3550.ViewModels
         {
             DateTime Start = ((DateTimeOffset)StartDate).DateTime.Date;
             DateTime End = ((DateTimeOffset)EndDate).DateTime.Date;
+
             //Do null trick to Go to infinity/-infinity if one is not set
             using (var db = new AirContext())
             {
-                Sflights = await db.ScheduledFlights
+                ScheduledFlights = await db.ScheduledFlights
                     .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
                     .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
                     .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
@@ -108,9 +107,9 @@ namespace Air_3550.ViewModels
                     .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start) && (ScheduledFlight.DepartureDate <= End))
                     .ToListAsync();
 
-                foreach (ScheduledFlight a in Sflights)
+                foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
                 {
-                    SflightsM.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
+                    ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager));
                 }
             }
         }
@@ -125,26 +124,28 @@ namespace Air_3550.ViewModels
             MainWindow.FixPicker(savePicker);
 
             // Dropdown of file types the user can save the file as
-            savePicker.FileTypeChoices.Add(".csv", new List<string>() { ".csv" });
+            savePicker.FileTypeChoices.Add(".csv", new List<string>() { "CSV (Comma delimited)" });
 
             // Default file name if the user does not type one in or select a file to replace
-            savePicker.SuggestedFileName = "New Document";
+            savePicker.SuggestedFileName = "Summary";
 
             StorageFile file = await savePicker.PickSaveFileAsync();
 
+            List<string> lines = new();
+
             lines.Add("ScheduledFlightId,Capacity,Tickets,Cost Per Ticket");
 
-            foreach (ScheduledFlight sF in Sflights)
+            foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
             {
                 lines.Add(
-                    sF.ScheduledFlightId + "," + sF.Flight.Plane.MaxSeats + "," + sF.Tickets.Count + "," + sF.Flight.GetCost()
+                    scheduledFlight.ScheduledFlightId + "," + scheduledFlight.Flight.Plane.MaxSeats + "," + scheduledFlight.Tickets.Count + "," + scheduledFlight.Flight.GetCost()
                     );
             }
 
             //Grabs File Path to write using System.IO
             if (file != null)
             {
-                String FilePath = file.Path;
+                string FilePath = file.Path;
                 File.WriteAllLines(FilePath, lines);
             }
 

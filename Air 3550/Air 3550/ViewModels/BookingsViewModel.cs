@@ -14,8 +14,7 @@ namespace Air_3550.ViewModels
 {
     class BookingsViewModel : ObservableObject
     {
-        public ObservableCollection<Booking> BookingsC = new();
-        public ObservableCollection<Ticket> TicketsC = new();
+        public ObservableCollection<Booking> Bookings = new();
 
         private readonly UserSessionService _userSessionService;
 
@@ -59,7 +58,7 @@ namespace Air_3550.ViewModels
 
         public async Task GetBookings()
         {
-            BookingsC.Clear();
+            Bookings.Clear();
             //Grab all useful data related to a booking _userSessionService.CustomerDataId
             using (var db = new AirContext())
             {
@@ -81,7 +80,7 @@ namespace Air_3550.ViewModels
                     .ToListAsync();
                 foreach (Booking a in bookings)
                 {
-                    BookingsC.Add(a);
+                    Bookings.Add(a);
                 }
                 //Feedback = "" + BookingsC.Count;
             }

@@ -24,9 +24,9 @@ namespace Air_3550.Converters
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            if (value is Visibility vis)
+            if (value is Visibility visibility)
             {
-                return vis == OnTrue;
+                return visibility == OnTrue;
             }
             else
             {

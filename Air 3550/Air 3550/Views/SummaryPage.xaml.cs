@@ -15,7 +15,7 @@ namespace Air_3550.Views
         public SummaryPage()
         {
             this.InitializeComponent();
-            this.Loaded += async (_, __) => await ViewModel.updateSflights();
+            this.Loaded += async (_, __) => await ViewModel.UpdateScheduledFlights();
         }
 
         readonly SummaryViewModel ViewModel = new();

@@ -17,7 +17,7 @@
         <ListView x:Name="BookingsListView"
             SelectedItem="{x:Bind ViewModel.SelectedBooking, Mode=TwoWay}"
             SelectionMode="Single"
-            ItemsSource="{x:Bind ViewModel.BookingsC, Mode=OneWay}">
+            ItemsSource="{x:Bind ViewModel.Bookings, Mode=OneWay}">
             <ListView.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
