@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(AirContext))]
-    [Migration("20210421170749_ATLSeeding")]
-    partial class ATLSeeding
+    [Migration("20210427172922_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,6 @@ namespace Database.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Elevation")
-                        .HasColumnType("INTEGER");
-
                     b.Property<decimal>("Latitude")
                         .HasColumnType("Decimal(8,6)");
 
@@ -55,7 +52,6 @@ namespace Database.Migrations
                             AirportId = 1,
                             City = "Cleveland",
                             Code = "CLE",
-                            Elevation = 791,
                             Latitude = 41.411667m,
                             Longitude = -81.849722m,
                             State = "Ohio"
@@ -65,7 +61,6 @@ namespace Database.Migrations
                             AirportId = 2,
                             City = "Nashville",
                             Code = "BNA",
-                            Elevation = 599,
                             Latitude = 36.126667m,
                             Longitude = -86.681944m,
                             State = "Tennessee"
@@ -75,7 +70,6 @@ namespace Database.Migrations
                             AirportId = 3,
                             City = "Detroit",
                             Code = "DTW",
-                            Elevation = 645,
                             Latitude = 42.2125m,
                             Longitude = -83.353333m,
                             State = "Michigan"
@@ -85,7 +79,6 @@ namespace Database.Migrations
                             AirportId = 4,
                             City = "Atlanta",
                             Code = "ATL",
-                            Elevation = 1026,
                             Latitude = 33.636667m,
                             Longitude = -84.428056m,
                             State = "Georgia"
@@ -95,7 +88,6 @@ namespace Database.Migrations
                             AirportId = 5,
                             City = "New York City",
                             Code = "LGA",
-                            Elevation = 21,
                             Latitude = 40.775m,
                             Longitude = -73.875m,
                             State = "New York"
@@ -105,7 +97,6 @@ namespace Database.Migrations
                             AirportId = 6,
                             City = "Los Angeles",
                             Code = "LAX",
-                            Elevation = 128,
                             Latitude = 33.9425m,
                             Longitude = -118.408056m,
                             State = "California"
@@ -115,7 +106,6 @@ namespace Database.Migrations
                             AirportId = 7,
                             City = "Chicago",
                             Code = "MDW",
-                            Elevation = 668,
                             Latitude = 41.786111m,
                             Longitude = -87.7525m,
                             State = "Illinois"
@@ -125,7 +115,6 @@ namespace Database.Migrations
                             AirportId = 8,
                             City = "Dallas",
                             Code = "DFW",
-                            Elevation = 607,
                             Latitude = 32.896944m,
                             Longitude = -97.038056m,
                             State = "Texas"
@@ -135,7 +124,6 @@ namespace Database.Migrations
                             AirportId = 9,
                             City = "Denver",
                             Code = "DEN",
-                            Elevation = 5434,
                             Latitude = 39.861667m,
                             Longitude = -104.673056m,
                             State = "Colorado"
@@ -145,7 +133,6 @@ namespace Database.Migrations
                             AirportId = 10,
                             City = "Seattle",
                             Code = "SEA",
-                            Elevation = 433,
                             Latitude = 47.448889m,
                             Longitude = -122.309444m,
                             State = "Washington"
@@ -158,7 +145,10 @@ namespace Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CustomerDataId")
+                    b.Property<int>("CustomerDataId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("FirstReturnTicketIndex")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("BookingId");
@@ -174,8 +164,8 @@ namespace Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AccountBalance")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("AccountBalance")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -210,7 +200,7 @@ namespace Database.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ZipCode")
@@ -1698,6 +1688,886 @@ namespace Database.Migrations
                             Number = 144,
                             OriginAirportId = 9,
                             PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 145,
+                            DepartureTime = new TimeSpan(0, 6, 30, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 145,
+                            OriginAirportId = 5,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 146,
+                            DepartureTime = new TimeSpan(0, 9, 0, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 146,
+                            OriginAirportId = 5,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 147,
+                            DepartureTime = new TimeSpan(0, 12, 30, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 147,
+                            OriginAirportId = 5,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 148,
+                            DepartureTime = new TimeSpan(0, 15, 0, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 148,
+                            OriginAirportId = 5,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 149,
+                            DepartureTime = new TimeSpan(0, 9, 30, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 149,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 150,
+                            DepartureTime = new TimeSpan(0, 12, 0, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 150,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 151,
+                            DepartureTime = new TimeSpan(0, 15, 30, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 151,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 152,
+                            DepartureTime = new TimeSpan(0, 18, 0, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 152,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 153,
+                            DepartureTime = new TimeSpan(0, 12, 50, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 153,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 154,
+                            DepartureTime = new TimeSpan(0, 15, 20, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 154,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 155,
+                            DepartureTime = new TimeSpan(0, 18, 50, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 155,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 156,
+                            DepartureTime = new TimeSpan(0, 21, 20, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 156,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 157,
+                            DepartureTime = new TimeSpan(0, 9, 50, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 157,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 158,
+                            DepartureTime = new TimeSpan(0, 12, 20, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 158,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 159,
+                            DepartureTime = new TimeSpan(0, 15, 50, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 159,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 160,
+                            DepartureTime = new TimeSpan(0, 18, 20, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 160,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 161,
+                            DepartureTime = new TimeSpan(0, 10, 0, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 161,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 162,
+                            DepartureTime = new TimeSpan(0, 13, 30, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 162,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 163,
+                            DepartureTime = new TimeSpan(0, 16, 0, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 163,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 164,
+                            DepartureTime = new TimeSpan(0, 19, 30, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 164,
+                            OriginAirportId = 5,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 165,
+                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 165,
+                            OriginAirportId = 9,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 166,
+                            DepartureTime = new TimeSpan(0, 16, 30, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 166,
+                            OriginAirportId = 9,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 167,
+                            DepartureTime = new TimeSpan(0, 19, 0, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 167,
+                            OriginAirportId = 9,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 168,
+                            DepartureTime = new TimeSpan(0, 22, 30, 0, 0),
+                            DestinationAirportId = 5,
+                            IsCanceled = false,
+                            Number = 168,
+                            OriginAirportId = 9,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 169,
+                            DepartureTime = new TimeSpan(0, 9, 45, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 169,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 170,
+                            DepartureTime = new TimeSpan(0, 12, 15, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 170,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 171,
+                            DepartureTime = new TimeSpan(0, 15, 45, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 171,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 172,
+                            DepartureTime = new TimeSpan(0, 18, 15, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 171,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 173,
+                            DepartureTime = new TimeSpan(0, 12, 45, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 173,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 174,
+                            DepartureTime = new TimeSpan(0, 15, 15, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 174,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 175,
+                            DepartureTime = new TimeSpan(0, 18, 45, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 175,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 176,
+                            DepartureTime = new TimeSpan(0, 21, 15, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 176,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 177,
+                            DepartureTime = new TimeSpan(0, 17, 0, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 177,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 178,
+                            DepartureTime = new TimeSpan(0, 20, 30, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 178,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 179,
+                            DepartureTime = new TimeSpan(0, 23, 0, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 179,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 180,
+                            DepartureTime = new TimeSpan(0, 2, 30, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 180,
+                            OriginAirportId = 6,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 181,
+                            DepartureTime = new TimeSpan(0, 14, 0, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 181,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 182,
+                            DepartureTime = new TimeSpan(0, 17, 30, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 182,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 183,
+                            DepartureTime = new TimeSpan(0, 20, 0, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 183,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 184,
+                            DepartureTime = new TimeSpan(0, 23, 30, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 184,
+                            OriginAirportId = 8,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 185,
+                            DepartureTime = new TimeSpan(0, 9, 5, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 185,
+                            OriginAirportId = 6,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 186,
+                            DepartureTime = new TimeSpan(0, 9, 35, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 186,
+                            OriginAirportId = 6,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 187,
+                            DepartureTime = new TimeSpan(0, 9, 5, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 187,
+                            OriginAirportId = 6,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 188,
+                            DepartureTime = new TimeSpan(0, 9, 35, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 188,
+                            OriginAirportId = 6,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 189,
+                            DepartureTime = new TimeSpan(0, 12, 5, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 189,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 190,
+                            DepartureTime = new TimeSpan(0, 15, 35, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 190,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 191,
+                            DepartureTime = new TimeSpan(0, 18, 5, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 191,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 192,
+                            DepartureTime = new TimeSpan(0, 21, 35, 0, 0),
+                            DestinationAirportId = 6,
+                            IsCanceled = false,
+                            Number = 192,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 193,
+                            DepartureTime = new TimeSpan(0, 4, 0, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 193,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 194,
+                            DepartureTime = new TimeSpan(0, 7, 30, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 194,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 195,
+                            DepartureTime = new TimeSpan(0, 10, 0, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 195,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 196,
+                            DepartureTime = new TimeSpan(0, 13, 30, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 196,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 197,
+                            DepartureTime = new TimeSpan(0, 7, 0, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 197,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 198,
+                            DepartureTime = new TimeSpan(0, 10, 30, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 198,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 199,
+                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 199,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 200,
+                            DepartureTime = new TimeSpan(0, 16, 30, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 200,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 201,
+                            DepartureTime = new TimeSpan(0, 12, 55, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 201,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 202,
+                            DepartureTime = new TimeSpan(0, 15, 25, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 202,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 203,
+                            DepartureTime = new TimeSpan(0, 18, 55, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 203,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 204,
+                            DepartureTime = new TimeSpan(0, 21, 25, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 204,
+                            OriginAirportId = 7,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 205,
+                            DepartureTime = new TimeSpan(0, 12, 55, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 205,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 206,
+                            DepartureTime = new TimeSpan(0, 15, 25, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 206,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 207,
+                            DepartureTime = new TimeSpan(0, 18, 55, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 207,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 208,
+                            DepartureTime = new TimeSpan(0, 21, 25, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 208,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 209,
+                            DepartureTime = new TimeSpan(0, 12, 50, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 209,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 210,
+                            DepartureTime = new TimeSpan(0, 15, 20, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 210,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 211,
+                            DepartureTime = new TimeSpan(0, 18, 50, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 211,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 212,
+                            DepartureTime = new TimeSpan(0, 21, 20, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 212,
+                            OriginAirportId = 7,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 213,
+                            DepartureTime = new TimeSpan(0, 9, 50, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 213,
+                            OriginAirportId = 10,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 214,
+                            DepartureTime = new TimeSpan(0, 12, 20, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 214,
+                            OriginAirportId = 10,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 215,
+                            DepartureTime = new TimeSpan(0, 15, 50, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 215,
+                            OriginAirportId = 10,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 216,
+                            DepartureTime = new TimeSpan(0, 18, 20, 0, 0),
+                            DestinationAirportId = 7,
+                            IsCanceled = false,
+                            Number = 216,
+                            OriginAirportId = 10,
+                            PlaneId = 3
+                        },
+                        new
+                        {
+                            FlightId = 217,
+                            DepartureTime = new TimeSpan(0, 13, 50, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 217,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 218,
+                            DepartureTime = new TimeSpan(0, 16, 20, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 218,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 219,
+                            DepartureTime = new TimeSpan(0, 19, 50, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 219,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 220,
+                            DepartureTime = new TimeSpan(0, 22, 20, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 220,
+                            OriginAirportId = 8,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 221,
+                            DepartureTime = new TimeSpan(0, 10, 50, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 221,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 222,
+                            DepartureTime = new TimeSpan(0, 13, 20, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 222,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 223,
+                            DepartureTime = new TimeSpan(0, 16, 50, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 223,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 224,
+                            DepartureTime = new TimeSpan(0, 19, 20, 0, 0),
+                            DestinationAirportId = 8,
+                            IsCanceled = false,
+                            Number = 224,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 225,
+                            DepartureTime = new TimeSpan(0, 15, 50, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 225,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 226,
+                            DepartureTime = new TimeSpan(0, 18, 20, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 226,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 227,
+                            DepartureTime = new TimeSpan(0, 21, 50, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 227,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 228,
+                            DepartureTime = new TimeSpan(0, 0, 20, 0, 0),
+                            DestinationAirportId = 10,
+                            IsCanceled = false,
+                            Number = 228,
+                            OriginAirportId = 9,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 229,
+                            DepartureTime = new TimeSpan(0, 12, 50, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 229,
+                            OriginAirportId = 10,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 230,
+                            DepartureTime = new TimeSpan(0, 15, 20, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 230,
+                            OriginAirportId = 10,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 231,
+                            DepartureTime = new TimeSpan(0, 18, 50, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 231,
+                            OriginAirportId = 10,
+                            PlaneId = 2
+                        },
+                        new
+                        {
+                            FlightId = 232,
+                            DepartureTime = new TimeSpan(0, 21, 20, 0, 0),
+                            DestinationAirportId = 9,
+                            IsCanceled = false,
+                            Number = 232,
+                            OriginAirportId = 10,
+                            PlaneId = 2
                         });
                 });
 
@@ -1754,7 +2624,7 @@ namespace Database.Migrations
                     b.Property<DateTime>("DepartureDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("FlightId")
+                    b.Property<int>("FlightId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ScheduledFlightId");
@@ -1776,7 +2646,13 @@ namespace Database.Migrations
                     b.Property<bool>("IsCanceled")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ScheduledFlightId")
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("PointsEarned")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ScheduledFlightId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("TicketId");
@@ -1842,16 +2718,22 @@ namespace Database.Migrations
 
             modelBuilder.Entity("Air_3550.Models.Booking", b =>
                 {
-                    b.HasOne("Air_3550.Models.CustomerData", null)
+                    b.HasOne("Air_3550.Models.CustomerData", "CustomerData")
                         .WithMany("Bookings")
-                        .HasForeignKey("CustomerDataId");
+                        .HasForeignKey("CustomerDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CustomerData");
                 });
 
             modelBuilder.Entity("Air_3550.Models.CustomerData", b =>
                 {
                     b.HasOne("Air_3550.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -1887,7 +2769,9 @@ namespace Database.Migrations
                 {
                     b.HasOne("Air_3550.Models.Flight", "Flight")
                         .WithMany()
-                        .HasForeignKey("FlightId");
+                        .HasForeignKey("FlightId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Flight");
                 });
@@ -1901,8 +2785,10 @@ namespace Database.Migrations
                         .IsRequired();
 
                     b.HasOne("Air_3550.Models.ScheduledFlight", "ScheduledFlight")
-                        .WithMany()
-                        .HasForeignKey("ScheduledFlightId");
+                        .WithMany("Tickets")
+                        .HasForeignKey("ScheduledFlightId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Booking");
 
@@ -1917,6 +2803,11 @@ namespace Database.Migrations
             modelBuilder.Entity("Air_3550.Models.CustomerData", b =>
                 {
                     b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("Air_3550.Models.ScheduledFlight", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }
