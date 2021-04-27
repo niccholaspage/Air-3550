@@ -1,22 +1,46 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
+using Air_3550.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Air_3550.ViewModels
 {
-    class EditScheduleViewModel : ObservableValidator
-    {
-        public ObservableCollection<Flight> Flights = new();
+    public record FlightWithDeletionActive(Flight Flight, bool DeletionActive);
 
-        public async Task CancelFlight(Flight flight)
+    class EditScheduleViewModel : ObservableObject
+    {
+        private readonly UserSessionService userSessionService;
+
+        public ObservableCollection<FlightWithDeletionActive> Flights = new();
+
+        private bool _isLoadEngineer;
+
+        public bool IsLoadEngineer
+        {
+            get => _isLoadEngineer;
+            set => SetProperty(ref _isLoadEngineer, value);
+        }
+
+        public EditScheduleViewModel()
+        {
+            userSessionService = App.Current.Services.GetService<UserSessionService>();
+
+            // If the marketing manager is on this page, we hide
+            // the delete button because they are only allowed to
+            // edit planes on flights and cannot delete a flight.
+            IsLoadEngineer = userSessionService.Role == Role.LOAD_ENGINEER;
+        }
+
+        public async Task CancelFlight(FlightWithDeletionActive flight)
         {
             using (var db = new AirContext())
             {
-                var lookupFlight = await db.Flights.FindAsync(flight.FlightId);
+                var lookupFlight = await db.Flights.FindAsync(flight.Flight.FlightId);
 
                 lookupFlight.IsCanceled = true;
 
@@ -38,9 +62,9 @@ namespace Air_3550.ViewModels
                     .Where(flight => !flight.IsCanceled)
                     .ToListAsync();
 
-                foreach (Flight a in queriedFlights)
+                foreach (Flight flight in queriedFlights)
                 {
-                    Flights.Add(a);
+                    Flights.Add(new FlightWithDeletionActive(flight, IsLoadEngineer));
                 }
             }
         }

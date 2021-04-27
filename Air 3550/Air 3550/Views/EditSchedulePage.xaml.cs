@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using static Air_3550.ViewModels.EditScheduleViewModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -19,12 +20,8 @@ namespace Air_3550.Views
     {
         readonly EditScheduleViewModel ViewModel = new();
 
-        private readonly UserSessionService userSessionService;
-
         public EditSchedulePage()
         {
-            userSessionService = App.Current.Services.GetService<UserSessionService>();
-
             this.InitializeComponent();
             this.Loaded += async (_, __) => await ViewModel.UpdateFlights();
         }
@@ -46,7 +43,7 @@ namespace Air_3550.Views
         private async void RemoveFlight_Click(object sender, RoutedEventArgs _)
         {
             var button = (Button)sender;
-            var flight = (Flight)button.CommandParameter;
+            var flight = (FlightWithDeletionActive)button.CommandParameter;
             await ViewModel.CancelFlight(flight);
         }
 
@@ -55,7 +52,7 @@ namespace Air_3550.Views
             var button = (Button)sender;
             Flight flight = (Flight)button.CommandParameter;
 
-            if (userSessionService.Role == Role.MARKETING_MANAGER)
+            if (!ViewModel.IsLoadEngineer)
             {
                 EditPlaneDialog dialog1 = new EditPlaneDialog(flight);
                 dialog1.XamlRoot = this.Content.XamlRoot;

@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:Air_3550.Models"
-    xmlns:data1="using:Air_3550.Repository"
+    xmlns:data1="using:Air_3550.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     >
@@ -15,7 +15,7 @@
     <Page.Resources>
         <converters:IntConverter x:Key="IntConverter"></converters:IntConverter>
 
-        <DataTemplate x:Key="ScheduleListViewTemplate" x:DataType="data:Flight">
+        <DataTemplate x:Key="ScheduleListViewTemplate" x:DataType="data1:FlightWithDeletionActive">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"></ColumnDefinition>
@@ -24,17 +24,17 @@
                     <ColumnDefinition Width="320"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Bind FlightId}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{x:Bind Number}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="2" Text="{x:Bind DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{x:Bind Flight.FlightId}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{x:Bind Flight.Number}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="3" HorizontalAlignment="Center">
-            <Run Text="{Binding OriginAirport.CityWithState}"/>
+            <Run Text="{x:Bind Flight.OriginAirport.CityWithState}"/>
             <Run Text="to"/>
-            <Run Text="{Binding DestinationAirport.CityWithState}"/>
+            <Run Text="{x:Bind Flight.DestinationAirport.CityWithState}"/>
                 </TextBlock>
                 <StackPanel Grid.Column="4" Orientation="Horizontal">
                     <AppBarButton Icon="Edit" Click="EditFlight_Click" CommandParameter="{x:Bind}" Label="Edit"></AppBarButton>
-                    <AppBarButton Icon="Delete" Click="RemoveFlight_Click" CommandParameter="{x:Bind}" Label="Delete"></AppBarButton>
+                    <AppBarButton Visibility="{x:Bind DeletionActive, Converter={StaticResource BoolToVisibilityConverter}}" Icon="Delete" Click="RemoveFlight_Click" CommandParameter="{x:Bind}" Label="Delete"></AppBarButton>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -48,7 +48,7 @@
                     <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Flights</TextBlock>
                 </StackPanel>
             </StackPanel>
-            <ListView
+            <ListView x:Name="FlightListView"
             SelectionMode="None"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
@@ -68,7 +68,6 @@
                         <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
                     </Grid>
                 </ListView.Header>
-
             </ListView>
         </RelativePanel>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
