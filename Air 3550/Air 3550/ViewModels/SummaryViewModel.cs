@@ -1,5 +1,6 @@
 ﻿using Air_3550.Models;
 using Air_3550.Repository;
+using Air_3550.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
@@ -8,14 +9,31 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
-using FileSavePicker = Windows.Storage.Pickers.FileSavePicker;
+using Microsoft.Extensions.DependencyInjection;
+using Windows.Storage.Pickers;
+using System.Collections.ObjectModel;
 
 namespace Air_3550.Views
 {
+    public record ScheduledFlightWithManifest(ScheduledFlight scheduledFlight, bool IsFlightManager);
+
     class SummaryViewModel : ObservableValidator
     {
-        private List<ScheduledFlight> _sflights;
+        private readonly UserSessionService userSessionService;
+
+        public ObservableCollection<ScheduledFlightWithManifest> SflightsM = new();
+
+        private bool _isFlightManager;
+
+        public bool IsFlightManager
+        {
+            get => _isFlightManager;
+            set => SetProperty(ref _isFlightManager, value);
+        }
+
         private List<string> lines = new List<string>();
+
+        private List<ScheduledFlight> _sflights;
 
         public List<ScheduledFlight> Sflights
         {
@@ -47,6 +65,16 @@ namespace Air_3550.Views
             set => SetProperty(ref _feedback, value);
         }
 
+        public SummaryViewModel()
+        {
+            userSessionService = App.Current.Services.GetService<UserSessionService>();
+
+            // If the marketing manager is on this page, we hide
+            // the delete button because they are only allowed to
+            // edit planes on flights and cannot delete a flight.
+            IsFlightManager = userSessionService.Role == Role.FLIGHT_MANAGER;
+        }
+
         public async Task updateSflights()
         {
             using (var db = new AirContext())
@@ -57,6 +85,11 @@ namespace Air_3550.Views
                     .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
                     .Include(ScheduledFlight => ScheduledFlight.Tickets)
                     .ToListAsync();
+
+                foreach(ScheduledFlight a in Sflights)
+                {
+                    SflightsM.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
+                }
             }
         }
 
@@ -74,6 +107,11 @@ namespace Air_3550.Views
                     .Include(ScheduledFlight => ScheduledFlight.Tickets)
                     .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start)&&(ScheduledFlight.DepartureDate <= End))
                     .ToListAsync();
+
+                foreach (ScheduledFlight a in Sflights)
+                {
+                    SflightsM.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
+                }
             }
         }
 
