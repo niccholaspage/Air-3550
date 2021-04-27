@@ -17,7 +17,7 @@
         <ListView x:Name="BookingsListView"
             SelectedItem="{x:Bind ViewModel.SelectedBooking, Mode=TwoWay}"
             SelectionMode="Single"
-            ItemsSource="{x:Bind ViewModel.BookingsC}">
+            ItemsSource="{x:Bind ViewModel.BookingsC, Mode=OneWay}">
             <ListView.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -65,17 +65,17 @@
                             </StackPanel>
                             <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
-                            <Button Content="Cancel Flight"  Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Visibility="{Binding CanCancel, Converter={StaticResource BoolToVisibilityConverter}}">
-                                <Button.Flyout>
-                                    <Flyout>
-                                        <StackPanel>
-                                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Do you wish to cancel your flight?" Margin="0,0,0,12" HorizontalAlignment="Center"/>
-                                            <Button Click="Cancel_Click" Content="Yes, Cancel Flight" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Flyout>
-                                </Button.Flyout>
-                            </Button>
+                            <Button x:Name="Cancel1" Content="Cancel Flight"  Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Visibility="{Binding CanCancel, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                                    <Button.Flyout>
+                                        <Flyout>
+                                            <StackPanel>
+                                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Do you wish to cancel your flight?" Margin="0,0,0,12" HorizontalAlignment="Center"/>
+                                                <Button Click="Cancel_Click" CommandParameter="{x:Bind}" Content="Yes, Cancel Flight" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Flyout>
+                                    </Button.Flyout>
+                                </Button>
                         </Grid>
 
 
@@ -109,17 +109,17 @@
                             </StackPanel>
                             <TextBlock Text="{Binding ReturnFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
-                            <Button Content="Cancel Return" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Visibility="{Binding CanCancelReturn, Converter={StaticResource BoolToVisibilityConverter}}">
-                                <Button.Flyout>
-                                    <Flyout>
-                                        <StackPanel>
-                                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Do you wish to cancel your return flight?" Margin="0,0,0,12" HorizontalAlignment="Center"/>
-                                            <Button Click="CancelReturn_Click" Content="Yes, Cancel Flight" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Flyout>
-                                </Button.Flyout>
-                            </Button>
+                            <Button x:Name="Cancel2" Content="Cancel Return" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Visibility="{Binding CanCancelReturn, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                                    <Button.Flyout>
+                                        <Flyout>
+                                            <StackPanel>
+                                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Do you wish to cancel your return flight?" Margin="0,0,0,12" HorizontalAlignment="Center"/>
+                                                <Button Click="CancelReturn_Click" CommandParameter="{x:Bind}" Content="Yes, Cancel Flight" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Flyout>
+                                    </Button.Flyout>
+                                </Button>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
