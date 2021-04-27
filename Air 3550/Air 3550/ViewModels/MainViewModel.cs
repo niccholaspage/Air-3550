@@ -24,6 +24,26 @@ namespace Air_3550.ViewModels
             }
         }
 
+        private class GreaterThanDepartureDate : ValidationAttribute
+        {
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            {
+                var departureDate = (validationContext.ObjectInstance as MainViewModel).DepartureDate;
+
+                if (value != null && departureDate != null)
+                {
+                    var returnDate = (DateTimeOffset)value;
+
+                    if (returnDate.Date <= departureDate.Value.Date)
+                    {
+                        return new ValidationResult(ErrorMessage);
+                    }
+                }
+
+                return ValidationResult.Success;
+            }
+        }
+
         private string _feedback;
 
         public string Feedback
@@ -71,6 +91,7 @@ namespace Air_3550.ViewModels
         private DateTimeOffset? _returnDate;
 
         [RequiredIfRoundTrip(ErrorMessage = "Please enter a valid return date.")]
+        [GreaterThanDepartureDate(ErrorMessage = "Please enter a return date that is after your departure date.")]
         public DateTimeOffset? ReturnDate
         {
             get => _returnDate;
