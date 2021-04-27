@@ -28,6 +28,7 @@
     <None Remove="Views\MyAccountPage.xaml" />
     <None Remove="Views\PaymentPage.xaml" />
     <None Remove="Views\RegisterPage.xaml" />
+    <None Remove="Views\ShowManifestDialog.xaml" />
     <None Remove="Views\SummaryPage.xaml" />
   </ItemGroup>
 
@@ -44,6 +45,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ShowManifestDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

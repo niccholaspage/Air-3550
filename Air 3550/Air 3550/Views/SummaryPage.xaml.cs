@@ -10,6 +10,8 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+using System;
+using Air_3550.Models;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -40,6 +42,18 @@ namespace Air_3550.Views
         public async void UpdateDates_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.UpdateScheduledFlightsDate();
+        }
+
+        public async void ShowManifest_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            var InterestedFlight = (ScheduledFlightWithManifest)button.CommandParameter;
+
+            ShowManifestDialog dialog1 = new(InterestedFlight.ScheduledFlight);
+            dialog1.XamlRoot = this.Content.XamlRoot;
+            await dialog1.ShowAsync();
+
+
         }
     }
 }
