@@ -24,7 +24,20 @@ namespace Air_3550.Models
         [Required]
         public Booking Booking { get; set; }
 
-        public bool BoardingPassAvailable => DateTime.Now >= ScheduledFlight.DepartureDate.Add((ScheduledFlight.GetDepartureTimestamp()).TimeOfDay).AddDays(-1);
+        [NotMapped]
+        public bool BoardingPassAvailable
+        {
+            get
+            {
+                var now = DateTime.Now;
+
+                var oneDayBeforeDeparture = ScheduledFlight.GetDepartureTimestamp().AddDays(-1);
+
+                return now >= oneDayBeforeDeparture && now < ScheduledFlight.GetDepartureTimestamp();
+            }
+        }
+
+        [NotMapped]
         public bool NotBoardingPassAvailable => !(BoardingPassAvailable);
     }
 }
