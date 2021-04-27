@@ -19,7 +19,7 @@
             SelectionMode="Single"
             ItemsSource="{x:Bind ViewModel.Bookings, Mode=OneWay}">
             <ListView.Header>
-                <Grid>
+                <Grid Margin="10 0 0 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="100" />
@@ -27,11 +27,10 @@
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="100" />
-                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Date</TextBlock>
                     <TextBlock Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
-                    <TextBlock Grid.Column="4" HorizontalTextAlignment="Center" VerticalAlignment="Center">Type</TextBlock>
+                    <TextBlock Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">Type</TextBlock>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -45,7 +44,6 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
-                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50" />
@@ -67,7 +65,7 @@
                             </StackPanel>
                             <TextBlock Text="{x:Bind Type}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
-                            <Button Content="Cancel"  Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            <Button Content="Cancel" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Visibility="{x:Bind CanCancelSomeTickets, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                 <Button.Flyout>
                                     <Flyout x:Name="CancelFlyout">
