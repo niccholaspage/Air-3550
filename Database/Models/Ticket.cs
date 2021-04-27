@@ -51,6 +51,11 @@ namespace Air_3550.Models
         {
             get
             {
+                if (IsCanceled)
+                {
+                    return false;
+                }
+
                 var now = DateTime.Now;
 
                 var oneDayBeforeDeparture = ScheduledFlight.GetDepartureTimestamp().AddDays(-1);
