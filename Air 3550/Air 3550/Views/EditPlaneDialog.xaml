@@ -9,9 +9,11 @@
     xmlns:controls="using:Air_3550.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Title="Edit Plane"
+   Title="Edit Plane"
+    PrimaryButtonText="Edit Plane"
+    PrimaryButtonClick="EditPlane_Click"
     CloseButtonText="Cancel"
-    DefaultButton="Close"
+    DefaultButton="Primary"
     >
 
     <ContentDialog.Resources>
@@ -19,10 +21,8 @@
     </ContentDialog.Resources>
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <!-- Content body -->
-        <TextBox Text="{x:Bind ViewModel.PlaneString, Mode=TwoWay}" Header="Plane Model" x:Name="PlaneModel"></TextBox>
+        <controls:EntitySuggestBox EntityType="Plane" SelectedEntityId="{x:Bind ViewModel.PlaneId, Mode=TwoWay}" Label="Plane" Margin="3" VerticalAlignment="Bottom" />
         <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"></TextBlock>
-        <Button Click="EditFlight_Click" HorizontalAlignment="Right">Update Plane</Button>
     </StackPanel>
 
 </ContentDialog>
