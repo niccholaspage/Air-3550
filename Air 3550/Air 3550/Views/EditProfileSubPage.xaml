@@ -16,5 +16,10 @@
             <TextBlock Text="{x:Bind ViewModel.FormattedTotalRewardPointsUsed, Mode=OneWay}"></TextBlock>
             <TextBlock></TextBlock>
         </StackPanel>
+        <ContentDialog x:Name="SuccessDialog" Title="Profile Edited" CloseButtonText="Close" DefaultButton="Close">
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <TextBlock>Your profile has been edited.</TextBlock>
+            </StackPanel>
+        </ContentDialog>
     </StackPanel>
 </Page>
