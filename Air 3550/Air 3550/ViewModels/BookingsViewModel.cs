@@ -132,6 +132,47 @@ namespace Air_3550.ViewModels
             await GetBookings();
 
         }
+
+        public async Task cancelReturnFlight(Booking cancelling)
+        {
+            decimal refund = 0;
+            using (var db = new AirContext())
+            {
+                var Cancelling = await db.Bookings
+                        .Include(Booking => Booking.Tickets)
+                        .ThenInclude(Ticket => Ticket.ScheduledFlight)
+                        .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
+                        .ThenInclude(Flight => Flight.OriginAirport)
+                        .Include(Booking => Booking.Tickets)
+                        .ThenInclude(Ticket => Ticket.ScheduledFlight)
+                        .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
+                        .ThenInclude(Flight => Flight.DestinationAirport)
+                        .Where(Booking => Booking.BookingId == cancelling.BookingId)
+                        .SingleAsync();
+                foreach (Ticket a in Cancelling.GetReturnTickets())
+                {
+                    a.IsCanceled = true;
+                    if (a.PaymentMethod == PaymentMethod.POINTS)
+                    {
+                        //Point return
+                    }
+                    else
+                    {
+                        refund += a.ScheduledFlight.Flight.GetCost();
+                    }
+                }
+
+                var customer = await db.CustomerDatas
+                    .Where(customerData => customerData.UserId == _userSessionService.UserId)
+                    .SingleAsync();
+
+                customer.AccountBalance += refund;
+
+                db.SaveChanges();
+            }
+            await GetBookings();
+
+        }
     }
 
 

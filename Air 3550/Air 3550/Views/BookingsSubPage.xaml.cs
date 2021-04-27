@@ -59,7 +59,10 @@ namespace Air_3550.Views
 
         private async void CancelReturn_Click(object sender, RoutedEventArgs e)
         {
-
+            Button button = (Button)sender;
+            var booking = (Booking)button.CommandParameter;
+            await ViewModel.cancelReturnFlight(booking);
+            booking.GetReturnTickets().First().IsCanceled = true;
         }
     }
 }
