@@ -10,6 +10,12 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/*
+ * The database context we will be using
+ * across our entire application to access
+ * the database with Entity Framework Core.
+ */
+
 using System;
 using System.IO;
 using Air_3550.Models;
@@ -18,8 +24,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Air_3550.Repository
 {
+    // This class extends EF Core's DBContext.
+    // An instance of an AirContext represents
+    // a session with the database and we use it
+    // to query and save instances of our models.
     public class AirContext : DbContext
     {
+        // Here, we declare the database sets for
+        // each model in our database. This is very
+        // similar to defining each table a database
+        // will have in SQL.
         public DbSet<Airport> Airports { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<CustomerData> CustomerDatas { get; set; }
@@ -29,10 +43,15 @@ namespace Air_3550.Repository
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
 
+        // We override the model creating method
+        // so that we can seed the database with all
+        // of our data.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); // Call the method in the base class.
 
+            // We first start with seeding our airport data. We seed
+            // ten airports with all of their codes and locations.
             modelBuilder.Entity<Airport>().HasData(
                 new Airport { AirportId = 1, Code = "CLE", City = "Cleveland", State = "Ohio", Latitude = 41.411667m, Longitude = -81.849722m },
                 new Airport { AirportId = 2, Code = "BNA", City = "Nashville", State = "Tennessee", Latitude = 36.126667m, Longitude = -86.681944m },
@@ -46,12 +65,20 @@ namespace Air_3550.Repository
                 new Airport { AirportId = 10, Code = "SEA", City = "Seattle", State = "Washington", Latitude = 47.448889m, Longitude = -122.309444m }
                 );
 
+            // We then seed our plane data. We seed three planes,
+            // with their model names, max seats, and maximum
+            // distance.
             modelBuilder.Entity<Plane>().HasData(
                 new Plane { PlaneId = 1, Model = "Boeing 737 MAX", MaxSeats = 230, MaxDistance = 6570 },
                 new Plane { PlaneId = 2, Model = "Boeing 747", MaxSeats = 416, MaxDistance = 14815 },
                 new Plane { PlaneId = 3, Model = "Boeing 777", MaxSeats = 550, MaxDistance = 17395 }
                 );
 
+            // We also seed our users. Because we allow registration,
+            // we do not worry about seeding a customer, but we do seed
+            // an accountant, load engineer, flight manager, and marketing
+            // manager. We also seed their passwords to be the same as their
+            // login ID - we aren't going for security!
             modelBuilder.Entity<User>().HasData(
                 new User { UserId = 1, Role = Role.ACCOUNTANT, LoginId = "accountant", PasswordHash = PasswordHandling.HashPassword("accountant") },
                 new User { UserId = 2, Role = Role.LOAD_ENGINEER, LoginId = "load_engineer", PasswordHash = PasswordHandling.HashPassword("load_engineer") },
@@ -59,6 +86,12 @@ namespace Air_3550.Repository
                 new User { UserId = 4, Role = Role.MARKETING_MANAGER, LoginId = "marketing_manager", PasswordHash = PasswordHandling.HashPassword("marketing_manager") }
                 );
 
+            // Finally, we seed our flights. For seeding, I
+            // went to Southwest's site and searched for flights
+            // going to and from each city. I took each flight,
+            // created 3 copies of it and changed the departure time
+            // for each one. I also based the plane model on the
+            // distance between the two airports.
             modelBuilder.Entity<Flight>().HasData(
                 // Flights from CLE to BNA
                 new Flight { FlightId = 1, Number = 1, OriginAirportId = 1, DestinationAirportId = 2, DepartureTime = new TimeSpan(06, 35, 00), PlaneId = 1 },
@@ -410,13 +443,29 @@ namespace Air_3550.Repository
                 );
         }
 
+        // We also override the on configuring method,
+        // which runs when the context is configured.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
+            // Before we get into setting our database file path, let's talk about
+            // how packaged apps work. At the moment, WinUI 3 only supports packaged
+            // apps. Packaged apps do not have direct access to the file system, so
+            // the location of the database will actually end up at the following directory:
+            // %localappdata%\Packages\13b1f18c-661a-4495-b3a2-861dd126199d_<user specific>\LocalCache\Roaming\Air 3550 Team 4
+
+            // We get the roaming AppData path (again, this ends up different due to sandboxing)
             var appDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            // We get the directory for where we will store the database.
             var airDataDirectory = Path.Combine(appDataDirectory, "Air 3550 Team 4");
-            Directory.CreateDirectory(airDataDirectory);
-            var dbPath = Path.Combine(airDataDirectory, "air.db");
-            options.UseSqlite(@"Data Source=" + dbPath);
+
+            Directory.CreateDirectory(airDataDirectory); // We create the directory incase it doesn't exist again.
+
+            var databaseFilePath = Path.Combine(airDataDirectory, "air.db"); // Finally, we get the path to the file.
+
+            // We then tell our database to use SQLite with our data source
+            // set to the database file path we setup above.
+            options.UseSqlite(@"Data Source=" + databaseFilePath);
         }
     }
 }
