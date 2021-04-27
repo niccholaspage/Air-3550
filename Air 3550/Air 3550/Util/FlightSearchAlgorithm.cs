@@ -121,7 +121,7 @@ namespace Air_3550.Util
                         // we turn the query into a list then check for it?
                         var allScheduledFlightsForFlightAsList = await (from scheduledFlight in db.ScheduledFlights
                                                                         where scheduledFlight.Flight == flight
-                                                                        select new { scheduledFlight.DepartureDate, TicketCount = scheduledFlight.Tickets.Count, PlaneCapacity = scheduledFlight.Flight.Plane.MaxSeats })
+                                                                        select new { scheduledFlight.DepartureDate, TicketCount = scheduledFlight.Tickets.Where(ticket => !ticket.IsCanceled).Count(), PlaneCapacity = scheduledFlight.Flight.Plane.MaxSeats })
                                                                         .ToListAsync();
 
                         if (allScheduledFlightsForFlightAsList.Any(scheduledFlight => scheduledFlight.DepartureDate == flightDepartureDate && scheduledFlight.TicketCount >= scheduledFlight.PlaneCapacity))
