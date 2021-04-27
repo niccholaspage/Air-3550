@@ -104,12 +104,36 @@
             </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Ticket">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" />
-                        <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" />
-                        <Button Click="BoardingPass_Click" CommandParameter="{x:Bind}" Visibility="{Binding BoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}">Get Boarding Pass</Button>
-                        <TextBlock Text="Boarding Pass Unavailable" Visibility="{Binding NotBoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Width="600" Height="100">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="170" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{x:Bind ScheduledFlight.DepartureDate}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" />
+                                <TextBlock Text="{x:Bind ScheduledFlight.Flight.DepartureTime}" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <SymbolIcon Symbol="Forward" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
+                            <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" />
+                                <TextBlock Text="{x:Bind ScheduledFlight.Flight.DepartureTime}" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <Button Grid.Column="4" Click="BoardingPass_Click" CommandParameter="{x:Bind}" Visibility="{Binding BoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}">Get Boarding Pass</Button>
+                            <TextBlock Grid.Column="4" Text="Boarding Pass Unavailable" Visibility="{Binding NotBoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
