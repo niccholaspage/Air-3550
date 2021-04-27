@@ -50,11 +50,11 @@ namespace Air_3550.Views
         private async void EditFlight_Click(object sender, RoutedEventArgs _)
         {
             var button = (Button)sender;
-            Flight flight = (Flight)button.CommandParameter;
+            FlightWithDeletionActive flightWithDeletion = (FlightWithDeletionActive)button.CommandParameter;
 
             if (!ViewModel.IsLoadEngineer)
             {
-                EditPlaneDialog dialog1 = new EditPlaneDialog(flight);
+                EditPlaneDialog dialog1 = new EditPlaneDialog(flightWithDeletion.Flight);
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed
@@ -62,7 +62,7 @@ namespace Air_3550.Views
             }
             else
             {
-                EditFlightDialog dialog1 = new(flight);
+                EditFlightDialog dialog1 = new(flightWithDeletion.Flight);
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
                 //Update if something changed
