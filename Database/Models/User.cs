@@ -10,6 +10,14 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * The user model is used to represent
+ * a user including their login information
+ * as well as their role, which is used to
+ * determine what they have access to in the
+ * system.
+ */
+
 using System.ComponentModel.DataAnnotations;
 
 namespace Air_3550.Models
@@ -19,11 +27,13 @@ namespace Air_3550.Models
         public int UserId { get; set; } // The primary ID of the user, used to relate the user to other data.
 
         [Required]
-        public string LoginId { get; set; }
+        public string LoginId { get; set; } // The login ID or username of the user.
 
+        // The password hash of the user, which is a Base64 encoded SHA512 hash of the user's password.
         [Required]
-        public string PasswordHash { get; set; } // TODO: Determine if this should be a string or not
+        public string PasswordHash { get; set; }
 
+        // The role of the user, which determines what functionality they have access to.
         [Required]
         public Role Role { get; set; }
     }
