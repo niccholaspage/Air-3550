@@ -1,4 +1,5 @@
 ﻿using Air_3550.Models;
+using Air_3550.Repository;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,15 +28,19 @@ namespace Air_3550.Views
         {
             Button button = (Button)sender;
             var ticket = (Ticket)button.CommandParameter;
-            BoardingPass dialog1 = new(ticket, ViewModel.CustomerName);
-            dialog1.XamlRoot = this.Content.XamlRoot;
-            await dialog1.ShowAsync();
+
+            using (var db = new AirContext())
+            {
+                BoardingPassDialog dialog1 = new(ticket, ViewModel.CustomerName);
+                dialog1.XamlRoot = this.Content.XamlRoot;
+                await dialog1.ShowAsync();
+            }
         }
 
         private async void Cancel_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            var flyout = (Flyout) button.FindName("CancelFlyout");
+            var flyout = (Flyout)button.FindName("CancelFlyout");
             flyout.Hide();
 
             var booking = (Booking)button.CommandParameter;

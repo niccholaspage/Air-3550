@@ -19,9 +19,9 @@ namespace Air_3550.ViewModels
 
         private readonly UserSessionService _userSessionService;
 
-        private String _customerName;
+        private string _customerName;
 
-        public String CustomerName
+        public string CustomerName
         {
             get => _customerName;
             set
@@ -63,7 +63,7 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                CustomerName = CustomerName = await db.CustomerDatas
+                CustomerName = await db.CustomerDatas
                     .Where(customerData => customerData.CustomerDataId == _userSessionService.CustomerDataId)
                     .Select(customerData => customerData.Name)
                 .SingleAsync();

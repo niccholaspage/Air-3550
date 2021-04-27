@@ -22,6 +22,10 @@ namespace Air_3550.Models
         [Required]
         public string State { get; set; } // TODO: Determine this as well
 
+        [NotMapped]
         public string CityWithState => City + ", " + State;
+
+        [NotMapped]
+        public string CityWithStateWithCode => CityWithState + " (" + Code + ")";
     }
 }

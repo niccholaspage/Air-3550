@@ -131,7 +131,7 @@
                                 <TextBlock FontSize="35" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" />
                                 <TextBlock Text="{x:Bind ScheduledFlight.Flight.FormattedArrivalTime}" HorizontalAlignment="Center" />
                             </StackPanel>
-                            <Button Grid.Column="4" Grid.RowSpan="2" Margin="20 0 0 0" VerticalAlignment="Center" Click="BoardingPass_Click" CommandParameter="{x:Bind}" Visibility="{x:Bind BoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}">Get Boarding Pass</Button>
+                            <Button Grid.Column="4" Grid.RowSpan="2" Margin="20 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BoardingPass_Click" CommandParameter="{x:Bind}" Visibility="{x:Bind BoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}">Get Boarding Pass</Button>
                             <TextBlock Grid.Column="4" Grid.RowSpan="2" Margin="20 0 0 0" VerticalAlignment="Center" Text="Boarding Pass Unavailable" Visibility="{x:Bind NotBoardingPassAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
                         </Grid>
                     </StackPanel>

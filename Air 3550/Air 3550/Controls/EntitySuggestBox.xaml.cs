@@ -78,7 +78,7 @@ namespace Air_3550.Controls
                     foreach (var airport in airports)
                     {
                         EntityIds.Add(airport.AirportId);
-                        EntityNames.Add(airport.City + ", " + airport.State + " (" + airport.Code + ")");
+                        EntityNames.Add(airport.CityWithStateWithCode);
                     }
                 }
                 else

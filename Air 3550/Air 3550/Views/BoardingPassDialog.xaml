@@ -1,5 +1,5 @@
 ﻿<ContentDialog
-    x:Class="Air_3550.Views.BoardingPass"
+    x:Class="Air_3550.Views.BoardingPassDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Air_3550.Views"
@@ -12,13 +12,27 @@
 
     <StackPanel Orientation="Vertical">
         <TextBlock>
-            <Run Text="Customer: "></Run>
+            <Run Text="Name:"></Run>
             <Run Text="{x:Bind CustomerName}"></Run>
         </TextBlock>
 
         <TextBlock>
-            <Run Text="Ticket ID: "></Run>
-            <Run Text="{x:Bind Viewing.TicketId}"></Run>
+            <Run Text="Flight Number:"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.Number}"></Run>
+        </TextBlock>
+
+        <TextBlock>
+            <Run Text="Departure:"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.OriginAirport.CityWithStateWithCode}"></Run>
+            <Run Text="at"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.DepartureDate}"></Run>
+        </TextBlock>
+
+        <TextBlock>
+            <Run Text="Arrival:"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.DestinationAirport.CityWithStateWithCode}"></Run>
+            <Run Text="at"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.DepartureDate}"></Run>
         </TextBlock>
     </StackPanel>
 </ContentDialog>

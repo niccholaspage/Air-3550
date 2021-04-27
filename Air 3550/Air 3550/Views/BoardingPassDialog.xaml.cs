@@ -10,17 +10,17 @@ namespace Air_3550.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BoardingPass : ContentDialog
+    public sealed partial class BoardingPassDialog : ContentDialog
     {
+        public Ticket Ticket;
 
-        public Ticket Viewing;
-        public String CustomerName;
+        public string CustomerName;
 
-        public BoardingPass(Ticket viewing, String name)
+        public BoardingPassDialog(Ticket ticket, string customerName)
         {
             this.InitializeComponent();
-            Viewing = viewing;
-            CustomerName = name;
+            Ticket = ticket;
+            CustomerName = customerName;
         }
     }
 }
