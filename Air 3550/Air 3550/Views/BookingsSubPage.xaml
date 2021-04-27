@@ -21,15 +21,17 @@
             <ListView.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="320"></ColumnDefinition>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight ID</TextBlock>
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
-                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Date</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    <TextBlock Grid.Column="4" HorizontalTextAlignment="Center" VerticalAlignment="Center">Type</TextBlock>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -63,7 +65,7 @@
                                 <TextBlock FontSize="35" Text="{x:Bind DepartureFlightPathWithDate.FlightPath.LastFlightArrivalAirportCode}" />
                                 <TextBlock Text="{Binding DepartureFlightPathWithDate.FlightPath.FormattedArrivalTime}" HorizontalAlignment="Center" />
                             </StackPanel>
-                            <TextBlock Text="{x:Bind DepartureFlightPathWithDate.FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            <TextBlock Text="{x:Bind Type}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
                             <Button Content="Cancel"  Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Visibility="{x:Bind CanCancelSomeTickets, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">

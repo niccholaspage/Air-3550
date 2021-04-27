@@ -76,6 +76,9 @@ namespace Air_3550.Models
         [NotMapped]
         public bool HasReturnTickets => FirstReturnTicketIndex != null;
 
+        [NotMapped]
+        public string Type => HasReturnTickets ? "Round Trip" : "One Way";
+
         public List<Ticket> GetDepartureTickets()
         {
             if (FirstReturnTicketIndex is int index)
@@ -106,40 +109,9 @@ namespace Air_3550.Models
             return Pricing.CalculatePriceOfFlights(tickets.Select(ticket => ticket.ScheduledFlight.Flight).ToList());
         }
 
-
         public decimal GetTotalCost()
         {
             return GetCost(true) + GetCost(false);
-        }
-
-        // this calculates the duration of one-way flight (either departure or return)
-        public TimeSpan GetDuration(bool departingTickets)
-        {
-            DateTime date1 = DateTime.Now;
-            DateTime date2;
-            TimeSpan totalDuration = new();
-            TimeSpan finalFlightTime = new();
-            var tickets = departingTickets ? GetDepartureTickets() : GetReturnTickets();
-            if (tickets.Count == 0)
-            {
-                return totalDuration;
-            }
-            date2 = tickets[0].ScheduledFlight.GetArrivalTimestamp();
-            foreach (var ticket in Tickets)
-            {
-                if (ticket.ScheduledFlight.GetDepartureTimestamp() < date1)
-                {
-                    date1 = ticket.ScheduledFlight.GetDepartureTimestamp();
-                }
-                if (ticket.ScheduledFlight.GetDepartureTimestamp() > date2)
-                {
-                    date2 = ticket.ScheduledFlight.GetDepartureTimestamp();
-                    finalFlightTime = ticket.ScheduledFlight.Flight.GetDuration();
-                }
-            }
-            totalDuration = date2.Subtract(date1);
-            totalDuration += finalFlightTime;
-            return totalDuration;
         }
     }
 }
