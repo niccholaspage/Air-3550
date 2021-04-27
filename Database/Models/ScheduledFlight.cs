@@ -20,7 +20,7 @@ namespace Air_3550.Models
 {
     public class ScheduledFlight
     {
-        public int ScheduledFlightId { get; set; }
+        public int ScheduledFlightId { get; set; } // The primary ID of the scheduled flight, used to relate the scheduled flight to other data.
 
         public int FlightId { get; set; }
 

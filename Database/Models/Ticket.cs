@@ -19,7 +19,7 @@ namespace Air_3550.Models
 {
     public class Ticket
     {
-        public int TicketId { get; set; }
+        public int TicketId { get; set; } // The primary ID of the ticket, used to relate the ticket to other data.
 
         [Required]
         public ScheduledFlight ScheduledFlight { get; set; }

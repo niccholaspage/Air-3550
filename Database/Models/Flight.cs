@@ -19,7 +19,7 @@ namespace Air_3550.Models
 {
     public class Flight
     {
-        public int FlightId { get; set; }
+        public int FlightId { get; set; } // The primary ID of the flight, used to relate the flight to other data.
 
         [Required]
         public int Number { get; set; }

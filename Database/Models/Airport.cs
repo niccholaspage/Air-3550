@@ -10,6 +10,12 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/*
+ * The airport model is used to represent an
+ * airport in the database with it's associated code,
+ * latitude, longitude, city, and state.
+ */
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,7 +23,7 @@ namespace Air_3550.Models
 {
     public class Airport
     {
-        public int AirportId { get; set; }
+        public int AirportId { get; set; } // The primary ID of the airport, used to relate the airport to other data.
 
         [Required]
         public string Code { get; set; }

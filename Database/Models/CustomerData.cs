@@ -17,7 +17,7 @@ namespace Air_3550.Models
 {
     public class CustomerData
     {
-        public int CustomerDataId { get; set; }
+        public int CustomerDataId { get; set; }  // The primary ID of the customer data, used to relate the customer data to other data.
 
         public int UserId { get; set; }
 

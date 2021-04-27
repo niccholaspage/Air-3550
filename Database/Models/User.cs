@@ -16,7 +16,7 @@ namespace Air_3550.Models
 {
     public class User
     {
-        public int UserId { get; set; }
+        public int UserId { get; set; } // The primary ID of the user, used to relate the user to other data.
 
         [Required]
         public string LoginId { get; set; }

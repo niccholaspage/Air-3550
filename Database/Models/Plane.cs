@@ -16,7 +16,7 @@ namespace Air_3550.Models
 {
     public class Plane
     {
-        public int PlaneId { get; set; }
+        public int PlaneId { get; set; } // The primary ID of the plane, used to relate the airport to other data.
 
         [Required]
         public string Model { get; set; }

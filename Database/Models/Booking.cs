@@ -21,7 +21,7 @@ namespace Air_3550.Models
 {
     public class Booking
     {
-        public int BookingId { get; set; }
+        public int BookingId { get; set; } // The primary ID of the booking, used to relate the booking to other data.
 
         public int CustomerDataId { get; set; }
 
