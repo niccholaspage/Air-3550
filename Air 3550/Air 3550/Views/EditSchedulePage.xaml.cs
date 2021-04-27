@@ -31,10 +31,10 @@ namespace Air_3550.Views
         {
             AddFlightDialog dialog = new();
             dialog.XamlRoot = Content.XamlRoot;
-            await dialog.ShowAsync();
+            var result = await dialog.ShowAsync();
 
-            //Update if something changed
-            if (dialog.Result != null)
+            // Update flights if a new flight was added.
+            if (result == ContentDialogResult.Primary)
             {
                 await ViewModel.UpdateFlights();
             }
@@ -57,16 +57,21 @@ namespace Air_3550.Views
                 EditPlaneDialog dialog1 = new EditPlaneDialog(flightWithDeletion.Flight);
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
-                //Update if something changed
-                if (dialog1.Result != null) await ViewModel.UpdateFlights();
+
+                // Update flights if a flight was edited.
+                if (result == ContentDialogResult.Primary)
+                {
+                    await ViewModel.UpdateFlights();
+                }
             }
             else
             {
                 EditFlightDialog dialog1 = new(flightWithDeletion.Flight);
                 dialog1.XamlRoot = this.Content.XamlRoot;
                 var result = await dialog1.ShowAsync();
-                //Update if something changed
-                if (dialog1.Result != null)
+
+                // Update flights if a flight was edited.
+                if (result == ContentDialogResult.Primary)
                 {
                     await ViewModel.UpdateFlights();
                 }

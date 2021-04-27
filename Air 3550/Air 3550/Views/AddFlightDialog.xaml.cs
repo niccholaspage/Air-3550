@@ -14,12 +14,9 @@ namespace Air_3550.Views
 
     public sealed partial class AddFlightDialog : ContentDialog
     {
-        public Flight Result { get; private set; }
-
         public AddFlightDialog()
         {
             this.InitializeComponent();
-            Result = null;
         }
 
         readonly AddFlightViewModel ViewModel = new();
@@ -30,8 +27,6 @@ namespace Air_3550.Views
 
             if (result == null)
             {
-                Result = result;
-
                 e.Cancel = true;
             }
         }

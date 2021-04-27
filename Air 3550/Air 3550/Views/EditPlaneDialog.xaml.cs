@@ -13,15 +13,12 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class EditPlaneDialog : ContentDialog
     {
-        public Flight Result { get; private set; }
-
         readonly EditPlaneViewModel ViewModel;
 
         public EditPlaneDialog(Flight flight)
         {
             ViewModel = new(flight);
             this.InitializeComponent();
-            Result = null;
         }
 
         public async void EditPlane_Click(object _, ContentDialogButtonClickEventArgs e)
@@ -30,8 +27,6 @@ namespace Air_3550.Views
 
             if (result == null)
             {
-                Result = result;
-
                 e.Cancel = true;
             }
         }

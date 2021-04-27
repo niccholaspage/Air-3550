@@ -15,12 +15,9 @@ namespace Air_3550.Views
     {
         readonly EditFlightViewModel ViewModel;
 
-        public Flight Result { get; private set; }
-
         public EditFlightDialog(Flight flight)
         {
             this.InitializeComponent();
-            Result = null;
             ViewModel = new(flight);
         }
 
@@ -30,8 +27,6 @@ namespace Air_3550.Views
 
             if (result == null)
             {
-                Result = result;
-
                 e.Cancel = true;
             }
         }
