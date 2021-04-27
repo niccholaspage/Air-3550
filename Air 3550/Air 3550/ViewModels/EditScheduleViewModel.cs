@@ -57,6 +57,7 @@ namespace Air_3550.ViewModels
                 Flights.Clear();
 
                 var queriedFlights = await db.Flights
+                    .Include(Flight => Flight.Plane)
                     .Include(Flight => Flight.OriginAirport)
                     .Include(Flight => Flight.DestinationAirport)
                     .Where(flight => !flight.IsCanceled)

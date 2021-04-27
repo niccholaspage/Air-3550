@@ -20,18 +20,18 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
                     <ColumnDefinition Width="320"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Bind Flight.FlightId}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{x:Bind Flight.Number}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="2" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="3" HorizontalAlignment="Center">
+                <TextBlock Grid.Column="0" Text="{x:Bind Flight.Number}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center">
             <Run Text="{x:Bind Flight.OriginAirport.CityWithState}"/>
             <Run Text="to"/>
             <Run Text="{x:Bind Flight.DestinationAirport.CityWithState}"/>
                 </TextBlock>
+                <TextBlock Grid.Column="3" Text="{x:Bind Flight.Plane.Model}" HorizontalAlignment="Center"></TextBlock>
                 <StackPanel Grid.Column="4" Orientation="Horizontal">
                     <AppBarButton Icon="Edit" Click="EditFlight_Click" CommandParameter="{x:Bind}" Label="Edit"></AppBarButton>
                     <AppBarButton Visibility="{x:Bind DeletionActive, Converter={StaticResource BoolToVisibilityConverter}}" Icon="Delete" Click="RemoveFlight_Click" CommandParameter="{x:Bind}" Label="Delete"></AppBarButton>
@@ -58,13 +58,14 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
                         <ColumnDefinition Width="320"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight ID</TextBlock>
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
-                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight Number</TextBlock>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Plane</TextBlock>
                 </Grid>
             </ListView.Header>
         </ListView>
