@@ -1,5 +1,4 @@
-﻿using Air_3550.Models;
-using Air_3550.Repository;
+﻿using Air_3550.Repository;
 using Air_3550.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

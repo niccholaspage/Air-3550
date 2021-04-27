@@ -1,20 +1,18 @@
 ﻿// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+using Air_3550.Models;
 using Air_3550.Services;
 using Air_3550.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.System;
-using Microsoft.Extensions.DependencyInjection;
-using Air_3550.Models;
-using System;
-using System.Reflection.Metadata;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Air_3550.Views
 {

@@ -1,5 +1,4 @@
-﻿using Database.Migrations;
-using Database.Util;
+﻿using Database.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,10 +21,10 @@ namespace Air_3550.Models
         public int? FirstReturnTicketIndex { get; set; }
 
         [NotMapped]
-        public bool CanCancel => (!Tickets.First().IsCanceled)&&(DateTime.Now <= DepartureFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1));
+        public bool CanCancel => (!Tickets.First().IsCanceled) && (DateTime.Now <= DepartureFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1));
 
         [NotMapped]
-        public bool CanCancelReturn =>(HasReturnTickets && !GetReturnTickets().First().IsCanceled) && !CanCancel && DateTime.Now <= ReturnFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1);
+        public bool CanCancelReturn => (HasReturnTickets && !GetReturnTickets().First().IsCanceled) && !CanCancel && DateTime.Now <= ReturnFlightPathWithDate.FirstDepartureFlightTimestamp.AddHours(-1);
 
         [NotMapped]
         public bool AreDepartureTicketsCanceled => Tickets.First().IsCanceled;

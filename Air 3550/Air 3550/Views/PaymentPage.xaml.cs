@@ -1,10 +1,9 @@
-﻿using Database.Util;
-using Air_3550.ViewModels;
+﻿using Air_3550.ViewModels;
+using Database.Util;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using Database.Util;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

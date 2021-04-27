@@ -1,19 +1,14 @@
-﻿using Air_3550.Controls;
+﻿using Air_3550.Models;
 using Air_3550.Repository;
 using Air_3550.Services;
+using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using Air_3550.Models;
-using Air_3550.Util;
-using System.Collections.Generic;
-using Database.Util;
-using System;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Database.Models;
+using System.Threading.Tasks;
 
 namespace Air_3550.ViewModels
 {
@@ -108,7 +103,7 @@ namespace Air_3550.ViewModels
                         .ThenInclude(Flight => Flight.DestinationAirport)
                         .Where(Booking => Booking.BookingId == cancelling.BookingId)
                         .SingleAsync();
-                foreach(Ticket a in Cancelling.Tickets)
+                foreach (Ticket a in Cancelling.Tickets)
                 {
                     a.IsCanceled = true;
                     if (a.PaymentMethod == PaymentMethod.POINTS)
@@ -128,7 +123,7 @@ namespace Air_3550.ViewModels
                 customer.AccountBalance += refund;
 
                 db.SaveChanges();
-           }
+            }
             await GetBookings();
 
         }

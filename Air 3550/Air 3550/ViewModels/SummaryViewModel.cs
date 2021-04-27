@@ -2,16 +2,16 @@
 using Air_3550.Repository;
 using Air_3550.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Microsoft.Extensions.DependencyInjection;
 using Windows.Storage.Pickers;
-using System.Collections.ObjectModel;
 
 namespace Air_3550.ViewModels
 {
@@ -86,7 +86,7 @@ namespace Air_3550.ViewModels
                     .Include(ScheduledFlight => ScheduledFlight.Tickets)
                     .ToListAsync();
 
-                foreach(ScheduledFlight a in Sflights)
+                foreach (ScheduledFlight a in Sflights)
                 {
                     SflightsM.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
                 }
@@ -105,7 +105,7 @@ namespace Air_3550.ViewModels
                     .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
                     .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
                     .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                    .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start)&&(ScheduledFlight.DepartureDate <= End))
+                    .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start) && (ScheduledFlight.DepartureDate <= End))
                     .ToListAsync();
 
                 foreach (ScheduledFlight a in Sflights)
