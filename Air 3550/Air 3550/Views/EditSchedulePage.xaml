@@ -40,38 +40,33 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid>
-
-        <RelativePanel Margin="5 45 0 0">
-            <StackPanel Margin="0 0 0 30" Orientation="Vertical" x:Name="Header">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Flights</TextBlock>
-                </StackPanel>
+    <RelativePanel Margin="5 0 0 0">
+        <StackPanel Margin="0 0 0 30" Orientation="Vertical" x:Name="Header">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Flights</TextBlock>
             </StackPanel>
-            <ListView x:Name="FlightListView"
+        </StackPanel>
+        <AppBarButton Icon="Add" Label="Add Flight" Click="AddFlight_Click" RelativePanel.Above="FlightListView" RelativePanel.AlignRightWith="FlightListView"></AppBarButton>
+        <ListView x:Name="FlightListView"
             SelectionMode="None"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
             ItemTemplate="{StaticResource ScheduleListViewTemplate}"
             ItemsSource="{x:Bind ViewModel.Flights}">
-                <ListView.Header>
-                    <Grid Margin="10 0 0 10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="320"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight ID</TextBlock>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
-                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
-                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
-                    </Grid>
-                </ListView.Header>
-            </ListView>
-        </RelativePanel>
-        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Click="AddFlight_Click" HorizontalAlignment="Right">Add Flight</Button>
-        </StackPanel>
-    </Grid>
+            <ListView.Header>
+                <Grid Margin="10 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="320"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight ID</TextBlock>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                </Grid>
+            </ListView.Header>
+        </ListView>
+    </RelativePanel>
 </Page>
