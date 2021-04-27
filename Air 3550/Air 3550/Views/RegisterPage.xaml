@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Air_3550.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <controls:EditAccountInfoControl Width="300" Header="Register" ActionButtonText="Register" Validator="{x:Bind ViewModel.Validator}" Click="RegisterButton_Click" x:Name="EditAccountInfoControl" HorizontalAlignment="Center" VerticalAlignment="Center"></controls:EditAccountInfoControl>
+    <ScrollViewer>
+        <controls:EditAccountInfoControl Width="300" Header="Register" ActionButtonText="Register" Validator="{x:Bind ViewModel.Validator}" Click="RegisterButton_Click" x:Name="EditAccountInfoControl" HorizontalAlignment="Center" VerticalAlignment="Center"></controls:EditAccountInfoControl>
+    </ScrollViewer>
 </Page>

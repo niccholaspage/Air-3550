@@ -26,10 +26,13 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Run Text="Flight"/>
+                        <Run Text="{x:Bind ViewModel.SFlight.Flight.OriginAirport.Code}"/>
                     </TextBlock>
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
-                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Plane</TextBlock>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Run Text="Flight"/>
+                        <Run Text="{x:Bind ViewModel.SFlight.Flight.DestinationAirport.Code}"/>
+                    </TextBlock>
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
                 </Grid>
             </GridView.Header>
         </GridView>
