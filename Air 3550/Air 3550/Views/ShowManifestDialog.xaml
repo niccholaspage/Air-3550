@@ -10,6 +10,26 @@
     CloseButtonText="Cancel">
 
     <Grid Width="600" Height="500">
-
+        <GridView x:Name="FlightListView"
+            SelectionMode="None"
+            RelativePanel.AlignHorizontalCenterWithPanel="true"
+            RelativePanel.Below="Header"
+            ItemsSource="{x:Bind ViewModel.TicketNames}">
+            <GridView.Header>
+                <Grid Margin="10 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="320"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Flight Number</TextBlock>
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">Departure</TextBlock>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Plane</TextBlock>
+                </Grid>
+            </GridView.Header>
+        </GridView>
     </Grid>
 </ContentDialog>

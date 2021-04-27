@@ -17,12 +17,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Air_3550.Models;
+using Air_3550.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Air_3550.ViewModels
 {
     class ShowManifestViewModel
     {
-        public ObservableCollection<Booking> Bookings = new();
+        public ObservableCollection<String> TicketNames = new();
 
+        public ScheduledFlight SFlight;
+
+        public ShowManifestViewModel(ScheduledFlight sFlight)
+        {
+            //Hold the flight of interested
+            SFlight = sFlight;
+            //Get all names on tickets onto ObservableCollection
+            getTicketNames();
+        }
+
+        public async void getTicketNames()
+        {
+            //Clear TicketNames
+            TicketNames.Clear();
+            
+            //Grab DataBase
+            using var db = new AirContext();
+
+            // Get all customer names of current selected flight
+            var customerNames = await db.Tickets.Where(Ticket => Ticket.ScheduledFlight.ScheduledFlightId == SFlight.ScheduledFlightId).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
+
+
+            //Add Ticket name to Observable collection to be displayed
+            foreach(String a in customerNames)
+            {
+                TicketNames.Add(a);
+            }
+
+        }
     }
 }

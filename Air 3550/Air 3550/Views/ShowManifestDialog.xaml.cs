@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Air_3550.Models;
+using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -39,6 +40,9 @@ namespace Air_3550.Views
         public ShowManifestDialog(ScheduledFlight SFlight)
         {
             this.InitializeComponent();
+            ViewModel = new(SFlight);
         }
+
+        readonly ShowManifestViewModel ViewModel;
     }
 }
