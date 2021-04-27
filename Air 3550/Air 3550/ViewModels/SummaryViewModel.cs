@@ -13,9 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Windows.Storage.Pickers;
 using System.Collections.ObjectModel;
 
-namespace Air_3550.Views
+namespace Air_3550.ViewModels
 {
-    public record ScheduledFlightWithManifest(ScheduledFlight scheduledFlight, bool IsFlightManager);
+    public record ScheduledFlightWithManifest(ScheduledFlight ScheduledFlight, bool IsFlightManager);
 
     class SummaryViewModel : ObservableValidator
     {

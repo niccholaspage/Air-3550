@@ -5,13 +5,14 @@
     xmlns:local="using:Air_3550.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:data="using:Air_3550.Models" 
+    xmlns:data="using:Air_3550.Models"
+    xmlns:data1="using:Air_3550.ViewModels"
     xmlns:converters="using:Air_3550.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-    <DataTemplate x:Key="SummaryListViewTemplate" x:DataType="data:ScheduledFlight">
+      <DataTemplate x:Key="SummaryListViewTemplate" x:DataType="data1:ScheduledFlightWithManifest">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"></ColumnDefinition>
@@ -21,18 +22,20 @@
                 <ColumnDefinition Width="50"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Bind DepartureDate}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="1" Text="{x:Bind Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="2" Text="{x:Bind Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{x:Bind ScheduledFlight.DepartureDate}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Text="{x:Bind ScheduledFlight.Flight.DepartureTime}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
                 <SymbolIcon Grid.Column="3" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
-                <TextBlock Grid.Column="4" Text="{x:Bind Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="5" Text="{x:Bind Flight.Number}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="4" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="5" Text="{x:Bind ScheduledFlight.Flight.Number}" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="6" HorizontalAlignment="Center">
-                    <Run Text="{x:Bind Tickets.Count}"/>
+                    <Run Text="{x:Bind ScheduledFlight.Tickets.Count}"/>
                     <Run Text="/"/>
-                    <Run Text="{x:Bind Flight.Plane.MaxSeats}"/>
+                    <Run Text="{x:Bind ScheduledFlight.Flight.Plane.MaxSeats}"/>
                 </TextBlock>
+                <Button Grid.Column="7" Visibility="{x:Bind IsFlightManager, Converter={StaticResource BoolToVisibilityConverter}}">Test</Button>
         </Grid>
     </DataTemplate>
     </Page.Resources>
@@ -51,7 +54,7 @@
         </Grid.RowDefinitions>
         <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1">
             <ListView 
-                ItemsSource="{x:Bind ViewModel.Sflights, Mode=TwoWay}" 
+                ItemsSource="{x:Bind ViewModel.SflightsM, Mode=TwoWay}" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" 
                 x:Name="displayedList"
                 ItemTemplate="{StaticResource SummaryListViewTemplate}">
