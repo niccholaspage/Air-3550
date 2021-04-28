@@ -371,9 +371,9 @@ namespace Air_3550.Repository
 
                 // Flights from LAX to DEN
                 new Flight { FlightId = 185, Number = 185, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 05, 00), PlaneId = 2 },
-                new Flight { FlightId = 186, Number = 186, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 35, 00), PlaneId = 2 },
-                new Flight { FlightId = 187, Number = 187, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 05, 00), PlaneId = 2 },
-                new Flight { FlightId = 188, Number = 188, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(09, 35, 00), PlaneId = 2 },
+                new Flight { FlightId = 186, Number = 186, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(12, 35, 00), PlaneId = 2 },
+                new Flight { FlightId = 187, Number = 187, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(15, 05, 00), PlaneId = 2 },
+                new Flight { FlightId = 188, Number = 188, OriginAirportId = 6, DestinationAirportId = 9, DepartureTime = new TimeSpan(18, 35, 00), PlaneId = 2 },
 
                 // Flights from DEN to LAX
                 new Flight { FlightId = 189, Number = 189, OriginAirportId = 9, DestinationAirportId = 6, DepartureTime = new TimeSpan(12, 05, 00), PlaneId = 2 },
