@@ -42,9 +42,9 @@ namespace Air_3550.Views
             var ticket = (Ticket)button.CommandParameter;
 
             using var db = new AirContext();
-            BoardingPassDialog dialog1 = new(ticket, ViewModel.CustomerName);
-            dialog1.XamlRoot = this.Content.XamlRoot;
-            await dialog1.ShowAsync();
+            BoardingPassDialog dialog = new(ticket, ViewModel.CustomerName, ViewModel.LoginId);
+            dialog.XamlRoot = this.Content.XamlRoot;
+            await dialog.ShowAsync();
         }
 
         private async void Cancel_Click(object sender, RoutedEventArgs e)

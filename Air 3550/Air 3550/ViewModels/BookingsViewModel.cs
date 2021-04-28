@@ -35,10 +35,15 @@ namespace Air_3550.ViewModels
         public string CustomerName
         {
             get => _customerName;
-            set
-            {
-                SetProperty(ref _customerName, value);
-            }
+            set => SetProperty(ref _customerName, value);
+        }
+
+        private string _loginId;
+
+        public string LoginId
+        {
+            get => _loginId;
+            set => SetProperty(ref _loginId, value);
         }
 
         private Booking _selectedBooking;
@@ -46,10 +51,7 @@ namespace Air_3550.ViewModels
         public Booking SelectedBooking
         {
             get => _selectedBooking;
-            set
-            {
-                SetProperty(ref _selectedBooking, value);
-            }
+            set => SetProperty(ref _selectedBooking, value);
         }
 
         private Ticket _selectedTicket;
@@ -57,10 +59,7 @@ namespace Air_3550.ViewModels
         public Ticket SelectedTicket
         {
             get => _selectedTicket;
-            set
-            {
-                SetProperty(ref _selectedTicket, value);
-            }
+            set => SetProperty(ref _selectedTicket, value);
         }
 
         public BookingsViewModel()
@@ -73,10 +72,13 @@ namespace Air_3550.ViewModels
             Bookings.Clear();
 
             using var db = new AirContext();
-            CustomerName = await db.CustomerDatas
+            var customerInfo = await db.CustomerDatas
                 .Where(customerData => customerData.CustomerDataId == _userSessionService.CustomerDataId)
-                .Select(customerData => customerData.Name)
+                .Select(customerData => new { customerData.Name, customerData.User.LoginId })
             .SingleAsync();
+
+            CustomerName = customerInfo.Name;
+            LoginId = customerInfo.LoginId;
 
             var bookings = await db.Bookings
                 .Include(Booking => Booking.Tickets)

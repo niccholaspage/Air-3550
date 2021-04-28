@@ -12,13 +12,13 @@
 
     <StackPanel Orientation="Vertical">
         <TextBlock>
-            <Run Text="Name:"></Run>
-            <Run Text="{x:Bind CustomerName}"></Run>
+            <Run Text="Flight Number:"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.Number}"></Run>
         </TextBlock>
 
         <TextBlock>
-            <Run Text="Flight Number:"></Run>
-            <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.Number}"></Run>
+            <Run Text="Name:"></Run>
+            <Run Text="{x:Bind CustomerName}"></Run>
         </TextBlock>
 
         <TextBlock>
@@ -33,6 +33,11 @@
             <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.DestinationAirport.CityWithStateWithCode}"></Run>
             <Run Text="at"></Run>
             <Run Text="{x:Bind Ticket.ScheduledFlight.FormattedReturnDateWithTime}"></Run>
+        </TextBlock>
+
+        <TextBlock>
+            <Run Text="Account Number:"></Run>
+            <Run Text="{x:Bind LoginId}"></Run>
         </TextBlock>
     </StackPanel>
 </ContentDialog>

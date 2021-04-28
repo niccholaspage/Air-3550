@@ -27,11 +27,14 @@ namespace Air_3550.Views
 
         public string CustomerName;
 
-        public BoardingPassDialog(Ticket ticket, string customerName)
+        public string LoginId;
+
+        public BoardingPassDialog(Ticket ticket, string customerName, string loginId)
         {
             this.InitializeComponent();
             Ticket = ticket;
             CustomerName = customerName;
+            LoginId = loginId;
         }
     }
 }
