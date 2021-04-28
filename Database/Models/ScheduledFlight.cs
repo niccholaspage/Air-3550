@@ -47,6 +47,11 @@ namespace Air_3550.Models
         [NotMapped]
         public string FormattedDepartureDate => DepartureDate.FormatNicely();
 
+        // A computed property for the time and date of a flight
+        // flight nicely for UI bindings.
+        [NotMapped]
+        public String DepartureDateWithTime => DepartureDate.FormatNicely() + " " +Flight.DepartureTime.FormatAsTimeNicely();
+
         // A list of all the tickets that are attached to
         // this scheduled flight, which can be used for determining
         // how full this scheduled flight is.

@@ -7,34 +7,39 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    CloseButtonText="Cancel">
+    CloseButtonText="Close">
 
-    <Grid Width="600" Height="500">
+    <RelativePanel>
+        <Grid x:Name="Header" Margin="10 0 0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Run Text="Flight: "/>    
+                    <Run Text="{x:Bind ViewModel.SFlight.ScheduledFlightId}"/>
+            </TextBlock>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Run Text="Traveling: "/>    
+                    <Run Text="{x:Bind ViewModel.SFlight.Flight.OriginAirport.Code}"/>
+            </TextBlock>
+            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Run Text="{x:Bind ViewModel.SFlight.Flight.OriginAirport.Code}"/>
+            </TextBlock>
+            <SymbolIcon Grid.Column="3" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
+            <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Run Text="{x:Bind ViewModel.SFlight.Flight.DestinationAirport.Code}"/>
+            </TextBlock>
+        </Grid>
+
         <GridView x:Name="FlightListView"
             SelectionMode="None"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
-            RelativePanel.Below="Header"
-            ItemsSource="{x:Bind ViewModel.TicketNames}">
-            <GridView.Header>
-                <Grid Margin="10 0 0 10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="320"></ColumnDefinition>
-                        <ColumnDefinition Width="150"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Run Text="Flight"/>
-                        <Run Text="{x:Bind ViewModel.SFlight.Flight.OriginAirport.Code}"/>
-                    </TextBlock>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Run Text="Flight"/>
-                        <Run Text="{x:Bind ViewModel.SFlight.Flight.DestinationAirport.Code}"/>
-                    </TextBlock>
-                    <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
-                </Grid>
-            </GridView.Header>
+            ItemsSource="{x:Bind ViewModel.TicketNames}"
+                  RelativePanel.Below="Header">
         </GridView>
-    </Grid>
+    </RelativePanel>
 </ContentDialog>
