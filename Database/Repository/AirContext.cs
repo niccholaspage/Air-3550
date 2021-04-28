@@ -10,7 +10,7 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-/*
+/**
  * The database context we will be using
  * across our entire application to access
  * the database with Entity Framework Core.

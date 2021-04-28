@@ -10,7 +10,7 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-/*
+/**
  * The airport model is used to represent an
  * airport in the database with it's associated code,
  * latitude, longitude, city, and state.

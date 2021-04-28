@@ -10,7 +10,7 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-/*
+/**
  * A simple class used to store and pass
  * around a flight path with a date. This
  * gets us a step closer to actually finding

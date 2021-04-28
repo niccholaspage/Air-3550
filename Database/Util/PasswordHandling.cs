@@ -10,7 +10,7 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-/*
+/**
  * A static class used for password functionality
  * in Air 3550. This class provides the ability to
  * hash passwords and check passwords against a hash.

@@ -10,7 +10,7 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-/*
+/**
  * The plane model is used to represent a plane
  * in the database. This model simply keeps track
  * of the the plane model, max seats, and max
