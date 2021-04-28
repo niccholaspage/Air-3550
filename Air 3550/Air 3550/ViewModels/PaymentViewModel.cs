@@ -113,14 +113,14 @@ namespace Air_3550.ViewModels
             List<Ticket> tickets = new();
 
             var flightPath = flightPathWithDate.FlightPath;
-            var departureDate = flightPathWithDate.Date;
+            var initialDepartureTimestamp = flightPathWithDate.FirstDepartureFlightTimestamp;
 
             for (int i = 0; i < flightPath.Flights.Count; i++)
             {
                 var flight = flightPath.Flights[i];
                 var flightDepartureTimeline = flightPath.FlightDepartureTimeline[i];
 
-                var flightDepartureDate = (departureDate + flightDepartureTimeline).Date;
+                var flightDepartureDate = (initialDepartureTimestamp + flightDepartureTimeline).Date;
                 var scheduledFlight = await db.ScheduledFlights
                     .SingleOrDefaultAsync(scheduledFlight => scheduledFlight.Flight == flight && scheduledFlight.DepartureDate == flightDepartureDate);
 
