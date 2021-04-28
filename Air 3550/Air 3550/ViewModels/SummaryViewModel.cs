@@ -141,6 +141,11 @@ namespace Air_3550.ViewModels
 
             foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
             {
+                if (scheduledFlight.Tickets.Where(ticket => !ticket.IsCanceled).Count() == 0)
+                {
+                    continue;
+                }
+
                 ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager));
             }
         }
