@@ -46,7 +46,7 @@
                 <TextBlock FontWeight="Bold" FontSize="50" Margin="0 0 10 0">Flights</TextBlock>
             </StackPanel>
         </StackPanel>
-        <AppBarButton Icon="Add" Label="Add Flight" Click="AddFlight_Click" RelativePanel.Above="FlightListView" RelativePanel.AlignRightWith="FlightListView"></AppBarButton>
+        <AppBarButton Visibility="{x:Bind ViewModel.IsLoadEngineer, Converter={StaticResource BoolToVisibilityConverter}}" Icon="Add" Label="Add Flight" Click="AddFlight_Click" RelativePanel.Above="FlightListView" RelativePanel.AlignRightWith="FlightListView"></AppBarButton>
         <ListView x:Name="FlightListView"
             SelectionMode="None"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
