@@ -115,6 +115,21 @@ namespace Air_3550.ViewModels
             var flightPath = flightPathWithDate.FlightPath;
             var initialDepartureTimestamp = flightPathWithDate.FirstDepartureFlightTimestamp;
 
+            // A ticket's price is based on the price of it's
+            // flight, adding on the distributed fees across
+            // this entire flight path. To do this, we first
+            // get the price of the entire flight path:
+            var flightPathCost = flightPath.Price;
+
+            // And we get the variable cost of each flight:
+            var variableFlightCosts = flightPath.Flights.Sum(flight => flight.GetCost());
+
+            // We get the remaining cost:
+            var remainingCost = flightPathCost - variableFlightCosts;
+
+            // and get the distributed cost per flight:
+            var distributedCost = remainingCost / flightPath.Flights.Count;
+
             for (int i = 0; i < flightPath.Flights.Count; i++)
             {
                 var flight = flightPath.Flights[i];
@@ -136,7 +151,11 @@ namespace Air_3550.ViewModels
                 var ticket = new Ticket()
                 {
                     ScheduledFlight = scheduledFlight,
-                    PaymentMethod = SelectedPaymentMethod
+                    PaymentMethod = SelectedPaymentMethod,
+                    // and set the ticket's price to be it's
+                    // flight cost + the distributed remaining
+                    // cost
+                    Price = flight.GetCost() + distributedCost
                 };
 
                 tickets.Add(ticket);

@@ -30,7 +30,7 @@ namespace Air_3550.ViewModels
 {
     public record ScheduledFlightWithManifest(ScheduledFlight ScheduledFlight, bool IsFlightManager)
     {
-        public decimal Income => (ScheduledFlight.Tickets.Count * ScheduledFlight.Flight.GetCost());
+        public decimal Income => ScheduledFlight.Tickets.Sum(ticket => ticket.IsCanceled ? 0.0m : ticket.Price);
 
         public string FormattedIncome => Income.FormatAsMoney();
     }

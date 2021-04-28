@@ -18,6 +18,7 @@ using Air_3550.Models;
 using Air_3550.Repository;
 using Air_3550.Services;
 using Database.Models;
+using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
@@ -97,7 +98,7 @@ namespace Air_3550.ViewModels
             }
         }
 
-        public async Task CancelBooking(Booking booking)
+        public async Task CancelBooking(Booking bookingToCancel)
         {
             using (var db = new AirContext())
             {
@@ -110,32 +111,20 @@ namespace Air_3550.ViewModels
                         .ThenInclude(ticket => ticket.ScheduledFlight)
                         .ThenInclude(scheduledFlight => scheduledFlight.Flight)
                         .ThenInclude(flight => flight.DestinationAirport)
-                        .SingleAsync(booking => booking.BookingId == booking.BookingId);
+                        .SingleAsync(booking => bookingToCancel.BookingId == booking.BookingId);
 
                 List<Ticket> tickets;
-
-                decimal refundedAmount;
-                int refundedAmountInPoints;
 
                 if (canceledBooking.CanCancelAllTickets)
                 {
                     tickets = canceledBooking.Tickets;
-
-                    refundedAmount = canceledBooking.DepartureFlightPathWithDate.FlightPath.Price;
-                    refundedAmountInPoints = canceledBooking.DepartureFlightPathWithDate.FlightPath.PriceInPoints;
-
-                    if (canceledBooking.HasReturnTickets)
-                    {
-                        refundedAmount += canceledBooking.ReturnFlightPathWithDate.FlightPath.Price;
-                        refundedAmountInPoints += canceledBooking.ReturnFlightPathWithDate.FlightPath.PriceInPoints;
-                    }
                 }
                 else
                 {
                     tickets = canceledBooking.GetReturnTickets();
-                    refundedAmount = canceledBooking.ReturnFlightPathWithDate.FlightPath.Price;
-                    refundedAmountInPoints = canceledBooking.ReturnFlightPathWithDate.FlightPath.PriceInPoints;
                 }
+
+                decimal refundAmount = tickets.Sum(ticket => ticket.Price);
 
                 foreach (Ticket ticket in tickets)
                 {
@@ -149,12 +138,12 @@ namespace Air_3550.ViewModels
                 if (paymentMethod == PaymentMethod.POINTS)
                 {
                     // Refund to customer's points.
-                    customer.RewardPointsBalance += refundedAmountInPoints;
+                    customer.RewardPointsBalance += Pricing.ConvertToPoints(refundAmount);
                 }
                 else
                 {
                     // Refund to account balance
-                    customer.AccountBalance += refundedAmount;
+                    customer.AccountBalance += refundAmount;
                 }
 
                 await db.SaveChangesAsync();
