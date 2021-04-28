@@ -37,12 +37,22 @@
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Text="Total Flight Cost:"/>
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind GetFormattedTotalCost()}"></TextBlock>
             </Grid>
+            <Line
+                Margin="0 10 0 10"
+             X1="0" Y1="0"
+             X2="250" Y2="0"
+             Stroke="{ThemeResource AppBarSeparatorForegroundThemeBrush}"
+             StrokeThickness="1"/>
+            <Grid Width="250">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Text="Account Balance:"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind ViewModel.FormattedAccountBalance, Mode=OneWay}"></TextBlock>
+            </Grid>
+            <Grid Width="250">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Text="Reward Points:"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind ViewModel.FormattedRewardPoints,Mode=OneWay}"></TextBlock>
+            </Grid>
         </StackPanel>
-        <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWith="FlightPaths" RelativePanel.AlignBottomWith="PricingInfo">
-            <TextBlock x:Name="AccountBalanceText" Text="{x:Bind ViewModel.FormattedAccountBalance, Mode=OneWay}"></TextBlock>
-            <TextBlock x:Name="RewardPoints" Text="{x:Bind ViewModel.FormattedRewardPoints, Mode=OneWay}"></TextBlock>
-        </StackPanel>
-        <RelativePanel Margin="0 150 0 0" x:Name="PurchaseControls" RelativePanel.AlignRightWith="FlightPaths" RelativePanel.Below="FlightPaths">
+        <RelativePanel Margin="0 140 0 0" x:Name="PurchaseControls" RelativePanel.AlignRightWith="FlightPaths" RelativePanel.Below="FlightPaths">
             <TextBlock Margin="2" RelativePanel.LeftOf="PaymentMethodDropdown" RelativePanel.AlignVerticalCenterWith="PurchaseButton">Payment Method:</TextBlock>
             <controls:PaymentTypeComboBox SelectedPaymentMethod="{x:Bind ViewModel.SelectedPaymentMethod, Mode=TwoWay}" Margin="2" x:Name="PaymentMethodDropdown" RelativePanel.LeftOf="PurchaseButton" RelativePanel.AlignVerticalCenterWith="PurchaseButton"></controls:PaymentTypeComboBox>
             <Button Margin="2" x:Name="PurchaseButton" RelativePanel.AlignRightWithPanel="true" Click="PurchaseButton_Click">Purchase</Button>

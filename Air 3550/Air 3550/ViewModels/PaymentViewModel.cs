@@ -74,9 +74,9 @@ namespace Air_3550.ViewModels
             set => SetProperty(ref _formattedAccountBalance, value);
         }
 
-        private string _formattedRewardPoints;
+        private int _formattedRewardPoints;
 
-        public string FormattedRewardPoints
+        public int FormattedRewardPoints
         {
             get => _formattedRewardPoints;
             set => SetProperty(ref _formattedRewardPoints, value);
@@ -90,11 +90,11 @@ namespace Air_3550.ViewModels
             .Select(customerData => customerData.AccountBalance)
             .SingleAsync();
 
-            FormattedAccountBalance = "Account Balance: " + accountBalance.FormatAsMoney();
+            FormattedAccountBalance = accountBalance.FormatAsMoney();
 
             var pointValues = await PointsHandler.UpdateAndRetrievePointsBalance(db);
 
-            FormattedRewardPoints = "Reward Points: " + pointValues.RewardPointsBalance;
+            FormattedRewardPoints = pointValues.RewardPointsBalance;
         }
 
         public decimal TotalCost => DepartingFlightPathWithDate.FlightPath.Price + (ReturnFlightPathWithDate != null ? ReturnFlightPathWithDate.FlightPath.Price : 0.0m);
