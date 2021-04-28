@@ -86,7 +86,7 @@ namespace Air_3550.ViewModels
 
         private string _confirmNewPassword;
 
-        [Required]
+        [Required(ErrorMessage = "Please confirm your new password.")]
         [Compare(nameof(NewPassword), ErrorMessage = "Passwords do not match.")]
         public string ConfirmNewPassword
         {
