@@ -10,6 +10,14 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This class is registered as a service
+ * by the service provider in App.xaml.cs
+ * and provides the currently logged in
+ * user ID, customer data ID if applicable,
+ * and the role of the user.
+ */
+
 using Air_3550.Models;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
@@ -19,6 +27,8 @@ namespace Air_3550.Services
     {
         private int? _userId;
 
+        // A property representing the currently
+        // logged in user's ID.
         public int? UserId
         {
             get => _userId;
@@ -26,12 +36,18 @@ namespace Air_3550.Services
             {
                 SetProperty(ref _userId, value);
 
+                // When the property is set, we make sure
+                // to notify listeners that the IsLoggedIn
+                // property changed.
                 OnPropertyChanged(nameof(IsLoggedIn));
             }
         }
 
         private int? _customerDataId;
 
+        // A property representing the currently
+        // logged in user's customer data ID, if
+        // applicable.
         public int? CustomerDataId
         {
             get => _customerDataId;
@@ -40,12 +56,17 @@ namespace Air_3550.Services
 
         private Role? _role;
 
+        // A property representing the currently
+        // logged in user's role.
         public Role? Role
         {
             get => _role;
             private set => SetProperty(ref _role, value);
         }
 
+        // This method should be called when a user needs
+        // be logged in. This sets the user ID, role, and
+        // customer data ID of the session.
         public void Login(User user, int? customerDataId)
         {
             UserId = user.UserId;
@@ -55,11 +76,13 @@ namespace Air_3550.Services
             CustomerDataId = customerDataId;
         }
 
-        public bool IsLoggedIn
-        {
-            get => UserId != null;
-        }
+        // This property simply returns whether a user
+        // is logged into the system or not.
+        public bool IsLoggedIn => UserId != null;
 
+        // This method logs out a user by clearing out
+        // the user ID, customer data ID, and role of
+        // session.
         public void Logout()
         {
             UserId = null;
