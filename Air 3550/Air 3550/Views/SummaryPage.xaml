@@ -79,7 +79,7 @@
                     </Grid>
                 </ListView.Header>
                 <ListView.Footer>
-                    <Grid Visibility="{x:Bind ViewModel.IsNotFlightManager}" Margin="10 0 0 10">
+                    <Grid Visibility="{x:Bind ViewModel.IsNotFlightManager}" Margin="10 20 0 10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"></ColumnDefinition>
                             <ColumnDefinition Width="40"></ColumnDefinition>
@@ -89,8 +89,8 @@
                             <ColumnDefinition Width="100"></ColumnDefinition>
                             <ColumnDefinition Width="120"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center">Total Income:</TextBlock>
-                        <TextBlock Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{x:Bind ViewModel.FormattedTotalIncome, Mode=OneWay}"></TextBlock>
+                        <TextBlock Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold">Total Income:</TextBlock>
+                        <TextBlock Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="{x:Bind ViewModel.FormattedTotalIncome, Mode=OneWay}"></TextBlock>
                     </Grid>
                 </ListView.Footer>
             </ListView>
