@@ -80,10 +80,11 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0">
             
             <CalendarDatePicker x:Name="StartDatePicker" Date="{x:Bind ViewModel.StartDate, Mode=TwoWay}" 
-                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="Start Date" VerticalAlignment="Bottom" />
+                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="{x:Bind ViewModel.DateTitle}" VerticalAlignment="Bottom" />
             
             <CalendarDatePicker x:Name="EndDatePicker" Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}" 
-                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="End Date" VerticalAlignment="Bottom" />
+                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="End Date" VerticalAlignment="Bottom" 
+                                Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}"/>
             
             <Button Click="SaveCSV_Click" HorizontalAlignment="Right">Generate CSV</Button>
             <Button Click="UpdateDates_Click" HorizontalAlignment="Right">Update Date</Button>

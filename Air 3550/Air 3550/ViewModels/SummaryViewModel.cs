@@ -36,6 +36,8 @@ namespace Air_3550.ViewModels
         public ObservableCollection<ScheduledFlightWithManifest> ScheduledFlightsWithManifest = new();
 
         private bool _isFlightManager;
+        public String DateTitle;
+        public bool IsNotFlightManager => !IsFlightManager;
 
         public bool IsFlightManager
         {
@@ -83,6 +85,8 @@ namespace Air_3550.ViewModels
             // the delete button because they are only allowed to
             // edit planes on flights and cannot delete a flight.
             IsFlightManager = userSessionService.Role == Role.FLIGHT_MANAGER;
+            if (IsFlightManager) DateTitle = "Select Date";
+            else DateTitle = "Start Date";
         }
 
         public async Task UpdateScheduledFlights()
@@ -103,10 +107,36 @@ namespace Air_3550.ViewModels
 
         public async Task UpdateScheduledFlightsDate()
         {
-            DateTime Start = ((DateTimeOffset)StartDate).DateTime.Date;
-            DateTime End = ((DateTimeOffset)EndDate).DateTime.Date;
+            ScheduledFlightsWithManifest.Clear();
+            
+            DateTime Start = DateTime.MinValue;
+            DateTime End = DateTime.MaxValue;
 
-            //Do null trick to Go to infinity/-infinity if one is not set
+            if (IsFlightManager && (StartDate != null))
+            {
+                Start = ((DateTimeOffset)StartDate).DateTime.Date;
+                End = Start;
+            }
+            else if ((StartDate == null) && (EndDate == null))
+            {
+
+            }
+            else if (StartDate == null)
+            {
+                Start = DateTime.MinValue;
+                End = ((DateTimeOffset)EndDate).DateTime.Date;
+            }
+            else if (EndDate == null)
+            {
+                Start = ((DateTimeOffset)StartDate).DateTime.Date;
+                End = DateTime.MaxValue;
+            }
+            else
+            {
+                Start = ((DateTimeOffset)StartDate).DateTime.Date;
+                End = ((DateTimeOffset)EndDate).DateTime.Date;
+            }
+
             using var db = new AirContext();
             ScheduledFlights = await db.ScheduledFlights
                 .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
