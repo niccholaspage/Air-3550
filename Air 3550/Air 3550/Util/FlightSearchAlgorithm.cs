@@ -10,6 +10,11 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This static class implements the flight search algorithm which
+ * determines 
+ */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +25,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Air_3550.Util
 {
-    class FlightSearchAlgorithm
+    static class FlightSearchAlgorithm
     {
         public static async Task<List<FlightPath>> FindFlightPaths(int DepartureAirportId, int ArrivalAirportId)
         {
@@ -148,7 +153,12 @@ namespace Air_3550.Util
                 flightPaths.Remove(flightPath);
             }
 
-            return flightPaths.Take(8).ToList();
+            if (flightPaths.Count > 8)
+            {
+                flightPaths = flightPaths.Take(8).ToList();
+            }
+
+            return flightPaths;
         }
     }
 }
