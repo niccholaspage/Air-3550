@@ -15,7 +15,8 @@
  * account info page that shows a customer the bookings
  * they have made and allows them to view tickets for
  * each booking, as well as cancel tickets and get
- * their boarding passes.
+ * their boarding passes. It is only shown to
+ * customers.
  */
 
 using System;
