@@ -148,7 +148,7 @@ namespace Air_3550.Util
                 flightPaths.Remove(flightPath);
             }
 
-            return flightPaths;
+            return flightPaths.Take(8).ToList();
         }
     }
 }
