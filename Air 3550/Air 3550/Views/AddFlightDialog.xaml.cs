@@ -10,12 +10,15 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This class is for the add flight dialog,
+ * allowing load engineers to add flights to
+ * the airline.
+ */
+
 using Air_3550.Models;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml.Controls;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Air_3550.Views
 {
@@ -31,8 +34,12 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        readonly AddFlightViewModel ViewModel = new();
+        readonly AddFlightViewModel ViewModel = new(); // Construct the view model.
 
+        // When the add flight button is clicked, we
+        // simply defer to the view model, and cancel
+        // the closing of the dialog if the flight does
+        // not get created due to validation issues.
         private async void AddFlight_Click(object _, ContentDialogButtonClickEventArgs e)
         {
             Flight result = await ViewModel.CreateFlight();
