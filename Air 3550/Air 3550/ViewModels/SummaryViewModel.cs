@@ -89,22 +89,6 @@ namespace Air_3550.ViewModels
             else DateTitle = "Start Date";
         }
 
-        public async Task UpdateScheduledFlights()
-        {
-            using var db = new AirContext();
-            ScheduledFlights = await db.ScheduledFlights
-                .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
-                .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
-                .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
-                .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                .ToListAsync();
-
-            foreach (ScheduledFlight a in ScheduledFlights)
-            {
-                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
-            }
-        }
-
         public async Task UpdateScheduledFlightsDate()
         {
             ScheduledFlightsWithManifest.Clear();
@@ -112,14 +96,14 @@ namespace Air_3550.ViewModels
             DateTime Start = DateTime.MinValue;
             DateTime End = DateTime.MaxValue;
 
-            if (IsFlightManager && (StartDate != null))
+            if ((StartDate == null) && (EndDate == null))
+            {
+
+            }
+            else if (IsFlightManager && (StartDate != null))
             {
                 Start = ((DateTimeOffset)StartDate).DateTime.Date;
                 End = Start;
-            }
-            else if ((StartDate == null) && (EndDate == null))
-            {
-
             }
             else if (StartDate == null)
             {
