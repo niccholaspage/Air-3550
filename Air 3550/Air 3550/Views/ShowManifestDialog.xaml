@@ -40,6 +40,19 @@
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             ItemsSource="{x:Bind ViewModel.TicketNames}"
                   RelativePanel.Below="Header">
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="Margin" Value="12, 2, 12, 2"/>
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
+                           MaximumRowsOrColumns="3"
+                           Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
         </GridView>
     </RelativePanel>
 </ContentDialog>
