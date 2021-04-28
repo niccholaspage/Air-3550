@@ -11,11 +11,8 @@
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Air_3550.Models;
 using Air_3550.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -40,16 +37,16 @@ namespace Air_3550.ViewModels
         {
             //Clear TicketNames
             TicketNames.Clear();
-            
+
             //Grab DataBase
             using var db = new AirContext();
 
             // Get all customer names of current selected flight
-            var customerNames = await db.Tickets.Where(Ticket => (Ticket.ScheduledFlight.ScheduledFlightId == SFlight.ScheduledFlightId)&&(!Ticket.IsCanceled)).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
+            var customerNames = await db.Tickets.Where(Ticket => (Ticket.ScheduledFlight.ScheduledFlightId == SFlight.ScheduledFlightId) && (!Ticket.IsCanceled)).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
 
 
             //Add Ticket name to Observable collection to be displayed
-            foreach(String a in customerNames)
+            foreach (String a in customerNames)
             {
                 TicketNames.Add(a);
             }
