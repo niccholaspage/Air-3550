@@ -44,7 +44,7 @@
         </StackPanel>
         <RelativePanel x:Name="PurchaseControls" RelativePanel.AlignRightWith="PricingInfo" RelativePanel.Below="FlightPaths">
             <TextBlock Margin="2" RelativePanel.LeftOf="PaymentMethodDropdown" RelativePanel.AlignVerticalCenterWith="PurchaseButton">Payment Method:</TextBlock>
-            <controls:PaymentTypeDropDownButton SelectedPaymentMethod="{x:Bind ViewModel.SelectedPaymentMethod, Mode=TwoWay}" Margin="2" x:Name="PaymentMethodDropdown" RelativePanel.LeftOf="PurchaseButton" RelativePanel.AlignVerticalCenterWith="PurchaseButton"></controls:PaymentTypeDropDownButton>
+            <controls:PaymentTypeComboBox SelectedPaymentMethod="{x:Bind ViewModel.SelectedPaymentMethod, Mode=TwoWay}" Margin="2" x:Name="PaymentMethodDropdown" RelativePanel.LeftOf="PurchaseButton" RelativePanel.AlignVerticalCenterWith="PurchaseButton"></controls:PaymentTypeComboBox>
             <Button Margin="2" x:Name="PurchaseButton" RelativePanel.AlignRightWithPanel="true" Click="PurchaseButton_Click">Purchase</Button>
         </RelativePanel>
         <TextBlock RelativePanel.AlignRightWith="PricingInfo" RelativePanel.Below="PurchaseControls" Foreground="Red" Text="{x:Bind ViewModel.Feedback, Mode=OneWay}"></TextBlock>

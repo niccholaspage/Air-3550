@@ -12,7 +12,7 @@
     <None Remove="Controls\EditAccountInfoControl.xaml" />
     <None Remove="Controls\EntitySuggestBox.xaml" />
     <None Remove="Controls\HeaderControl.xaml" />
-    <None Remove="Controls\PaymentTypeDropDownButton.xaml" />
+    <None Remove="Controls\PaymentTypeComboBox.xaml" />
     <None Remove="Controls\ResourceDictionary1.xaml" />
     <None Remove="Resources\Templates.xaml" />
     <None Remove="Views\AddFlightDialog.xaml" />
@@ -66,7 +66,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Controls\PaymentTypeDropDownButton.xaml">
+    <Page Update="Controls\PaymentTypeComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
