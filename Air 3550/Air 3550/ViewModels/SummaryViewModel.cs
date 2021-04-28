@@ -36,7 +36,7 @@ namespace Air_3550.ViewModels
         public ObservableCollection<ScheduledFlightWithManifest> ScheduledFlightsWithManifest = new();
 
         private bool _isFlightManager;
-        public String DateTitle;
+        public string DateTitle;
         public bool IsNotFlightManager => !IsFlightManager;
 
         public bool IsFlightManager
@@ -81,18 +81,22 @@ namespace Air_3550.ViewModels
         {
             userSessionService = App.Current.Services.GetService<UserSessionService>();
 
-            // If the marketing manager is on this page, we hide
-            // the delete button because they are only allowed to
-            // edit planes on flights and cannot delete a flight.
             IsFlightManager = userSessionService.Role == Role.FLIGHT_MANAGER;
-            if (IsFlightManager) DateTitle = "Select Date";
-            else DateTitle = "Start Date";
+
+            if (IsFlightManager)
+            {
+                DateTitle = "Date";
+            }
+            else
+            {
+                DateTitle = "Start Date";
+            }
         }
 
         public async Task UpdateScheduledFlightsDate()
         {
             ScheduledFlightsWithManifest.Clear();
-            
+
             DateTime Start = DateTime.MinValue;
             DateTime End = DateTime.MaxValue;
 
@@ -122,6 +126,7 @@ namespace Air_3550.ViewModels
             }
 
             using var db = new AirContext();
+
             ScheduledFlights = await db.ScheduledFlights
                 .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
                 .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)

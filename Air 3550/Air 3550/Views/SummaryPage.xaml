@@ -12,17 +12,17 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-      <DataTemplate x:Key="SummaryListViewTemplate" x:DataType="data1:ScheduledFlightWithManifest">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"></ColumnDefinition>
-                <ColumnDefinition Width="40"></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
-                <ColumnDefinition Width="40"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="150"></ColumnDefinition>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+        <DataTemplate x:Key="SummaryListViewTemplate" x:DataType="data1:ScheduledFlightWithManifest">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="70"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{x:Bind ScheduledFlight.FormattedDepartureDateWithTime}" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
@@ -35,8 +35,8 @@
                     <Run Text="{x:Bind ScheduledFlight.Flight.Plane.MaxSeats}"/>
                 </TextBlock>
                 <Button Grid.Column="7" Click="ShowManifest_Click" Visibility="{x:Bind IsFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" CommandParameter="{x:Bind}">Show Manifest</Button>
-        </Grid>
-    </DataTemplate>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid>
@@ -48,8 +48,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-        <RowDefinition />
-            
+            <RowDefinition />
+
         </Grid.RowDefinitions>
         <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1">
             <ListView 
@@ -77,19 +77,17 @@
                 </ListView.Header>
             </ListView>
         </RelativePanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0">
-            
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
             <CalendarDatePicker x:Name="StartDatePicker" Date="{x:Bind ViewModel.StartDate, Mode=TwoWay}" 
-                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="{x:Bind ViewModel.DateTitle}" VerticalAlignment="Bottom" />
-            
-            <CalendarDatePicker x:Name="EndDatePicker" Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}" 
-                                PlaceholderText="Pick a date" Width="150" Margin="3" Header="End Date" VerticalAlignment="Bottom" 
-                                Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                PlaceholderText="Pick a date" Width="125" Header="{x:Bind ViewModel.DateTitle}" Margin="3" VerticalAlignment="Bottom" />
 
-            <Button Click="SaveCSV_Click" HorizontalAlignment="Right" Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}">Generate CSV</Button>
-            <Button Click="UpdateDates_Click" HorizontalAlignment="Right">Update Date</Button>
-            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" Foreground="Red"/>
-            
+            <CalendarDatePicker x:Name="EndDatePicker" Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}" 
+                                PlaceholderText="Pick a date" Width="125" Header="End Date" Margin="3"
+                                Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Bottom"/>
+
+            <Button Click="SaveCSV_Click" Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" Margin="3" VerticalAlignment="Bottom">Generate CSV</Button>
+            <Button Click="UpdateDates_Click" Margin="3" VerticalAlignment="Bottom">Update Date</Button>
+            <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
         </StackPanel>
 
     </Grid>
