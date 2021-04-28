@@ -36,6 +36,8 @@ namespace Air_3550.Models
 
         public bool PointsEarned { get; set; } // Whether points have been earned for this ticket already.
 
+        public decimal Price { get; set; } // The price paid for this ticket.
+
         public PaymentMethod PaymentMethod { get; set; } // The payment method used to purchase this ticket.
 
         [Required]
