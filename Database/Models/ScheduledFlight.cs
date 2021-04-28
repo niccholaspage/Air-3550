@@ -69,6 +69,12 @@ namespace Air_3550.Models
         [NotMapped]
         public int FilledSeats => Tickets.Where(ticket => !ticket.IsCanceled).Count();
 
+        // A computed property that returns
+        // if a scheduled flight has already
+        // departed.
+        [NotMapped]
+        public bool HasDeparted => DateTime.Now >= GetDepartureTimestamp();
+
         // A convenience method to return the exact timestamp
         // a scheduled flight departs by taking the departure date
         // and adding the base flight's departure time to it.

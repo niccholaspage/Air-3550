@@ -70,16 +70,20 @@ namespace Air_3550.Models
         public bool NotBoardingPassAvailable => !BoardingPassAvailable;
 
         [NotMapped]
-        public bool HasInvalidStatus => InvalidStatus != null;
+        public bool HasInvalidBoardingPassStatus => BoardingPassUnavailableStatus != null;
 
         [NotMapped]
-        public string InvalidStatus
+        public string BoardingPassUnavailableStatus
         {
             get
             {
                 if (IsCanceled)
                 {
                     return "Canceled";
+                }
+                else if (ScheduledFlight.HasDeparted)
+                {
+                    return "Departed";
                 }
                 else
                 {
