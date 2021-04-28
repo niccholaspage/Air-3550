@@ -11,7 +11,7 @@
         <InfoBar x:Name="InfoBar" IsOpen="False" Width="600" Severity="Success" Margin="0 5 0 5"></InfoBar>
         <StackPanel KeyDown="StackPanel_KeyDown" Width="300">
             <TextBlock FontSize="50" HorizontalAlignment="Center" Padding="0 5 0 0">Login</TextBlock>
-            <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" x:Name="UsernameBox" Header="Username:" PlaceholderText="Name" />
+            <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" x:Name="UsernameBox" Header="Username:" PlaceholderText="Username" />
             <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" x:Name="PasswordBox" Header="Password:" PlaceholderText="Password" />
             <RelativePanel Margin="0 5 0 0">
                 <Button x:Name="RegisterButton" Click="RegisterButton_Click" RelativePanel.AlignLeftWithPanel="true">Register</Button>
