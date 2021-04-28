@@ -11,6 +11,7 @@
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Air_3550.Models;
 using Air_3550.Repository;
@@ -60,7 +61,16 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                //Update Plane on selected Flight
+                //Get Max sets of plane and see if the any ScheduledFlights have more passangers
+                var MaxSeats = await db.Planes.Where(plane => plane.PlaneId == (int)PlaneId).Select(plane => plane.MaxSeats).SingleAsync();
+                var Passangers = await db.ScheduledFlights.Include(scheduledFlight => scheduledFlight.Tickets).Where(scheduledFlight => scheduledFlight.FlightId == FlightId).ToListAsync();
+                var OverCap = Passangers.Where(scheduledFlight => scheduledFlight.FilledSeats > MaxSeats).ToList();
+                if(OverCap.Count > 0)
+                {
+                    Feedback = "Select a bigger Plane";
+                    return null;
+                }
+                //Updates Flight if valid
                 var flight = await db.Flights.Include(Flight => Flight.Plane).SingleOrDefaultAsync(flight => flight.FlightId == FlightId);
                 flight.PlaneId = (int)PlaneId;
                 await db.SaveChangesAsync();
