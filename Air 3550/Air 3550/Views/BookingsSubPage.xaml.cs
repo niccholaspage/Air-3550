@@ -54,8 +54,10 @@ namespace Air_3550.Views
             flyout.Hide();
 
             var booking = (Booking)button.CommandParameter;
+            var index = BookingsListView.SelectedIndex;
+            BookingsListView.SelectedIndex = -1;
             await ViewModel.CancelBooking(booking);
-            booking.Tickets.First().IsCanceled = true;
+            BookingsListView.SelectedIndex = index;
         }
     }
 }
