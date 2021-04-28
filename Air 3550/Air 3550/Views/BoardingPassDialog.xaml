@@ -25,14 +25,14 @@
             <Run Text="Departure:"></Run>
             <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.OriginAirport.CityWithStateWithCode}"></Run>
             <Run Text="at"></Run>
-            <Run Text="{x:Bind Ticket.ScheduledFlight.DepartureDate}"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.FormattedDepartureDateWithTime}"></Run>
         </TextBlock>
 
         <TextBlock>
             <Run Text="Arrival:"></Run>
             <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.DestinationAirport.CityWithStateWithCode}"></Run>
             <Run Text="at"></Run>
-            <Run Text="{x:Bind Ticket.ScheduledFlight.DepartureDate}"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.FormattedDepartureDateWithTime}"></Run>
         </TextBlock>
     </StackPanel>
 </ContentDialog>

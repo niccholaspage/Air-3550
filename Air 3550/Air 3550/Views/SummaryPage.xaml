@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{x:Bind ScheduledFlight.DepartureDateWithTime}" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Text="{x:Bind ScheduledFlight.FormattedDepartureDateWithTime}" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
                 <SymbolIcon Grid.Column="2" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
                 <TextBlock Grid.Column="3" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
