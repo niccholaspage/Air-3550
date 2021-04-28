@@ -10,6 +10,11 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * The page that shows the search results
+ * for flights for a given departure and
+ * destination city and date.
+ */
 using System;
 using System.Threading.Tasks;
 using Air_3550.Repository;
@@ -21,15 +26,19 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace Air_3550.Views
 {
     public sealed partial class FlightSearchPage : Page
     {
+        // This page uses the user session service to
+        // determine if we need to navigate the user
+        // to the login page or not when they are going
+        // to the payment page.
         private readonly UserSessionService userSession;
 
+        // The instance of the page parameters for the
+        // flight search page, set when this page is navigated
+        // to.
         private Params pageParams;
 
         public class Params
@@ -50,19 +59,30 @@ namespace Air_3550.Views
             }
         }
 
+        // When this page is navigated to, we need to check
+        // set our pageParams to the navigation parameteres.
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             pageParams = e.Parameter as Params;
 
-            // TODO: Don't await.
+            // We need to search for flights with the
+            // view model so we can show the results
+            // to the user.
             Task.Run(async () =>
             {
                 using var db = new AirContext();
+
+                // We first fetch the departure and destination
+                // airport based on the IDs passed into the page.
                 var departureAirport = await db.Airports.FindAsync(pageParams.DepartureAirportId);
                 var destinationAirport = await db.Airports.FindAsync(pageParams.DestinationAirportId);
 
+                // If a departure flight path has already been chosen,
+                // we search for return flights on the return date.
+                // Otherwise, we search for departure flights on the
+                // departure date.
                 if (pageParams.DepartureFlightPath != null)
                 {
                     await ViewModel.SearchForFlights(departureAirport, destinationAirport, (DateTime)pageParams.ReturnDate);
