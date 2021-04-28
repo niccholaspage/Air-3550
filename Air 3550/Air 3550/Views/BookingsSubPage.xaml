@@ -66,7 +66,7 @@
                             <TextBlock Text="{x:Bind Type}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
                             <TextBlock Visibility="{x:Bind AreDepartureTicketsCanceled}" Grid.Column="5" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">Canceled</TextBlock>
-                            <TextBlock Visibility="{x:Bind AreReturnTicketsCanceled}" Grid.Column="5" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">Return Canceled</TextBlock>
+                            <TextBlock Visibility="{x:Bind AreOnlyReturnTicketsCanceled}" Grid.Column="5" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">Return Canceled</TextBlock>
                             <Button Content="Cancel" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Visibility="{x:Bind CanCancelSomeTickets, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Button.Flyout>

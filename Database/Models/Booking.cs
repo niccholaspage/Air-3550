@@ -84,6 +84,10 @@ namespace Air_3550.Models
             }
         }
 
+        // A computed property to check if only the return tickets of a booking are canceled.
+        [NotMapped]
+        public bool AreOnlyReturnTicketsCanceled => !AreDepartureTicketsCanceled && AreReturnTicketsCanceled;
+
         // A computed property that returns the departure flight path with date
         // of the booking based on its departing tickets. This is used to determine
         // the duration, departure and arrival times, price, and other information of
