@@ -57,17 +57,10 @@
             </StackPanel>
             <TextBlock Text="{Binding FlightPath.FormattedDuration}" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Grid.Column="4" Grid.Row="0" Grid.RowSpan="2"/>
-            <Button Content="{Binding FlightPath.FormattedStops}" IsEnabled="{Binding NoStop, Mode=OneWay}"
+            <TextBlock Text="{Binding FlightPath.FormattedStops}"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         Grid.Column="5" Grid.Row="0" Grid.RowSpan="2" >
-                <Button.Flyout>
-                    <Flyout>
-                        <StackPanel>
-                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="View Stops" Margin="0,0,0,12" />
-                        </StackPanel>
-                    </Flyout>
-                </Button.Flyout>
-            </Button>
+            </TextBlock>
 
         </Grid>
     </DataTemplate>
