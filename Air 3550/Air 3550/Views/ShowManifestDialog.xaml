@@ -12,26 +12,26 @@
     <RelativePanel>
         <Grid x:Name="Header" Margin="10 0 0 10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="130"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="40"></ColumnDefinition>
                 <ColumnDefinition Width="40"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Run Text="Flight: "/>    
-                    <Run Text="{x:Bind ViewModel.SFlight.ScheduledFlightId}"/>
+                    <Run Text="Flight Number:"/>    
+                    <Run Text="{x:Bind ViewModel.ScheduledFlight.Flight.Number}"/>
             </TextBlock>
-            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"> 
-                    <Run Text="{x:Bind ViewModel.SFlight.FormattedDepartureDateWithTime}"/>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"> 
+                    <Run Text="{x:Bind ViewModel.ScheduledFlight.FormattedDepartureDateWithTime}"/>
             </TextBlock>
             <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Run Text="Traveling: "/>    
-                        <Run Text="{x:Bind ViewModel.SFlight.Flight.OriginAirport.Code}"/>
+                        <Run Text="{x:Bind ViewModel.ScheduledFlight.Flight.OriginAirport.Code}"/>
             </TextBlock>
             <SymbolIcon Grid.Column="3" Symbol="Forward" HorizontalAlignment="Center"></SymbolIcon>
             <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Run Text="{x:Bind ViewModel.SFlight.Flight.DestinationAirport.Code}"/>
+                        <Run Text="{x:Bind ViewModel.ScheduledFlight.Flight.DestinationAirport.Code}"/>
             </TextBlock>
         </Grid>
 

@@ -21,34 +21,35 @@ namespace Air_3550.ViewModels
 {
     class ShowManifestViewModel
     {
-        public ObservableCollection<String> TicketNames = new();
+        public ObservableCollection<string> TicketNames = new();
 
-        public ScheduledFlight SFlight;
+        public ScheduledFlight ScheduledFlight;
 
-        public ShowManifestViewModel(ScheduledFlight sFlight)
+        public ShowManifestViewModel(ScheduledFlight scheduledFlight)
         {
             //Hold the flight of interested
-            SFlight = sFlight;
+            ScheduledFlight = scheduledFlight;
+
             //Get all names on tickets onto ObservableCollection
-            getTicketNames();
+            GetTicketNames();
         }
 
-        public async void getTicketNames()
+        public async void GetTicketNames()
         {
-            //Clear TicketNames
+            // Clear all the ticket names
             TicketNames.Clear();
 
             //Grab DataBase
             using var db = new AirContext();
 
-            // Get all customer names of current selected flight
-            var customerNames = await db.Tickets.Where(Ticket => (Ticket.ScheduledFlight.ScheduledFlightId == SFlight.ScheduledFlightId) && (!Ticket.IsCanceled)).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
+            // Get all customer names of non-canceled tickets from currently selected scheduled flight
+            var customerNames = await db.Tickets.Where(Ticket => Ticket.ScheduledFlight.ScheduledFlightId == ScheduledFlight.ScheduledFlightId && !Ticket.IsCanceled).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
 
 
-            //Add Ticket name to Observable collection to be displayed
-            foreach (String a in customerNames)
+            // Add Ticket name to Observable collection to be displayed
+            foreach (string customerName in customerNames)
             {
-                TicketNames.Add(a);
+                TicketNames.Add(customerName);
             }
 
         }

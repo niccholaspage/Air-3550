@@ -24,10 +24,10 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class ShowManifestDialog : ContentDialog
     {
-        public ShowManifestDialog(ScheduledFlight SFlight)
+        public ShowManifestDialog(ScheduledFlight scheduledFlight)
         {
             this.InitializeComponent();
-            ViewModel = new(SFlight);
+            ViewModel = new(scheduledFlight);
         }
 
         readonly ShowManifestViewModel ViewModel;
