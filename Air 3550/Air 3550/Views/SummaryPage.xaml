@@ -54,7 +54,8 @@
             <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
         </StackPanel>
         <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.Below="HeaderBar">
-            <ListView 
+            <ListView
+                SelectionMode="None"
                 Margin="0 10 0 0"
                 ItemsSource="{x:Bind ViewModel.ScheduledFlightsWithManifest, Mode=TwoWay}" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" 
