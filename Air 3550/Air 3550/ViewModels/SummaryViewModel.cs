@@ -114,42 +114,43 @@ namespace Air_3550.ViewModels
         {
             ScheduledFlightsWithManifest.Clear();
 
-            DateTime Start = DateTime.MinValue;
-            DateTime End = DateTime.MaxValue;
+            DateTime start = DateTime.MinValue;
+            DateTime end = DateTime.MaxValue;
 
-            if ((StartDate == null) && (EndDate == null))
+            if (StartDate == null && EndDate == null)
             {
 
             }
-            else if (IsFlightManager && (StartDate != null))
+            else if (IsFlightManager && StartDate != null)
             {
-                Start = ((DateTimeOffset)StartDate).DateTime.Date;
-                End = Start;
+                start = ((DateTimeOffset)StartDate).DateTime.Date;
+                end = start;
             }
             else if (StartDate == null)
             {
-                Start = DateTime.MinValue;
-                End = ((DateTimeOffset)EndDate).DateTime.Date;
+                start = DateTime.MinValue;
+                end = ((DateTimeOffset)EndDate).DateTime.Date;
             }
             else if (EndDate == null)
             {
-                Start = ((DateTimeOffset)StartDate).DateTime.Date;
-                End = DateTime.MaxValue;
+                start = ((DateTimeOffset)StartDate).DateTime.Date;
+                end = DateTime.MaxValue;
             }
             else
             {
-                Start = ((DateTimeOffset)StartDate).DateTime.Date;
-                End = ((DateTimeOffset)EndDate).DateTime.Date;
+                start = ((DateTimeOffset)StartDate).DateTime.Date;
+                end = ((DateTimeOffset)EndDate).DateTime.Date;
             }
 
             using var db = new AirContext();
 
             ScheduledFlights = await db.ScheduledFlights
-                .Include(ScheduledFlight => ScheduledFlight.Flight.DestinationAirport)
-                .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
-                .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
-                .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                .Where(ScheduledFlight => ScheduledFlight.DepartureDate >= Start && ScheduledFlight.DepartureDate <= End)
+                .Include(scheduledFlight => scheduledFlight.Flight.DestinationAirport)
+                .Include(scheduledFlight => scheduledFlight.Flight.OriginAirport)
+                .Include(scheduledFlight => scheduledFlight.Flight.Plane)
+                .Include(scheduledFlight => scheduledFlight.Tickets)
+                .OrderBy(scheduledFlight => scheduledFlight.DepartureDate)
+                .Where(scheduledFlight => scheduledFlight.DepartureDate >= start && scheduledFlight.DepartureDate <= end)
                 .ToListAsync();
 
             decimal totalIncome = 0;
