@@ -30,7 +30,9 @@ namespace Air_3550.ViewModels
 {
     public record ScheduledFlightWithManifest(ScheduledFlight ScheduledFlight, bool IsFlightManager)
     {
-        public string Income => (ScheduledFlight.Tickets.Count * ScheduledFlight.Flight.GetCost()).FormatAsMoney();
+        public decimal Income => (ScheduledFlight.Tickets.Count * ScheduledFlight.Flight.GetCost());
+
+        public string FormattedIncome => Income.FormatAsMoney();
     }
 
     class SummaryViewModel : ObservableValidator
@@ -79,6 +81,17 @@ namespace Air_3550.ViewModels
         {
             get => _feedback;
             set => SetProperty(ref _feedback, value);
+        }
+
+        private string _formattedTotalIncome;
+
+        public string FormattedTotalIncome
+        {
+            get => _formattedTotalIncome;
+            set
+            {
+                SetProperty(ref _formattedTotalIncome, value);
+            }
         }
 
         public SummaryViewModel()
@@ -139,6 +152,8 @@ namespace Air_3550.ViewModels
                 .Where(ScheduledFlight => ScheduledFlight.DepartureDate >= Start && ScheduledFlight.DepartureDate <= End)
                 .ToListAsync();
 
+            decimal totalIncome = 0;
+
             foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
             {
                 if (!scheduledFlight.Tickets.Where(ticket => !ticket.IsCanceled).Any())
@@ -146,8 +161,14 @@ namespace Air_3550.ViewModels
                     continue;
                 }
 
-                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager));
+                var scheduledFlightWithManifest = new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager);
+
+                totalIncome += scheduledFlightWithManifest.Income;
+
+                ScheduledFlightsWithManifest.Add(scheduledFlightWithManifest);
             }
+
+            FormattedTotalIncome = totalIncome.FormatAsMoney();
         }
 
         public async Task SaveSummary()
