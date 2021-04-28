@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="40"></ColumnDefinition>
                     <ColumnDefinition Width="70"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{x:Bind ScheduledFlight.FormattedDepartureDateWithTime}" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="1" Text="{x:Bind ScheduledFlight.Flight.OriginAirport.Code}" HorizontalAlignment="Center"></TextBlock>
@@ -33,7 +33,7 @@
                     <Run Text="/"/>
                     <Run Text="{x:Bind ScheduledFlight.Flight.Plane.MaxSeats}"/>
                 </TextBlock>
-                <Button Grid.Column="6" Click="ShowManifest_Click" Visibility="{x:Bind IsFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" CommandParameter="{x:Bind}">Show Manifest</Button>
+                <Button Grid.Column="6" Click="ShowManifest_Click" HorizontalAlignment="Center" Visibility="{x:Bind IsFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" CommandParameter="{x:Bind}">Show Manifest</Button>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -66,8 +66,7 @@
                             <ColumnDefinition Width="40"></ColumnDefinition>
                             <ColumnDefinition Width="70"></ColumnDefinition>
                             <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="120"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Departure Date</TextBlock>
                         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
