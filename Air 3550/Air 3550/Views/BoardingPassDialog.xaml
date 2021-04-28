@@ -32,7 +32,7 @@
             <Run Text="Arrival:"></Run>
             <Run Text="{x:Bind Ticket.ScheduledFlight.Flight.DestinationAirport.CityWithStateWithCode}"></Run>
             <Run Text="at"></Run>
-            <Run Text="{x:Bind Ticket.ScheduledFlight.FormattedDepartureDateWithTime}"></Run>
+            <Run Text="{x:Bind Ticket.ScheduledFlight.FormattedReturnDateWithTime}"></Run>
         </TextBlock>
     </StackPanel>
 </ContentDialog>
