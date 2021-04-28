@@ -37,7 +37,6 @@ namespace Database.Util
         private readonly Lazy<string> _formattedDepartureTime;
         private readonly Lazy<string> _formattedArrivalTime;
         private readonly Lazy<decimal> _price;
-        private readonly Lazy<int> _priceInPoints;
         private readonly Lazy<List<TimeSpan>> _flightDepartureTimeline;
         private readonly Lazy<TimeSpan> _duration;
 
@@ -51,7 +50,7 @@ namespace Database.Util
         public decimal Price => _price.Value;
 
         // The price of all the flights together in points.
-        public int PriceInPoints => _priceInPoints.Value;
+        public int PriceInPoints => Pricing.ConvertToPoints(Price);
 
         // The total time it would take if a customer flew the
         // entire flight path, starting from the first flight's
@@ -101,7 +100,6 @@ namespace Database.Util
             // price times 100 casted to an integer,
             // because a point corresponds to one cent.
             _price = new(() => Pricing.CalculatePriceOfFlights(Flights));
-            _priceInPoints = new(() => (int)(Price * 100));
 
             // Now, let's take care of the doozy.
             // We need to setup the flight departure

@@ -87,5 +87,12 @@ namespace Database.Util
 
             return totalCost;
         }
+
+        // This method converts the a money amount
+        // into reward points.
+        public static int ConvertToPoints(decimal amount)
+        {
+            return (int)(amount * 100);
+        }
     }
 }
