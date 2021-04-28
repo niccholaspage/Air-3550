@@ -30,7 +30,7 @@
                 <TextBlock Grid.Column="3" Text="{x:Bind ScheduledFlight.Flight.DestinationAirport.Code}" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="4" Margin="10 0 0 0" Text="{x:Bind ScheduledFlight.Flight.Number}" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="5" HorizontalAlignment="Center">
-                    <Run Text="{x:Bind ScheduledFlight.Tickets.Count}"/>
+                    <Run Text="{x:Bind count}"/>
                     <Run Text="/"/>
                     <Run Text="{x:Bind ScheduledFlight.Flight.Plane.MaxSeats}"/>
                 </TextBlock>

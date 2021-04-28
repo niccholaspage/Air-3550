@@ -27,7 +27,7 @@ using Windows.Storage.Pickers;
 
 namespace Air_3550.ViewModels
 {
-    public record ScheduledFlightWithManifest(ScheduledFlight ScheduledFlight, bool IsFlightManager);
+    public record ScheduledFlightWithManifest(ScheduledFlight ScheduledFlight, bool IsFlightManager, int count);
 
     class SummaryViewModel : ObservableValidator
     {
@@ -95,9 +95,16 @@ namespace Air_3550.ViewModels
                 .Include(ScheduledFlight => ScheduledFlight.Tickets)
                 .ToListAsync();
 
+            int TicketCount;
+
             foreach (ScheduledFlight a in ScheduledFlights)
             {
-                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
+                TicketCount = 0;
+                foreach (Ticket b in a.Tickets)
+                {
+                    if (!b.IsCanceled) TicketCount++;
+                }
+                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager, TicketCount));
             }
         }
 
@@ -116,9 +123,16 @@ namespace Air_3550.ViewModels
                 .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start) && (ScheduledFlight.DepartureDate <= End))
                 .ToListAsync();
 
-            foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
+            int TicketCount;
+
+            foreach (ScheduledFlight a in ScheduledFlights)
             {
-                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager));
+                TicketCount = 0;
+                foreach (Ticket b in a.Tickets)
+                {
+                    if (!b.IsCanceled) TicketCount++;
+                }
+                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager, TicketCount));
             }
         }
 
