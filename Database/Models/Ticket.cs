@@ -68,5 +68,31 @@ namespace Air_3550.Models
         // property for easier UI binding.
         [NotMapped]
         public bool NotBoardingPassAvailable => !BoardingPassAvailable;
+
+        [NotMapped]
+        public bool HasInvalidStatus => InvalidStatus != null;
+
+        [NotMapped]
+        public string InvalidStatus
+        {
+            get
+            {
+                if (IsCanceled)
+                {
+                    return "Canceled";
+                }
+                else
+                {
+                    if (NotBoardingPassAvailable)
+                    {
+                        return "Boarding Pass Not Available";
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
     }
 }
