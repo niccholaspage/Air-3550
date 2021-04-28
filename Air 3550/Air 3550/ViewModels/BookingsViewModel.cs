@@ -81,17 +81,17 @@ namespace Air_3550.ViewModels
             LoginId = customerInfo.LoginId;
 
             var bookings = await db.Bookings
-                .Include(Booking => Booking.Tickets)
-                .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                .ThenInclude(Flight => Flight.OriginAirport)
-                .Include(Booking => Booking.Tickets)
-                .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                .ThenInclude(Flight => Flight.DestinationAirport)
-                .Where(Booking => Booking.CustomerDataId == _userSessionService.CustomerDataId)
+                .Include(booking => booking.Tickets)
+                .ThenInclude(ticket => ticket.ScheduledFlight)
+                .ThenInclude(scheduledFlight => scheduledFlight.Flight)
+                .ThenInclude(flight => flight.OriginAirport)
+                .Include(booking => booking.Tickets)
+                .ThenInclude(ticket => ticket.ScheduledFlight)
+                .ThenInclude(scheduledFlight => scheduledFlight.Flight)
+                .ThenInclude(flight => flight.DestinationAirport)
+                .Where(booking => booking.CustomerDataId == _userSessionService.CustomerDataId)
                 .ToListAsync();
-            foreach (Booking a in bookings)
+            foreach (Booking a in bookings.OrderBy(booking => booking.Tickets[0].ScheduledFlight.DepartureDate))
             {
                 Bookings.Add(a);
             }
@@ -102,15 +102,15 @@ namespace Air_3550.ViewModels
             using (var db = new AirContext())
             {
                 var canceledBooking = await db.Bookings
-                        .Include(Booking => Booking.Tickets)
-                        .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                        .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                        .ThenInclude(Flight => Flight.OriginAirport)
-                        .Include(Booking => Booking.Tickets)
-                        .ThenInclude(Ticket => Ticket.ScheduledFlight)
-                        .ThenInclude(ScheduledFlight => ScheduledFlight.Flight)
-                        .ThenInclude(Flight => Flight.DestinationAirport)
-                        .SingleAsync(Booking => Booking.BookingId == booking.BookingId);
+                        .Include(booking => booking.Tickets)
+                        .ThenInclude(ticket => ticket.ScheduledFlight)
+                        .ThenInclude(scheduledFlight => scheduledFlight.Flight)
+                        .ThenInclude(flight => flight.OriginAirport)
+                        .Include(booking => booking.Tickets)
+                        .ThenInclude(ticket => ticket.ScheduledFlight)
+                        .ThenInclude(scheduledFlight => scheduledFlight.Flight)
+                        .ThenInclude(flight => flight.DestinationAirport)
+                        .SingleAsync(booking => booking.BookingId == booking.BookingId);
 
                 List<Ticket> tickets;
 
