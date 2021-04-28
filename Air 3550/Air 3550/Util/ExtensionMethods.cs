@@ -10,7 +10,7 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-/*
+/**
  * This class exists to add extension methods
  * to various classes. The reason this file
  * is contained in the Air 3550 project is due
