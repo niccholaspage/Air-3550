@@ -13,7 +13,7 @@
 /**
  * A value converter used to convert a boolean value
  * to a Visibility for use with XAML bindings. By default,
- * the visibility if the value is true is visible, otherwise
+ * the visibility of the value is true is visible, otherwise
  * it is collapsed. This can be configured by the consumer.
  */
 
