@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Database.Util;
 
 namespace Air_3550.Models
@@ -61,6 +62,12 @@ namespace Air_3550.Models
         // this scheduled flight, which can be used for determining
         // how full this scheduled flight is.
         public List<Ticket> Tickets { get; }
+
+        // A computed property that returns
+        // how many seats are filled on a
+        // scheduled flight.
+        [NotMapped]
+        public int FilledSeats => Tickets.Where(ticket => !ticket.IsCanceled).Count();
 
         // A convenience method to return the exact timestamp
         // a scheduled flight departs by taking the departure date
