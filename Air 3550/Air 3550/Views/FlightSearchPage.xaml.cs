@@ -59,7 +59,6 @@ namespace Air_3550.Views
 
             pageParams = e.Parameter as Params;
 
-
             // TODO: Don't await.
             Task.Run(async () =>
             {
@@ -67,7 +66,14 @@ namespace Air_3550.Views
                 var departureAirport = await db.Airports.FindAsync(pageParams.DepartureAirportId);
                 var destinationAirport = await db.Airports.FindAsync(pageParams.DestinationAirportId);
 
-                await ViewModel.SearchForFlights(departureAirport, destinationAirport, pageParams.DepartureDate);
+                if (pageParams.DepartureFlightPath != null)
+                {
+                    await ViewModel.SearchForFlights(departureAirport, destinationAirport, (DateTime) pageParams.ReturnDate);
+                }
+                else
+                {
+                    await ViewModel.SearchForFlights(departureAirport, destinationAirport, pageParams.DepartureDate);
+                }
             }).Wait();
         }
 
