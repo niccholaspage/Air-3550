@@ -12,7 +12,11 @@
 
 /**
  * This static class implements the flight search algorithm which
- * determines 
+ * determines the possible flight paths between two airports. It also
+ * has the ability find all valid and optimized flight paths, which will
+ * remove flight paths that would result in layover of more than eight
+ * hours as well as removing flight paths that would result in an
+ * overbooking if they were booked.
  */
 
 using System;
@@ -27,6 +31,9 @@ namespace Air_3550.Util
 {
     static class FlightSearchAlgorithm
     {
+        // This method finds all flight paths with zero, one, or two connections,
+        // completely ignoring any date or timing of the scheduled flights - it
+        // purely looks at the recurring flight and not scheduled flight.
         public static async Task<List<FlightPath>> FindFlightPaths(int DepartureAirportId, int ArrivalAirportId)
         {
             // This method finds all flight paths with zero, one, or two connections.
@@ -39,6 +46,7 @@ namespace Air_3550.Util
             // possible, so it is up to the caller to sort the routes however they want,
             // potentially based on price and/or duration.
             using var db = new AirContext();
+
             // This query grabs all direct flights that have not been canceled going from
             // the departure airport to the arrival airport.
             var directFlights = await db.Flights
@@ -98,24 +106,28 @@ namespace Air_3550.Util
             // We first start by removing any flight path who's max layover is over
             // 8 hours.
             var eightHours = new TimeSpan(8, 0, 0);
-
             flightPaths.RemoveAll(path => path.MaxLayoverDuration > eightHours);
 
             // We first start by sorting the flight paths by the cheapest price,
             // or the shortest duration if the prices match.
             flightPaths.Sort((x, y) => x.Price == y.Price ? x.Duration.CompareTo(y.Duration) : x.Price.CompareTo(y.Price));
 
+            // We setup a list of flight paths to flag for deletion.
             List<FlightPath> flaggedFlightPaths = new();
 
-            // TODO: Optimize this - this is doing way to many queries and has tons of room for optimization.
+            // This could have been optimized. Clearly, we should not be doing
+            // a query for every single flight of a flight path. If we wanted
+            // better performance, we could have to worked to minimize the
+            // number of queries to the database.
             using (var db = new AirContext())
             {
-                foreach (var flightPath in flightPaths)
+                foreach (var flightPath in flightPaths) // We loop through each flight path in our potential list of flight paths,
                 {
+                    // Get the departure date and time of the first flight in the flight path,
                     var departureDateAndTime = departureDate + flightPath.FirstFlightDepartureTime;
 
-                    // Check if the first flight of the flight path has already departed. If so,
-                    // remove the flight path.
+                    // Check if the first flight of the flight path has
+                    // already departed. If so, remove the flight path.
                     if (DateTime.Now >= departureDateAndTime)
                     {
                         flaggedFlightPaths.Add(flightPath);
@@ -123,21 +135,34 @@ namespace Air_3550.Util
                         continue;
                     }
 
+                    // Retrieve the flight departure timeline.
                     var flightDepartureTimeline = flightPath.FlightDepartureTimeline;
 
-                    for (int j = 0; j < flightPath.Flights.Count; j++)
+                    // Loop through each flight in the flight path
+                    // so that we can check if it's corresponding
+                    // scheduled flight for the departure date is
+                    // not full.
+                    for (int i = 0; i < flightPath.Flights.Count; i++)
                     {
-                        var flight = flightPath.Flights[j];
+                        var flight = flightPath.Flights[i]; // Grab the flight
 
-                        var flightDepartureDate = (departureDateAndTime + flightDepartureTimeline[j]).Date;
+                        // We grab the flight's departure date, which is simply the flight path's initial departure
+                        // date and time plus the flight departure timeline for our filght. We then take the date of
+                        // it, because we do not need the time component.
+                        var flightDepartureDate = (departureDateAndTime + flightDepartureTimeline[i]).Date;
 
-                        // TODO: Why on earth does the DepartureDate comparision only work if
-                        // we turn the query into a list then check for it?
+                        // Bug in EF core potentially: Why on earth does the DepartureDate comparision only
+                        // work if we turn the query into a list then check for it? To avoid this odd issue,
+                        // we simply queried for all scheduled flights corresponding to the flight and got
+                        // them as a list, then checked the departure date and ticket count.
                         var allScheduledFlightsForFlightAsList = await (from scheduledFlight in db.ScheduledFlights
                                                                         where scheduledFlight.Flight == flight
                                                                         select new { scheduledFlight.DepartureDate, TicketCount = scheduledFlight.Tickets.Where(ticket => !ticket.IsCanceled).Count(), PlaneCapacity = scheduledFlight.Flight.Plane.MaxSeats })
                                                                         .ToListAsync();
 
+                        // If any scheduled flight has the correct departure date
+                        // and the ticket count is equal to or higher than the
+                        // plane capacity, then we flag the flight path for removal.
                         if (allScheduledFlightsForFlightAsList.Any(scheduledFlight => scheduledFlight.DepartureDate == flightDepartureDate && scheduledFlight.TicketCount >= scheduledFlight.PlaneCapacity))
                         {
                             flaggedFlightPaths.Add(flightPath);
@@ -148,11 +173,18 @@ namespace Air_3550.Util
                 }
             }
 
+            // Finally, we loop through and remove
+            // all flagged flight paths from the list.
             foreach (var flightPath in flaggedFlightPaths)
             {
                 flightPaths.Remove(flightPath);
             }
 
+            // If we have more than eight possible flight
+            // paths, we cut the list down to only keep
+            // the eight best ones, to cut down on the
+            // amount of choice some searches may result
+            // in.
             if (flightPaths.Count > 8)
             {
                 flightPaths = flightPaths.Take(8).ToList();
