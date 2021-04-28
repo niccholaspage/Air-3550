@@ -55,6 +55,7 @@
         </StackPanel>
         <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.Below="HeaderBar">
             <ListView 
+                Margin="0 10 0 0"
                 ItemsSource="{x:Bind ViewModel.ScheduledFlightsWithManifest, Mode=TwoWay}" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" 
                 x:Name="displayedList"
