@@ -10,25 +10,28 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This class is for the boarding pass dialog,
+ * allowing customers to view their boarding
+ * pass for flights that will be departing.
+ */
+
 using Air_3550.Models;
 using Microsoft.UI.Xaml.Controls;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace Air_3550.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class BoardingPassDialog : ContentDialog
     {
-        public Ticket Ticket;
+        public Ticket Ticket;       // We store the ticket,
 
-        public string CustomerName;
+        public string CustomerName; // customer name of the user,
 
-        public string LoginId;
+        public string LoginId;      // and login ID (account number).
 
+        // We just set the three fields of our class to the
+        // parameters passed into the constructor so that we
+        // can bind to these fields in the UI.
         public BoardingPassDialog(Ticket ticket, string customerName, string loginId)
         {
             this.InitializeComponent();
