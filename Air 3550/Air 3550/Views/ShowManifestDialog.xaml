@@ -42,7 +42,7 @@
                   RelativePanel.Below="Header">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
-                    <Setter Property="Margin" Value="12, 2, 12, 2"/>
+                    <Setter Property="Margin" Value="20, 2, 20, 2"/>
                 </Style>
             </GridView.ItemContainerStyle>
             <GridView.ItemsPanel>
