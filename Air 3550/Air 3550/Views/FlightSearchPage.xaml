@@ -10,6 +10,7 @@
 
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverterInverted" OnTrue="Collapsed" OnFalse="Visible"></converters:BoolToVisibilityConverter>
     </Page.Resources>
 
     <RelativePanel Margin="5 45 0 0">
@@ -25,7 +26,9 @@
             </StackPanel>
             <TextBlock Text="{x:Bind ViewModel.FormattedDate}"></TextBlock>
         </StackPanel>
+        <TextBlock Visibility="{x:Bind ViewModel.HasPaths, Converter={StaticResource BoolToVisibilityConverterInverted}}" FontSize="30" RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.AlignVerticalCenterWithPanel="true">No flights exist on this day. Please try changing the date.</TextBlock>
         <ListView x:Name="FlightList"
+            Visibility="{x:Bind ViewModel.HasPaths, Converter={StaticResource BoolToVisibilityConverter}}"
             SelectedIndex="{x:Bind ViewModel.SelectedPathIndex, Mode=TwoWay}"
             RelativePanel.AlignHorizontalCenterWithPanel="true"
             RelativePanel.Below="Header"
@@ -46,6 +49,6 @@
                 </Grid>
             </ListView.Header>
         </ListView>
-        <Button IsEnabled="{x:Bind ViewModel.CanContinue, Mode=OneWay}" Click="ContinueButton_Click" Margin="5 0 0 5" RelativePanel.RightOf="FlightList" RelativePanel.AlignBottomWithPanel="true">Continue</Button>
+        <Button Visibility="{x:Bind ViewModel.HasPaths, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{x:Bind ViewModel.CanContinue, Mode=OneWay}" Click="ContinueButton_Click" Margin="5 0 0 5" RelativePanel.RightOf="FlightList" RelativePanel.AlignBottomWithPanel="true">Continue</Button>
     </RelativePanel>
 </Page>

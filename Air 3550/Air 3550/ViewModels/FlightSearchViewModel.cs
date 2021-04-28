@@ -45,6 +45,8 @@ namespace Air_3550.ViewModels
             }
         }
 
+        public bool HasPaths => Paths.Count > 0;
+
         public bool CanContinue => SelectedPathIndex != -1;
 
         public async Task SearchForFlights(Airport originAirport, Airport destinationAirport, DateTime date)
@@ -62,6 +64,8 @@ namespace Air_3550.ViewModels
             {
                 Paths.Add(path);
             }
+
+            OnPropertyChanged(nameof(HasPaths));
         }
     }
 }
