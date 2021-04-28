@@ -38,7 +38,7 @@
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Text="{x:Bind GetFormattedTotalCost()}"></TextBlock>
             </Grid>
         </StackPanel>
-        <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWith="FlightPaths" RelativePanel.AlignBottomWith="PurchaseControls">
+        <StackPanel Orientation="Vertical" RelativePanel.AlignLeftWith="FlightPaths" RelativePanel.AlignBottomWith="PricingInfo">
             <TextBlock x:Name="AccountBalanceText" Text="{x:Bind ViewModel.FormattedAccountBalance, Mode=OneWay}"></TextBlock>
             <TextBlock x:Name="RewardPoints" Text="{x:Bind ViewModel.FormattedRewardPoints, Mode=OneWay}"></TextBlock>
         </StackPanel>
