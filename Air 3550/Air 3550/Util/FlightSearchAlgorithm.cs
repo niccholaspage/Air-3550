@@ -100,32 +100,31 @@ namespace Air_3550.Util
             // or the shortest duration if the prices match.
             flightPaths.Sort((x, y) => x.Price == y.Price ? x.Duration.CompareTo(y.Duration) : x.Price.CompareTo(y.Price));
 
+            List<FlightPath> flaggedFlightPaths = new();
+
             // TODO: Optimize this - this is doing way to many queries and has tons of room for optimization.
             using (var db = new AirContext())
             {
-                var index = 0;
-                while (index < flightPaths.Count)
+                foreach (var flightPath in flightPaths)
                 {
-                    var flightPath = flightPaths[index];
-
                     var departureDateAndTime = departureDate + flightPath.FirstFlightDepartureTime;
 
                     // Check if the first flight of the flight path has already departed. If so,
                     // remove the flight path.
                     if (DateTime.Now >= departureDateAndTime)
                     {
-                        flightPaths.RemoveAt(index);
+                        flaggedFlightPaths.Add(flightPath);
 
                         continue;
                     }
 
                     var flightDepartureTimeline = flightPath.FlightDepartureTimeline;
 
-                    for (int i = 0; i < flightPath.Flights.Count; i++)
+                    for (int j = 0; j < flightPath.Flights.Count; j++)
                     {
-                        var flight = flightPath.Flights[i];
+                        var flight = flightPath.Flights[j];
 
-                        var flightDepartureDate = (departureDateAndTime + flightDepartureTimeline[i]).Date;
+                        var flightDepartureDate = (departureDateAndTime + flightDepartureTimeline[j]).Date;
 
                         // TODO: Why on earth does the DepartureDate comparision only work if
                         // we turn the query into a list then check for it?
@@ -136,14 +135,17 @@ namespace Air_3550.Util
 
                         if (allScheduledFlightsForFlightAsList.Any(scheduledFlight => scheduledFlight.DepartureDate == flightDepartureDate && scheduledFlight.TicketCount >= scheduledFlight.PlaneCapacity))
                         {
-                            flightPaths.RemoveAt(index);
-                        }
-                        else
-                        {
-                            index++;
+                            flaggedFlightPaths.Add(flightPath);
+
+                            break;
                         }
                     }
                 }
+            }
+
+            foreach (var flightPath in flaggedFlightPaths)
+            {
+                flightPaths.Remove(flightPath);
             }
 
             return flightPaths;
