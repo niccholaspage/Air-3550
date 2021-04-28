@@ -28,6 +28,16 @@ namespace Air_3550.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public class Params
+        {
+            public bool ShowPurchaseConfirmation;
+
+            public Params(bool showPurchaseConfirmation)
+            {
+                ShowPurchaseConfirmation = showPurchaseConfirmation;
+            }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -50,9 +60,11 @@ namespace Air_3550.Views
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is not null)
+            if (e.Parameter is Params pageParams && pageParams.ShowPurchaseConfirmation)
             {
                 BookedFlightsInfoBar.IsOpen = true;
+
+                pageParams.ShowPurchaseConfirmation = false;
             }
         }
 

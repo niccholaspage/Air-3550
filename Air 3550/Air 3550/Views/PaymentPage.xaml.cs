@@ -76,7 +76,7 @@ namespace Air_3550.Views
         {
             if (await ViewModel.PurchaseTrip())
             {
-                Frame.Navigate(typeof(MainPage), true);
+                Frame.Navigate(typeof(MainPage), new MainPage.Params(true));
 
                 Frame.BackStack.Clear();
             }
