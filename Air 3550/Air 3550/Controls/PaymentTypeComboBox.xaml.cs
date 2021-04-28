@@ -1,4 +1,4 @@
-﻿// PaymentTypeDropDownButton.xaml.cs - Air 3550 Project
+﻿// PaymentTypeComboBox.xaml.cs - Air 3550 Project
 //
 // This program emulates a flight reservation system for a new airline,
 // allowing customers to book and manage trips,as well as allowing employees

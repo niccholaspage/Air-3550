@@ -132,12 +132,12 @@ namespace Air_3550.ViewModels
                 .Include(ScheduledFlight => ScheduledFlight.Flight.OriginAirport)
                 .Include(ScheduledFlight => ScheduledFlight.Flight.Plane)
                 .Include(ScheduledFlight => ScheduledFlight.Tickets)
-                .Where(ScheduledFlight => (ScheduledFlight.DepartureDate >= Start) && (ScheduledFlight.DepartureDate <= End))
+                .Where(ScheduledFlight => ScheduledFlight.DepartureDate >= Start && ScheduledFlight.DepartureDate <= End)
                 .ToListAsync();
 
-            foreach (ScheduledFlight a in ScheduledFlights)
+            foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
             {
-                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(a, IsFlightManager));
+                ScheduledFlightsWithManifest.Add(new ScheduledFlightWithManifest(scheduledFlight, IsFlightManager));
             }
         }
 

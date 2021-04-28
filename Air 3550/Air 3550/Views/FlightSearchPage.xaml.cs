@@ -68,7 +68,7 @@ namespace Air_3550.Views
 
                 if (pageParams.DepartureFlightPath != null)
                 {
-                    await ViewModel.SearchForFlights(departureAirport, destinationAirport, (DateTime) pageParams.ReturnDate);
+                    await ViewModel.SearchForFlights(departureAirport, destinationAirport, (DateTime)pageParams.ReturnDate);
                 }
                 else
                 {
