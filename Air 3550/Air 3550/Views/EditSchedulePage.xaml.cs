@@ -10,13 +10,20 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/*
+ * The page for the load engineer and
+ * marketing manager, allowing them to
+ * add new flights, edit existing flights,
+ * and remove flights. Unlike the load
+ * engineer, the marketing manager can
+ * only edit planes of flights and nothing
+ * else.
+ */
+
 using System;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Air_3550.Views
 {
@@ -24,13 +31,22 @@ namespace Air_3550.Views
     {
         readonly EditScheduleViewModel ViewModel = new();
 
+        // On construction of the edit schedule page,
+        // we register with the loaded event and
+        // tell the view model to update the flights
+        // so we can display them.
         public EditSchedulePage()
         {
             this.InitializeComponent();
             this.Loaded += async (_, __) => await ViewModel.UpdateFlights();
         }
 
-
+        // When the add flight button is clicked,
+        // we construct a new add flight dialog and
+        // show it to the user. If it results in
+        // a valid flight, we update the flights
+        // in the view model to cause the UI to
+        // refresh.
         private async void AddFlight_Click(object sender, RoutedEventArgs e)
         {
             AddFlightDialog dialog = new();
@@ -44,6 +60,11 @@ namespace Air_3550.Views
             }
         }
 
+        // When the remove flight button is clicked,
+        // we simply defer to the view model and have
+        // it cancel the flight for us. It will then
+        // update the flights for us, causing our UI
+        // to update.
         private async void RemoveFlight_Click(object sender, RoutedEventArgs _)
         {
             var button = (Button)sender;
@@ -51,6 +72,12 @@ namespace Air_3550.Views
             await ViewModel.CancelFlight(flight);
         }
 
+        // When the edit flight button is clicked,
+        // we construct a new edit flight dialog and
+        // show it to the user. If it results in
+        // a valid flight, we update the flights
+        // in the view model to cause the UI to
+        // refresh.
         private async void EditFlight_Click(object sender, RoutedEventArgs _)
         {
             var button = (Button)sender;
