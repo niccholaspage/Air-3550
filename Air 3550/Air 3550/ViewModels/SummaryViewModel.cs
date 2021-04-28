@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using Air_3550.Models;
 using Air_3550.Repository;
 using Air_3550.Services;
+using Database.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
@@ -27,7 +28,10 @@ using Windows.Storage.Pickers;
 
 namespace Air_3550.ViewModels
 {
-    public record ScheduledFlightWithManifest(ScheduledFlight ScheduledFlight, bool IsFlightManager);
+    public record ScheduledFlightWithManifest(ScheduledFlight ScheduledFlight, bool IsFlightManager)
+    {
+        public string Income => (ScheduledFlight.Tickets.Count * ScheduledFlight.Flight.GetCost()).FormatAsMoney();
+    }
 
     class SummaryViewModel : ObservableValidator
     {

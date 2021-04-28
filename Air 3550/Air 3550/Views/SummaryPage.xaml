@@ -12,6 +12,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Name="BoolToVisibilityInvertedConverter" OnTrue="Collapsed" OnFalse="Visible"></converters:BoolToVisibilityConverter>
         <DataTemplate x:Key="SummaryListViewTemplate" x:DataType="data1:ScheduledFlightWithManifest">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -34,6 +35,7 @@
                     <Run Text="{x:Bind ScheduledFlight.Flight.Plane.MaxSeats}"/>
                 </TextBlock>
                 <Button Grid.Column="6" Click="ShowManifest_Click" HorizontalAlignment="Center" Visibility="{x:Bind IsFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" CommandParameter="{x:Bind}">Show Manifest</Button>
+                <TextBlock Grid.Column="6" HorizontalAlignment="Center" Visibility="{x:Bind IsFlightManager, Converter={StaticResource BoolToVisibilityInvertedConverter}}" Text="{x:Bind Income}"></TextBlock>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -72,6 +74,7 @@
                         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">Traveling</TextBlock>
                         <TextBlock Grid.Column="4" Margin="10 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">Number</TextBlock>
                         <TextBlock Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center">Tickets</TextBlock>
+                        <TextBlock Grid.Column="6" Visibility="{x:Bind ViewModel.IsNotFlightManager}" VerticalAlignment="Center" HorizontalAlignment="Center">Income</TextBlock>
                     </Grid>
                 </ListView.Header>
             </ListView>
