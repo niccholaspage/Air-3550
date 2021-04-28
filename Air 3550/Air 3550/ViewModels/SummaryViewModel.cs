@@ -148,7 +148,7 @@ namespace Air_3550.ViewModels
             MainWindow.FixPicker(savePicker);
 
             // Dropdown of file types the user can save the file as
-            savePicker.FileTypeChoices.Add(".csv", new List<string>() { ".csv" });
+            savePicker.FileTypeChoices.Add("CSV (Comma delimited)", new List<string>() { ".csv" });
 
             // Default file name if the user does not type one in or select a file to replace
             savePicker.SuggestedFileName = "Summary";
