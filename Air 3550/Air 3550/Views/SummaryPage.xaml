@@ -48,9 +48,9 @@
             <CalendarDatePicker x:Name="EndDatePicker" Date="{x:Bind ViewModel.EndDate, Mode=TwoWay}" 
                                 PlaceholderText="Pick a date" Width="125" Header="End Date" Margin="3"
                                 Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Bottom"/>
-
-            <Button Click="SaveCSV_Click" Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" Margin="3" VerticalAlignment="Bottom">Generate CSV</Button>
+            
             <Button Click="UpdateDates_Click" Margin="3" VerticalAlignment="Bottom">Update Date</Button>
+            <Button Click="SaveCSV_Click" Visibility="{x:Bind ViewModel.IsNotFlightManager, Converter={StaticResource BoolToVisibilityConverter}}" Margin="3" VerticalAlignment="Bottom">Generate CSV</Button>
             <TextBlock Text="{x:Bind ViewModel.Feedback, Mode=OneWay }" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
         </StackPanel>
         <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="true" RelativePanel.Below="HeaderBar">
