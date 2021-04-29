@@ -24,8 +24,7 @@ namespace Air_3550.Views
         // On construction of the ShowManifestDialog,
         // a new View model is created with the object
         // of the scheduled fight that the user
-        // requested to view. Upon creation a 
-        // list of names is generated
+        // requested to view
         public ShowManifestDialog(ScheduledFlight scheduledFlight)
         {
             this.InitializeComponent();
