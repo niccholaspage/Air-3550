@@ -10,29 +10,33 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This dialog is shown to the flight manager
+ * when they click the button in the summary
+ * to view the flight manifest. This contains
+ * a grid of each name on a scheduled flight.
+ */
+
 using Air_3550.Models;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml.Controls;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Air_3550.Views
 {
     public sealed partial class ShowManifestDialog : ContentDialog
     {
         // On construction of the ShowManifestDialog,
-        // a new View model is created with the object
+        // a new view model is created with the object
         // of the scheduled fight that the user
-        // requested to view
+        // requested to view.
         public ShowManifestDialog(ScheduledFlight scheduledFlight)
         {
             this.InitializeComponent();
 
-            //Create new view model
+            //Create the new view model
             ViewModel = new(scheduledFlight);
         }
 
-        readonly ShowManifestViewModel ViewModel;
+        readonly ShowManifestViewModel ViewModel; // Construct the view model.
     }
 }
