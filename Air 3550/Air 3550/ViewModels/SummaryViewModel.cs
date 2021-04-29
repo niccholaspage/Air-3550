@@ -188,12 +188,12 @@ namespace Air_3550.ViewModels
 
             List<string> lines = new();
 
-            lines.Add("ScheduledFlightId,Capacity,Tickets,Cost Per Ticket");
+            lines.Add("ScheduledFlightId,Filled Seats,Capacity,Income");
 
-            foreach (ScheduledFlight scheduledFlight in ScheduledFlights)
+            foreach (ScheduledFlightWithManifest a in ScheduledFlightsWithManifest)
             {
                 lines.Add(
-                    scheduledFlight.ScheduledFlightId + "," + scheduledFlight.Flight.Plane.MaxSeats + "," + scheduledFlight.Tickets.Count + "," + scheduledFlight.Flight.GetCost()
+                    a.ScheduledFlight.ScheduledFlightId + "," + a.ScheduledFlight.FilledSeats + "," + a.ScheduledFlight.Flight.Plane.MaxSeats + "," + a.Income
                     );
             }
 
