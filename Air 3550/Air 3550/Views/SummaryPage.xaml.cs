@@ -10,13 +10,20 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This page is used by the flight manager and the
+ * accountant so that they can see all of the scheduled
+ * flights and filter them by date. The accountant sees
+ * the income of each scheduled flight as well as the
+ * total income across the company, while the flight
+ * manager can generate flight manifests for every
+ * scheduled flight.
+ */
+
 using System;
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Air_3550.Views
 {
@@ -24,9 +31,9 @@ namespace Air_3550.Views
     {
         readonly SummaryViewModel ViewModel = new();
 
-        // On construction of the Summary page,
-        // we register with the loaded event and
-        // tell the view model to update the Scheduled
+        // On construction of the summary page,
+        // we register the loaded event to
+        // tell the view model to update the scheduled
         // flights so we can display them.
         public SummaryPage()
         {
@@ -34,41 +41,38 @@ namespace Air_3550.Views
             this.Loaded += async (_, __) => await ViewModel.UpdateScheduledFlightsDate();
         }
 
-        // On the click of the Generate CSV
-        // the user will be displayed a save window and allowed to        
-        // select the location that the user would like to save
-        // the CSV file to. The currently shown flights will be saved
-        // to that CSV
+        // On click of the Generate CSV button the user
+        // will be shown a file save picker and allowed
+        // to  select the location that the user would
+        // like to save the CSV file to. The currently
+        // shown flights will be saved to that CSV file.
         public async void SaveCSV_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.SaveSummary();
         }
 
-        // On the click of Update Dates
-        // The currently displayed dates will be
-        // updated to being only those within the range
-        // that the user requested
+        // On the click of the Update Dates button,
+        // the currently displayed scheduled flights will
+        // be updated to be only those within the range
+        // that the user requested.
         public async void UpdateDates_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.UpdateScheduledFlightsDate();
         }
 
-        // On the click of Show Manifest button
-        // A manifest will be displayed as a conent dialogue
-        // inside the content dialoog is a grid that shows 
-        // every passanger that will be on the flight
+        // On click of Show Manifest button, a manifest will
+        // in a dialog, where a grid shows every passenger that
+        // will be on the flight.
         public async void ShowManifest_Click(object sender, RoutedEventArgs e)
         {
-            //Grabs the origin of the button that was clicked
+            //Grabs the origin of the button that was clicked.
             Button button = (Button)sender;
-            var InterestedFlight = (ScheduledFlightWithManifest)button.CommandParameter;
+            var scheduledFlightWithManifest = (ScheduledFlightWithManifest)button.CommandParameter;
 
-            //Shows the dialogue page
-            ShowManifestDialog dialog1 = new(InterestedFlight.ScheduledFlight);
+            //Shows the dialogue page for the specific scheduled flight.
+            ShowManifestDialog dialog1 = new(scheduledFlightWithManifest.ScheduledFlight);
             dialog1.XamlRoot = this.Content.XamlRoot;
             await dialog1.ShowAsync();
-
-
         }
     }
 }
