@@ -10,6 +10,16 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model simply holds the logic
+ * to fetch customer names for a certain
+ * scheduled flight for the retrieval
+ * of a flight manifest. Only non-canceled
+ * tickets are taken into consideratino,
+ * and it keeps track of all ticket
+ * names for a scheduled flight.
+ */
+
 using System.Collections.ObjectModel;
 using System.Linq;
 using Air_3550.Models;
@@ -26,10 +36,10 @@ namespace Air_3550.ViewModels
 
         public ShowManifestViewModel(ScheduledFlight scheduledFlight)
         {
-            //Hold the flight of interested
+            //Hold the scheduled flight we are taking a look at
             ScheduledFlight = scheduledFlight;
 
-            //Get all names on tickets onto ObservableCollection
+            // Get all names on the tickets
             GetTicketNames();
         }
 
@@ -38,14 +48,14 @@ namespace Air_3550.ViewModels
             // Clear all the ticket names
             TicketNames.Clear();
 
-            //Grab DataBase
+            // Get a new database context
             using var db = new AirContext();
 
             // Get all customer names of non-canceled tickets from currently selected scheduled flight
             var customerNames = await db.Tickets.Where(Ticket => Ticket.ScheduledFlight.ScheduledFlightId == ScheduledFlight.ScheduledFlightId && !Ticket.IsCanceled).Select(Ticket => Ticket.Booking.CustomerData.Name).ToListAsync();
 
 
-            // Add Ticket name to Observable collection to be displayed
+            // Add ticket name to TicketNames collection for future use
             foreach (string customerName in customerNames)
             {
                 TicketNames.Add(customerName);

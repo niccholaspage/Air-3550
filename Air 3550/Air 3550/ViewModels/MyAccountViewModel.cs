@@ -10,6 +10,13 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model handles the my account
+ * view, mostly allowing for a tabbed UI
+ * switching between the bookings, profile,
+ * and change password page.
+ */
+
 using System;
 using Air_3550.Services;
 using Air_3550.Views;

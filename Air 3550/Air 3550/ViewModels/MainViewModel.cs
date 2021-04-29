@@ -10,6 +10,14 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model is for the main page
+ * and validates a search, validating that
+ * a proper departure and destination airport
+ * as well as a departure and return date (if
+ * required) are specified.
+ */
+
 using System;
 using System.ComponentModel.DataAnnotations;
 using Air_3550.Util;

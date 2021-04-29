@@ -10,6 +10,14 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model is used for account registration,
+ * allowing customers to register for the system. It
+ * uses the EditAccountInfoValidator to validate info,
+ * then creates a new user and customer data object to
+ * go along with it, giving a user access to the system.
+ */
+
 using System;
 using System.Threading.Tasks;
 using Air_3550.Controls;

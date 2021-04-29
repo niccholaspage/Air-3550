@@ -10,6 +10,16 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model is used to authenticate
+ * and log the user into the system. It
+ * checks usernames and passwords and
+ * determines whether a username and password
+ * combo will authenticate a user into the
+ * system, then configures their sesion if
+ * so.
+ */
+
 using System.Threading.Tasks;
 using Air_3550.Models;
 using Air_3550.Repository;

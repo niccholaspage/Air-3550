@@ -10,6 +10,15 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model handles the payment view,
+ * and validates the user's payment method of
+ * choice. It also has the purchasing logic,
+ * converting a flight path into a proper set
+ * of tickets for the customer, then creating
+ * a booking to house them.
+ */
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
