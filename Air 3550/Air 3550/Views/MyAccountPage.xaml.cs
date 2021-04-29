@@ -10,12 +10,18 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This page is shown to the user when they
+ * visit their account info after they are
+ * signed in. For all users, it shows a
+ * change password tab. For customers, it
+ * shows an additional bookings tab as well
+ * as a profile tab.
+ */
+
 using Air_3550.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Air_3550.Views
 {
@@ -26,18 +32,27 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        readonly MyAccountViewModel ViewModel = new();
+        readonly MyAccountViewModel ViewModel = new(); // Construct the view model.
 
+        // When the user clicks the bookings button,
+        // we tell the view model to set the current
+        // tab to the bookings tab.
         private void BookingsButton_Click(object _, RoutedEventArgs __)
         {
             ViewModel.SetCurrentTab(MyAccountViewModel.Tab.BOOKINGS);
         }
 
+        // When the user clicks the profile button,
+        // we tell the view model to set the current
+        // tab to the profile tab.
         private void ProfileButton_Click(object _, RoutedEventArgs __)
         {
             ViewModel.SetCurrentTab(MyAccountViewModel.Tab.PROFILE);
         }
 
+        // When the user clicks the change password
+        // button, we tell the view model to set the
+        // current tab to the change password tab.
         private void ChangePasswordButton_Click(object _, RoutedEventArgs __)
         {
             ViewModel.SetCurrentTab(MyAccountViewModel.Tab.CHANGE_PASSWORD);
