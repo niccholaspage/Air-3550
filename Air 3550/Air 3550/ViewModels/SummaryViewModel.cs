@@ -189,15 +189,12 @@ namespace Air_3550.ViewModels
             List<string> lines = new();
 
             lines.Add("ScheduledFlightId,Filled Seats,Capacity,Percent Full,Income");
-
-            double percentage = 0;
-
-            foreach (ScheduledFlightWithManifest a in ScheduledFlightsWithManifest)
+            foreach (ScheduledFlightWithManifest scheduledFlightWithManifiest in ScheduledFlightsWithManifest)
             {
-                percentage = (1.00*a.ScheduledFlight.FilledSeats) / a.ScheduledFlight.Flight.Plane.MaxSeats;
-
+                var percentage = (double)(scheduledFlightWithManifiest.ScheduledFlight.FilledSeats) / scheduledFlightWithManifiest.ScheduledFlight.Flight.Plane.MaxSeats;
                 lines.Add(
-                    a.ScheduledFlight.ScheduledFlightId + "," + a.ScheduledFlight.FilledSeats + "," + a.ScheduledFlight.Flight.Plane.MaxSeats + "," + percentage + "," + a.Income
+                    scheduledFlightWithManifiest.ScheduledFlight.ScheduledFlightId + "," + scheduledFlightWithManifiest.ScheduledFlight.FilledSeats
+                    + "," + scheduledFlightWithManifiest.ScheduledFlight.Flight.Plane.MaxSeats + "," + percentage + "," + scheduledFlightWithManifiest.Income
                     );
             }
 
