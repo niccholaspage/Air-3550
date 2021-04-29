@@ -10,6 +10,15 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model allows a load engineer
+ * to edit an entire flight, including it's time,
+ * plane, origin and destination. This edit view
+ * will copy the flight into a new one and cancel
+ * the old flight, to avoid breaking scheduled
+ * flights depending on the old flight..
+ */
+
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;

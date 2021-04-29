@@ -10,6 +10,12 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model handles the logic
+ * for adding a flight to the airline,
+ * performed by the load engineer.
+ */
+
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;

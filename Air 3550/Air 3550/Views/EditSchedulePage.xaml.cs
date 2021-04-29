@@ -10,7 +10,7 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
-/*
+/**
  * The page for the load engineer and
  * marketing manager, allowing them to
  * add new flights, edit existing flights,

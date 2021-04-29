@@ -10,6 +10,15 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model allows a customer
+ * to edit their profile, updating
+ * their name, age, address, and other
+ * information. It also helps fetch
+ * the account balance and points of
+ * the customer.
+ */
+
 using System.Linq;
 using System.Threading.Tasks;
 using Air_3550.Controls;

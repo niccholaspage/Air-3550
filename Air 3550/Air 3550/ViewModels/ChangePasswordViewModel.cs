@@ -10,6 +10,13 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model handles the logic that
+ * allows a user to change their password
+ * so that they can use it the next time
+ * they login.
+ */
+
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;

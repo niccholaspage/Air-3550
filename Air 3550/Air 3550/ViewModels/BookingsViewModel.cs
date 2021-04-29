@@ -23,6 +23,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
+/**
+ * This view model handles booking related logic,
+ * including retrieving a user's bookings and handling
+ * booking/ticket cancelation.
+ */
+
 namespace Air_3550.ViewModels
 {
     class BookingsViewModel : ObservableObject

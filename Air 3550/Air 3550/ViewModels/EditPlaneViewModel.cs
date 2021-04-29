@@ -10,6 +10,12 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model allows a marketing manager
+ * to edit just the plane of a given flight.
+ * This edit view will edit the flight directly.
+ */
+
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
