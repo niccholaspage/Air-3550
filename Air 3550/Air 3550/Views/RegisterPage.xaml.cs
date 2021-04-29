@@ -52,7 +52,7 @@ namespace Air_3550.Views
             }
         }
 
-        readonly RegisterViewModel ViewModel = new();  // Construct the view model.
+        readonly RegisterViewModel ViewModel = new(); // Construct the view model.
 
         // On a click of the register button,
         // an account will be created with the 

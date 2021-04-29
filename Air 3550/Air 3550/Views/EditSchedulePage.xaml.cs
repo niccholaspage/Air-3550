@@ -29,7 +29,7 @@ namespace Air_3550.Views
 {
     public sealed partial class EditSchedulePage : Page
     {
-        readonly EditScheduleViewModel ViewModel = new();
+        readonly EditScheduleViewModel ViewModel = new(); // Construct the view model.
 
         // On construction of the edit schedule page,
         // we register with the loaded event and

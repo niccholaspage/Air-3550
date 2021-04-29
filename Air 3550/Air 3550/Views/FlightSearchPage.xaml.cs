@@ -94,6 +94,10 @@ namespace Air_3550.Views
             }).Wait();
         }
 
+        // In the constructor, we make sure to get the
+        // user session, as we will need it to determine
+        // whether we can navigate the user straight to
+        // the payment screen or not.
         public FlightSearchPage()
         {
             userSession = App.Current.Services.GetService<UserSessionService>();
@@ -101,10 +105,16 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        readonly FlightSearchViewModel ViewModel = new();
+        readonly FlightSearchViewModel ViewModel = new(); // Construct the view model.
 
+        // A computed property that the UI binds to
+        // so that the user knows whether they are
+        // booking a departure or return flight path.
         public string PathType => pageParams.DepartureFlightPath == null ? "Depart:" : "Return:";
 
+        // A computed property used in the UI to show
+        // the user what locations they are travelling to
+        // and from.
         public string Subtitle
         {
             get
@@ -120,10 +130,20 @@ namespace Air_3550.Views
             }
         }
 
+        // A method used to send the user to the payment
+        // page if they are signed in.
         private void proceedToPayment(FlightPath flightPath)
         {
+            // We first setup a local variable for
+            // payment page parameters.
             PaymentPage.Params paymentPageParams;
 
+            // If a return date is specified,
+            // we working with a round trip,
+            // so we construct our two flight
+            // paths with dates and make a new
+            // set of payment page parameters passing
+            // on those new flight paths with dates.
             if (pageParams.ReturnDate != null)
             {
                 var departureFlightPathWithDate = new FlightPathWithDate(pageParams.DepartureFlightPath, pageParams.DepartureDate);
@@ -134,25 +154,45 @@ namespace Air_3550.Views
             }
             else
             {
+                // If no return date is specified,
+                // we only are focusing on a one-way,
+                // so we just construct our one flight
+                // path with dates and make a new
+                // set of payment page parameters passing
+                // on that new flight path with date.
                 var departureFlightPathWithDate = new FlightPathWithDate(flightPath, pageParams.DepartureDate);
 
                 paymentPageParams = new PaymentPage.Params(departureFlightPathWithDate, null);
             }
 
+            // If we aren't logged in, we navigate
+            // the user to the login page, passing
+            // in redirect parameters so they get
+            // sent back to the payment page
+            // afterwards.
             if (!userSession.IsLoggedIn)
             {
                 Frame.Navigate(typeof(LoginPage), new LoginPage.Params.RedirectToPage(typeof(PaymentPage), paymentPageParams));
             }
-            else
+            else // otherwise, just navigate to the payment page.
             {
                 Frame.Navigate(typeof(PaymentPage), paymentPageParams);
             }
         }
 
+        // This method handles the continue button click. This will either
+        // take you to the search page again to pick a return flight, or
+        // process your payment if you have picked all necessary flights.
         private void ContinueButton_Click(object _, RoutedEventArgs __)
         {
+            // We get the selected flight path.
             FlightPath flightPath = (FlightPath)FlightList.SelectedItem;
 
+            // If we need to specify a return date, we check if
+            // the user has already chosen a departure flight path.
+            // If so, we proceed to payment. Otherwise, we navigate
+            // the user to the flight search page again so they can
+            // choose their return flight path.
             if (pageParams.ReturnDate != null)
             {
                 if (pageParams.DepartureFlightPath == null)
