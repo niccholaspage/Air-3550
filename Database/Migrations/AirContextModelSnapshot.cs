@@ -154,6 +154,70 @@ namespace Database.Migrations
                     b.HasIndex("CustomerDataId");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            BookingId = 1,
+                            CustomerDataId = 1,
+                            FirstReturnTicketIndex = 2
+                        },
+                        new
+                        {
+                            BookingId = 2,
+                            CustomerDataId = 1
+                        },
+                        new
+                        {
+                            BookingId = 3,
+                            CustomerDataId = 1,
+                            FirstReturnTicketIndex = 2
+                        },
+                        new
+                        {
+                            BookingId = 4,
+                            CustomerDataId = 1,
+                            FirstReturnTicketIndex = 2
+                        },
+                        new
+                        {
+                            BookingId = 5,
+                            CustomerDataId = 2,
+                            FirstReturnTicketIndex = 1
+                        },
+                        new
+                        {
+                            BookingId = 6,
+                            CustomerDataId = 2,
+                            FirstReturnTicketIndex = 1
+                        },
+                        new
+                        {
+                            BookingId = 7,
+                            CustomerDataId = 2
+                        },
+                        new
+                        {
+                            BookingId = 8,
+                            CustomerDataId = 2
+                        },
+                        new
+                        {
+                            BookingId = 9,
+                            CustomerDataId = 2,
+                            FirstReturnTicketIndex = 2
+                        },
+                        new
+                        {
+                            BookingId = 10,
+                            CustomerDataId = 2,
+                            FirstReturnTicketIndex = 2
+                        },
+                        new
+                        {
+                            BookingId = 11,
+                            CustomerDataId = 2
+                        });
                 });
 
             modelBuilder.Entity("Air_3550.Models.CustomerData", b =>
@@ -210,6 +274,40 @@ namespace Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CustomerDatas");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerDataId = 1,
+                            AccountBalance = 0m,
+                            Address = "3456 Pine Road",
+                            Age = 39,
+                            City = "South Wood",
+                            CreditCardNumber = "1234123412341234",
+                            Name = "John Smith",
+                            PhoneNumber = "8492039944",
+                            RewardPointsBalance = 0,
+                            RewardPointsUsed = 0,
+                            State = "Ohio",
+                            UserId = 5,
+                            ZipCode = "28934"
+                        },
+                        new
+                        {
+                            CustomerDataId = 2,
+                            AccountBalance = 252.56m,
+                            Address = "3459 Oak Road",
+                            Age = 50,
+                            City = "Farmington",
+                            CreditCardNumber = "234523452345322",
+                            Name = "Steve Peterson",
+                            PhoneNumber = "3949907733",
+                            RewardPointsBalance = 0,
+                            RewardPointsUsed = 0,
+                            State = "Ohio",
+                            UserId = 6,
+                            ZipCode = "34564"
+                        });
                 });
 
             modelBuilder.Entity("Air_3550.Models.Flight", b =>
@@ -2630,6 +2728,182 @@ namespace Database.Migrations
                     b.HasIndex("FlightId");
 
                     b.ToTable("ScheduledFlights");
+
+                    b.HasData(
+                        new
+                        {
+                            ScheduledFlightId = 1,
+                            DepartureDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 33
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 2,
+                            DepartureDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 191
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 3,
+                            DepartureDate = new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 171
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 4,
+                            DepartureDate = new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 32
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 5,
+                            DepartureDate = new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 186
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 6,
+                            DepartureDate = new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 166
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 7,
+                            DepartureDate = new DateTime(2021, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 121
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 8,
+                            DepartureDate = new DateTime(2021, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 212
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 9,
+                            DepartureDate = new DateTime(2021, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 214
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 10,
+                            DepartureDate = new DateTime(2021, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 127
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 11,
+                            DepartureDate = new DateTime(2021, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 27
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 12,
+                            DepartureDate = new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 193
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 13,
+                            DepartureDate = new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 200
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 14,
+                            DepartureDate = new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 31
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 15,
+                            DepartureDate = new DateTime(2021, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 108
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 16,
+                            DepartureDate = new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 111
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 17,
+                            DepartureDate = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 115
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 18,
+                            DepartureDate = new DateTime(2021, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 119
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 19,
+                            DepartureDate = new DateTime(2021, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 102
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 20,
+                            DepartureDate = new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 85
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 21,
+                            DepartureDate = new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 14
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 22,
+                            DepartureDate = new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 18
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 23,
+                            DepartureDate = new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 55
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 24,
+                            DepartureDate = new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 44
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 25,
+                            DepartureDate = new DateTime(2021, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 216
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 26,
+                            DepartureDate = new DateTime(2021, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 128
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 27,
+                            DepartureDate = new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 139
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 28,
+                            DepartureDate = new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 227
+                        },
+                        new
+                        {
+                            ScheduledFlightId = 29,
+                            DepartureDate = new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightId = 29
+                        });
                 });
 
             modelBuilder.Entity("Air_3550.Models.Ticket", b =>
@@ -2663,6 +2937,298 @@ namespace Database.Migrations
                     b.HasIndex("ScheduledFlightId");
 
                     b.ToTable("Tickets");
+
+                    b.HasData(
+                        new
+                        {
+                            TicketId = 1,
+                            BookingId = 1,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 170.4m,
+                            ScheduledFlightId = 1
+                        },
+                        new
+                        {
+                            TicketId = 2,
+                            BookingId = 1,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 119.55m,
+                            ScheduledFlightId = 2
+                        },
+                        new
+                        {
+                            TicketId = 3,
+                            BookingId = 1,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 212.87m,
+                            ScheduledFlightId = 3
+                        },
+                        new
+                        {
+                            TicketId = 4,
+                            BookingId = 1,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 53.4m,
+                            ScheduledFlightId = 4
+                        },
+                        new
+                        {
+                            TicketId = 5,
+                            BookingId = 2,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 129.89m,
+                            ScheduledFlightId = 5
+                        },
+                        new
+                        {
+                            TicketId = 6,
+                            BookingId = 2,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 201.14m,
+                            ScheduledFlightId = 6
+                        },
+                        new
+                        {
+                            TicketId = 7,
+                            BookingId = 3,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 95.06m,
+                            ScheduledFlightId = 7
+                        },
+                        new
+                        {
+                            TicketId = 8,
+                            BookingId = 3,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 190.14m,
+                            ScheduledFlightId = 8
+                        },
+                        new
+                        {
+                            TicketId = 9,
+                            BookingId = 3,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 234.17m,
+                            ScheduledFlightId = 9
+                        },
+                        new
+                        {
+                            TicketId = 10,
+                            BookingId = 3,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 90.45m,
+                            ScheduledFlightId = 10
+                        },
+                        new
+                        {
+                            TicketId = 11,
+                            BookingId = 4,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 58.4m,
+                            ScheduledFlightId = 11
+                        },
+                        new
+                        {
+                            TicketId = 12,
+                            BookingId = 4,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 105.62m,
+                            ScheduledFlightId = 12
+                        },
+                        new
+                        {
+                            TicketId = 13,
+                            BookingId = 4,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 122.28m,
+                            ScheduledFlightId = 13
+                        },
+                        new
+                        {
+                            TicketId = 14,
+                            BookingId = 4,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 59.58m,
+                            ScheduledFlightId = 14
+                        },
+                        new
+                        {
+                            TicketId = 15,
+                            BookingId = 5,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 147.62m,
+                            ScheduledFlightId = 15
+                        },
+                        new
+                        {
+                            TicketId = 16,
+                            BookingId = 5,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 166.07m,
+                            ScheduledFlightId = 16
+                        },
+                        new
+                        {
+                            TicketId = 17,
+                            BookingId = 6,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 141.4m,
+                            ScheduledFlightId = 17
+                        },
+                        new
+                        {
+                            TicketId = 18,
+                            BookingId = 6,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 141.4m,
+                            ScheduledFlightId = 18
+                        },
+                        new
+                        {
+                            TicketId = 19,
+                            BookingId = 7,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 77.36m,
+                            ScheduledFlightId = 19
+                        },
+                        new
+                        {
+                            TicketId = 20,
+                            BookingId = 8,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 125.68m,
+                            ScheduledFlightId = 20
+                        },
+                        new
+                        {
+                            TicketId = 21,
+                            BookingId = 9,
+                            IsCanceled = true,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 37.93m,
+                            ScheduledFlightId = 21
+                        },
+                        new
+                        {
+                            TicketId = 22,
+                            BookingId = 9,
+                            IsCanceled = true,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 86.54m,
+                            ScheduledFlightId = 22
+                        },
+                        new
+                        {
+                            TicketId = 23,
+                            BookingId = 9,
+                            IsCanceled = true,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 52.23m,
+                            ScheduledFlightId = 23
+                        },
+                        new
+                        {
+                            TicketId = 24,
+                            BookingId = 9,
+                            IsCanceled = true,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 75.86m,
+                            ScheduledFlightId = 24
+                        },
+                        new
+                        {
+                            TicketId = 25,
+                            BookingId = 10,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 210.9m,
+                            ScheduledFlightId = 25
+                        },
+                        new
+                        {
+                            TicketId = 26,
+                            BookingId = 10,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 80.84m,
+                            ScheduledFlightId = 26
+                        },
+                        new
+                        {
+                            TicketId = 27,
+                            BookingId = 10,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 167.81m,
+                            ScheduledFlightId = 27
+                        },
+                        new
+                        {
+                            TicketId = 28,
+                            BookingId = 10,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 122.23m,
+                            ScheduledFlightId = 28
+                        },
+                        new
+                        {
+                            TicketId = 29,
+                            BookingId = 11,
+                            IsCanceled = false,
+                            PaymentMethod = 0,
+                            PointsEarned = false,
+                            Price = 86.76m,
+                            ScheduledFlightId = 29
+                        });
                 });
 
             modelBuilder.Entity("Air_3550.Models.User", b =>
@@ -2714,6 +3280,20 @@ namespace Database.Migrations
                             LoginId = "marketing_manager",
                             PasswordHash = "NgyuvZ7baGCcCTO63jVlNQ5Z4oTMUDzmG/DuvUL7flvWV6ce0UmCJRaHV+fxCVkgQRzOJ3eeDHeOxSU13q4gQA==",
                             Role = 4
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            LoginId = "756967",
+                            PasswordHash = "1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==",
+                            Role = 0
+                        },
+                        new
+                        {
+                            UserId = 6,
+                            LoginId = "886642",
+                            PasswordHash = "1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==",
+                            Role = 0
                         });
                 });
 

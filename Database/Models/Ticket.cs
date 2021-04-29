@@ -29,6 +29,8 @@ namespace Air_3550.Models
     {
         public int TicketId { get; set; } // The primary ID of the ticket, used to relate the ticket to other data.
 
+        public int ScheduledFlightId { get; set; } // The ID of the scheduled flight this ticket is for.
+
         [Required]
         public ScheduledFlight ScheduledFlight { get; set; } // The scheduled flight this ticket is for.
 
@@ -40,8 +42,10 @@ namespace Air_3550.Models
 
         public PaymentMethod PaymentMethod { get; set; } // The payment method used to purchase this ticket.
 
+        public int BookingId { get; set; } // The ID of the booking that contains this ticket.
+
         [Required]
-        public Booking Booking { get; set; } // The booking contains this ticket.
+        public Booking Booking { get; set; } // The booking that contains this ticket.
 
         // A computed property that checks whether the boarding pass
         // for a ticket should be available. A boarding pass for a ticket

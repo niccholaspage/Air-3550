@@ -19,6 +19,7 @@
 using System;
 using System.IO;
 using Air_3550.Models;
+using Database.Models;
 using Database.Util;
 using Microsoft.EntityFrameworkCore;
 
@@ -74,16 +75,17 @@ namespace Air_3550.Repository
                 new Plane { PlaneId = 3, Model = "Boeing 777", MaxSeats = 550, MaxDistance = 17395 }
                 );
 
-            // We also seed our users. Because we allow registration,
-            // we do not worry about seeding a customer, but we do seed
-            // an accountant, load engineer, flight manager, and marketing
-            // manager. We also seed their passwords to be the same as their
-            // login ID - we aren't going for security!
+            // We also seed our users. We seed an accountant, load engineer,
+            // flight manager, and marketing manager. We also seed their passwords
+            // to be the same as their login ID - we aren't going for security!
+            // We also seed two dummy customers for initial data.
             modelBuilder.Entity<User>().HasData(
                 new User { UserId = 1, Role = Role.ACCOUNTANT, LoginId = "accountant", PasswordHash = PasswordHandling.HashPassword("accountant") },
                 new User { UserId = 2, Role = Role.LOAD_ENGINEER, LoginId = "load_engineer", PasswordHash = PasswordHandling.HashPassword("load_engineer") },
                 new User { UserId = 3, Role = Role.FLIGHT_MANAGER, LoginId = "flight_manager", PasswordHash = PasswordHandling.HashPassword("flight_manager") },
-                new User { UserId = 4, Role = Role.MARKETING_MANAGER, LoginId = "marketing_manager", PasswordHash = PasswordHandling.HashPassword("marketing_manager") }
+                new User { UserId = 4, Role = Role.MARKETING_MANAGER, LoginId = "marketing_manager", PasswordHash = PasswordHandling.HashPassword("marketing_manager") },
+                new User { UserId = 5, Role = Role.CUSTOMER, LoginId = "756967", PasswordHash = PasswordHandling.HashPassword("1234") },
+                new User { UserId = 6, Role = Role.CUSTOMER, LoginId = "886642", PasswordHash = PasswordHandling.HashPassword("1234") }
                 );
 
             // Finally, we seed our flights. For seeding, I
@@ -440,6 +442,90 @@ namespace Air_3550.Repository
                 new Flight { FlightId = 230, Number = 230, OriginAirportId = 10, DestinationAirportId = 9, DepartureTime = new TimeSpan(15, 20, 00), PlaneId = 2 },
                 new Flight { FlightId = 231, Number = 231, OriginAirportId = 10, DestinationAirportId = 9, DepartureTime = new TimeSpan(18, 50, 00), PlaneId = 2 },
                 new Flight { FlightId = 232, Number = 232, OriginAirportId = 10, DestinationAirportId = 9, DepartureTime = new TimeSpan(21, 20, 00), PlaneId = 2 }
+                );
+
+            // Now we need to seed the customer data for our two dummy users.
+            modelBuilder.Entity<CustomerData>().HasData(
+                new CustomerData { CustomerDataId = 1, UserId = 5, Name = "John Smith", Age = 39, PhoneNumber = "8492039944", Address = "3456 Pine Road", ZipCode = "28934", City = "South Wood", State = "Ohio", CreditCardNumber = "1234123412341234", AccountBalance = 0m, RewardPointsBalance = 0, RewardPointsUsed = 0 },
+                new CustomerData { CustomerDataId = 2, UserId = 6, Name = "Steve Peterson", Age = 50, PhoneNumber = "3949907733", Address = "3459 Oak Road", ZipCode = "34564", City = "Farmington", State = "Ohio", CreditCardNumber = "234523452345322", AccountBalance = 252.56m, RewardPointsBalance = 0, RewardPointsUsed = 0 }
+            );
+
+            modelBuilder.Entity<ScheduledFlight>().HasData(
+                new ScheduledFlight { ScheduledFlightId = 1, FlightId = 33, DepartureDate = new DateTime(2021, 05, 01) },
+                new ScheduledFlight { ScheduledFlightId = 2, FlightId = 191, DepartureDate = new DateTime(2021, 05, 01) },
+                new ScheduledFlight { ScheduledFlightId = 3, FlightId = 171, DepartureDate = new DateTime(2021, 05, 07) },
+                new ScheduledFlight { ScheduledFlightId = 4, FlightId = 32, DepartureDate = new DateTime(2021, 05, 07) },
+                new ScheduledFlight { ScheduledFlightId = 5, FlightId = 186, DepartureDate = new DateTime(2021, 05, 08) },
+                new ScheduledFlight { ScheduledFlightId = 6, FlightId = 166, DepartureDate = new DateTime(2021, 05, 08) },
+                new ScheduledFlight { ScheduledFlightId = 7, FlightId = 121, DepartureDate = new DateTime(2021, 05, 10) },
+                new ScheduledFlight { ScheduledFlightId = 8, FlightId = 212, DepartureDate = new DateTime(2021, 05, 10) },
+                new ScheduledFlight { ScheduledFlightId = 9, FlightId = 214, DepartureDate = new DateTime(2021, 05, 14) },
+                new ScheduledFlight { ScheduledFlightId = 10, FlightId = 127, DepartureDate = new DateTime(2021, 05, 14) },
+                new ScheduledFlight { ScheduledFlightId = 11, FlightId = 27, DepartureDate = new DateTime(2021, 04, 28) },
+                new ScheduledFlight { ScheduledFlightId = 12, FlightId = 193, DepartureDate = new DateTime(2021, 04, 29) },
+                new ScheduledFlight { ScheduledFlightId = 13, FlightId = 200, DepartureDate = new DateTime(2021, 04, 29) },
+                new ScheduledFlight { ScheduledFlightId = 14, FlightId = 31, DepartureDate = new DateTime(2021, 04, 29) },
+                new ScheduledFlight { ScheduledFlightId = 15, FlightId = 108, DepartureDate = new DateTime(2021, 04, 28) },
+                new ScheduledFlight { ScheduledFlightId = 16, FlightId = 111, DepartureDate = new DateTime(2021, 04, 29) },
+                new ScheduledFlight { ScheduledFlightId = 17, FlightId = 115, DepartureDate = new DateTime(2021, 05, 01) },
+                new ScheduledFlight { ScheduledFlightId = 18, FlightId = 119, DepartureDate = new DateTime(2021, 05, 02) },
+                new ScheduledFlight { ScheduledFlightId = 19, FlightId = 102, DepartureDate = new DateTime(2021, 05, 03) },
+                new ScheduledFlight { ScheduledFlightId = 20, FlightId = 85, DepartureDate = new DateTime(2021, 05, 18) },
+                new ScheduledFlight { ScheduledFlightId = 21, FlightId = 14, DepartureDate = new DateTime(2021, 05, 05) },
+                new ScheduledFlight { ScheduledFlightId = 22, FlightId = 18, DepartureDate = new DateTime(2021, 05, 05) },
+                new ScheduledFlight { ScheduledFlightId = 23, FlightId = 55, DepartureDate = new DateTime(2021, 05, 13) },
+                new ScheduledFlight { ScheduledFlightId = 24, FlightId = 44, DepartureDate = new DateTime(2021, 05, 13) },
+                new ScheduledFlight { ScheduledFlightId = 25, FlightId = 216, DepartureDate = new DateTime(2021, 05, 06) },
+                new ScheduledFlight { ScheduledFlightId = 26, FlightId = 128, DepartureDate = new DateTime(2021, 05, 06) },
+                new ScheduledFlight { ScheduledFlightId = 27, FlightId = 139, DepartureDate = new DateTime(2021, 05, 08) },
+                new ScheduledFlight { ScheduledFlightId = 28, FlightId = 227, DepartureDate = new DateTime(2021, 05, 08) },
+                new ScheduledFlight { ScheduledFlightId = 29, FlightId = 29, DepartureDate = new DateTime(2021, 05, 11) }
+            );
+
+            modelBuilder.Entity<Ticket>().HasData(
+                new Ticket { TicketId = 1, ScheduledFlightId = 1, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 1, Price = 170.4m },
+                new Ticket { TicketId = 2, ScheduledFlightId = 2, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 1, Price = 119.55m },
+                new Ticket { TicketId = 3, ScheduledFlightId = 3, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 1, Price = 212.87m },
+                new Ticket { TicketId = 4, ScheduledFlightId = 4, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 1, Price = 53.4m },
+                new Ticket { TicketId = 5, ScheduledFlightId = 5, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 2, Price = 129.89m },
+                new Ticket { TicketId = 6, ScheduledFlightId = 6, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 2, Price = 201.14m },
+                new Ticket { TicketId = 7, ScheduledFlightId = 7, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 3, Price = 95.06m },
+                new Ticket { TicketId = 8, ScheduledFlightId = 8, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 3, Price = 190.14m },
+                new Ticket { TicketId = 9, ScheduledFlightId = 9, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 3, Price = 234.17m },
+                new Ticket { TicketId = 10, ScheduledFlightId = 10, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 3, Price = 90.45m },
+                new Ticket { TicketId = 11, ScheduledFlightId = 11, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 4, Price = 58.4m },
+                new Ticket { TicketId = 12, ScheduledFlightId = 12, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 4, Price = 105.62m },
+                new Ticket { TicketId = 13, ScheduledFlightId = 13, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 4, Price = 122.28m },
+                new Ticket { TicketId = 14, ScheduledFlightId = 14, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 4, Price = 59.58m },
+                new Ticket { TicketId = 15, ScheduledFlightId = 15, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 5, Price = 147.62m },
+                new Ticket { TicketId = 16, ScheduledFlightId = 16, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 5, Price = 166.07m },
+                new Ticket { TicketId = 17, ScheduledFlightId = 17, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 6, Price = 141.4m },
+                new Ticket { TicketId = 18, ScheduledFlightId = 18, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 6, Price = 141.4m },
+                new Ticket { TicketId = 19, ScheduledFlightId = 19, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 7, Price = 77.36m },
+                new Ticket { TicketId = 20, ScheduledFlightId = 20, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 8, Price = 125.68m },
+                new Ticket { TicketId = 21, ScheduledFlightId = 21, IsCanceled = true, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 9, Price = 37.93m },
+                new Ticket { TicketId = 22, ScheduledFlightId = 22, IsCanceled = true, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 9, Price = 86.54m },
+                new Ticket { TicketId = 23, ScheduledFlightId = 23, IsCanceled = true, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 9, Price = 52.23m },
+                new Ticket { TicketId = 24, ScheduledFlightId = 24, IsCanceled = true, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 9, Price = 75.86m },
+                new Ticket { TicketId = 25, ScheduledFlightId = 25, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 10, Price = 210.9m },
+                new Ticket { TicketId = 26, ScheduledFlightId = 26, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 10, Price = 80.84m },
+                new Ticket { TicketId = 27, ScheduledFlightId = 27, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 10, Price = 167.81m },
+                new Ticket { TicketId = 28, ScheduledFlightId = 28, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 10, Price = 122.23m },
+                new Ticket { TicketId = 29, ScheduledFlightId = 29, IsCanceled = false, PointsEarned = false, PaymentMethod = PaymentMethod.CREDIT_CARD, BookingId = 11, Price = 86.76m }
+            );
+
+            modelBuilder.Entity<Booking>().HasData(
+                new Booking { BookingId = 1, CustomerDataId = 1, FirstReturnTicketIndex = 2 },
+                new Booking { BookingId = 2, CustomerDataId = 1, FirstReturnTicketIndex = null },
+                new Booking { BookingId = 3, CustomerDataId = 1, FirstReturnTicketIndex = 2 },
+                new Booking { BookingId = 4, CustomerDataId = 1, FirstReturnTicketIndex = 2 },
+                new Booking { BookingId = 5, CustomerDataId = 2, FirstReturnTicketIndex = 1 },
+                new Booking { BookingId = 6, CustomerDataId = 2, FirstReturnTicketIndex = 1 },
+                new Booking { BookingId = 7, CustomerDataId = 2, FirstReturnTicketIndex = null },
+                new Booking { BookingId = 8, CustomerDataId = 2, FirstReturnTicketIndex = null },
+                new Booking { BookingId = 9, CustomerDataId = 2, FirstReturnTicketIndex = 2 },
+                new Booking { BookingId = 10, CustomerDataId = 2, FirstReturnTicketIndex = 2 },
+                new Booking { BookingId = 11, CustomerDataId = 2, FirstReturnTicketIndex = null }
                 );
         }
 

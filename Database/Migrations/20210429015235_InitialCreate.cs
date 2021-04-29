@@ -1,16 +1,4 @@
-﻿// 20210427172922_InitialCreate.cs - Air 3550 Project
-//
-// This program emulates a flight reservation system for a new airline,
-// allowing customers to book and manage trips,as well as allowing employees
-// to update the available flights and view stats on them.
-//
-// Authors:		Nicholas Nassar, Jacob Hammitte, Nikesh Dhital
-// Class:		EECS 3550-001 Software Engineering, Spring 2021
-// Instructor:	Dr. Thomas
-// Date:		April 28, 2021
-// Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
-
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Database.Migrations
@@ -181,6 +169,7 @@ namespace Database.Migrations
                     ScheduledFlightId = table.Column<int>(type: "INTEGER", nullable: false),
                     IsCanceled = table.Column<bool>(type: "INTEGER", nullable: false),
                     PointsEarned = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     PaymentMethod = table.Column<int>(type: "INTEGER", nullable: false),
                     BookingId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -209,7 +198,7 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Airports",
                 columns: new[] { "AirportId", "City", "Code", "Latitude", "Longitude", "State" },
-                values: new object[] { 10, "Seattle", "SEA", 47.448889m, -122.309444m, "Washington" });
+                values: new object[] { 9, "Denver", "DEN", 39.861667m, -104.673056m, "Colorado" });
 
             migrationBuilder.InsertData(
                 table: "Airports",
@@ -229,7 +218,7 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Airports",
                 columns: new[] { "AirportId", "City", "Code", "Latitude", "Longitude", "State" },
-                values: new object[] { 9, "Denver", "DEN", 39.861667m, -104.673056m, "Colorado" });
+                values: new object[] { 10, "Seattle", "SEA", 47.448889m, -122.309444m, "Washington" });
 
             migrationBuilder.InsertData(
                 table: "Airports",
@@ -269,7 +258,7 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "LoginId", "PasswordHash", "Role" },
-                values: new object[] { 3, "flight_manager", "4iifPzpmqB9f+1Lf8aCc0q6Ro56ySCMNKQcIRnnGus20qIDaeDXKcgA9jDfhB8+Rxfl5VngwN1Trob5CA5v/TQ==", 3 });
+                values: new object[] { 5, "756967", "1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==", 0 });
 
             migrationBuilder.InsertData(
                 table: "Users",
@@ -284,12 +273,32 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "LoginId", "PasswordHash", "Role" },
+                values: new object[] { 3, "flight_manager", "4iifPzpmqB9f+1Lf8aCc0q6Ro56ySCMNKQcIRnnGus20qIDaeDXKcgA9jDfhB8+Rxfl5VngwN1Trob5CA5v/TQ==", 3 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "LoginId", "PasswordHash", "Role" },
                 values: new object[] { 4, "marketing_manager", "NgyuvZ7baGCcCTO63jVlNQ5Z4oTMUDzmG/DuvUL7flvWV6ce0UmCJRaHV+fxCVkgQRzOJ3eeDHeOxSU13q4gQA==", 4 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "LoginId", "PasswordHash", "Role" },
+                values: new object[] { 6, "886642", "1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==", 0 });
+
+            migrationBuilder.InsertData(
+                table: "CustomerDatas",
+                columns: new[] { "CustomerDataId", "AccountBalance", "Address", "Age", "City", "CreditCardNumber", "Name", "PhoneNumber", "RewardPointsBalance", "RewardPointsUsed", "State", "UserId", "ZipCode" },
+                values: new object[] { 2, 252.56m, "3459 Oak Road", 50, "Farmington", "234523452345322", "Steve Peterson", "3949907733", 0, 0, "Ohio", 6, "34564" });
+
+            migrationBuilder.InsertData(
+                table: "CustomerDatas",
+                columns: new[] { "CustomerDataId", "AccountBalance", "Address", "Age", "City", "CreditCardNumber", "Name", "PhoneNumber", "RewardPointsBalance", "RewardPointsUsed", "State", "UserId", "ZipCode" },
+                values: new object[] { 1, 0m, "3456 Pine Road", 39, "South Wood", "1234123412341234", "John Smith", "8492039944", 0, 0, "Ohio", 5, "28934" });
 
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 1, new TimeSpan(0, 6, 35, 0, 0), 2, false, 1, 1, 1 });
+                values: new object[] { 215, new TimeSpan(0, 15, 50, 0, 0), 7, false, 215, 10, 3 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
@@ -534,17 +543,17 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 186, new TimeSpan(0, 9, 35, 0, 0), 9, false, 186, 6, 2 });
+                values: new object[] { 186, new TimeSpan(0, 12, 35, 0, 0), 9, false, 186, 6, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 187, new TimeSpan(0, 9, 5, 0, 0), 9, false, 187, 6, 2 });
+                values: new object[] { 187, new TimeSpan(0, 15, 5, 0, 0), 9, false, 187, 6, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 188, new TimeSpan(0, 9, 35, 0, 0), 9, false, 188, 6, 2 });
+                values: new object[] { 188, new TimeSpan(0, 18, 35, 0, 0), 9, false, 188, 6, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
@@ -569,7 +578,7 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 126, new TimeSpan(0, 17, 15, 0, 0), 4, false, 126, 7, 2 });
+                values: new object[] { 216, new TimeSpan(0, 18, 20, 0, 0), 7, false, 216, 10, 3 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
@@ -714,7 +723,7 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 231, new TimeSpan(0, 18, 50, 0, 0), 9, false, 231, 10, 2 });
+                values: new object[] { 126, new TimeSpan(0, 17, 15, 0, 0), 4, false, 126, 7, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
@@ -859,12 +868,12 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 125, new TimeSpan(0, 14, 45, 0, 0), 4, false, 125, 7, 2 });
+                values: new object[] { 231, new TimeSpan(0, 18, 50, 0, 0), 9, false, 231, 10, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 124, new TimeSpan(0, 23, 15, 0, 0), 7, false, 124, 4, 2 });
+                values: new object[] { 125, new TimeSpan(0, 14, 45, 0, 0), 4, false, 125, 7, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
@@ -1199,22 +1208,22 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 105, new TimeSpan(0, 16, 30, 0, 0), 9, false, 105, 3, 2 });
+                values: new object[] { 105, new TimeSpan(0, 14, 30, 0, 0), 9, false, 105, 3, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 106, new TimeSpan(0, 19, 0, 0, 0), 9, false, 106, 3, 2 });
+                values: new object[] { 106, new TimeSpan(0, 17, 0, 0, 0), 9, false, 106, 3, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 107, new TimeSpan(0, 22, 30, 0, 0), 9, false, 107, 3, 2 });
+                values: new object[] { 107, new TimeSpan(0, 20, 30, 0, 0), 9, false, 107, 3, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 108, new TimeSpan(1, 1, 0, 0, 0), 9, false, 108, 3, 2 });
+                values: new object[] { 108, new TimeSpan(0, 23, 0, 0, 0), 9, false, 108, 3, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
@@ -1369,7 +1378,7 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 215, new TimeSpan(0, 15, 50, 0, 0), 7, false, 215, 10, 3 });
+                values: new object[] { 124, new TimeSpan(0, 23, 15, 0, 0), 7, false, 124, 4, 2 });
 
             migrationBuilder.InsertData(
                 table: "Flights",
@@ -1444,7 +1453,352 @@ namespace Database.Migrations
             migrationBuilder.InsertData(
                 table: "Flights",
                 columns: new[] { "FlightId", "DepartureTime", "DestinationAirportId", "IsCanceled", "Number", "OriginAirportId", "PlaneId" },
-                values: new object[] { 216, new TimeSpan(0, 18, 20, 0, 0), 7, false, 216, 10, 3 });
+                values: new object[] { 1, new TimeSpan(0, 6, 35, 0, 0), 2, false, 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 11, 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 2, 1, null });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 3, 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 4, 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 5, 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 1, 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 7, 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 8, 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 9, 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 6, 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerDataId", "FirstReturnTicketIndex" },
+                values: new object[] { 10, 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 12, new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 193 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 25, new DateTime(2021, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 216 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 9, new DateTime(2021, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 214 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 8, new DateTime(2021, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 212 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 3, new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 171 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 6, new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 166 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 27, new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 139 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 28, new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 227 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 13, new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 200 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 2, new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 191 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 26, new DateTime(2021, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 128 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 22, new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 18 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 11, new DateTime(2021, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 27 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 29, new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 29 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 14, new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 31 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 4, new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 32 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 24, new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 44 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 23, new DateTime(2021, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 55 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 5, new DateTime(2021, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 186 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 19, new DateTime(2021, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 102 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 20, new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 85 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 15, new DateTime(2021, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 108 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 16, new DateTime(2021, 4, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 111 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 17, new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 115 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 18, new DateTime(2021, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 119 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 7, new DateTime(2021, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 121 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 10, new DateTime(2021, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 127 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 1, new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 33 });
+
+            migrationBuilder.InsertData(
+                table: "ScheduledFlights",
+                columns: new[] { "ScheduledFlightId", "DepartureDate", "FlightId" },
+                values: new object[] { 21, new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 14 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 1, 1, false, 0, false, 170.4m, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 27, 10, false, 0, false, 167.81m, 27 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 26, 10, false, 0, false, 80.84m, 26 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 25, 10, false, 0, false, 210.9m, 25 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 24, 9, true, 0, false, 75.86m, 24 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 23, 9, true, 0, false, 52.23m, 23 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 22, 9, true, 0, false, 86.54m, 22 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 21, 9, true, 0, false, 37.93m, 21 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 20, 8, false, 0, false, 125.68m, 20 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 19, 7, false, 0, false, 77.36m, 19 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 18, 6, false, 0, false, 141.4m, 18 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 17, 6, false, 0, false, 141.4m, 17 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 16, 5, false, 0, false, 166.07m, 16 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 28, 10, false, 0, false, 122.23m, 28 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 15, 5, false, 0, false, 147.62m, 15 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 13, 4, false, 0, false, 122.28m, 13 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 12, 4, false, 0, false, 105.62m, 12 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 11, 4, false, 0, false, 58.4m, 11 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 10, 3, false, 0, false, 90.45m, 10 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 9, 3, false, 0, false, 234.17m, 9 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 8, 3, false, 0, false, 190.14m, 8 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 7, 3, false, 0, false, 95.06m, 7 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 6, 2, false, 0, false, 201.14m, 6 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 5, 2, false, 0, false, 129.89m, 5 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 4, 1, false, 0, false, 53.4m, 4 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 3, 1, false, 0, false, 212.87m, 3 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 2, 1, false, 0, false, 119.55m, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 14, 4, false, 0, false, 59.58m, 14 });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "TicketId", "BookingId", "IsCanceled", "PaymentMethod", "PointsEarned", "Price", "ScheduledFlightId" },
+                values: new object[] { 29, 11, false, 0, false, 86.76m, 29 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_CustomerDataId",
