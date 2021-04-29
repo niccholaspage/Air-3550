@@ -25,7 +25,9 @@ namespace Air_3550.Views
     public sealed partial class PaymentPage : Page
     {
         private Params pageParams;
-
+        
+        //Params class to allow the passing of params in 
+        //Through an on Navigayed to
         public class Params
         {
             public FlightPathWithDate DepartingFlightPathWithDate;
@@ -38,6 +40,10 @@ namespace Air_3550.Views
             }
         }
 
+
+        // On construction a payment page is created that
+        // will show the user the information about the booking
+        // that they are about to pay for
         public PaymentPage()
         {
             this.InitializeComponent();
@@ -45,6 +51,9 @@ namespace Air_3550.Views
             this.Loaded += async (_, __) => await ViewModel.FetchBalances();
         }
 
+        // Returns the cost of the flight/flights
+        // in a string format to be displayed
+        // to the user
         public string GetFormattedTotalCost()
         {
             return ViewModel.TotalCost.FormatAsMoney();
@@ -52,6 +61,9 @@ namespace Air_3550.Views
 
         readonly PaymentViewModel ViewModel = new();
 
+        // OnNavigatedTo is overides to set the 
+        // Params of the PaymentPage so it has
+        // The information from the previous flight search page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -69,12 +81,17 @@ namespace Air_3550.Views
             }
         }
 
+        // On click of the Purchase Button
+        // The tickets are purchased from the flights
+        // Selected on the the previous flight Search Pages
         private async void PurchaseButton_Click(object _, RoutedEventArgs __)
         {
             if (await ViewModel.PurchaseTrip())
             {
+                //Navigate back to main page
                 Frame.Navigate(typeof(MainPage), new MainPage.Params(true));
 
+                //Clears the stack for the back button
                 Frame.BackStack.Clear();
             }
         }
