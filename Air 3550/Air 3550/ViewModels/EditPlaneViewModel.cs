@@ -61,19 +61,33 @@ namespace Air_3550.ViewModels
 
             using (var db = new AirContext())
             {
-                //Get Max sets of plane and see if the any ScheduledFlights have more passangers
-                var MaxSeats = await db.Planes.Where(plane => plane.PlaneId == (int)PlaneId).Select(plane => plane.MaxSeats).SingleAsync();
-                var Passangers = await db.ScheduledFlights.Include(scheduledFlight => scheduledFlight.Tickets).Where(scheduledFlight => scheduledFlight.FlightId == FlightId).ToListAsync();
-                var OverCap = Passangers.Where(scheduledFlight => scheduledFlight.FilledSeats > MaxSeats).ToList();
-                if(OverCap.Count > 0)
+                // Get the max sets of the chosen plane and
+                // see if any scheduled flights have more
+                // passengers than the plane could fit.
+                var maxSeats = await db.Planes.Where(plane => plane.PlaneId == PlaneId).Select(plane => plane.MaxSeats).SingleAsync();
+
+                var passengers = await db.ScheduledFlights
+                    .Include(scheduledFlight => scheduledFlight.Tickets)
+                    .Where(scheduledFlight => scheduledFlight.FlightId == FlightId)
+                    .ToListAsync();
+
+                if (passengers.Where(scheduledFlight => scheduledFlight.FilledSeats > maxSeats).Any())
                 {
-                    Feedback = "Select a bigger Plane";
+                    Feedback = "Please choose a bigger plane.";
+
                     return null;
                 }
-                //Updates Flight if valid
-                var flight = await db.Flights.Include(Flight => Flight.Plane).SingleOrDefaultAsync(flight => flight.FlightId == FlightId);
+
+                // Now we go ahead and grab the flight from the DB
+                // and update it, finally saving our changes.
+                var flight = await db
+                    .Flights.Include(Flight => Flight.Plane)
+                    .SingleOrDefaultAsync(flight => flight.FlightId == FlightId);
+
                 flight.PlaneId = (int)PlaneId;
+
                 await db.SaveChangesAsync();
+
                 return flight;
             }
         }
