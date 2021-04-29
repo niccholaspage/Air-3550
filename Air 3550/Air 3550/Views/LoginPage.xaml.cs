@@ -10,6 +10,15 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This page is shown to the user for logging
+ * into an account. They can either get taken
+ * to the register page to create an account,
+ * or login to an existing account, which will
+ * then lead to redirection to the previous page
+ * they were on or to an elevated role page.
+ */
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,8 +36,14 @@ namespace Air_3550.Views
 {
     public sealed partial class LoginPage : Page
     {
+        // The parameters that can be passed when
+        // this page is navigated to which changes
+        // the initial behavior of the page.
         public class Params
         {
+            // This class is used when the login page
+            // needs to display a new user's login ID
+            // and prefill it in the username box.
             public class NewUser : Params
             {
                 public string LoginId;
@@ -39,8 +54,15 @@ namespace Air_3550.Views
                 }
             }
 
+            // This class is used when the login page needs
+            // to tell the user that their password has
+            // changed.
             public class PasswordChanged : Params { }
 
+            // This class is used to tell the login page
+            // where to redirect to after a successful
+            // login instead of it's default behavior of
+            // going back.
             public class RedirectToPage : Params
             {
                 public Type PageType;
@@ -54,11 +76,18 @@ namespace Air_3550.Views
             }
         }
 
+        // The redirection page type and parameter,
+        // used for navigating to the next page if
+        // it is specified.
         private Type redirectPageType;
         private object redirectParam;
 
+        // The user session we will use to truly log
+        // the user into the application.
         private readonly UserSessionService userSession;
 
+        // In the constructor, we simply
+        // get the user session service.
         public LoginPage()
         {
             userSession = App.Current.Services.GetService<UserSessionService>();
@@ -66,8 +95,13 @@ namespace Air_3550.Views
             this.InitializeComponent();
         }
 
-        readonly LoginViewModel ViewModel = new();
+        readonly LoginViewModel ViewModel = new(); // Construct the view model.
 
+        // This method handles login page parameters,
+        // either showing the user an info bar saying
+        // that their account has been created or their
+        // password has been changed, processing the redirect
+        // after a successful login.
         private void handleParams(Params param)
         {
             if (param is Params.NewUser newUserParam)
@@ -90,6 +124,9 @@ namespace Air_3550.Views
             }
         }
 
+        // Overides OnNavigatedTo handle each login page parameter,
+        // either passed as a single login parameter or a list of
+        // different parameters.
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -107,11 +144,16 @@ namespace Air_3550.Views
             }
         }
 
+        // This method is called when the login button is clicked,
+        // and simply calls the PerformLogin method to cause a login.
         public async void LoginButton_Clicked(object _, RoutedEventArgs __)
         {
             await PerformLogin();
         }
 
+        // This method is called when enter is pressed
+        // in the stack panel, allowing the user to press
+        // enter to login.
         private async void StackPanel_KeyDown(object _, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Enter)
@@ -120,6 +162,10 @@ namespace Air_3550.Views
             }
         }
 
+        // This method actually performs a login. It defers
+        // to the view model to perform the login, then if
+        // successful, navigates the user to the right page
+        // based on their role.
         private async Task PerformLogin()
         {
             if (await ViewModel.PerformLogin())
@@ -155,9 +201,12 @@ namespace Air_3550.Views
             }
         }
 
+        // This method is called when the user clicks the register
+        // button, and simply sends the user to the register page,
+        // passing in this page's redirect properties.
         private void RegisterButton_Click(object _, RoutedEventArgs __)
         {
-            Frame.Navigate(typeof(RegisterPage), new LoginPage.Params.RedirectToPage(redirectPageType, redirectParam));
+            Frame.Navigate(typeof(RegisterPage), new Params.RedirectToPage(redirectPageType, redirectParam));
         }
     }
 }
