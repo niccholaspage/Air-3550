@@ -10,6 +10,15 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This page shows the customer the
+ * departure and potentially return
+ * flight paths they have chosen to
+ * buy, displaying the total and
+ * allowing them to choose their
+ * payment method to purchase them.
+ */
+
 using System;
 using Air_3550.ViewModels;
 using Database.Util;
@@ -17,17 +26,15 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace Air_3550.Views
 {
     public sealed partial class PaymentPage : Page
     {
         private Params pageParams;
-        
+
         //Params class to allow the passing of params in 
-        //Through an on Navigayed to
+        //through the OnNavigatedTo. We store the departure
+        // and return flight path with date.
         public class Params
         {
             public FlightPathWithDate DepartingFlightPathWithDate;
@@ -41,9 +48,9 @@ namespace Air_3550.Views
         }
 
 
-        // On construction a payment page is created that
-        // will show the user the information about the booking
-        // that they are about to pay for
+        // On construction, we register the Loaded event
+        // and fetch the account balance and reward points
+        // to display it in the UI.
         public PaymentPage()
         {
             this.InitializeComponent();
@@ -51,19 +58,20 @@ namespace Air_3550.Views
             this.Loaded += async (_, __) => await ViewModel.FetchBalances();
         }
 
-        // Returns the cost of the flight/flights
+        // Returns the cost of the flight paths
         // in a string format to be displayed
-        // to the user
+        // to the user.
         public string GetFormattedTotalCost()
         {
             return ViewModel.TotalCost.FormatAsMoney();
         }
 
-        readonly PaymentViewModel ViewModel = new();
+        readonly PaymentViewModel ViewModel = new(); // Construct the view model
 
-        // OnNavigatedTo is overides to set the 
-        // Params of the PaymentPage so it has
-        // The information from the previous flight search page
+        // OnNavigatedTo is overrided to set the 
+        // params of the PaymentPage so it has
+        // the information from the previous flight
+        // search page.
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -81,9 +89,10 @@ namespace Air_3550.Views
             }
         }
 
-        // On click of the Purchase Button
-        // The tickets are purchased from the flights
-        // Selected on the the previous flight Search Pages
+        // On click of the purchase button,
+        // the tickets are purchased based on
+        // the scheduled flights across both
+        // flight paths.
         private async void PurchaseButton_Click(object _, RoutedEventArgs __)
         {
             if (await ViewModel.PurchaseTrip())
