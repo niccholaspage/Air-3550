@@ -10,6 +10,14 @@
 // Date:		April 28, 2021
 // Copyright:	Copyright 2021 by Nicholas Nassar, Jacob Hammitte, and Nikesh Dhital. All rights reserved.
 
+/**
+ * This view model contains the logic for
+ * searching for flight paths, including
+ * calling on the flight search algorithm
+ * to retrieve valid and optimal flight
+ * paths.
+ */
+
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -59,7 +67,6 @@ namespace Air_3550.ViewModels
 
             var optimizedPaths = await FlightSearchAlgorithm.GetValidAndOptimizedFlightPaths(possiblePaths, date);
 
-            // TODO: This is cursed...
             foreach (var path in optimizedPaths)
             {
                 Paths.Add(path);
