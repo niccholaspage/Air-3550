@@ -24,13 +24,22 @@ namespace Air_3550.Views
 {
     public sealed partial class RegisterPage : Page
     {
+        
+        //On construction a register page is created
+        // for the user to enter informaiton in to 
+        // create a user for the Air 3550 system
         public RegisterPage()
         {
             this.InitializeComponent();
         }
 
+        // Holds the params of the a log in page to bring
+        // The userID over to the log in page
         private LoginPage.Params.RedirectToPage redirectParams;
 
+        // Overides OnNavigatedTo to bring redirectParams
+        // if params are RedirectParams then RedirectParams
+        // Will be passed
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -43,10 +52,15 @@ namespace Air_3550.Views
 
         readonly RegisterViewModel ViewModel = new();
 
+        // On click of the Register Button
+        // An account will be created with the 
+        // Information provided by the user after
+        // being validated
         private async void RegisterButton_Click(object _, RoutedEventArgs __)
         {
             var loginId = await ViewModel.CreateAccount();
 
+            //Checks if an account was created
             if (loginId != null)
             {
                 var newUserParams = new LoginPage.Params.NewUser(loginId);
